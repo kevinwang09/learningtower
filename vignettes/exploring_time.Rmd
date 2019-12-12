@@ -12,12 +12,16 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
-)
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  error = FALSE,
+  outwidth = "100%",
+  fig.width = 8, fig.height = 6)
 ```
 
 
-## Read data
+# Read data
 
 ```{r}
 library(learningtower)
@@ -25,6 +29,7 @@ library(tidyverse)
 data(student)
 ```
 
+# Data exploration
 ## Australia
 
 ```{r}
@@ -37,7 +42,7 @@ student %>%
     ylim(c(0,1000))
 ```
 
-# All countries
+## All countries
 
 ```{r}
 student %>% 
@@ -46,6 +51,10 @@ student %>%
   ggplot() + 
     geom_line(aes(x=year, y=math, group=country)) +
     ylim(c(250,800))
+# Uncomment this to make interactive
 #library(plotly)
 #ggplotly()
 ```
+
+## Features
+
