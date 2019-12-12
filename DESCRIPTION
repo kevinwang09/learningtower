@@ -14,7 +14,7 @@ Authors@R:
       person(given = "Kevin", family = "Wang", role = "aut", 
              email = "kevin.wang09@gmail.com"),
       person(given = "Giulio", family = "Valentino Dalla Riva", role = "aut", 
-             email = ""),
+             email = "me@gvdallariva.net"),
       person(given = "Dianne", family = "Cook", role = "aut", 
              email = "dicook@monash.edu"),
       person(given = "Nick", family = "Tierney", role = "aut", 
