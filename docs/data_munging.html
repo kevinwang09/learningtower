@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -330,6 +329,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -370,10 +370,73 @@ summary {
 <h1>Sources</h1>
 <p>Data files for years 2000, 2003, 2006, 2009, 2012, 2015, 2018, were downloaded from <a href="https://www.oecd.org/pisa/data/" class="uri">https://www.oecd.org/pisa/data/</a>. The format of the data provided is different across years.</p>
 <p>Only text files are provided up to 2012, along with SPSS read scripts. These were read with <code>read_fwf()</code> after reading the SPSS format files, computing the field widths from the start, end columns for each variable, and using the provided variable name. The code for doing this is in the <code>data-raw</code> folder.</p>
-<p>Binary SPSS files are provided for 2015, 2018. These files are read in into R using the <code>read.sav()</code> function in the <code>haven</code> package.</p>
+<p>Binary SPSS files are provided for 2015, 2018. These files are read in into R using the <code>read_sav()</code> function in the <code>haven</code> package.</p>
 </div>
 <div id="variable-selection-renaming-and-merging-of-years" class="section level1">
 <h1>Variable selection, renaming and merging of years</h1>
+<p>The datasets have a very large number and varying variable names between years. Variables have been selected and the data for each year and questionnaire combined to enable a longitudinal analysis.</p>
+<p>The following provides the variable naming for each questionnaire:</p>
+<p><strong>Student Questionnaire</strong></p>
+<p>The student questionnaire data file (which also includes estimates of student performance and parent-questionnaire data) has been reduced to the following variable subset:</p>
+<p><em>Note</em> this is the current 2018 naming convention and is subject to change on a review of the data sets.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">CNT</td>
+<td align="left">Country code 3-character</td>
+</tr>
+<tr class="even">
+<td align="left">CNTSCHID</td>
+<td align="left">Intl. School ID</td>
+</tr>
+<tr class="odd">
+<td align="left">CNTSTUID</td>
+<td align="left">Intl. Student ID</td>
+</tr>
+<tr class="even">
+<td align="left">ST004D01T</td>
+<td align="left">What is the <highest level of schooling> completed by your mother?</td>
+</tr>
+<tr class="odd">
+<td align="left">ST005Q01TA</td>
+<td align="left">What is the <highest level of schooling> completed by your father?</td>
+</tr>
+<tr class="even">
+<td align="left">ST007Q01TA</td>
+<td align="left">Student (Standardized) Gender</td>
+</tr>
+<tr class="odd">
+<td align="left">ST011Q04TA</td>
+<td align="left">In your home: A computer you can use for school work</td>
+</tr>
+<tr class="even">
+<td align="left">ST011Q06TA</td>
+<td align="left">In your home: A link to the Internet</td>
+</tr>
+<tr class="odd">
+<td align="left">W_FSTUWT</td>
+<td align="left">Plausible Value 1 in Mathematics</td>
+</tr>
+<tr class="even">
+<td align="left">PV1MATH</td>
+<td align="left">Plausible Value 1 in Reading</td>
+</tr>
+<tr class="odd">
+<td align="left">PV1READ</td>
+<td align="left">Plausible Value 1 in Science</td>
+</tr>
+<tr class="even">
+<td align="left">PV1SCIE</td>
+<td align="left">FINAL TRIMMED NONRESPONSE ADJUSTED STUDENT WEIGHT</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
