@@ -12,12 +12,11 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# learningtower
+# learningtower <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-<img src="man/figures/logo.png" align="right"  height="290" width="250"/>
 
 The goal of learningtower is to ...
 
