@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 
 ```{r}
 library(learningtower)
+library(tidyverse)
 data(student)
 ```
 
@@ -30,8 +31,21 @@ data(student)
 student %>% 
   filter(country == "AUS") %>%
   group_by(year) %>%
-  summarise(math = mean(math, na.rm=TRUE)) %>%
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
   ggplot() + 
     geom_line(aes(x=year, y=math)) +
     ylim(c(0,1000))
+```
+
+# All countries
+
+```{r}
+student %>% 
+  group_by(year, country) %>%
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
+  ggplot() + 
+    geom_line(aes(x=year, y=math, group=country)) +
+    ylim(c(250,800))
+#library(plotly)
+#ggplotly()
 ```
