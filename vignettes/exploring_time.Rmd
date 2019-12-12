@@ -46,6 +46,6 @@ student %>%
   ggplot() + 
     geom_line(aes(x=year, y=math, group=country)) +
     ylim(c(250,800))
-#library(plotly)
-#ggplotly()
+library(plotly)
+ggplotly()
 ```
