@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 
-The goal of learningtower is to ...
+The goal of learningtower is to provide access to the Program for International Assessment (PISA) data base across all years.
 
 ## Installation
 
