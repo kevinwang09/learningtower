@@ -1,0 +1,37 @@
+---
+title: "Exploring temporal trends"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Read data
+
+```{r}
+library(learningtower)
+data(student)
+```
+
+## Australia
+
+```{r}
+student %>% 
+  filter(country == "AUS") %>%
+  group_by(year) %>%
+  summarise(math = mean(math, na.rm=TRUE)) %>%
+  ggplot() + 
+    geom_line(aes(x=year, y=math)) +
+    ylim(c(0,1000))
+```
