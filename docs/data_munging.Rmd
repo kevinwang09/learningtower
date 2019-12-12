@@ -1,0 +1,18 @@
+---
+title: "Explanation of data munging"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Sources
+
+Data files for years 2000, 2003, 2006, 2009, 2012, 2015, 2018, were downloaded from https://www.oecd.org/pisa/data/. The format of the data provided is different across years.
+
+Only text files are provided up to 2012, along with SPSS read scripts. These were read with `read_fwf()` after reading the SPSS format files, computing the field widths from the start, end columns for each variable, and using the provided variable name. The code for doing this is in the `data-raw` folder.
+
+Binary SPSS files are provided for 2015, 2018. These files are read in into R using the `read.sav()` function in the `haven` package.
+
+# Variable selection, renaming and merging of years
