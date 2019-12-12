@@ -91,21 +91,16 @@
 
     
     
-<div id="read-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#read-data" class="anchor"></a>Read data</h2>
+<div id="read-data" class="section level1">
+<h1 class="hasAnchor">
+<a href="#read-data" class="anchor"></a>Read data</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(learningtower)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#&gt; ── Attaching packages ────────────────────────── tidyverse 1.3.0 ──</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#&gt; ✓ ggplot2 3.2.1     ✓ purrr   0.3.3</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt; ✓ tibble  2.1.3     ✓ dplyr   0.8.3</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt; ✓ tidyr   1.0.0     ✓ stringr 1.4.0</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#&gt; ✓ readr   1.3.1     ✓ forcats 0.4.0</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt; ── Conflicts ───────────────────────────── tidyverse_conflicts() ──</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt; x dplyr::filter() masks stats::filter()</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(student)</span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(student)</span></code></pre></div>
 </div>
+<div id="data-exploration" class="section level1">
+<h1 class="hasAnchor">
+<a href="#data-exploration" class="anchor"></a>Data exploration</h1>
 <div id="australia" class="section level2">
 <h2 class="hasAnchor">
 <a href="#australia" class="anchor"></a>Australia</h2>
@@ -116,21 +111,26 @@
 <span id="cb2-5"><a href="#cb2-5"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb2-6"><a href="#cb2-6"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>math)) <span class="op">+</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">1000</span>))</span></code></pre></div>
-<p><img src="exploring_time_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<p><img src="exploring_time_files/figure-html/unnamed-chunk-2-1.png" width="768"></p>
 </div>
-<div id="all-countries" class="section level1">
-<h1 class="hasAnchor">
-<a href="#all-countries" class="anchor"></a>All countries</h1>
+<div id="all-countries" class="section level2">
+<h2 class="hasAnchor">
+<a href="#all-countries" class="anchor"></a>All countries</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>student <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw">group_by</span>(year, country) <span class="op">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">math =</span> <span class="kw"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(math, stu_wgt, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb3-5"><a href="#cb3-5"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>math, <span class="dt">group=</span>country)) <span class="op">+</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">250</span>,<span class="dv">800</span>))</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_path).</span></span></code></pre></div>
-<p><img src="exploring_time_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">#library(plotly)</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#ggplotly()</span></span></code></pre></div>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">250</span>,<span class="dv">800</span>))</span></code></pre></div>
+<p><img src="exploring_time_files/figure-html/unnamed-chunk-3-1.png" width="768"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Uncomment this to make interactive</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#library(plotly)</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#ggplotly()</span></span></code></pre></div>
+</div>
+<div id="features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#features" class="anchor"></a>Features</h2>
+</div>
 </div>
   </div>
 
@@ -141,8 +141,13 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#read-data">Read data</a></li>
-      <li><a href="#australia">Australia</a></li>
+      <li>
+<a href="#data-exploration">Data exploration</a><ul class="nav nav-pills nav-stacked">
+<li><a href="#australia">Australia</a></li>
       <li><a href="#all-countries">All countries</a></li>
+      <li><a href="#features">Features</a></li>
+      </ul>
+</li>
       </ul>
 </div>
       </div>
