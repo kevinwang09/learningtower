@@ -41,7 +41,10 @@ student %>%
             science = weighted.mean(science, stu_wgt, na.rm=TRUE),
             math_max = max(math, na.rm=TRUE), 
             read_max = max(read, na.rm=TRUE),
-            science_max = max(science, na.rm=TRUE),) %>%
+            science_max = max(science, na.rm=TRUE),
+            math_min = min(math, na.rm=TRUE), 
+            read_min = min(read, na.rm=TRUE),
+            science_min = min(science, na.rm=TRUE)) %>%
   ggplot() + 
     geom_line(aes(x=year, y=math, group=country, colour=country)) +
 #    ylim(c(0,1000))
