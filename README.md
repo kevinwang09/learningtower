@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# learningtower <img src='man/figures/logo.png' align="right" height="139" />
+# learningtower <img src='man/figures/logo.png' align="right" height="211" />
 
 <!-- badges: start -->
 
@@ -51,23 +51,7 @@ library(tidyverse)
 data(student)
 ```
 
-We can produce a graph of Australian student math scores over time as
-follows:
-
-``` r
-student %>% 
-  filter(country == "AUS") %>%
-  group_by(year) %>%
-  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
-  ggplot() + 
-    geom_line(aes(x=year, y=math)) +
-    ylim(c(0,1000)) +
-  ggtitle("Australian PV1 Math Scores, 2000-2018")
-```
-
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
-
 Changing the scales over-highlights differences in the means between
 various countries.
 
-<img src="man/figures/README-unnamed-chunk-4-1.gif" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.gif" width="100%" />

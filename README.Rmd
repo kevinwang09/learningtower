@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# learningtower <img src='man/figures/logo.png' align="right" height="139" />
+# learningtower <img src='man/figures/logo.png' align="right" height="211" />
 
 
 <!-- badges: start -->
@@ -52,20 +52,6 @@ data(student)
 ```
 
 
-We can produce a graph of Australian student math scores over time as follows:
-
-```{r, fig.retina = 4}
-student %>% 
-  filter(country == "AUS") %>%
-  group_by(year) %>%
-  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
-  ggplot() + 
-    geom_line(aes(x=year, y=math)) +
-    ylim(c(0,1000)) +
-  ggtitle("Australian PV1 Math Scores, 2000-2018")
-```
-
-
 Changing the scales over-highlights differences in the means between various countries.
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE}
@@ -95,7 +81,14 @@ s <- student %>%
                    wrap = FALSE,
                    fixed_x = TRUE)
 
-gif <- animate(s, device = "png", width = 830, height =500, rewind = FALSE, type = "cairo", detail = 3)
+gif <- animate(s, 
+               device = "png",
+                type="cairo",
+                units="in", 
+                width=9, 
+                height=6, 
+                pointsize=24, 
+                res=200)
 
 gif
 ```
