@@ -18,7 +18,11 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 
+<<<<<<< HEAD
+The goal of learningtower is to provide access to the Program for International Assessment (PISA) data base across all years.
+=======
 The goal of learningtower is to provide a userfriendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](http://www.oecd.org/pisa/data/), for years 2000 - 2018, collected on a three year basis.
+>>>>>>> 5f98f002696fd1e6c50d22fa9755fb3ab74da779
 
 **What is PISA?**
 
