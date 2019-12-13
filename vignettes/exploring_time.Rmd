@@ -12,26 +12,59 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
-)
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  error = FALSE,
+  outwidth = "100%",
+  fig.width = 8, fig.height = 6)
 ```
 
 
-## Read data
+# Read data
 
 ```{r}
 library(learningtower)
+library(tidyverse)
 data(student)
 ```
 
+# Data exploration
 ## Australia
 
 ```{r}
 student %>% 
   filter(country == "AUS") %>%
   group_by(year) %>%
-  summarise(math = mean(math, na.rm=TRUE)) %>%
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
   ggplot() + 
     geom_line(aes(x=year, y=math)) +
     ylim(c(0,1000))
+```
+
+## All countries
+
+```{r}
+student %>% 
+  group_by(year, country) %>%
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
+  ggplot() + 
+    geom_line(aes(x=year, y=math, group=country)) +
+    ylim(c(250,800))
+# Uncomment this to make interactive
+#library(plotly)
+#ggplotly()
+
+```
+
+## Features
+
+```{r}
+# devtools::install_github("njtierney/brolgar")
+library(brolgar)
+library(tsibble)
+student <- as_tsibble(student, 
+                      key = c(country, school_id, student_id), 
+                      index = year)
+stu_features <- feat_brolgar(as_tibble)
 ```
