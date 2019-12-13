@@ -66,3 +66,8 @@ student %>%
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+Changing the scales over-highlights differences in the means between
+various countries.
+
+<img src="man/figures/README-unnamed-chunk-4-1.gif" width="100%" />
