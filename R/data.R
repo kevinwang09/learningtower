@@ -30,7 +30,7 @@
 #`   \item escs Index of economic, social and cultural status
 #` }
 #` @docType data
-#` @name school
+#` @name student
 NULL
 
 #` School data from 2000-2018 PISA OECD data
@@ -71,5 +71,5 @@ NULL
 #`   \item country_name Country name
 #` }
 #` @docType data
-#` @name school
+#` @name countrycode
 NULL
