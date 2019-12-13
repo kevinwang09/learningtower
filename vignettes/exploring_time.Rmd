@@ -58,3 +58,12 @@ student %>%
 
 ## Features
 
+```{r}
+# devtools::install_github("njtierney/brolgar")
+library(brolgar)
+library(tsibble)
+student <- as_tsibble(student, 
+                      key = c(country, school_id, student_id), 
+                      index = year)
+stu_features <- feat_brolgar(as_tibble)
+```
