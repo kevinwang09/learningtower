@@ -51,7 +51,7 @@ library(tidyverse)
 data(student)
 ```
 
-And produce a graph of Australian student math scores over time as
+We can produce a graph of Australian student math scores over time as
 follows:
 
 ``` r
