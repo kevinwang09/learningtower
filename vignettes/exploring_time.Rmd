@@ -30,16 +30,22 @@ data(student)
 ```
 
 # Data exploration
-## Australia
+## Australia, New Zealand, Indonesia
 
-```{r}
+```{r fig.height=4}
 student %>% 
-  filter(country == "AUS") %>%
-  group_by(year) %>%
-  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
+  filter(country %in% c("AUS", "NZL", "IDN")) %>%
+  group_by(year, country) %>%
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE),
+            read = weighted.mean(read, stu_wgt, na.rm=TRUE),
+            science = weighted.mean(science, stu_wgt, na.rm=TRUE),
+            math_max = max(math, na.rm=TRUE), 
+            read_max = max(read, na.rm=TRUE),
+            science_max = max(science, na.rm=TRUE),) %>%
   ggplot() + 
-    geom_line(aes(x=year, y=math)) +
-    ylim(c(0,1000))
+    geom_line(aes(x=year, y=math, group=country, colour=country)) +
+#    ylim(c(0,1000))
+    ylim(c(250,750))
 ```
 
 ## All countries
@@ -54,12 +60,30 @@ student %>%
 # Uncomment this to make interactive
 #library(plotly)
 #ggplotly()
+```
+
+## Features
+
+Here we want to calculate features for all the countries over time, and explore the variability by country.
+
+```{r eval=FALSE}
+# devtools::install_github("njtierney/brolgar")
+library(brolgar)
+library(tsibble)
+student_means <- student %>%
+  group_by(year, country) %>%
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) 
+
+student_means <- as_tsibble(student_means, 
+                      key = country, 
+                      index = year)
+stu_features <- student_means %>% features(math, feat_brolgar)
 
 ```
 
-
 ## Multivariate plot
-```{r}
+
+```{r eval=FALSE}
 student %>% 
   filter(country %in% c("AUS", "CAN")) %>% 
   group_by(year, country) %>%
@@ -68,18 +92,4 @@ student %>%
   ggplot(aes(x = math_mean, y = read_mean, colour = country)) + 
   geom_point() +
   geom_text(aes(label = year))
-```
-
-
-
-## Features
-
-```{r}
-# devtools::install_github("njtierney/brolgar")
-library(brolgar)
-library(tsibble)
-student <- as_tsibble(student, 
-                      key = c(country, school_id, student_id), 
-                      index = year)
-stu_features <- feat_brolgar(as_tibble)
 ```
