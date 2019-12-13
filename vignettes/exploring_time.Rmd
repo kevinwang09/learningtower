@@ -26,20 +26,44 @@ knitr::opts_chunk$set(
 ```{r}
 library(learningtower)
 library(tidyverse)
+library(gridExtra)
 data(student)
 ```
 
 # Data exploration
-## Australia
+## Australia, New Zealand, Indonesia
 
-```{r}
-student %>% 
-  filter(country == "AUS") %>%
-  group_by(year) %>%
-  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
-  ggplot() + 
-    geom_line(aes(x=year, y=math)) +
-    ylim(c(0,1000))
+```{r fig.height=9}
+student_sumry <- student %>% 
+  filter(country %in% c("AUS", "NZL", "IDN")) %>%
+  group_by(year, country) %>%
+  summarise(math_mean = weighted.mean(math, stu_wgt, na.rm=TRUE),
+            read_mean = weighted.mean(read, stu_wgt, na.rm=TRUE),
+            science_mean = weighted.mean(science, stu_wgt, na.rm=TRUE),
+            math_max = max(math, na.rm=TRUE), 
+            read_max = max(read, na.rm=TRUE),
+            science_max = max(science, na.rm=TRUE),
+            math_min = min(math, na.rm=TRUE), 
+            read_min = min(read, na.rm=TRUE),
+            science_min = min(science, na.rm=TRUE)) %>%
+  mutate(country=factor(country, levels=c("AUS", "NZL", "IDN"))) 
+p1 <- ggplot(student_sumry) + 
+    geom_ribbon(aes(x=year, ymin=math_min, ymax=math_max), fill="grey70") +
+    geom_line(aes(x=year, y=math_mean), colour="black", size=2) +
+    facet_wrap(~country) +
+    ylim(c(0,1000)) + ylab("math")
+p2 <- ggplot(student_sumry) + 
+    geom_ribbon(aes(x=year, ymin=science_min, ymax=science_max), fill="grey70") +
+    geom_line(aes(x=year, y=science_mean), colour="black", size=2) +
+    facet_wrap(~country) +
+    ylim(c(0,1000)) + ylab("science")
+p3 <- ggplot(student_sumry) + 
+    geom_ribbon(aes(x=year, ymin=read_min, ymax=read_max), fill="grey70") +
+    geom_line(aes(x=year, y=read_mean), colour="black", size=2) +
+    facet_wrap(~country) +
+    ylim(c(0,1000)) + ylab("read")
+grid.arrange(p1, p2, p3, ncol=1)
+#    ylim(c(250,750))
 ```
 
 ## All countries
@@ -54,17 +78,36 @@ student %>%
 # Uncomment this to make interactive
 #library(plotly)
 #ggplotly()
-
 ```
 
 ## Features
 
-```{r}
+Here we want to calculate features for all the countries over time, and explore the variability by country.
+
+```{r eval=FALSE}
 # devtools::install_github("njtierney/brolgar")
 library(brolgar)
 library(tsibble)
-student <- as_tsibble(student, 
-                      key = c(country, school_id, student_id), 
+student_means <- student %>%
+  group_by(year, country) %>%
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) 
+
+student_means <- as_tsibble(student_means, 
+                      key = country, 
                       index = year)
-stu_features <- feat_brolgar(as_tibble)
+stu_features <- student_means %>% features(math, feat_brolgar)
+
+```
+
+## Multivariate plot
+
+```{r eval=FALSE}
+student %>% 
+  filter(country %in% c("AUS", "CAN")) %>% 
+  group_by(year, country) %>%
+  summarise(math_mean = weighted.mean(math, stu_wgt, na.rm=TRUE),
+            read_mean = weighted.mean(read, stu_wgt, na.rm=TRUE)) %>%
+  ggplot(aes(x = math_mean, y = read_mean, colour = country)) + 
+  geom_point() +
+  geom_text(aes(label = year))
 ```

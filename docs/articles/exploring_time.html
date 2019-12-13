@@ -96,40 +96,88 @@
 <a href="#read-data" class="anchor"></a>Read data</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(learningtower)</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(student)</span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(gridExtra)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(student)</span></code></pre></div>
 </div>
 <div id="data-exploration" class="section level1">
 <h1 class="hasAnchor">
 <a href="#data-exploration" class="anchor"></a>Data exploration</h1>
-<div id="australia" class="section level2">
+<div id="australia-new-zealand-indonesia" class="section level2">
 <h2 class="hasAnchor">
-<a href="#australia" class="anchor"></a>Australia</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>student <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(country <span class="op">==</span><span class="st"> "AUS"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">math =</span> <span class="kw"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(math, stu_wgt, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>math)) <span class="op">+</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">1000</span>))</span></code></pre></div>
+<a href="#australia-new-zealand-indonesia" class="anchor"></a>Australia, New Zealand, Indonesia</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>student_sumry &lt;-<span class="st"> </span>student <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(country <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AUS"</span>, <span class="st">"NZL"</span>, <span class="st">"IDN"</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">  </span><span class="kw">group_by</span>(year, country) <span class="op">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">math_mean =</span> <span class="kw"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(math, stu_wgt, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</span>
+<span id="cb2-5"><a href="#cb2-5"></a>            <span class="dt">read_mean =</span> <span class="kw"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(read, stu_wgt, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</span>
+<span id="cb2-6"><a href="#cb2-6"></a>            <span class="dt">science_mean =</span> <span class="kw"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(science, stu_wgt, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</span>
+<span id="cb2-7"><a href="#cb2-7"></a>            <span class="dt">math_max =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(math, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb2-8"><a href="#cb2-8"></a>            <span class="dt">read_max =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(read, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</span>
+<span id="cb2-9"><a href="#cb2-9"></a>            <span class="dt">science_max =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(science, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</span>
+<span id="cb2-10"><a href="#cb2-10"></a>            <span class="dt">math_min =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(math, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </span>
+<span id="cb2-11"><a href="#cb2-11"></a>            <span class="dt">read_min =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(read, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</span>
+<span id="cb2-12"><a href="#cb2-12"></a>            <span class="dt">science_min =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(science, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">country=</span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(country, <span class="dt">levels=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AUS"</span>, <span class="st">"NZL"</span>, <span class="st">"IDN"</span>))) </span>
+<span id="cb2-14"><a href="#cb2-14"></a>p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(student_sumry) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="st">    </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">ymin=</span>math_min, <span class="dt">ymax=</span>math_max), <span class="dt">fill=</span><span class="st">"grey70"</span>) <span class="op">+</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>math_mean), <span class="dt">colour=</span><span class="st">"black"</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country) <span class="op">+</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">1000</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">"math"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19"></a>p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(student_sumry) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="st">    </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">ymin=</span>science_min, <span class="dt">ymax=</span>science_max), <span class="dt">fill=</span><span class="st">"grey70"</span>) <span class="op">+</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>science_mean), <span class="dt">colour=</span><span class="st">"black"</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country) <span class="op">+</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">1000</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">"science"</span>)</span>
+<span id="cb2-24"><a href="#cb2-24"></a>p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(student_sumry) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="st">    </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">ymin=</span>read_min, <span class="dt">ymax=</span>read_max), <span class="dt">fill=</span><span class="st">"grey70"</span>) <span class="op">+</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>read_mean), <span class="dt">colour=</span><span class="st">"black"</span>, <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country) <span class="op">+</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>,<span class="dv">1000</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">"read"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="kw"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span>(p1, p2, p3, <span class="dt">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
 <p><img src="exploring_time_files/figure-html/unnamed-chunk-2-1.png" width="768"></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#    ylim(c(250,750))</span></span></code></pre></div>
 </div>
 <div id="all-countries" class="section level2">
 <h2 class="hasAnchor">
 <a href="#all-countries" class="anchor"></a>All countries</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>student <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw">group_by</span>(year, country) <span class="op">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">math =</span> <span class="kw"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(math, stu_wgt, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>math, <span class="dt">group=</span>country)) <span class="op">+</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">250</span>,<span class="dv">800</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>student <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span><span class="kw">group_by</span>(year, country) <span class="op">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">math =</span> <span class="kw"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(math, stu_wgt, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>math, <span class="dt">group=</span>country)) <span class="op">+</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">250</span>,<span class="dv">800</span>))</span></code></pre></div>
 <p><img src="exploring_time_files/figure-html/unnamed-chunk-3-1.png" width="768"></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Uncomment this to make interactive</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#library(plotly)</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#ggplotly()</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Uncomment this to make interactive</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#library(plotly)</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#ggplotly()</span></span></code></pre></div>
 </div>
 <div id="features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#features" class="anchor"></a>Features</h2>
+<p>Here we want to calculate features for all the countries over time, and explore the variability by country.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># devtools::install_github("njtierney/brolgar")</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(brolgar)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tsibble)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>student_means &lt;-<span class="st"> </span>student <span class="op">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="st">  </span><span class="kw">group_by</span>(year, country) <span class="op">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">math =</span> <span class="kw"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(math, stu_wgt, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) </span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a>student_means &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">as_tsibble</a></span>(student_means, </span>
+<span id="cb6-9"><a href="#cb6-9"></a>                      <span class="dt">key =</span> country, </span>
+<span id="cb6-10"><a href="#cb6-10"></a>                      <span class="dt">index =</span> year)</span>
+<span id="cb6-11"><a href="#cb6-11"></a>stu_features &lt;-<span class="st"> </span>student_means <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">features</a></span>(math, feat_brolgar)</span></code></pre></div>
+</div>
+<div id="multivariate-plot" class="section level2">
+<h2 class="hasAnchor">
+<a href="#multivariate-plot" class="anchor"></a>Multivariate plot</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>student <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(country <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AUS"</span>, <span class="st">"CAN"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw">group_by</span>(year, country) <span class="op">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">math_mean =</span> <span class="kw"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(math, stu_wgt, <span class="dt">na.rm=</span><span class="ot">TRUE</span>),</span>
+<span id="cb7-5"><a href="#cb7-5"></a>            <span class="dt">read_mean =</span> <span class="kw"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(read, stu_wgt, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> math_mean, <span class="dt">y =</span> read_mean, <span class="dt">colour =</span> country)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> year))</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -143,9 +191,10 @@
 <li><a href="#read-data">Read data</a></li>
       <li>
 <a href="#data-exploration">Data exploration</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#australia">Australia</a></li>
+<li><a href="#australia-new-zealand-indonesia">Australia, New Zealand, Indonesia</a></li>
       <li><a href="#all-countries">All countries</a></li>
       <li><a href="#features">Features</a></li>
+      <li><a href="#multivariate-plot">Multivariate plot</a></li>
       </ul>
 </li>
       </ul>

@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# learningtower <img src='man/figures/logo.png' align="right" height="139" />
+# learningtower <img src='man/figures/logo.png' align="right" height="211" />
+
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -50,16 +51,45 @@ library(tidyverse)
 data(student)
 ```
 
-And produce a graph of Australian student math scores over time as follows:
 
-```{r, fig.retina = 4}
-student %>% 
-  filter(country == "AUS") %>%
-  group_by(year) %>%
+Changing the scales over-highlights differences in the means between various countries.
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE}
+library(gganimate)
+library(learningtower)
+
+s <- student %>% 
+  filter(country == "SGP" | country == "CAN"| country == "FIN" | country == "NZL" | country == "USA" | country == "JPN" | country == "GBR" | country == "AUS") %>% 
+  group_by(year, country) %>%
   summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
-  ggplot() + 
-    geom_line(aes(x=year, y=math)) +
-    ylim(c(0,1000)) +
-  ggtitle("Australian PV1 Math Scores, 2000-2018")
+  ggplot(aes(x=year, y=math, group=country, color = country)) + 
+  geom_line() +
+  geom_point()+
+  ylim(c(250,800)) + 
+  theme_minimal() +
+  ylab("Score") +
+  xlab("Year")+
+  theme(text = element_text(size=20)) +
+  ggtitle("Mathematics PISA Scores from 2000 - 2018") +
+  scale_color_brewer(palette = "Dark2") +
+  view_zoom_manual(pause_length = 1,
+                   step_length = 10, 
+                   xmin = c(2000, 2018),
+                   xmax = c(2000, 2018),
+                   ymin =c(200, 450),
+                   ymax = c(800, 600),
+                   wrap = FALSE,
+                   fixed_x = TRUE)
+
+gif <- animate(s, 
+               device = "png",
+                type="cairo",
+                units="in", 
+                width=9, 
+                height=6, 
+                pointsize=24, 
+                res=200)
+
+gif
 ```
 
