@@ -26,29 +26,44 @@ knitr::opts_chunk$set(
 ```{r}
 library(learningtower)
 library(tidyverse)
+library(gridExtra)
 data(student)
 ```
 
 # Data exploration
 ## Australia, New Zealand, Indonesia
 
-```{r fig.height=4}
-student %>% 
+```{r fig.height=9}
+student_sumry <- student %>% 
   filter(country %in% c("AUS", "NZL", "IDN")) %>%
   group_by(year, country) %>%
-  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE),
-            read = weighted.mean(read, stu_wgt, na.rm=TRUE),
-            science = weighted.mean(science, stu_wgt, na.rm=TRUE),
+  summarise(math_mean = weighted.mean(math, stu_wgt, na.rm=TRUE),
+            read_mean = weighted.mean(read, stu_wgt, na.rm=TRUE),
+            science_mean = weighted.mean(science, stu_wgt, na.rm=TRUE),
             math_max = max(math, na.rm=TRUE), 
             read_max = max(read, na.rm=TRUE),
             science_max = max(science, na.rm=TRUE),
             math_min = min(math, na.rm=TRUE), 
             read_min = min(read, na.rm=TRUE),
             science_min = min(science, na.rm=TRUE)) %>%
-  ggplot() + 
-    geom_line(aes(x=year, y=math, group=country, colour=country)) +
-#    ylim(c(0,1000))
-    ylim(c(250,750))
+  mutate(country=factor(country, levels=c("AUS", "NZL", "IDN"))) 
+p1 <- ggplot(student_sumry) + 
+    geom_ribbon(aes(x=year, ymin=math_min, ymax=math_max), fill="grey70") +
+    geom_line(aes(x=year, y=math_mean), colour="black", size=2) +
+    facet_wrap(~country) +
+    ylim(c(0,1000)) + ylab("math")
+p2 <- ggplot(student_sumry) + 
+    geom_ribbon(aes(x=year, ymin=science_min, ymax=science_max), fill="grey70") +
+    geom_line(aes(x=year, y=science_mean), colour="black", size=2) +
+    facet_wrap(~country) +
+    ylim(c(0,1000)) + ylab("science")
+p3 <- ggplot(student_sumry) + 
+    geom_ribbon(aes(x=year, ymin=read_min, ymax=read_max), fill="grey70") +
+    geom_line(aes(x=year, y=read_mean), colour="black", size=2) +
+    facet_wrap(~country) +
+    ylim(c(0,1000)) + ylab("read")
+grid.arrange(p1, p2, p3, ncol=1)
+#    ylim(c(250,750))
 ```
 
 ## All countries
