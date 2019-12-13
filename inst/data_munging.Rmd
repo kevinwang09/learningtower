@@ -1,6 +1,7 @@
 ---
-title: "Explanation of data munging"
-output: html_document
+title: "Data munging for the PISA data"
+author: "Author"
+date: "`r Sys.Date()`"
 ---
 
 ```{r setup, include=FALSE}
@@ -11,22 +12,36 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 ```
 
+# Overview
 
-# Sources
+OECD provides the PISA data for the years 2000, 2003, 2006, 2009, 2012, 2015 and 2018 at https://www.oecd.org/pisa/data/. While this data is accessible for the general public, the formatting of the data is different across years with inconsistent naming of questions/variables. 
 
-Data files for years 2000, 2003, 2006, 2009, 2012, 2015, 2018, were downloaded from https://www.oecd.org/pisa/data/. The format of the data provided is different across years.
+As the `learningtower` package aims to contribute to the community by providing curated PISA data, we believe it is important to document the data curation steps to a sufficient degree so that future analysts can reproduce our data/results. The rest of this document will organise the data processing steps by year.
 
-Only text files are provided up to 2012, along with SPSS read scripts. These were read with `read_fwf()` after reading the SPSS format files, computing the field widths from the start, end columns for each variable, and using the provided variable name. The code for doing this is in the `data-raw` folder.
 
-Binary SPSS files are provided for 2015, 2018. These files are read in into R using the `read_sav()` function in the `haven` package.
+# Importing data for individual years
 
-# Variable selection, renaming and merging of years
+All scripts for importing individual data are in the `inst/raw_data`, organised by year.
 
-The datasets have a very large number and varying variable names between years. Variables have been selected and the data for each year and questionnaire combined to enable a longitudinal analysis. 
+## Between 2000 and 2012
 
-The following provides the variable naming for each questionnaire:
+Between 2000 and 2012, both the student and school questionnaire data are in `.txt` format with SPSS processing scripts. Due to inconsistent formatting, we will describe our method for the year 2000 and then the years 2003 - 2012. 
 
-**Student Questionnaire**
+For the year of 2000 only, the student questionnaire data is split into three `.txt` files (one for math, reading and science) and three corresponding SPSS processing scripts. We ran the the SPSS processing script into SPSS and export the data as a `.sav` file. These files are read in into `R` using the `read_sav()` function in the `haven` package. The student questionnaire data are then merged together by common column names and the final data is exported into a `data.frame`.
+
+Between 2003 and 2012, the `.txt` data (both student and school questionnaires) were read with `read_fwf()` function using a modified version of the corresponding SPSS processing scripts. The only modification we made to the SPSS scripts is to shorten the script to only the `DATA LIST` section (the section that controls which character should be read in as which columns). Then, we compute the field widths from the start, end columns for each variable, and use the provided variable name to create a `data.frame`. The final data is exported into a `data.frame`.
+
+## Between 2015 and 2018
+
+Binary SPSS files (`.sav` files) are provided for 2015, 2018. These files are read in into R using the `read_sav()` function in the `haven` package. 
+
+# Selection of variables from individual years
+
+Due to the size of each data and varying variable names between years, we only select interesting variables (as determined by the authors) and also those variables present in most years (for the purpose of logitudunal analysis). 
+
+
+
+## Student questionnaire
 
 The student questionnaire data file (which also includes estimates of student performance and parent-questionnaire data) has been reduced to the following variable subset: 
 
@@ -39,4 +54,13 @@ Description<- c("Country code 3-character","Intl. School ID","Intl. Student ID",
 data.frame(Name,Description) %>% 
   knitr::kable()
 ```
+
+
+
+## School questionnaire
+
+
+
+# Merging data across different years
+
 
