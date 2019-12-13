@@ -29,8 +29,8 @@
 #`   \item wealth Family wealth
 #`   \item escs Index of economic, social and cultural status
 #` }
-#' @docType data
-#' @name student
+#` @docType data
+#` @name school
 NULL
 
 #` School data from 2000-2018 PISA OECD data
@@ -57,8 +57,8 @@ NULL
 #`   \item sch_wgt Adjusted school base weight
 #`   \item school_size The school size
 #` }
-#' @docType data
-#' @name school
+#` @docType data
+#` @name school
 NULL
 
 #` Country Mapping Data PISA OECD data
@@ -70,6 +70,6 @@ NULL
 #`   \item country_iso3c Country 3 character code
 #`   \item country_name Country name
 #` }
-#' @docType data
-#' @name countrycode
+#` @docType data
+#` @name school
 NULL
