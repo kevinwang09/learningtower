@@ -57,5 +57,20 @@ student %>%
 
 ```
 
+
+## Multivariate plot
+```{r}
+student %>% 
+  filter(country %in% c("AUS", "CAN")) %>% 
+  group_by(year, country) %>%
+  summarise(math_mean = weighted.mean(math, stu_wgt, na.rm=TRUE),
+            read_mean = weighted.mean(read, stu_wgt, na.rm=TRUE)) %>%
+  ggplot(aes(x = math_mean, y = read_mean, colour = country)) + 
+  geom_point() +
+  geom_text(aes(label = year))
+```
+
+
+
 ## Features
 
