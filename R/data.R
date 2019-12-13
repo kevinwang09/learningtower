@@ -19,17 +19,19 @@
 #`   \item read = Simulated score in reading
 #`   \item science = Simulated score in science
 #`   \item stu_wgt = The final survey weight score for the student score
-#`   \item desk = Possession of  desk to study at - 1 yes, 2 no or missing 
-#`   \item room = Possession of a room of your own - 1 yes, 2 no or missing 
-#`   \item dishwasher = Possession of a dishwasher - 1 yes, 2 no or missing 
-#`   \item television = Number of televisions - 1 yes, 2 no or missing 
-#`   \item computer_n = Number of computers - 1 yes, 2 no or missing 
-#`   \item car = Number of cars - 1 yes, 2 no or missing 
-#`   \item book = Number of books - 1 yes, 2 no or missing 
+#`   \item desk = Possession of  desk to study at - 1 yes, 2 no or missing
+#`   \item room = Possession of a room of your own - 1 yes, 2 no or missing
+#`   \item dishwasher = Possession of a dishwasher - 1 yes, 2 no or missing
+#`   \item television = Number of televisions - 1 yes, 2 no or missing
+#`   \item computer_n = Number of computers - 1 yes, 2 no or missing
+#`   \item car = Number of cars - 1 yes, 2 no or missing
+#`   \item book = Number of books - 1 yes, 2 no or missing
 #`   \item wealth = Family wealth
 #`   \item escs = Index of economic, social and cultural status
 #` }
-
+#' @docType data
+#' @name student
+NULL
 
 #` School data from 2000-2018 PISA OECD data
 #`
@@ -55,6 +57,9 @@
 #`   \item sch_wgt = Adjusted school base weight
 #`   \item school_size = The school size
 #` }
+#' @docType data
+#' @name school
+NULL
 
 #` Country Mapping Data PISA OECD data
 #`
@@ -63,3 +68,6 @@
 #` \itemize{
 #`   \item country_iso3c = Country 3 character code
 #`   \item country_name = Country name
+#' @docType data
+#' @name countrycode
+NULL
