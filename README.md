@@ -21,7 +21,7 @@ mathematical and scientific literacy.
 PISA assesses the extent to which 15-year-old students have acquired
 some of the knowledge and skills that are essential for full
 participation in society, and how well they are prepared for lifelong
-learning in the areas of reading, mathematical and scientific literacy
+learning in the areas of reading, mathematical and scientific literacy.
 
 In 2018, PISA involved 79 countries and 600,000+ students worldwide.
 
@@ -40,18 +40,62 @@ devtools::install_github("ropenscilabs/learningtower")
 
 ## Usage
 
-The PISA assessment measures responses from individual students, school
-principals, and parents. A subset of features of these questionnaires
-can be found in `student`, `school`, and `parent` respectively. As an
-example, we can load the `student` data as follows:
+The PISA assessment measures responses from individual students and
+school principals. A subset of features of these questionnaires can be
+found in `student` and `school` respectively (the latter coming soon).
+As an example, we can load the `student` data as follows:
 
 ``` r
 library(learningtower)
-library(tidyverse)
 data(student)
+head(student)
+#>   year country school_id student_id mother_educ father_educ gender
+#> 1 2000     ALB     01001      00001          NA          NA      1
+#> 2 2000     ALB     01001      00003          NA          NA      1
+#> 3 2000     ALB     01001      00006          NA          NA      2
+#> 4 2000     ALB     01001      00008          NA          NA      1
+#> 5 2000     ALB     01001      00011          NA          NA      1
+#> 6 2000     ALB     01001      00012          NA          NA      1
+#>   computer internet  math science  read stu_wgt country_iso3c country.name
+#> 1        4        2 324.4   345.7 397.9    2.16           ALB      Albania
+#> 2        1        2    NA   385.8 368.4    2.16           ALB      Albania
+#> 3        1        2    NA   327.9 294.2    2.16           ALB      Albania
+#> 4        2        2 235.8   341.1 241.5    2.16           ALB      Albania
+#> 5        1        2    NA   307.1 287.2    2.16           ALB      Albania
+#> 6       NA        2 290.7   277.0 307.8    2.16           ALB      Albania
+#>   un.name.en
+#> 1    Albania
+#> 2    Albania
+#> 3    Albania
+#> 4    Albania
+#> 5    Albania
+#> 6    Albania
 ```
+
+See `?student` for information pertaining to variables captured.
+
+We can get futher information on the country codes in the `countrycode`
+data.
+
+``` r
+data(countrycode)
+head(countrycode)
+#>   country_iso3c country_name
+#> 1           AZE   Azerbaijan
+#> 2           ARG    Argentina
+#> 3           AUS    Australia
+#> 4           AUT      Austria
+#> 5           BEL      Belgium
+#> 6           BRA       Brazil
+```
+
+## Exploring the data
 
 Changing the scales over-highlights differences in the means between
 various countries.
 
-<img src="man/figures/README-unnamed-chunk-3-1.gif" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.gif" width="100%" />
+
+Further data exploration can be found in our vignette exploring temporal
+trends
+[here](https://ropenscilabs.github.io/learningtower/articles/exploring_time.html).

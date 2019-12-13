@@ -25,7 +25,7 @@ The goal of learningtower is to provide a userfriendly R package to provide easy
 
 The Programme for International Student Assessment (PISA) is an international assessment measuring student performance in reading, mathematical and scientific literacy.
 
-PISA assesses the extent to which 15-year-old students have acquired some of the knowledge and skills that are essential for full participation in society, and how well they are prepared for lifelong learning in the areas of reading, mathematical and scientific literacy
+PISA assesses the extent to which 15-year-old students have acquired some of the knowledge and skills that are essential for full participation in society, and how well they are prepared for lifelong learning in the areas of reading, mathematical and scientific literacy.
 
 In 2018, PISA involved 79 countries and 600,000+ students worldwide. 
 
@@ -43,14 +43,25 @@ devtools::install_github("ropenscilabs/learningtower")
 
 ## Usage
 
-The PISA assessment measures responses from individual students, school principals, and parents. A subset of features of these questionnaires can be found in `student`, `school`,  and `parent` respectively. As an example, we can load the `student` data as follows:
+The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in `student` and `school` respectively (the latter coming soon). As an example, we can load the `student` data as follows:
 
 ```{r, warning = FALSE, message = FALSE}
 library(learningtower)
-library(tidyverse)
 data(student)
+head(student)
 ```
 
+See `?student` for information pertaining to variables captured.
+
+We can get futher information on the country codes in the `countrycode` data.
+
+```{r}
+data(countrycode)
+head(countrycode)
+```
+
+
+## Exploring the data 
 
 Changing the scales over-highlights differences in the means between various countries.
 
@@ -92,4 +103,6 @@ gif <- animate(s,
 
 gif
 ```
+
+Further data exploration can be found in our vignette exploring temporal trends [here](https://ropenscilabs.github.io/learningtower/articles/exploring_time.html).
 
