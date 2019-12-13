@@ -7,7 +7,7 @@
 #`
 #` @format A tibble of the following variables
 #` \itemize{
-#`   \item country = Country 3 character code
+#`   \item country_iso3c = Country 3 character code
 #`   \item school_id = The unique school identification number
 #`   \item student_id = The student identification number
 #`   \item mother_educ = Highest level of mother's education - 1 to 5
@@ -56,3 +56,10 @@
 #`   \item school_size = The school size
 #` }
 
+#` Country Mapping Data PISA OECD data
+#`
+#` A dataset containing mapping of the country ISO code to the country name.
+#` @format A tibble of the following variables
+#` \itemize{
+#`   \item country_iso3c = Country 3 character code
+#`   \item country_name = Country name
