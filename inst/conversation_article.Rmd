@@ -1,5 +1,5 @@
 ---
-title: "Beyond the average: exploring individual variation in Australia's PISA test results"
+title: "Beyond the average: individual variation is the main feature of Australia's PISA test results"
 author: "Sarah Romanes and Di Cook"
 date: "Jan 15, 2020"
 output: html_document
@@ -17,14 +17,17 @@ The data from this survey and all of the surveys conducted since the first colle
 
 Since 2000, the OECD has overseen a Programme for International Student Assessment (PISA). The goal of this programme it to provide reliable indicators of what people actually know and can do. Details can be found at https://www.oecd.org/pisa/. Every three years 15 year old students around the world are tested on standardised skills in mathematics, science and reading. The students are also surveyed on aspects of their everyday life, that includes resources, quality of life and study habits. In addition, surveys are conducted with the school administrators and parents, about resources and quality of life. 
 
-The scope is gradually broadening, with more countries being added each three years. 2018 had results from 80 countries, double the initial number of 43. Each country is responsible for their data collection, and this is mostly consistent with a few notable exceptions, like China and the USA. In Australia, for the 2018 survey, 1717 schools were selected for testing. Stratified sampling was conducted to ensure representation from each state and territory, each type of school (public, private and catholic). A balance across urbanisation, socieoeconomic status, gender was checked, XXX students from each school. China, USA. Where to read details. 
+The scope is gradually broadening, with more countries being added each three years. 2018 had results from 80 countries, double the initial number of 43. Each country is responsible for their data collection, under OECD oversight, and this is mostly consistent with a few notable exceptions, like China and the USA. In Australia, for the 2018 survey, ??? schools were selected for testing of 14273 students. Stratified sampling was conducted to ensure representation from each state and territory, each type of school (public, private and catholic). A balance across urbanisation, socieoeconomic status, gender was checked.  An average of 20 students are tested from each school. 
+
+China samples schools and students selectively, with OECD approval, and its not entirely clear that the data is representative of the whole country. ([See a Washington Post article by Valerie Strauss for commentary on China's PISA practices](https://www.washingtonpost.com/education/2019/12/04/china-is-no-pisa-heres-why-its-test-scores-are-hard-believe/).) In the USA, the procedures for data collection are carefully documented and approved by the OECD, but the sample of schools and students is relatively small, about a third the numbers sampled in Australia. Schools can refuse to take part. (See [the technical notes for the USA PISA surveys for details](https://nces.ed.gov/pubs2011/2011004.pdf).) 
 
 ```{r loaddata, out.width="50%", echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE, fig.show="hide"}
+library(tidyverse)
 library(learningtower)
 data(student)
 ```
 
-```{r collection, out.width="50%", echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE, fig.show="hide", eval+FALSE}
+```{r collection, out.width="50%", echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE, fig.show="hide", eval=FALSE}
 student %>% group_by(year) %>%
   count(country) %>%
   count(year) %>%
@@ -34,9 +37,29 @@ student %>% group_by(year) %>%
     ylab("Number of countries reporting")
 
 student %>% filter(country == "AUS", year == 2018) %>% count(school_id, sort=TRUE)
-student %>% filter(country == "AUS") %>% count(school_id) %>% tally()
-student %>% filter(country == "AUS") %>% count(school_id) %>% select(n) %>% summary()
+student %>% filter(country == "AUS", year == 2018) %>% count(school_id) %>% summarise(n=sum(n))
+student %>% filter(country == "AUS", year == 2018) %>% count(school_id) %>% select(n) %>% summary()
 # Something isn't correct with 2015, 2018 school_id
+```
+
+The data from the testing, and the responses to the survey questions from students, parents and schools is freely available for [download](https://www.oecd.org/pisa/data/). It needs to be noted, though, that the raw test scores are not released. You can see this f you have a keen eye. The plots below show the 2018 scores for Australian students: a histogram of the math scores is plotted at left, and a scatterplot comparing math and reading scores is plotted at right. The histogram is beautifully bell-shaped and the scatterplot has a lovely elliptical appearance. These perfect structures should inspire suspician, and indeed if you read the data documentation you learn that the released values are simulated from a complex linear model applied to the data. Actually, multiple values are simulated for each student. This is called synthetic data, which is a common approach to ensure data privacy, and the data can still be considered to be accurate within the mean, variance and strata (country, gender, ...) used in the model of the original data.  
+
+```{r scores, out.width="80%", fig.height=3, echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE}
+library(gridExtra)
+p1 <- student %>% filter(country == "AUS", year == 2018) %>%
+  ggplot(aes(x=math)) + 
+    geom_histogram(binwidth=30) + 
+    xlim(c(0, 1000)) +
+    xlab("Math scores in Australia in 2018") +
+    ylab("Count") + ggtitle("2018 math scores")
+p2 <- student %>% filter(country == "AUS", year == 2018) %>%
+  ggplot(aes(x=math, y=read)) + 
+    geom_point(alpha=0.5) + 
+    xlim(c(0, 1000)) + ylim(c(0, 1000)) +
+    xlab("Math scores in Australia in 2018") +
+    ylab("Reading scores") +
+    theme(aspect.ratio=1) + ggtitle("2018 math and reading scores")
+grid.arrange(p1, p2, ncol=2)
 ```
 
 # Is it really this dramatic?
@@ -45,25 +68,33 @@ Richard Holden's Dec 6, 2019 article in the Conversation shows the figure below,
 
 ![](figures/conversation_holden.png)
 
+A reason that this looks so dramatic, is that the scale of the differences is magnified. The repoorted scores range from 0 through 1000. These plots zoom in to the neighbourhood of 500. The animation below shows the average math scores on the larger scale of the data. For comparison several other countries are shown: Canada, Finland, Great Britain, Japan, New Zealand, Singapore and the USA. 
+
+There has been a decline of 25 points in Australian students math scores on average, since 2000, which sounds bad, and particularly if the plot is made on a range of 450-550 also looks terrible. (It should be noted that the average for 2018 is similar to that for 2015.)
+If these values are examined on the full data scale, the line looks flat, and particularly is not very different from related countries. All years the average is higher than the USA. Except for this past year, the averages were all higher than those in Great Britain. New Zealand averages are similar to Australia. Finland, the education shining star, has also seen a decline in average math score, but in contrast to Australian news headlines in Finland the title is [Finland Remains Among Top Nations in PISA Education Survey](https://finland.fi/life-society/finland-remains-among-top-nations-in-pisa-education-survey/).
+
+All of the scores fluctuate, and it is arguable that the level of fluctuation is within sampling and modeling error.
+
+<!--
 Looking at the data in detail can show alarming fluctations. However when examined at a larger scale, the results are not concerning.
 
 - difference in mean is exaggeraed
 - lowest score in australa has gone up for reading
 - focus on improving the low scorers
-
+-->
 
 ```{r animation, echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE}
 library(gganimate)
-library(tidyverse)
 
-
-s <- student %>% 
+stu_sub <- student %>% 
   filter(country == "SGP" | country == "CAN"| country == "FIN" | country == "NZL" | country == "USA" | country == "JPN" | country == "GBR" | country == "AUS") %>% 
   group_by(year, country) %>%
-  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE))
+s <- stu_sub %>%
   ggplot(aes(x=year, y=math, group=country, color = country)) + 
   geom_line() +
-  geom_point()+
+  geom_point() +
+  geom_line(data=filter(stu_sub, country == "AUS"), size=2) +
   ylim(c(250,800)) + 
   theme_minimal() +
   ylab("Score") +
@@ -71,12 +102,12 @@ s <- student %>%
   theme(text = element_text(size=20)) +
   ggtitle("Mathematics PISA Scores from 2000 - 2018") +
   scale_color_brewer(palette = "Dark2") +
-  view_zoom_manual(pause_length = 1,
+  view_zoom_manual(pause_length = 5,
                    step_length = 10, 
                    xmin = c(2000, 2018),
                    xmax = c(2000, 2018),
-                   ymin =c(200, 450),
-                   ymax = c(800, 600),
+                   ymin = c(00, 450),
+                   ymax = c(1000, 550),
                    wrap = FALSE,
                    fixed_x = TRUE)
 
@@ -88,12 +119,16 @@ gif
 
 # Exploring PISA
 
+Plot of scores across these same set oof countries, side-by-side boxplots, or beeswarms.
+
+Plot of gender gap over time, in math and reading. 
+
+Homework time vs scores
 
 # Do it yourself
 
-About the package
+The PISA data across all years is provided in a convenient format in the R package, `learningtower` available from https://github.com/ropenscilabs/learningtower. Details on how to install the package, and access the data are at https://ropenscilabs.github.io/learningtower/. 
 
-# Acknowledgements
+The work to make the data available is the effort of several researchers from Australia, New Zealand and Indonesia, conducted as part of the [ROpenSci OzUnconf](https://ozunconf19.ropensci.org) held in Sydney, Dec 11-13, 2019.
 
-List everyone
 
