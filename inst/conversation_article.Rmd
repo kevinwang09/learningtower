@@ -17,12 +17,14 @@ The data from this survey and all of the surveys conducted since the first colle
 
 Since 2000, the OECD has overseen a Programme for International Student Assessment (PISA). The goal of this programme it to provide reliable indicators of what people actually know and can do. Details can be found at https://www.oecd.org/pisa/. Every three years 15 year old students around the world are tested on standardised skills in mathematics, science and reading. The students are also surveyed on aspects of their everyday life, that includes resources, quality of life and study habits. In addition, surveys are conducted with the school administrators and parents, about resources and quality of life. 
 
-The scope is gradually broadening, with more countries being added each three years. 2018 had results from 80 countries, double the initial number of 43. 
+The scope is gradually broadening, with more countries being added each three years. 2018 had results from 80 countries, double the initial number of 43. Each country is responsible for their data collection, and this is mostly consistent with a few notable exceptions, like China and the USA. In Australia, for the 2018 survey, 1717 schools were selected for testing. Stratified sampling was conducted to ensure representation from each state and territory, each type of school (public, private and catholic). A balance across urbanisation, socieoeconomic status, gender was checked, XXX students from each school. China, USA. Where to read details. 
 
-```{r collection, out.width="50%", echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE, fig.show="hide"}
+```{r loaddata, out.width="50%", echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE, fig.show="hide"}
 library(learningtower)
 data(student)
+```
 
+```{r collection, out.width="50%", echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE, fig.show="hide", eval+FALSE}
 student %>% group_by(year) %>%
   count(country) %>%
   count(year) %>%
@@ -30,6 +32,11 @@ student %>% group_by(year) %>%
     geom_col(width=1) +
     xlab("") +
     ylab("Number of countries reporting")
+
+student %>% filter(country == "AUS", year == 2018) %>% count(school_id, sort=TRUE)
+student %>% filter(country == "AUS") %>% count(school_id) %>% tally()
+student %>% filter(country == "AUS") %>% count(school_id) %>% select(n) %>% summary()
+# Something isn't correct with 2015, 2018 school_id
 ```
 
 # Is it really this dramatic?
