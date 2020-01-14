@@ -119,9 +119,51 @@ gif
 
 # Exploring PISA
 
-Plot of scores across these same set oof countries, side-by-side boxplots, or beeswarms.
+## Individuals
+
+In the plot below, one dot represents one student. The scores for students in each country are very spread out: the lowest scores for each country are similar, and the highest scores for each country are similar. Even, though Singapore has a higher median score, the top math score in Australia is higher than the top math score in Singapore, and Canada has the highest individual overall math score. 
+
+```{r individual, echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE}
+library(ggbeeswarm)
+library(forcats)
+student %>% 
+  filter(country == "SGP" | country == "CAN"| country == "FIN" | 
+           country == "NZL" | country == "USA" | country == "JPN" | 
+           country == "GBR" | country == "AUS") %>%
+  filter(year == 2018) %>%
+  ggplot(aes(x=fct_reorder(country, math), y=math)) + geom_quasirandom() +
+      geom_violin(draw_quantiles=c(0.25, 0.5, 0.75), fill=NA) +
+      ylab("Math scores") + xlab("") +
+      ggtitle("Individual Student Mathematics PISA Scores from 2018")
+```
+
+## Gender gap
 
 Plot of gender gap over time, in math and reading. 
+
+```{r gender, echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE}
+library(ggbeeswarm)
+library(forcats)
+student %>% 
+  filter(country == "AUS") %>%
+  filter(gender %in% c(1,2)) %>%
+  mutate(gender=factor(gender, levels=c(1,2), labels=c("m", "f"))) %>%
+  ggplot(aes(x=gender, y=math)) + geom_quasirandom() +
+      geom_violin(draw_quantiles=c(0.25, 0.5, 0.75), fill=NA) +
+      facet_wrap(~year, ncol=7) +
+      ylab("Math scores") + xlab("") +
+      ggtitle("Individual Student Mathematics PISA Scores from 2018")
+gender <- student %>% 
+  filter(country == "AUS") %>% 
+  filter(gender %in% c(1,2)) %>%
+  mutate(gender=factor(gender, levels=c(1,2), labels=c("m", "f"))) %>%
+  group_by(gender, year) %>%
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE), 
+            read = weighted.mean(read, stu_wgt, na.rm=TRUE)) %>%
+  gather(topic, score, math, read)
+ggplot(gender, aes(x=year, y=score, colour=gender)) + geom_line() + facet_wrap(~topic, ncol=2) +
+  scale_color_brewer("", palette="Dark2")
+```
 
 Homework time vs scores
 
