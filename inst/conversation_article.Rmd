@@ -142,21 +142,35 @@ student %>%
 Plot of gender gap over time, in math and reading. 
 
 ```{r gender, echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE}
-library(ggbeeswarm)
-library(forcats)
 student %>% 
   filter(country == "AUS") %>%
   filter(gender %in% c(1,2)) %>%
-  mutate(gender=factor(gender, levels=c(1,2), labels=c("m", "f"))) %>%
-  ggplot(aes(x=gender, y=math)) + geom_quasirandom() +
-      geom_violin(draw_quantiles=c(0.25, 0.5, 0.75), fill=NA) +
+  mutate(gender=factor(gender, levels=c(1,2), labels=c("f", "m"))) %>%
+  ggplot(aes(x=gender, y=math)) + geom_quasirandom(aes(colour=gender)) +
+      #geom_violin(draw_quantiles=c(0.25, 0.5, 0.75), aes(fill=gender), colour="white") +
       facet_wrap(~year, ncol=7) +
-      ylab("Math scores") + xlab("") +
-      ggtitle("Individual Student Mathematics PISA Scores from 2018")
+      ylab("Mathematics scores") + xlab("") +
+      scale_colour_brewer("", palette="Dark2") +
+      ggtitle("Individual Student Mathematics PISA Scores from 2000-2018")
+student %>% 
+  filter(country == "AUS") %>%
+  filter(gender %in% c(1,2)) %>%
+  mutate(gender=factor(gender, levels=c(1,2), labels=c("f", "m"))) %>%
+  ggplot(aes(x=gender, y=read)) + geom_quasirandom(aes(colour=gender)) +
+      #geom_violin(draw_quantiles=c(0.25, 0.5, 0.75), aes(fill=gender), colour="white") +
+      facet_wrap(~year, ncol=7) +
+      ylab("Reading scores") + xlab("") +
+      scale_colour_brewer("", palette="Dark2") +
+      ggtitle("Individual Student Reading PISA Scores from 2000-2018")
+```
+
+Something's off with gender - cross-checking against the PISA Australia summary, and it doesn't look correct here.
+
+```{r gendergap, eval=FALSE, echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE}
 gender <- student %>% 
   filter(country == "AUS") %>% 
   filter(gender %in% c(1,2)) %>%
-  mutate(gender=factor(gender, levels=c(1,2), labels=c("m", "f"))) %>%
+  mutate(gender=factor(gender, levels=c(1,2), labels=c("f", "m"))) %>%
   group_by(gender, year) %>%
   summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE), 
             read = weighted.mean(read, stu_wgt, na.rm=TRUE)) %>%
@@ -165,7 +179,7 @@ ggplot(gender, aes(x=year, y=score, colour=gender)) + geom_line() + facet_wrap(~
   scale_color_brewer("", palette="Dark2")
 ```
 
-Homework time vs scores
+<!--XX Can't do this for now - data not available for homework Homework time vs scores-->
 
 # Do it yourself
 
