@@ -11,15 +11,15 @@ output: html_document
 
 The PISA 2018 results were released on 3 December 2019. This led to wringing of hands in the Australian press, with titles of stories like [Vital Signs: Australia's slipping student scores will lead to greater income inequality](https://theconversation.com/vital-signs-australias-slipping-student-scores-will-lead-to-greater-income-inequality-128301) and [In China, Nicholas studied maths 20 hours a week. In Australia, it's three](https://www.smh.com.au/education/in-china-nicholas-studied-maths-20-hours-a-week-in-australia-it-s-three-20191203-p53ggv.html). Australia's neighbours, New Zealand and Indonesia, are also worrying: [New Zealand top-end in OECD's latest PISA report but drop in achievements 'worrying'](https://www.stuff.co.nz/national/education/117890945/new-zealand-topend-in-oecds-latest-pisa-report-but-drop-in-achievements-worrying), [Not even mediocre? Indonesian students score low in math, reading, science: PISA report](https://www.thejakartapost.com/news/2019/12/04/not-even-mediocre-indonesian-students-score-low-in-math-reading-science-pisa-report.html). 
 
-The data from this survey and all of the surveys conducted since the first collection in 2000, is publicly available. We have made a more convenient subset of the data available in a new R package, called learningtower, along with sample code for analysis, openly available. What you can learn by looking at the data, is that the variation from individual is vastly dominates any difference between averages. Focusing attention on the averages, can be convenient, from a public policy perspective, it detracts from paying attenton to the individual, and boosting opportunities for all. 
+The data from this survey and all of the surveys conducted since the first collection in 2000, is publicly available. We have made a more convenient subset of the data available in a new R package, called `learningtower`, along with sample code for analysis, openly available. What you can learn by looking at the data, is that the variation from individual is vastly dominates any difference between averages. Focusing attention on the averages, can be convenient, from a public policy perspective, it detracts from paying attenton to the individual, and boosting opportunities for all. 
 
 # About the data
 
-Since 2000, the OECD has overseen a Programme for International Student Assessment (PISA). The goal of this programme it to provide reliable indicators of what people actually know and can do. Details can be found at https://www.oecd.org/pisa/. Every three years 15 year old students around the world are tested on standardised skills in mathematics, science and reading. The students are also surveyed on aspects of their everyday life, that includes resources, quality of life and study habits. In addition, surveys are conducted with the school administrators and parents, about resources and quality of life. 
+Since 2000, the OECD has overseen a Programme for International Student Assessment (PISA). The goal of this programme is to provide reliable indicators of what people actually know and can do. Details can be found at https://www.oecd.org/pisa/. Every three years, 15 year old students around the world are tested on standardised skills in mathematics, science and reading. The students are also surveyed on aspects of their everyday life that includes resources, quality of life and study habits. In addition, surveys are conducted with the school administrators and parents about resources and quality of life. 
 
-The scope is gradually broadening, with more countries being added each three years. 2018 had results from 80 countries, double the initial number of 43. Each country is responsible for their data collection, under OECD oversight, and this is mostly consistent with a few notable exceptions, like China and the USA. In Australia, for the 2018 survey, ??? schools were selected for testing of 14273 students. Stratified sampling was conducted to ensure representation from each state and territory, each type of school (public, private and catholic). A balance across urbanisation, socieoeconomic status, gender was checked.  An average of 20 students are tested from each school. 
+The scope is gradually broadening, with more countries being added every three years. 2018 had results from 80 countries, which was double the initial number of 43. Each country is responsible for their data collection, under OECD oversight, and this is mostly consistent with a few notable exceptions, such as China and the USA. In Australia, for the 2018 survey, **???** schools were selected for testing of 14273 students. Stratified sampling was conducted to ensure representation from each state and territory, each type of school (public, private and catholic). A balance across urbanisation, socieoeconomic status, gender was checked.  An average of 20 students are tested from each school. 
 
-China samples schools and students selectively, with OECD approval, and its not entirely clear that the data is representative of the whole country. ([See a Washington Post article by Valerie Strauss for commentary on China's PISA practices](https://www.washingtonpost.com/education/2019/12/04/china-is-no-pisa-heres-why-its-test-scores-are-hard-believe/).) In the USA, the procedures for data collection are carefully documented and approved by the OECD, but the sample of schools and students is relatively small, about a third the numbers sampled in Australia. Schools can refuse to take part. (See [the technical notes for the USA PISA surveys for details](https://nces.ed.gov/pubs2011/2011004.pdf).) 
+China samples schools and students selectively, with OECD approval, and it is not entirely clear that the data is representative of the whole country. ([See a Washington Post article by Valerie Strauss for commentary on China's PISA practices](https://www.washingtonpost.com/education/2019/12/04/china-is-no-pisa-heres-why-its-test-scores-are-hard-believe/).) In the USA, the procedures for data collection are carefully documented and approved by the OECD, but the sample of schools and students is relatively small, at about a third of the numbers sampled in Australia. Schools can refuse to take part. (See [the technical notes for the USA PISA surveys for details](https://nces.ed.gov/pubs2011/2011004.pdf).) 
 
 ```{r loaddata, out.width="50%", echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE, fig.show="hide"}
 library(tidyverse)
@@ -42,7 +42,7 @@ student %>% filter(country == "AUS", year == 2018) %>% count(school_id) %>% sele
 # Something isn't correct with 2015, 2018 school_id
 ```
 
-The data from the testing, and the responses to the survey questions from students, parents and schools is freely available for [download](https://www.oecd.org/pisa/data/). It needs to be noted, though, that the raw test scores are not released. You can see this f you have a keen eye. The plots below show the 2018 scores for Australian students: a histogram of the math scores is plotted at left, and a scatterplot comparing math and reading scores is plotted at right. The histogram is beautifully bell-shaped and the scatterplot has a lovely elliptical appearance. These perfect structures should inspire suspician, and indeed if you read the data documentation you learn that the released values are simulated from a complex linear model applied to the data. Actually, multiple values are simulated for each student. This is called synthetic data, which is a common approach to ensure data privacy, and the data can still be considered to be accurate within the mean, variance and strata (country, gender, ...) used in the model of the original data.  
+The data from the testing, and the responses to the survey questions from students, parents and schools is freely available for [download](https://www.oecd.org/pisa/data/). It needs to be noted, though, that the raw test scores are not released. You can see this if you have a keen eye. The plots below show the 2018 scores for Australian students: a histogram of the math scores is plotted at left, and a scatterplot comparing math and reading scores is plotted at right. The histogram is beautifully bell-shaped and the scatterplot has a lovely elliptical appearance. These perfect structures should inspire suspician, and indeed if you read the data documentation you learn that the released values are simulated from a complex linear model applied to the data. Actually, multiple values are simulated for each student. This is called synthetic data, which is a common approach to ensure data privacy, and the data can still be considered to be accurate within the mean, variance and strata (country, gender, ...) used in the model of the original data.  
 
 ```{r scores, out.width="80%", fig.height=3, echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE}
 library(gridExtra)
@@ -50,15 +50,15 @@ p1 <- student %>% filter(country == "AUS", year == 2018) %>%
   ggplot(aes(x=math)) + 
     geom_histogram(binwidth=30) + 
     xlim(c(0, 1000)) +
-    xlab("Math scores in Australia in 2018") +
-    ylab("Count") + ggtitle("2018 math scores")
+    xlab("Mathematics scores in Australia in 2018") +
+    ylab("Count") + ggtitle("2018 Mathematics scores")
 p2 <- student %>% filter(country == "AUS", year == 2018) %>%
   ggplot(aes(x=math, y=read)) + 
     geom_point(alpha=0.5) + 
     xlim(c(0, 1000)) + ylim(c(0, 1000)) +
-    xlab("Math scores in Australia in 2018") +
+    xlab("Mathematics scores in Australia in 2018") +
     ylab("Reading scores") +
-    theme(aspect.ratio=1) + ggtitle("2018 math and reading scores")
+    theme(aspect.ratio=1) + ggtitle("2018 Mathematics and Reading scores")
 grid.arrange(p1, p2, ncol=2)
 ```
 
@@ -111,7 +111,14 @@ s <- stu_sub %>%
                    wrap = FALSE,
                    fixed_x = TRUE)
 
-gif <- animate(s, device = "png", width = 830, height =500, rewind = FALSE, type = "cairo", detail = 3)
+gif <- animate(s, 
+               device = "png",
+                type="cairo",
+                units="in", 
+                width=9, 
+                height=6, 
+                pointsize=24, 
+                res=200)
 
 gif
 
@@ -183,7 +190,7 @@ ggplot(gender, aes(x=year, y=score, colour=gender)) + geom_line() + facet_wrap(~
 
 # Do it yourself
 
-The PISA data across all years is provided in a convenient format in the R package, `learningtower` available from https://github.com/ropenscilabs/learningtower. Details on how to install the package, and access the data are at https://ropenscilabs.github.io/learningtower/. 
+The a subset of variables from the PISA data across all years is provided in a convenient format in the R package, `learningtower` available from https://github.com/ropenscilabs/learningtower. Details on how to install the package, and access the data are at https://ropenscilabs.github.io/learningtower/. 
 
 The work to make the data available is the effort of several researchers from Australia, New Zealand and Indonesia, conducted as part of the [ROpenSci OzUnconf](https://ozunconf19.ropensci.org) held in Sydney, Dec 11-13, 2019.
 
