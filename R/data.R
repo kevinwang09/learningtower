@@ -61,9 +61,10 @@ NULL
 #' @name school
 NULL
 
-#' Country iso3c and name mapping for PISA OECD countries
+#' Country iso3c and name mapping for PISA OECD countries [participants](http://www.oecd.org/pisa/aboutpisa/pisa-participants.htm)
 #'
-#' A dataset containing mapping of the country ISO code to the country name.
+#' A dataset containing mapping of the [country ISO code to the country name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf).
+#'
 #'
 #' @format A tibble of the following variables
 #' \itemize{

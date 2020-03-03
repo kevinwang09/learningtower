@@ -3,12 +3,12 @@
 \docType{data}
 \name{countrycode}
 \alias{countrycode}
-\title{Country iso3c and name mapping for PISA OECD countries}
+\title{Country iso3c and name mapping for PISA OECD countries [participants](http://www.oecd.org/pisa/aboutpisa/pisa-participants.htm)}
 \format{A tibble of the following variables
 \itemize{
     \item country_iso3c Country 3 character code
     \item country_name Country name
     }}
 \description{
-A dataset containing mapping of the country ISO code to the country name.
+A dataset containing mapping of the [country ISO code to the country name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf).
 }

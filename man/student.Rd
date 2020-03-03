@@ -12,7 +12,7 @@
     \item mother_educ Highest level of mother's education - 1 to 5
     \item father_educ Highest level of father's education - 1 to 5
     \item gender recorded gender - 1 female or 2 male or missing
-    \item computer Possession of computer - 1 yes, 2 no or missing
+    \item computer Possession of computer - 1 yes, 2 no, other values are coding missing values
     \item internet Access to internet - 1 yes, 2 no or missing
     \item math Simulated score in mathematics
     \item read Simulated score in reading
