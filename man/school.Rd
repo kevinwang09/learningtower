@@ -4,7 +4,8 @@
 \name{school}
 \alias{school}
 \title{School data from 2000-2018 PISA OECD data}
-\format{A tibble of the following variables
+\format{
+A tibble of the following variables
 \itemize{
     \item student_id The student identification number
     \item stu_wgt The final survey weight score for the student score
@@ -20,7 +21,8 @@
     \item staff_shortage The unique school identification number
     \item sch_wgt Adjusted school base weight
     \item school_size The school size
-    }}
+    }
+}
 \description{
 A dataset containing school weight and other information
 from the triennial testing of 15 year olds around

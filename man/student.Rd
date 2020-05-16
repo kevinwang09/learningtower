@@ -4,7 +4,8 @@
 \name{student}
 \alias{student}
 \title{Student data from 2000-2018 PISA OECD data}
-\format{A tibble of the following variables
+\format{
+A tibble of the following variables
 \itemize{
     \item country_iso3c Country 3 character code
     \item school_id The unique school identification number
@@ -27,7 +28,8 @@
     \item book Number of books - 1 yes, 2 no or missing
     \item wealth Family wealth
     \item escs Index of economic, social and cultural status
-    }}
+    }
+}
 \description{
 A dataset containing scores and other information
 from the triennial testing of 15 year olds around
