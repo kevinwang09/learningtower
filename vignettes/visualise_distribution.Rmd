@@ -24,6 +24,13 @@ theme_set(theme_classic(18) +
             theme(legend.position = "bottom"))
 ```
 
+# Check for dupes
+```{r}
+data(student)
+student %>%
+  janitor::get_dupes(country, year, school_id, student_id)
+```
+
 
 # Simplified boxplot
 
