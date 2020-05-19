@@ -25,7 +25,8 @@ Suggests:
     knitr,
     rmarkdown,
     broom,
-    ggrepel
+    ggrepel,
+    patchwork
 Depends: R (>= 3.5.0)
 License: MIT
 Encoding: UTF-8

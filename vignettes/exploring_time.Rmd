@@ -34,7 +34,7 @@ data(student)
 # Data exploration
 ## Australia, New Zealand, Indonesia
 
-```{r fig.height=9}
+```{r, fig.height=9}
 student_sumry <- student %>% 
   filter(country %in% c("AUS", "NZL", "IDN")) %>%
   group_by(year, country) %>%
@@ -85,7 +85,7 @@ student %>%
 
 Here we want to calculate features for all the countries over time, and explore the variability by country.
 
-```{r eval=FALSE}
+```{r, eval=FALSE}
 # devtools::install_github("njtierney/brolgar")
 library(brolgar)
 library(tsibble)
@@ -98,11 +98,41 @@ student_means <- as_tsibble(student_means,
                       index = year)
 stu_features <- student_means %>% features(math, feat_brolgar)
 
+stu_features
+
+stu_monotone = student_means %>%
+  features(math, feat_monotonic)
+
+
+p1 = stu_monotone %>% 
+  right_join(student_means, by = "country") %>%
+  ggplot(aes(x = year,
+             y = math,
+             group = country)) +
+  geom_line() + 
+  gghighlight::gghighlight(increase) +
+  labs(x = "Year", 
+       y = "Weighted mean Maths scores", 
+       title = "Highlight monotone increasing countries")
+
+
+p2 = stu_monotone %>% 
+  right_join(student_means, by = "country") %>%
+  ggplot(aes(x = year,
+             y = math,
+             group = country)) +
+  geom_line() + 
+  gghighlight::gghighlight(decrease) +
+  labs(x = "Year", 
+       y = "Weighted mean Maths scores", 
+       title = "Highlight decreasing countries")
+
+p1 / p2
 ```
 
 ## Multivariate plot
 
-```{r eval=FALSE}
+```{r, eval=FALSE}
 student %>% 
   filter(country %in% c("AUS", "CAN")) %>% 
   group_by(year, country) %>%
