@@ -20,7 +20,15 @@ Authors@R:
       person(given = "Nick", family = "Tierney", role = "aut", 
              email = "nicholas.tierney@gmail.com"))
 Description: This package provides the OECD PISA data from 2000-2018 
+Suggests: 
+    tidyverse,
+    knitr,
+    rmarkdown,
+    broom,
+    ggrepel
+Depends: R (>= 3.5.0)
 License: MIT
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.0
+VignetteBuilder: knitr

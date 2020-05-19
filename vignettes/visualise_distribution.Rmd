@@ -1,8 +1,12 @@
 ---
 title: "Visualise differential distribution between countries"
-author: "Authors"
-date: "16/05/2020"
-output: html_document
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Distributions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 # Some prelim/working thoughts...
@@ -16,7 +20,7 @@ We will attempt to answer these questions via the maths test score.
 ```{r}
 library(tidyverse)
 library(learningtower)
-library(directlabels)
+library(broom)
 library(ggrepel)
 
 selected_countries = c("JPN", "AUS")
@@ -25,7 +29,7 @@ theme_set(theme_classic(18) +
 ```
 
 # Check for dupes
-```{r}
+```{r, eval = FALSE}
 data(student)
 student %>%
   janitor::get_dupes(country, year, school_id, student_id)
@@ -48,7 +52,6 @@ selected_country_avg %>%
   geom_linerange(aes(ymin = math_p25, ymax = math_p75), size = 1.2, alpha = 0.7) +
   geom_point(size = 3) +
   geom_line(aes(group = country)) +
-  geom_dl(aes(label = country), method = "last.points") +
   scale_fill_brewer(palette = "Dark2") +
   scale_colour_brewer(palette = "Dark2") +
   labs(y = "Math scores")
@@ -102,7 +105,10 @@ country_lm %>%
              label = country)) +
   geom_point() +
   geom_label_repel() +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  labs(x = "Median score in the year 2000", 
+       y = "Avg decrease in median score every year since 2000",
+       size = "-log10(p-value of slope)")
 ```
 
 Some explanation:
