@@ -7,20 +7,20 @@
 \format{
 A tibble of the following variables
 \itemize{
-    \item student_id The student identification number
-    \item stu_wgt The final survey weight score for the student score
-    \item country_iso3c Country 3 character code
-    \item school_id The unique school identification number
-    \item funding_gov Percentage of total funding for school year from: Government
-    \item funding_fees Percentage of total funding for school year from: Student fees or school charges paid by parents
-    \item funding_donations Percentage of total funding for school year from: Benefactors, donations, bequests, sponsorships, parent fundraising
-    \item enrollment_boys Number of boys
-    \item enrollment_girls Number of girls
-    \item student_teacher_ratio Student-Teacher ratio
-    \item public_private Public or private school
-    \item staff_shortage The unique school identification number
-    \item sch_wgt Adjusted school base weight
-    \item school_size The school size
+    \item \code{year}: Year of the PISA data. Factor.
+    \item \code{country_iso3c}: Country 3 character code. Factor.
+    \item \code{school_id}: The school identification number, unique for each country and year combination. Factor.
+    \item \code{fund_gov}: Percentage of total funding for school year from government. Numeric.
+    \item \code{fund_fees}: Percentage of total funding for school year from student fees or school charges paid by parents. Numeric.
+    \item \code{fund_donation}: Percentage of total funding for school year from
+    benefactors, donations, bequests, sponsorships, parent fundraising. Numeric.
+    \item \code{enrol_boys}: Number of boys in the school. Numeric.
+    \item \code{enrol_girls}: Number of girls in the schoo. Numeric.
+    \item \code{stratio}: Student-Teacher ratio. Numeric.
+    \item \code{public_private}: Is the school a public or private school. Factor.
+    \item \code{staff_shortage}: Shortage of staff. Numeric.
+    \item \code{sch_wgt}: The final survey weight score for the schools. Numeric.
+    \item \code{school_size}: The school size. Numeric.
     }
 }
 \description{

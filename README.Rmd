@@ -15,8 +15,7 @@ knitr::opts_chunk$set(
 # learningtower <img src='man/figures/logo.png' align="right" height="211" />
 
 
-<!-- badges: start -->
-<!-- badges: end -->
+![R-CMD-check](https://github.com/ropenscilabs/learningtower/workflows/R-CMD-check/badge.svg)
 
 
 The goal of learningtower is to provide a userfriendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](http://www.oecd.org/pisa/data/), for years 2000 - 2018, collected on a three year basis.

@@ -7,27 +7,40 @@
 \format{
 A tibble of the following variables
 \itemize{
-    \item country_iso3c Country 3 character code
-    \item school_id The unique school identification number
-    \item student_id The student identification number
-    \item mother_educ Highest level of mother's education - 1 to 5
-    \item father_educ Highest level of father's education - 1 to 5
-    \item gender recorded gender - 1 female or 2 male or missing
-    \item computer Possession of computer - 1 yes, 2 no, other values are coding missing values
-    \item internet Access to internet - 1 yes, 2 no or missing
-    \item math Simulated score in mathematics
-    \item read Simulated score in reading
-    \item science Simulated score in science
-    \item stu_wgt The final survey weight score for the student score
-    \item desk Possession of  desk to study at - 1 yes, 2 no or missing
-    \item room Possession of a room of your own - 1 yes, 2 no or missing
-    \item dishwasher Possession of a dishwasher - 1 yes, 2 no or missing
-    \item television Number of televisions - 1 yes, 2 no or missing
-    \item computer_n Number of computers - 1 yes, 2 no or missing
-    \item car Number of cars - 1 yes, 2 no or missing
-    \item book Number of books - 1 yes, 2 no or missing
-    \item wealth Family wealth
-    \item escs Index of economic, social and cultural status
+    \item \code{year}: Year of the PISA data. Factor.
+    \item \code{country}: Country 3 character code. Factor.
+    \item \code{school_id}: The school identification number, unique for each country and year combination. Factor.
+    \item \code{student_id}: The student identification number, unique for each school, country and year combination. Factor.
+    \item \code{mother_educ}: Highest level of mother's education. Ranges from "less than ISCED1" to "ISCED 3A". Factor.
+    Note that in 2000, all entries are missing.
+    \item \code{father_educ}: Highest level of father's education. Ranges from "less than ISCED1" to "ISCED 3A". Factor.
+    Note that in 2000, all entries are missing.
+    \item \code{gender}: Gender of the student. Only "male" and "female" are recorded. Factor.
+    \item \code{computer}: Possession of computer. Only "yes" and "no" are recorded. Factor.
+    \item \code{internet}: Access to internet. Only "yes" and "no" are recorded. Factor.
+    \item \code{math}: Simulated score in mathematics. Numeric.
+    \item \code{read}: Simulated score in reading. Numeric.
+    \item \code{science}: Simulated score in science. Numeric.
+    \item \code{stu_wgt}: The final survey weight score for the student score. Numeric.
+    \item \code{desk}: Possession of desk to study at. Only "yes" and "no" are recorded. Factor.
+    \item \code{room}: Possession of a room of your own. Only "yes" and "no" are recorded. Factor.
+    \item \code{dishwasher}: Possession of a dishwasher. Only "yes" and "no" are recorded. Factor.
+    Note that in 2015 and 2018, all entries are missing.
+    \item \code{television}: Number of televisions.
+    "0", "1", "2" are code for no, one and two TVs in the house. "3+" codes for three or more TVs. Factor.
+    Note that in 2003, all entries are missing.
+    \item \code{computer_n}: Number of computers.
+    "0", "1", "2" are code for no, one and two computers in the house. "3+" codes for three or more computers. Factor.
+    Note that in 2003, all entries are missing.
+    \item \code{car}: Number of cars.
+    "0", "1", "2" are code for no, one and two cars in the house. "3+" codes for three or more cars Factor.
+    Note that in 2003, all entries are missing.
+    \item \code{book}: Number of books. Factor.
+    Note that encodings are different in 2000 and 2003 compare to all other years. Factor.
+    Evalute \code{table(student$book, student$year)} for a demo.
+    \item \code{wealth}: Family wealth. Numeric.
+    Note that in 2003, all entries are missing.
+    \item \code{escs}: Index of economic, social and cultural status. Numeric.
     }
 }
 \description{

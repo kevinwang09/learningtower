@@ -3,9 +3,7 @@
 
 # learningtower <img src='man/figures/logo.png' align="right" height="211" />
 
-<!-- badges: start -->
-
-<!-- badges: end -->
+![R-CMD-check](https://github.com/ropenscilabs/learningtower/workflows/R-CMD-check/badge.svg)
 
 The goal of learningtower is to provide a userfriendly R package to
 provide easy access to a subset of variables from PISA data collected
@@ -49,27 +47,27 @@ As an example, we can load the `student` data as follows:
 library(learningtower)
 data(student)
 head(student)
-#>   year country school_id student_id mother_educ father_educ gender
-#> 1 2000     ALB     01001      00001          NA          NA      1
-#> 2 2000     ALB     01001      00003          NA          NA      1
-#> 3 2000     ALB     01001      00006          NA          NA      2
-#> 4 2000     ALB     01001      00008          NA          NA      1
-#> 5 2000     ALB     01001      00011          NA          NA      1
-#> 6 2000     ALB     01001      00012          NA          NA      1
-#>   computer internet  math science  read stu_wgt country_iso3c country.name
-#> 1        4        2 324.4   345.7 397.9    2.16           ALB      Albania
-#> 2        1        2    NA   385.8 368.4    2.16           ALB      Albania
-#> 3        1        2    NA   327.9 294.2    2.16           ALB      Albania
-#> 4        2        2 235.8   341.1 241.5    2.16           ALB      Albania
-#> 5        1        2    NA   307.1 287.2    2.16           ALB      Albania
-#> 6       NA        2 290.7   277.0 307.8    2.16           ALB      Albania
-#>   un.name.en
-#> 1    Albania
-#> 2    Albania
-#> 3    Albania
-#> 4    Albania
-#> 5    Albania
-#> 6    Albania
+#>   year school_id student_id mother_educ father_educ gender computer internet
+#> 1 2000      1001          1          NA          NA      1       NA        2
+#> 2 2000      1001          3          NA          NA      1       NA        2
+#> 3 2000      1001          6          NA          NA      2       NA        2
+#> 4 2000      1001          8          NA          NA      1       NA        2
+#> 5 2000      1001         11          NA          NA      1       NA        2
+#> 6 2000      1001         12          NA          NA      1       NA        2
+#>     math   read science stu_wgt desk room dishwasher television computer_n car
+#> 1 324.35 397.87  345.66    2.16    1    2          2          2          4   2
+#> 2     NA 368.41  385.83    2.16    1    1          2          3          1   1
+#> 3     NA 294.17  327.94    2.16    1    1          2          3          1   1
+#> 4 235.79 241.49  341.09    2.16    1    1          2          2          2   1
+#> 5     NA 287.16  307.15    2.16    1    1          2          3          1   2
+#> 6 290.74 307.84  277.04    2.16    1    1          1          2         NA   4
+#>   book wealth       escs country
+#> 1    3  -0.60  0.1057558     ALB
+#> 2    2  -1.84 -1.4240446     ALB
+#> 3    2  -1.46 -1.3066839     ALB
+#> 4    3  -1.46 -0.4624639     ALB
+#> 5    3  -1.13 -1.2816273     ALB
+#> 6    3  -0.40 -0.2299722     ALB
 ```
 
 See `?student` for information pertaining to variables captured.
@@ -80,13 +78,13 @@ data.
 ``` r
 data(countrycode)
 head(countrycode)
-#>   country_iso3c country_name
-#> 1           AZE   Azerbaijan
-#> 2           ARG    Argentina
-#> 3           AUS    Australia
-#> 4           AUT      Austria
-#> 5           BEL      Belgium
-#> 6           BRA       Brazil
+#>   country country_name
+#> 1     AZE   Azerbaijan
+#> 2     ARG    Argentina
+#> 3     AUS    Australia
+#> 4     AUT      Austria
+#> 5     BEL      Belgium
+#> 6     BRA       Brazil
 ```
 
 ## Exploring the data

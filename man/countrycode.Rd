@@ -7,8 +7,8 @@
 \format{
 A tibble of the following variables
 \itemize{
-    \item country_iso3c Country 3 character code
-    \item country_name Country name
+    \item \code{country}: Country 3 character code. Character.
+    \item \code{country_name}: Country name. Character.
     }
 }
 \description{
