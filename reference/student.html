@@ -146,27 +146,40 @@ the globe. Original data available from
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A tibble of the following variables</p><ul>
-<li><p>country_iso3c Country 3 character code</p></li>
-<li><p>school_id The unique school identification number</p></li>
-<li><p>student_id The student identification number</p></li>
-<li><p>mother_educ Highest level of mother's education - 1 to 5</p></li>
-<li><p>father_educ Highest level of father's education - 1 to 5</p></li>
-<li><p>gender recorded gender - 1 female or 2 male or missing</p></li>
-<li><p>computer Possession of computer - 1 yes, 2 no, other values are coding missing values</p></li>
-<li><p>internet Access to internet - 1 yes, 2 no or missing</p></li>
-<li><p>math Simulated score in mathematics</p></li>
-<li><p>read Simulated score in reading</p></li>
-<li><p>science Simulated score in science</p></li>
-<li><p>stu_wgt The final survey weight score for the student score</p></li>
-<li><p>desk Possession of  desk to study at - 1 yes, 2 no or missing</p></li>
-<li><p>room Possession of a room of your own - 1 yes, 2 no or missing</p></li>
-<li><p>dishwasher Possession of a dishwasher - 1 yes, 2 no or missing</p></li>
-<li><p>television Number of televisions - 1 yes, 2 no or missing</p></li>
-<li><p>computer_n Number of computers - 1 yes, 2 no or missing</p></li>
-<li><p>car Number of cars - 1 yes, 2 no or missing</p></li>
-<li><p>book Number of books - 1 yes, 2 no or missing</p></li>
-<li><p>wealth Family wealth</p></li>
-<li><p>escs Index of economic, social and cultural status</p></li>
+<li><p><code>year</code>: Year of the PISA data. Factor.</p></li>
+<li><p><code>country</code>: Country 3 character code. Factor.</p></li>
+<li><p><code>school_id</code>: The school identification number, unique for each country and year combination. Factor.</p></li>
+<li><p><code>student_id</code>: The student identification number, unique for each school, country and year combination. Factor.</p></li>
+<li><p><code>mother_educ</code>: Highest level of mother's education. Ranges from "less than ISCED1" to "ISCED 3A". Factor.
+    Note that in 2000, all entries are missing.</p></li>
+<li><p><code>father_educ</code>: Highest level of father's education. Ranges from "less than ISCED1" to "ISCED 3A". Factor.
+    Note that in 2000, all entries are missing.</p></li>
+<li><p><code>gender</code>: Gender of the student. Only "male" and "female" are recorded. Factor.</p></li>
+<li><p><code>computer</code>: Possession of computer. Only "yes" and "no" are recorded. Factor.</p></li>
+<li><p><code>internet</code>: Access to internet. Only "yes" and "no" are recorded. Factor.</p></li>
+<li><p><code>math</code>: Simulated score in mathematics. Numeric.</p></li>
+<li><p><code>read</code>: Simulated score in reading. Numeric.</p></li>
+<li><p><code>science</code>: Simulated score in science. Numeric.</p></li>
+<li><p><code>stu_wgt</code>: The final survey weight score for the student score. Numeric.</p></li>
+<li><p><code>desk</code>: Possession of desk to study at. Only "yes" and "no" are recorded. Factor.</p></li>
+<li><p><code>room</code>: Possession of a room of your own. Only "yes" and "no" are recorded. Factor.</p></li>
+<li><p><code>dishwasher</code>: Possession of a dishwasher. Only "yes" and "no" are recorded. Factor.
+    Note that in 2015 and 2018, all entries are missing.</p></li>
+<li><p><code>television</code>: Number of televisions.
+    "0", "1", "2" are code for no, one and two TVs in the house. "3+" codes for three or more TVs. Factor.
+    Note that in 2003, all entries are missing.</p></li>
+<li><p><code>computer_n</code>: Number of computers.
+    "0", "1", "2" are code for no, one and two computers in the house. "3+" codes for three or more computers. Factor.
+    Note that in 2003, all entries are missing.</p></li>
+<li><p><code>car</code>: Number of cars.
+    "0", "1", "2" are code for no, one and two cars in the house. "3+" codes for three or more cars Factor.
+    Note that in 2003, all entries are missing.</p></li>
+<li><p><code>book</code>: Number of books. Factor.
+    Note that encodings are different in 2000 and 2003 compare to all other years. Factor.
+    Evalute <code><a href='https://rdrr.io/r/base/table.html'>table(student$book, student$year)</a></code> for a demo.</p></li>
+<li><p><code>wealth</code>: Family wealth. Numeric.
+    Note that in 2003, all entries are missing.</p></li>
+<li><p><code>escs</code>: Index of economic, social and cultural status. Numeric.</p></li>
 </ul>
 
 

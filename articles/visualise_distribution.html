@@ -85,7 +85,7 @@
       <h1 data-toc-skip>Visualise differential distribution between countries</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2020-05-20</h4>
+            <h4 class="date">2020-05-24</h4>
       
       
       <div class="hidden name"><code>visualise_distribution.Rmd</code></div>
@@ -104,7 +104,7 @@
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.3.0     ✔ purrr   0.3.4
 ## ✔ tibble  3.0.1     ✔ dplyr   0.8.5
-## ✔ tidyr   1.0.3     ✔ stringr 1.4.0
+## ✔ tidyr   1.1.0     ✔ stringr 1.4.0
 ## ✔ readr   1.3.1     ✔ forcats 0.5.0</code></pre>
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
@@ -135,7 +135,26 @@
     <span class="kw">math_p50</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">math</span>, <span class="fl">0.50</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>),
     <span class="kw">math_p75</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">math</span>, <span class="fl">0.75</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>))
 
-<span class="no">selected_country_avg</span> <span class="kw">%&gt;%</span>
+<span class="no">student</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">%in%</span> <span class="no">selected_countries</span>, <span class="no">year</span> <span class="kw">==</span> <span class="fl">2003</span>)</pre></body></html></div>
+<pre><code>## # A tibble: 17,258 x 22
+##    year  country school_id student_id mother_educ father_educ gender computer
+##    &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;      &lt;fct&gt;       &lt;fct&gt;       &lt;fct&gt;  &lt;fct&gt;   
+##  1 2003  AUS     00001     00001      less than … ISCED 3A    male   no      
+##  2 2003  AUS     00001     00002      ISCED 3A    ISCED 3A    male   yes     
+##  3 2003  AUS     00001     00003      ISCED 3A    ISCED 2     female yes     
+##  4 2003  AUS     00001     00004      ISCED 3B, C ISCED 3A    female yes     
+##  5 2003  AUS     00001     00005      ISCED 3B, C ISCED 3B, C female yes     
+##  6 2003  AUS     00001     00006      ISCED 3B, C ISCED 3A    male   yes     
+##  7 2003  AUS     00001     00007      ISCED 3B, C ISCED 3B, C female yes     
+##  8 2003  AUS     00001     00008      ISCED 2     ISCED 2     male   no      
+##  9 2003  AUS     00001     00009      &lt;NA&gt;        &lt;NA&gt;        male   yes     
+## 10 2003  AUS     00001     00010      less than … ISCED 3B, C female yes     
+## # … with 17,248 more rows, and 14 more variables: internet &lt;fct&gt;, math &lt;dbl&gt;,
+## #   read &lt;dbl&gt;, science &lt;dbl&gt;, stu_wgt &lt;dbl&gt;, desk &lt;fct&gt;, room &lt;fct&gt;,
+## #   dishwasher &lt;fct&gt;, television &lt;fct&gt;, computer_n &lt;fct&gt;, car &lt;fct&gt;,
+## #   book &lt;fct&gt;, wealth &lt;dbl&gt;, escs &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">selected_country_avg</span> <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">year</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">math_p50</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">country</span>)) +
   <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="kw">ymin</span> <span class="kw">=</span> <span class="no">math_p25</span>, <span class="kw">ymax</span> <span class="kw">=</span> <span class="no">math_p75</span>), <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1.2</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.7</span>) +
   <span class="fu">geom_point</span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>) +
@@ -149,7 +168,7 @@
 <div id="is-the-decreasing-trend-a-more-general-trend-around-the-world" class="section level1">
 <h1 class="hasAnchor">
 <a href="#is-the-decreasing-trend-a-more-general-trend-around-the-world" class="anchor"></a>Is the decreasing trend a more general trend around the world?</h1>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="co"># quant_fns = function(x){</span>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># quant_fns = function(x){</span>
 <span class="co">#   q = quantile(x = x, probs = c(0.01, 0.05, 0.25, 0.50, 0.75, 0.95, 0.99), na.rm = TRUE)</span>
 <span class="co">#   list(tibble(quant = names(q),</span>
 <span class="co">#               values = q))</span>
@@ -163,7 +182,9 @@
 <span class="co">#   unnest(quant)</span>
 
 <span class="no">country_summ</span> <span class="kw">=</span> <span class="no">student</span> <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">year</span> <span class="kw">=</span> <span class="no">year</span> - <span class="fl">2000</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(
+    <span class="kw">year</span> <span class="kw">=</span> <span class="no">year</span> <span class="kw">%&gt;%</span> <span class="no">as.character</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(),
+    <span class="kw">year</span> <span class="kw">=</span> <span class="no">year</span> - <span class="fl">2000</span>) <span class="kw">%&gt;%</span>
   <span class="fu">group_by</span>(<span class="no">year</span>, <span class="no">country</span>) <span class="kw">%&gt;%</span>
   <span class="fu">summarise</span>(<span class="kw">math_p50</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">math</span>, <span class="fl">0.5</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>)) <span class="kw">%&gt;%</span>
   <span class="fu">ungroup</span>()
@@ -206,7 +227,7 @@
 <p>But just because there is a large variability in the data, I don’t think it is completely meaningless to compare across countries. Sure, the original Conversation article produced figures that zoomed into the averaged data, which might exaggerated the decreasing trends, but the solution isn’t to resetting zoom to the whole range of the raw data. Because the average of many values (X-bar) will have a smaller spread than Xi’s.</p>
 <p>I put forward the argument that we should consider visualising the raw scores without any summarisation. This might be achived through ECDF. Each bump in the ECDF curve is a raw data point. So instead of trying to come up with a summarisation of location or spread, we can see the entire sample distribution of marks for each country. This way we can see the entire distribution of scores in a country and compare the distribution rather than comparing a simple one number summary and be lured into making false conclusions.</p>
 <p>Using the simulation from Gaussian distribution below, we can see that a difference in mean can be characterised by a horizontal shift (because the red curve is <strong>right</strong> of the green, it thus has a <strong>higher</strong> mean than green) and a small sd is characterised by a sharp increase in the middle of the curve.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123</span>)
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">123</span>)
 
 <span class="fu">bind_rows</span>(
   <span class="fu">tibble</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="fl">1000</span>, <span class="fl">0</span>, <span class="fl">1</span>),
@@ -220,7 +241,7 @@
   <span class="fu">scale_colour_brewer</span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"Set1"</span>)</pre></body></html></div>
 <p><img src="visualise_distribution_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>We compute the ECDF/EPDF of four selected countries below.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">student</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">student</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AUS"</span>, <span class="st">"USA"</span>, <span class="st">"JPN"</span>, <span class="st">"BRA"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">math</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">country</span>)) +
   <span class="fu">geom_density</span>() +
@@ -228,7 +249,7 @@
   <span class="fu">scale_colour_brewer</span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"Set1"</span>)</pre></body></html></div>
 <pre><code>## Warning: Removed 6414 rows containing non-finite values (stat_density).</code></pre>
 <p><img src="visualise_distribution_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">student</span> <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">student</span> <span class="kw">%&gt;%</span>
   <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AUS"</span>, <span class="st">"USA"</span>, <span class="st">"JPN"</span>, <span class="st">"BRA"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">math</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">country</span>)) +
   <span class="fu">stat_ecdf</span>(<span class="kw">geom</span> <span class="kw">=</span> <span class="st">"step"</span>, <span class="kw">size</span> <span class="kw">=</span> <span class="fl">1.2</span>) +
@@ -237,16 +258,16 @@
 <pre><code>## Warning: Removed 6414 rows containing non-finite values (stat_ecdf).</code></pre>
 <p><img src="visualise_distribution_files/figure-html/unnamed-chunk-6-2.png" width="700"></p>
 <p>Interesting findings: + In most cases, AUS, USA and JPN share quite similar gradient of ECDF, which might be an indication that they have similar spread. BRA tends to have a bit of sharper increase. So that could imply some advantages in favour of the top students. + If the argument is that an average student in JPN does better than an average student in AUS, then we can now refine this statement to use a precise statement using quantiles and distributions. E.g. a student who stores in the top 50% of JPN student population is able to score better than 66.5% of AUS student population. But of course, this gao narrows when you go towards the top of the distributions.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">student</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">==</span> <span class="st">"JPN"</span>, <span class="no">year</span> <span class="kw">==</span> <span class="fl">2018</span>) <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">math</span>) <span class="kw">%&gt;%</span> <span class="no">median</span></pre></body></html></div>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="no">student</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">==</span> <span class="st">"JPN"</span>, <span class="no">year</span> <span class="kw">==</span> <span class="fl">2018</span>) <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">math</span>) <span class="kw">%&gt;%</span> <span class="no">median</span></pre></body></html></div>
 <pre><code>## [1] 532.182</code></pre>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">student</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">==</span> <span class="st">"AUS"</span>, <span class="no">year</span> <span class="kw">==</span> <span class="fl">2018</span>) <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">math</span>) <span class="kw">&lt;=</span> <span class="fl">532.182</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">student</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">==</span> <span class="st">"AUS"</span>, <span class="no">year</span> <span class="kw">==</span> <span class="fl">2018</span>) <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">math</span>) <span class="kw">&lt;=</span> <span class="fl">532.182</span>)</pre></body></html></div>
 <pre><code>## [1] 0.6653121</code></pre>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">student</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">==</span> <span class="st">"JPN"</span>, <span class="no">year</span> <span class="kw">==</span> <span class="fl">2018</span>) <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">math</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="fl">0.90</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="no">student</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">==</span> <span class="st">"JPN"</span>, <span class="no">year</span> <span class="kw">==</span> <span class="fl">2018</span>) <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">math</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="fl">0.90</span>)</pre></body></html></div>
 <pre><code>##     90% 
 ## 636.917</code></pre>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">student</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">==</span> <span class="st">"AUS"</span>, <span class="no">year</span> <span class="kw">==</span> <span class="fl">2018</span>) <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">math</span>) <span class="kw">&lt;=</span> <span class="fl">636.9</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">student</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">==</span> <span class="st">"AUS"</span>, <span class="no">year</span> <span class="kw">==</span> <span class="fl">2018</span>) <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">math</span>) <span class="kw">&lt;=</span> <span class="fl">636.9</span>)</pre></body></html></div>
 <pre><code>## [1] 0.9445106</code></pre>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
 <pre><code>## R version 4.0.0 (2020-04-24)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
 ## Running under: macOS Catalina 10.15.4
@@ -264,25 +285,25 @@
 ## other attached packages:
 ##  [1] ggrepel_0.8.2            broom_0.5.6              learningtower_0.0.0.9000
 ##  [4] forcats_0.5.0            stringr_1.4.0            dplyr_0.8.5             
-##  [7] purrr_0.3.4              readr_1.3.1              tidyr_1.0.3             
+##  [7] purrr_0.3.4              readr_1.3.1              tidyr_1.1.0             
 ## [10] tibble_3.0.1             ggplot2_3.3.0            tidyverse_1.3.0         
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] tidyselect_1.1.0   xfun_0.14          haven_2.2.0        lattice_0.20-41   
 ##  [5] colorspace_1.4-1   vctrs_0.3.0        generics_0.0.2     htmltools_0.4.0   
-##  [9] yaml_2.2.1         rlang_0.4.6        pkgdown_1.5.1.9000 pillar_1.4.4      
-## [13] withr_2.2.0        glue_1.4.1         DBI_1.1.0          RColorBrewer_1.1-2
-## [17] dbplyr_1.4.3       modelr_0.1.8       readxl_1.3.1       lifecycle_0.2.0   
-## [21] munsell_0.5.0      gtable_0.3.0       cellranger_1.1.0   rvest_0.3.5       
-## [25] memoise_1.1.0      evaluate_0.14      labeling_0.3       knitr_1.28        
-## [29] fansi_0.4.1        Rcpp_1.0.4.6       backports_1.1.7    scales_1.1.1      
-## [33] desc_1.2.0         jsonlite_1.6.1     farver_2.0.3       fs_1.4.1          
-## [37] hms_0.5.3          digest_0.6.25      stringi_1.4.6      grid_4.0.0        
-## [41] rprojroot_1.3-2    cli_2.0.2          tools_4.0.0        magrittr_1.5      
-## [45] crayon_1.3.4       pkgconfig_2.0.3    MASS_7.3-51.5      ellipsis_0.3.1    
-## [49] xml2_1.3.2         reprex_0.3.0       lubridate_1.7.8    assertthat_0.2.1  
-## [53] rmarkdown_2.1      httr_1.4.1         rstudioapi_0.11    R6_2.4.1          
-## [57] nlme_3.1-147       compiler_4.0.0</code></pre>
+##  [9] yaml_2.2.1         utf8_1.1.4         rlang_0.4.6        pkgdown_1.5.1.9000
+## [13] pillar_1.4.4       withr_2.2.0        glue_1.4.1         DBI_1.1.0         
+## [17] RColorBrewer_1.1-2 dbplyr_1.4.3       modelr_0.1.8       readxl_1.3.1      
+## [21] lifecycle_0.2.0    munsell_0.5.0      gtable_0.3.0       cellranger_1.1.0  
+## [25] rvest_0.3.5        memoise_1.1.0      evaluate_0.14      labeling_0.3      
+## [29] knitr_1.28         fansi_0.4.1        Rcpp_1.0.4.6       backports_1.1.7   
+## [33] scales_1.1.1       desc_1.2.0         jsonlite_1.6.1     farver_2.0.3      
+## [37] fs_1.4.1           hms_0.5.3          digest_0.6.25      stringi_1.4.6     
+## [41] grid_4.0.0         rprojroot_1.3-2    cli_2.0.2          tools_4.0.0       
+## [45] magrittr_1.5       crayon_1.3.4       pkgconfig_2.0.3    MASS_7.3-51.5     
+## [49] ellipsis_0.3.1     xml2_1.3.2         reprex_0.3.0       lubridate_1.7.8   
+## [53] assertthat_0.2.1   rmarkdown_2.1      httr_1.4.1         rstudioapi_0.11   
+## [57] R6_2.4.1           nlme_3.1-147       compiler_4.0.0</code></pre>
 </div>
   </div>
 
