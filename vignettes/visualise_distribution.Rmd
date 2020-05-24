@@ -47,6 +47,9 @@ selected_country_avg = student %>%
     math_p50 = quantile(math, 0.50, na.rm = TRUE),
     math_p75 = quantile(math, 0.75, na.rm = TRUE))
 
+student %>% 
+  dplyr::filter(country %in% selected_countries, year == 2003)
+
 selected_country_avg %>% 
   ggplot(aes(x = year, y = math_p50, colour = country, fill = country)) +
   geom_linerange(aes(ymin = math_p25, ymax = math_p75), size = 1.2, alpha = 0.7) +
@@ -76,7 +79,9 @@ By the looks of the simplified boxplot above, there is indeed a large spread of 
 #   unnest(quant)
 
 country_summ = student %>% 
-  mutate(year = year - 2000) %>% 
+  mutate(
+    year = year %>% as.character %>% as.integer(),
+    year = year - 2000) %>% 
   group_by(year, country) %>% 
   summarise(math_p50 = quantile(math, 0.5, na.rm = TRUE)) %>% 
   ungroup() 
