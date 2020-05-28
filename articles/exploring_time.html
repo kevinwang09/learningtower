@@ -85,7 +85,7 @@
       <h1 data-toc-skip>Exploring temporal trends</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2020-05-24</h4>
+            <h4 class="date">2020-05-28</h4>
       
       
       <div class="hidden name"><code>exploring_time.Rmd</code></div>
@@ -100,6 +100,7 @@
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">learningtower</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">patchwork</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">brolgar</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">student</span>)</pre></body></html></div>
 </div>
@@ -122,19 +123,19 @@
             <span class="kw">read_min</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">read</span>, <span class="kw">na.rm</span><span class="kw">=</span><span class="fl">TRUE</span>),
             <span class="kw">science_min</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">science</span>, <span class="kw">na.rm</span><span class="kw">=</span><span class="fl">TRUE</span>)) <span class="kw">%&gt;%</span>
   <span class="fu">mutate</span>(<span class="kw">country</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">country</span>, <span class="kw">levels</span><span class="kw">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AUS"</span>, <span class="st">"NZL"</span>, <span class="st">"IDN"</span>)))
-<span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu">ggplot</span>(<span class="no">student_sumry</span>) +
+<span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu">ggplot</span>(<span class="no">student_sumry</span>, <span class="fu">aes</span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>)) +
     <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">year</span>, <span class="kw">ymin</span><span class="kw">=</span><span class="no">math_min</span>, <span class="kw">ymax</span><span class="kw">=</span><span class="no">math_max</span>), <span class="kw">fill</span><span class="kw">=</span><span class="st">"grey70"</span>) +
     <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">year</span>, <span class="kw">y</span><span class="kw">=</span><span class="no">math_mean</span>), <span class="kw">colour</span><span class="kw">=</span><span class="st">"black"</span>, <span class="kw">size</span><span class="kw">=</span><span class="fl">2</span>) +
     <span class="fu">facet_wrap</span>(~<span class="no">country</span>) +
     <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>,<span class="fl">1000</span>)) + <span class="fu">ylab</span>(<span class="st">"math"</span>)
-<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu">ggplot</span>(<span class="no">student_sumry</span>) +
+<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu">ggplot</span>(<span class="no">student_sumry</span>, <span class="fu">aes</span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>)) +
     <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">year</span>, <span class="kw">ymin</span><span class="kw">=</span><span class="no">science_min</span>, <span class="kw">ymax</span><span class="kw">=</span><span class="no">science_max</span>), <span class="kw">fill</span><span class="kw">=</span><span class="st">"grey70"</span>) +
-    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">year</span>, <span class="kw">y</span><span class="kw">=</span><span class="no">science_mean</span>), <span class="kw">colour</span><span class="kw">=</span><span class="st">"black"</span>, <span class="kw">size</span><span class="kw">=</span><span class="fl">2</span>) +
+    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">year</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">y</span><span class="kw">=</span><span class="no">science_mean</span>), <span class="kw">colour</span><span class="kw">=</span><span class="st">"black"</span>, <span class="kw">size</span><span class="kw">=</span><span class="fl">2</span>) +
     <span class="fu">facet_wrap</span>(~<span class="no">country</span>) +
     <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>,<span class="fl">1000</span>)) + <span class="fu">ylab</span>(<span class="st">"science"</span>)
-<span class="no">p3</span> <span class="kw">&lt;-</span> <span class="fu">ggplot</span>(<span class="no">student_sumry</span>) +
+<span class="no">p3</span> <span class="kw">&lt;-</span> <span class="fu">ggplot</span>(<span class="no">student_sumry</span>, <span class="fu">aes</span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>)) +
     <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">year</span>, <span class="kw">ymin</span><span class="kw">=</span><span class="no">read_min</span>, <span class="kw">ymax</span><span class="kw">=</span><span class="no">read_max</span>), <span class="kw">fill</span><span class="kw">=</span><span class="st">"grey70"</span>) +
-    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">year</span>, <span class="kw">y</span><span class="kw">=</span><span class="no">read_mean</span>), <span class="kw">colour</span><span class="kw">=</span><span class="st">"black"</span>, <span class="kw">size</span><span class="kw">=</span><span class="fl">2</span>) +
+    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="kw">x</span><span class="kw">=</span><span class="no">year</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">y</span><span class="kw">=</span><span class="no">read_mean</span>), <span class="kw">colour</span><span class="kw">=</span><span class="st">"black"</span>, <span class="kw">size</span><span class="kw">=</span><span class="fl">2</span>) +
     <span class="fu">facet_wrap</span>(~<span class="no">country</span>) +
     <span class="fu"><a href="https://rdrr.io/r/graphics/plot.window.html">ylim</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>,<span class="fl">1000</span>)) + <span class="fu">ylab</span>(<span class="st">"read"</span>)
 
@@ -164,17 +165,18 @@
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tsibble</span>)
 <span class="no">student_means</span> <span class="kw">&lt;-</span> <span class="no">student</span> <span class="kw">%&gt;%</span>
   <span class="fu">group_by</span>(<span class="no">year</span>, <span class="no">country</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">summarise</span>(<span class="kw">math</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(<span class="no">math</span>, <span class="no">stu_wgt</span>, <span class="kw">na.rm</span><span class="kw">=</span><span class="fl">TRUE</span>))
+  <span class="fu">summarise</span>(<span class="kw">math</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(<span class="no">math</span>, <span class="no">stu_wgt</span>, <span class="kw">na.rm</span><span class="kw">=</span><span class="fl">TRUE</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu">ungroup</span>()
 
-<span class="no">student_means</span> <span class="kw">&lt;-</span> <span class="fu">as_tsibble</span>(<span class="no">student_means</span>,
+<span class="no">student_means</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">as_tsibble</a></span>(<span class="no">student_means</span> <span class="kw">%&gt;%</span> <span class="fu">mutate</span>(<span class="kw">year</span> <span class="kw">=</span> <span class="no">year</span> <span class="kw">%&gt;%</span> <span class="no">as.character</span> <span class="kw">%&gt;%</span> <span class="no">as.integer</span>),
                       <span class="kw">key</span> <span class="kw">=</span> <span class="no">country</span>,
                       <span class="kw">index</span> <span class="kw">=</span> <span class="no">year</span>)
-<span class="no">stu_features</span> <span class="kw">&lt;-</span> <span class="no">student_means</span> <span class="kw">%&gt;%</span> <span class="fu">features</span>(<span class="no">math</span>, <span class="no">feat_brolgar</span>)
+<span class="no">stu_features</span> <span class="kw">&lt;-</span> <span class="no">student_means</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">features</a></span>(<span class="no">math</span>, <span class="no">feat_brolgar</span>)
 
 <span class="no">stu_features</span>
 
 <span class="no">stu_monotone</span> <span class="kw">=</span> <span class="no">student_means</span> <span class="kw">%&gt;%</span>
-  <span class="fu">features</span>(<span class="no">math</span>, <span class="no">feat_monotonic</span>)
+  <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">features</a></span>(<span class="no">math</span>, <span class="no">feat_monotonic</span>)
 
 
 <span class="no">p1</span> <span class="kw">=</span> <span class="no">stu_monotone</span> <span class="kw">%&gt;%</span>
@@ -198,7 +200,7 @@
   <span class="kw pkg">gghighlight</span><span class="kw ns">::</span><span class="fu">gghighlight</span>(<span class="no">decrease</span>) +
   <span class="fu">labs</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">"Year"</span>,
        <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Weighted mean Maths scores"</span>,
-       <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Highlight decreasing countries"</span>)
+       <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Highlight monotone decreasing countries"</span>)
 
 <span class="no">p1</span> / <span class="no">p2</span></pre></body></html></div>
 </div>
