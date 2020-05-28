@@ -27,6 +27,7 @@ knitr::opts_chunk$set(
 library(learningtower)
 library(tidyverse)
 library(patchwork)
+library(brolgar)
 
 data(student)
 ```
@@ -48,19 +49,19 @@ student_sumry <- student %>%
             read_min = min(read, na.rm=TRUE),
             science_min = min(science, na.rm=TRUE)) %>%
   mutate(country=factor(country, levels=c("AUS", "NZL", "IDN"))) 
-p1 <- ggplot(student_sumry) + 
+p1 <- ggplot(student_sumry, aes(group = country)) + 
     geom_ribbon(aes(x=year, ymin=math_min, ymax=math_max), fill="grey70") +
     geom_line(aes(x=year, y=math_mean), colour="black", size=2) +
     facet_wrap(~country) +
     ylim(c(0,1000)) + ylab("math")
-p2 <- ggplot(student_sumry) + 
+p2 <- ggplot(student_sumry, aes(group = country)) + 
     geom_ribbon(aes(x=year, ymin=science_min, ymax=science_max), fill="grey70") +
-    geom_line(aes(x=year, y=science_mean), colour="black", size=2) +
+    geom_line(aes(x=year, group = country, y=science_mean), colour="black", size=2) +
     facet_wrap(~country) +
     ylim(c(0,1000)) + ylab("science")
-p3 <- ggplot(student_sumry) + 
+p3 <- ggplot(student_sumry, aes(group = country)) + 
     geom_ribbon(aes(x=year, ymin=read_min, ymax=read_max), fill="grey70") +
-    geom_line(aes(x=year, y=read_mean), colour="black", size=2) +
+    geom_line(aes(x=year, group = country, y=read_mean), colour="black", size=2) +
     facet_wrap(~country) +
     ylim(c(0,1000)) + ylab("read")
 
@@ -91,9 +92,10 @@ library(brolgar)
 library(tsibble)
 student_means <- student %>%
   group_by(year, country) %>%
-  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) 
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>% 
+  ungroup()
 
-student_means <- as_tsibble(student_means, 
+student_means <- as_tsibble(student_means %>% mutate(year = year %>% as.character %>% as.integer), 
                       key = country, 
                       index = year)
 stu_features <- student_means %>% features(math, feat_brolgar)
@@ -125,7 +127,7 @@ p2 = stu_monotone %>%
   gghighlight::gghighlight(decrease) +
   labs(x = "Year", 
        y = "Weighted mean Maths scores", 
-       title = "Highlight decreasing countries")
+       title = "Highlight monotone decreasing countries")
 
 p1 / p2
 ```
