@@ -40,7 +40,7 @@ student %>%
 
 ```{r}
 selected_country_avg = student %>% 
-  dplyr::filter(country %in% selected_countries) %>% 
+  filter(country %in% selected_countries) %>% 
   group_by(year, country) %>% 
   summarise(
     math_p25 = quantile(math, 0.25, na.rm = TRUE),
@@ -48,7 +48,7 @@ selected_country_avg = student %>%
     math_p75 = quantile(math, 0.75, na.rm = TRUE))
 
 student %>% 
-  dplyr::filter(country %in% selected_countries, year == 2003)
+  filter(country %in% selected_countries, year == 2003)
 
 selected_country_avg %>% 
   ggplot(aes(x = year, y = math_p50, colour = country, fill = country)) +
@@ -90,13 +90,13 @@ country_lm = country_summ %>%
   group_by(country) %>% 
   filter(n() == 7) %>% ## 7 survey years and 7 quantile values were calculated
   nest() %>% 
-  dplyr::mutate(
-    lm = purrr::map(.x = data, ~ lm(math_p50 ~ year, data = .x)),
-    lm_tidy = purrr::map(lm, broom::tidy)) %>% 
-  dplyr::select(country, lm_tidy) %>% 
-  tidyr::unnest(lm_tidy) %>% 
-  dplyr::select(country, term, estimate, p.value) %>% 
-  dplyr::mutate(term = ifelse(term == "(Intercept)", "int", term)) %>% 
+  mutate(
+    lm = map(.x = data, ~ lm(math_p50 ~ year, data = .x)),
+    lm_tidy = map(lm, broom::tidy)) %>% 
+  select(country, lm_tidy) %>% 
+  unnest(lm_tidy) %>% 
+  select(country, term, estimate, p.value) %>% 
+  mutate(term = ifelse(term == "(Intercept)", "int", term)) %>% 
   pivot_longer(cols = c("estimate", "p.value"),
                names_to = "names", 
                values_to = "values") %>% 
@@ -153,14 +153,14 @@ We compute the ECDF/EPDF of four selected countries below.
 
 ```{r}
 student %>% 
-  dplyr::filter(country %in% c("AUS", "USA", "JPN", "BRA")) %>% 
+  filter(country %in% c("AUS", "USA", "JPN", "BRA")) %>% 
   ggplot(aes(x = math, colour = country)) + 
   geom_density() +
   facet_wrap(~year) +
   scale_colour_brewer(palette = "Set1")
 
 student %>% 
-  dplyr::filter(country %in% c("AUS", "USA", "JPN", "BRA")) %>% 
+  filter(country %in% c("AUS", "USA", "JPN", "BRA")) %>% 
   ggplot(aes(x = math, colour = country)) + 
   stat_ecdf(geom = "step", size = 1.2) +
   facet_wrap(~year) +

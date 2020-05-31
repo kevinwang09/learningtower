@@ -54,8 +54,8 @@ stu_summ = student %>%
 
 
 stu_wmean_long = stu_summ %>%
-  dplyr::select(year, country, contains("wmean")) %>% 
-  tidyr::pivot_longer(cols = contains("wmean"), 
+  select(year, country, contains("wmean")) %>% 
+  pivot_longer(cols = contains("wmean"), 
                       names_to = "wmean_names",
                       values_to = "wmean_values")
 
@@ -78,12 +78,12 @@ We focus on three countries here. The dark line is the weighted mean score of ea
 
 ```{r}
 stu_summ_long2 = stu_summ %>% 
-  dplyr::filter(country %in% c("AUS", "NZL", "IDN")) %>% 
-  tidyr::pivot_longer(cols = math_wmean:science_max, 
-                      names_to = "names",
-                      values_to = "values") %>% 
-  tidyr::separate(col = names, into = c("subject", "statistics"), sep = "_") %>% 
-  tidyr::pivot_wider(names_from = "statistics",
+  filter(country %in% c("AUS", "NZL", "IDN")) %>% 
+  pivot_longer(cols = math_wmean:science_max, 
+               names_to = "names",
+               values_to = "values") %>% 
+  separate(col = names, into = c("subject", "statistics"), sep = "_") %>% 
+  pivot_wider(names_from = "statistics",
                      values_from = "values")
 stu_summ_long2
 
@@ -106,11 +106,11 @@ stu_summ_long2 %>%
 complete_nations = stu_summ %>% 
   group_by(country) %>% filter(n() == 7) %>%
   ungroup() %>%
-  dplyr::mutate(year_subtract = year - 2000) %>% 
+  mutate(year_subtract = year - 2000) %>% 
   as_tsibble(key = country, index = year_subtract)
 
 math_slope = complete_nations %>% ## Filter for countries participated in all 7 PISA studies
-  dplyr::transmute(
+  select(
     year_subtract, 
     country, 
     math_wmean) %>% 
@@ -135,7 +135,8 @@ math_slope_near
 # math_features
 
 math_monotone = complete_nations %>%
-  features(math_wmean, feat_monotonic)
+  features_at(.var = vars(math_wmean), 
+           features = feat_monotonic)
 
 math_monotone
 
@@ -145,7 +146,7 @@ p1 = math_monotone %>%
              y = math_wmean,
              group = country)) +
   geom_line() + 
-  gghighlight::gghighlight(increase) +
+  gghighlight::gghighlight(math_wmean_increase) +
   labs(x = "Year", 
        y = "Weighted mean Maths scores", 
        title = "Highlight monotone increasing countries")
@@ -157,7 +158,7 @@ p2 = math_monotone %>%
              y = math_wmean,
              group = country)) +
   geom_line() + 
-  gghighlight::gghighlight(decrease) +
+  gghighlight::gghighlight(math_wmean_decrease) +
   labs(x = "Year", 
        y = "Weighted mean Maths scores", 
        title = "Highlight monotone decreasing countries")
