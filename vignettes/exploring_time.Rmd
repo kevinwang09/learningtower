@@ -2,7 +2,11 @@
 title: "Exploring temporal trends"
 author: "The Freemasons"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    fig_height: 14
+    fig_width: 10
+    number_sections: true
 vignette: >
   %\VignetteIndexEntry{Temporal trends}
   %\VignetteEngine{knitr::rmarkdown}
@@ -34,13 +38,15 @@ library(brolgar)
 library(tsibble)
 
 data(student)
+theme_set(theme_classic(18) +
+            theme(legend.position = "bottom"))
 ```
 
 # Time series visaulisation
 
 We will first visualise the time series trend of countries, regardless of when and how long they have participated in the PISA study. 
 
-```{r, fig.height=9}
+```{r}
 w_mean = function(x, w){weighted.mean(x = x, w = w, na.rm=TRUE)}
 
 stu_summ = student %>% 
@@ -100,11 +106,11 @@ stu_summ_long2 %>%
 
 ## Calculating slope
 
-<!-- There are many countries who did not participate in all 7 PISA countries. As we are interested in calculating linear models, we will filter out these countries due to the small number of observations.  -->
+There are many countries/regions who did not participate in all 7 PISA countries. As we are interested in calculating linear models, we will retain only those countries/regions participated in 5 or more studies. 
 
 ```{r}
 complete_nations = stu_summ %>% 
-  group_by(country) %>% filter(n() == 7) %>%
+  group_by(country) %>% filter(n() >= 5) %>%
   ungroup() %>%
   mutate(year_subtract = year - 2000) %>% 
   as_tsibble(key = country, index = year_subtract)
@@ -134,34 +140,39 @@ math_slope_near
 # 
 # math_features
 
-math_monotone = complete_nations %>%
-  features_at(.var = vars(math_wmean), 
-           features = feat_monotonic)
+feature_monotone = complete_nations %>%
+  features_at(.var = vars(math_wmean, read_wmean, science_wmean), 
+              features = feat_monotonic) %>% 
+  dplyr::select(country, contains("increase"), contains("decrease"))
 
-math_monotone
+feature_monotone_long = feature_monotone %>% 
+  pivot_longer(cols = -country,
+               names_to = "names", 
+               values_to = "monotone_value") %>% 
+  separate(col = names, into = c("subject", "direction"), sep = "_(?!.*_)")
 
-p1 = math_monotone %>% 
-  right_join(complete_nations, by = "country") %>%
+plot_tbl = complete_nations %>% 
+  as_tibble() %>% 
+  select(year, country, math_wmean, read_wmean, science_wmean) %>% 
+  pivot_longer(cols = contains("_wmean"),
+               names_to = "subject", 
+               values_to = "wmean_value") %>%
+  left_join(feature_monotone_long, by = c("country", "subject"))
+
+plot_tbl
+
+plot_tbl %>% 
   ggplot(aes(x = year,
-             y = math_wmean,
-             group = country)) +
+             y = wmean_value,
+             group = interaction(country, subject))) +
   geom_line() + 
-  gghighlight::gghighlight(math_wmean_increase) +
-  labs(x = "Year", 
-       y = "Weighted mean Maths scores", 
-       title = "Highlight monotone increasing countries")
-
-
-p2 = math_monotone %>% 
-  right_join(complete_nations, by = "country") %>%
-  ggplot(aes(x = year,
-             y = math_wmean,
-             group = country)) +
-  geom_line() + 
-  gghighlight::gghighlight(math_wmean_decrease) +
-  labs(x = "Year", 
-       y = "Weighted mean Maths scores", 
-       title = "Highlight monotone decreasing countries")
-
-p1 / p2
+  gghighlight::gghighlight(monotone_value, label_key = country) +
+  facet_grid(direction~subject) +
+  labs(x = "Year", y = "Weighted means")
 ```
+
+# Session info
+```{r}
+sessionInfo()
+```
+
