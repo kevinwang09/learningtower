@@ -181,6 +181,19 @@ mean(student %>% filter(country == "AUS", year == 2018) %>% pull(math) <= 636.9)
 ```
 
 
+# Mixed model
+```{r, eval = FALSE}
+library(lme4)
+aus_data = student %>% filter(country == "AUS")
+
+glimpse(aus_data)
+
+obj = lmer(math ~ escs + (escs|year/school_id) + (escs|gender), data = aus_data)
+summary(obj)
+```
+
+
+
 ```{r}
 sessionInfo()
 ```

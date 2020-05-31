@@ -1,16 +1,16 @@
 ---
 title: "Exploring temporal trends"
-author: "Vignette Author"
+author: "The Freemasons"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Temporal}
+  %\VignetteIndexEntry{Temporal trends}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-
+  
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(
+  knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   warning = FALSE,
@@ -19,97 +19,130 @@ knitr::opts_chunk$set(
   outwidth = "100%",
   fig.width = 8, fig.height = 6)
 ```
-
-
-# Read data
-
+  
+  
+# Loading packages and data
+  
 ```{r}
 library(learningtower)
 library(tidyverse)
 library(patchwork)
 library(brolgar)
+library(gghighlight)
+library(ggrepel)
+library(brolgar)
+library(tsibble)
 
 data(student)
 ```
 
-# Data exploration
-## Australia, New Zealand, Indonesia
+# Time series visaulisation
+
+We will first visualise the time series trend of countries, regardless of when and how long they have participated in the PISA study. 
 
 ```{r, fig.height=9}
-student_sumry <- student %>% 
-  filter(country %in% c("AUS", "NZL", "IDN")) %>%
-  group_by(year, country) %>%
-  summarise(math_mean = weighted.mean(math, stu_wgt, na.rm=TRUE),
-            read_mean = weighted.mean(read, stu_wgt, na.rm=TRUE),
-            science_mean = weighted.mean(science, stu_wgt, na.rm=TRUE),
-            math_max = max(math, na.rm=TRUE), 
-            read_max = max(read, na.rm=TRUE),
-            science_max = max(science, na.rm=TRUE),
-            math_min = min(math, na.rm=TRUE), 
-            read_min = min(read, na.rm=TRUE),
-            science_min = min(science, na.rm=TRUE)) %>%
-  mutate(country=factor(country, levels=c("AUS", "NZL", "IDN"))) 
-p1 <- ggplot(student_sumry, aes(group = country)) + 
-    geom_ribbon(aes(x=year, ymin=math_min, ymax=math_max), fill="grey70") +
-    geom_line(aes(x=year, y=math_mean), colour="black", size=2) +
-    facet_wrap(~country) +
-    ylim(c(0,1000)) + ylab("math")
-p2 <- ggplot(student_sumry, aes(group = country)) + 
-    geom_ribbon(aes(x=year, ymin=science_min, ymax=science_max), fill="grey70") +
-    geom_line(aes(x=year, group = country, y=science_mean), colour="black", size=2) +
-    facet_wrap(~country) +
-    ylim(c(0,1000)) + ylab("science")
-p3 <- ggplot(student_sumry, aes(group = country)) + 
-    geom_ribbon(aes(x=year, ymin=read_min, ymax=read_max), fill="grey70") +
-    geom_line(aes(x=year, group = country, y=read_mean), colour="black", size=2) +
-    facet_wrap(~country) +
-    ylim(c(0,1000)) + ylab("read")
+w_mean = function(x, w){weighted.mean(x = x, w = w, na.rm=TRUE)}
 
-p1 / p2 / p3  
+stu_summ = student %>% 
+  group_by(year, country) %>%
+  summarise_at(.vars = vars(math, read, science), 
+               .funs = list(wmean = ~w_mean(., w = stu_wgt),
+                            min = ~min(., na.rm = TRUE), 
+                            max = ~max(., na.rm = TRUE))) %>% 
+  ungroup() %>% 
+  dplyr::mutate(year = year %>% as.character() %>% as.integer)
+
+
+stu_wmean_long = stu_summ %>%
+  dplyr::select(year, country, contains("wmean")) %>% 
+  tidyr::pivot_longer(cols = contains("wmean"), 
+                      names_to = "wmean_names",
+                      values_to = "wmean_values")
+
+stu_wmean_long %>% 
+  ggplot(aes(x = year, y = wmean_values, group = country)) +
+  geom_line() +
+  facet_wrap(~wmean_names) +
+  labs(x = "Year", y = "Weighted mean values")
+
+
+## Uncomment this to make interactive
+# library(plotly)
+# ggplotly()
 ```
 
-## All countries
+
+## Australia, New Zealand, Indonesia
+
+We focus on three countries here. The dark line is the weighted mean score of each country for each subject. The shading indicates the min and max score of a given year. 
 
 ```{r}
-student %>% 
-  group_by(year, country) %>%
-  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
-  ggplot() + 
-    geom_line(aes(x=year, y=math, group=country)) +
-    ylim(c(250,800))
-# Uncomment this to make interactive
-#library(plotly)
-#ggplotly()
+stu_summ_long2 = stu_summ %>% 
+  dplyr::filter(country %in% c("AUS", "NZL", "IDN")) %>% 
+  tidyr::pivot_longer(cols = math_wmean:science_max, 
+                      names_to = "names",
+                      values_to = "values") %>% 
+  tidyr::separate(col = names, into = c("subject", "statistics"), sep = "_") %>% 
+  tidyr::pivot_wider(names_from = "statistics",
+                     values_from = "values")
+stu_summ_long2
+
+
+stu_summ_long2 %>% 
+  ggplot(aes(x = year, y = wmean)) +
+  geom_ribbon(aes(ymin = min, ymax = max), fill = "grey70") +
+  geom_line(colour = "black", size = 2) +
+  facet_grid(subject~country, labeller = label_both) + 
+  labs(x = "Year", y = "Test score values")
 ```
 
-## Features
+# `brolgar` visualisations 
 
-Here we want to calculate features for all the countries over time, and explore the variability by country.
+## Calculating slope
 
-```{r, eval=FALSE}
-# devtools::install_github("njtierney/brolgar")
-library(brolgar)
-library(tsibble)
-student_means <- student %>%
-  group_by(year, country) %>%
-  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>% 
-  ungroup()
+<!-- There are many countries who did not participate in all 7 PISA countries. As we are interested in calculating linear models, we will filter out these countries due to the small number of observations.  -->
 
-student_means <- as_tsibble(student_means %>% mutate(year = year %>% as.character %>% as.integer), 
-                      key = country, 
-                      index = year)
-stu_features <- student_means %>% features(math, feat_brolgar)
+```{r}
+complete_nations = stu_summ %>% 
+  group_by(country) %>% filter(n() == 7) %>%
+  ungroup() %>%
+  dplyr::mutate(year_subtract = year - 2000) %>% 
+  as_tsibble(key = country, index = year_subtract)
 
-stu_features
+math_slope = complete_nations %>% ## Filter for countries participated in all 7 PISA studies
+  dplyr::transmute(
+    year_subtract, 
+    country, 
+    math_wmean) %>% 
+  key_slope(math_wmean ~ year_subtract)
 
-stu_monotone = student_means %>%
-  features(math, feat_monotonic)
+math_slope %>% 
+  ggplot(aes(x = .intercept, y = .slope_year_subtract)) +
+  geom_point() +
+  geom_label_repel(aes(label = country)) +
+  labs(x = "Weighted mean math score in 2000", 
+       y = "Avg. increase in weighted mean score every year")
 
 
-p1 = stu_monotone %>% 
-  right_join(student_means, by = "country") %>%
+math_slope_near <- math_slope %>%
+  keys_near(key = country, var = .slope_year_subtract)
+
+math_slope_near
+
+# math_features <- complete_nations %>% 
+#   features(math_wmean, feat_brolgar)
+# 
+# math_features
+
+math_monotone = complete_nations %>%
+  features(math_wmean, feat_monotonic)
+
+math_monotone
+
+p1 = math_monotone %>% 
+  right_join(complete_nations, by = "country") %>%
   ggplot(aes(x = year,
-             y = math,
+             y = math_wmean,
              group = country)) +
   geom_line() + 
   gghighlight::gghighlight(increase) +
@@ -118,10 +151,10 @@ p1 = stu_monotone %>%
        title = "Highlight monotone increasing countries")
 
 
-p2 = stu_monotone %>% 
-  right_join(student_means, by = "country") %>%
+p2 = math_monotone %>% 
+  right_join(complete_nations, by = "country") %>%
   ggplot(aes(x = year,
-             y = math,
+             y = math_wmean,
              group = country)) +
   geom_line() + 
   gghighlight::gghighlight(decrease) +
@@ -130,17 +163,4 @@ p2 = stu_monotone %>%
        title = "Highlight monotone decreasing countries")
 
 p1 / p2
-```
-
-## Multivariate plot
-
-```{r, eval=FALSE}
-student %>% 
-  filter(country %in% c("AUS", "CAN")) %>% 
-  group_by(year, country) %>%
-  summarise(math_mean = weighted.mean(math, stu_wgt, na.rm=TRUE),
-            read_mean = weighted.mean(read, stu_wgt, na.rm=TRUE)) %>%
-  ggplot(aes(x = math_mean, y = read_mean, colour = country)) + 
-  geom_point() +
-  geom_text(aes(label = year))
 ```
