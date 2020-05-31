@@ -107,6 +107,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tsibble</span>)
 
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">student</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">countrycode</span>)
 <span class="fu">theme_set</span>(<span class="fu">theme_classic</span>(<span class="fl">18</span>) +
             <span class="fu">theme</span>(<span class="kw">legend.position</span> <span class="kw">=</span> <span class="st">"bottom"</span>))</pre></body></html></div>
 </div>
@@ -199,12 +200,13 @@
     <span class="no">year_subtract</span>,
     <span class="no">country</span>,
     <span class="no">math_wmean</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/key_slope.html">key_slope</a></span>(<span class="no">math_wmean</span> ~ <span class="no">year_subtract</span>)
+  <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/key_slope.html">key_slope</a></span>(<span class="no">math_wmean</span> ~ <span class="no">year_subtract</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">left_join</span>(<span class="no">countrycode</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"country"</span>)
 
 <span class="no">math_slope</span> <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">.intercept</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">.slope_year_subtract</span>)) +
   <span class="fu">geom_point</span>() +
-  <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_label_repel</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">label</span> <span class="kw">=</span> <span class="no">country</span>)) +
+  <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_label_repel</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">label</span> <span class="kw">=</span> <span class="no">country_name</span>)) +
   <span class="fu">labs</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">"Weighted mean math score in 2000"</span>,
        <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Avg. increase in weighted mean score every year"</span>)</pre></body></html></div>
 <p><img src="exploring_time_files/figure-html/unnamed-chunk-4-1.png" width="768"></p>
@@ -216,14 +218,17 @@
 <span class="no">math_slope_near</span>
 <span class="co">#&gt; # A tibble: 5 x 5</span>
 <span class="co">#&gt;   country .slope_year_subtract stat  stat_value stat_diff</span>
-<span class="co">#&gt;   &lt;fct&gt;                  &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt;   &lt;chr&gt;                  &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt;     &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 NZL                   -2.48  min       -2.48     0     </span>
 <span class="co">#&gt; 2 USA                   -0.816 q_25      -0.797    0.0187</span>
 <span class="co">#&gt; 3 GRC                    0.107 med        0.172    0.0641</span>
 <span class="co">#&gt; 4 TUR                    1.35  q_75       1.32     0.0336</span>
-<span class="co">#&gt; 5 QAT                    7.59  max        7.59     0</span>
-
-<span class="co"># math_features &lt;- complete_nations %&gt;% </span>
+<span class="co">#&gt; 5 QAT                    7.59  max        7.59     0</span></pre></body></html></div>
+</div>
+<div id="highlighting-monotone-countries-for-subjects" class="section level2">
+<h2 class="hasAnchor">
+<a href="#highlighting-monotone-countries-for-subjects" class="anchor"></a>Highlighting monotone countries for subjects</h2>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># math_features &lt;- complete_nations %&gt;% </span>
 <span class="co">#   features(math_wmean, feat_brolgar)</span>
 <span class="co"># </span>
 <span class="co"># math_features</span>
@@ -245,22 +250,23 @@
   <span class="fu">pivot_longer</span>(<span class="kw">cols</span> <span class="kw">=</span> <span class="fu">contains</span>(<span class="st">"_wmean"</span>),
                <span class="kw">names_to</span> <span class="kw">=</span> <span class="st">"subject"</span>,
                <span class="kw">values_to</span> <span class="kw">=</span> <span class="st">"wmean_value"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">left_join</span>(<span class="no">feature_monotone_long</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"country"</span>, <span class="st">"subject"</span>))
+  <span class="fu">left_join</span>(<span class="no">feature_monotone_long</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"country"</span>, <span class="st">"subject"</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu">left_join</span>(<span class="no">countrycode</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"country"</span>)
 
 <span class="no">plot_tbl</span>
-<span class="co">#&gt; # A tibble: 2,130 x 6</span>
-<span class="co">#&gt;     year country subject       wmean_value direction monotone_value</span>
-<span class="co">#&gt;    &lt;int&gt; &lt;fct&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;     &lt;lgl&gt;         </span>
-<span class="co">#&gt;  1  2000 ALB     math_wmean           395. increase  FALSE         </span>
-<span class="co">#&gt;  2  2000 ALB     math_wmean           395. decrease  FALSE         </span>
-<span class="co">#&gt;  3  2000 ALB     read_wmean           354. increase  TRUE          </span>
-<span class="co">#&gt;  4  2000 ALB     read_wmean           354. decrease  FALSE         </span>
-<span class="co">#&gt;  5  2000 ALB     science_wmean        378. increase  FALSE         </span>
-<span class="co">#&gt;  6  2000 ALB     science_wmean        378. decrease  FALSE         </span>
-<span class="co">#&gt;  7  2009 ALB     math_wmean           377. increase  FALSE         </span>
-<span class="co">#&gt;  8  2009 ALB     math_wmean           377. decrease  FALSE         </span>
-<span class="co">#&gt;  9  2009 ALB     read_wmean           385. increase  TRUE          </span>
-<span class="co">#&gt; 10  2009 ALB     read_wmean           385. decrease  FALSE         </span>
+<span class="co">#&gt; # A tibble: 2,130 x 7</span>
+<span class="co">#&gt;     year country subject       wmean_value direction monotone_value country_name</span>
+<span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;     &lt;lgl&gt;          &lt;chr&gt;       </span>
+<span class="co">#&gt;  1  2000 ALB     math_wmean           395. increase  FALSE          Albania     </span>
+<span class="co">#&gt;  2  2000 ALB     math_wmean           395. decrease  FALSE          Albania     </span>
+<span class="co">#&gt;  3  2000 ALB     read_wmean           354. increase  TRUE           Albania     </span>
+<span class="co">#&gt;  4  2000 ALB     read_wmean           354. decrease  FALSE          Albania     </span>
+<span class="co">#&gt;  5  2000 ALB     science_wmean        378. increase  FALSE          Albania     </span>
+<span class="co">#&gt;  6  2000 ALB     science_wmean        378. decrease  FALSE          Albania     </span>
+<span class="co">#&gt;  7  2009 ALB     math_wmean           377. increase  FALSE          Albania     </span>
+<span class="co">#&gt;  8  2009 ALB     math_wmean           377. decrease  FALSE          Albania     </span>
+<span class="co">#&gt;  9  2009 ALB     read_wmean           385. increase  TRUE           Albania     </span>
+<span class="co">#&gt; 10  2009 ALB     read_wmean           385. decrease  FALSE          Albania     </span>
 <span class="co">#&gt; # … with 2,120 more rows</span>
 
 <span class="no">plot_tbl</span> <span class="kw">%&gt;%</span>
@@ -268,16 +274,16 @@
              <span class="kw">y</span> <span class="kw">=</span> <span class="no">wmean_value</span>,
              <span class="kw">group</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interaction.html">interaction</a></span>(<span class="no">country</span>, <span class="no">subject</span>))) +
   <span class="fu">geom_line</span>() +
-  <span class="kw pkg">gghighlight</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/gghighlight.html">gghighlight</a></span>(<span class="no">monotone_value</span>, <span class="kw">label_key</span> <span class="kw">=</span> <span class="no">country</span>) +
+  <span class="kw pkg">gghighlight</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/gghighlight.html">gghighlight</a></span>(<span class="no">monotone_value</span>, <span class="kw">label_key</span> <span class="kw">=</span> <span class="no">country_name</span>) +
   <span class="fu">facet_grid</span>(<span class="no">direction</span>~<span class="no">subject</span>) +
   <span class="fu">labs</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">"Year"</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Weighted means"</span>)</pre></body></html></div>
-<p><img src="exploring_time_files/figure-html/unnamed-chunk-4-2.png" width="768"></p>
+<p><img src="exploring_time_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
 </div>
 </div>
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
 <span class="co">#&gt; R version 4.0.0 (2020-04-24)</span>
 <span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
 <span class="co">#&gt; Running under: macOS Catalina 10.15.4</span>
