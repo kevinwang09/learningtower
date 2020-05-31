@@ -14,7 +14,7 @@ vignette: >
 ---
   
 ```{r setup, include = FALSE}
-  knitr::opts_chunk$set(
+knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   warning = FALSE,
@@ -38,6 +38,7 @@ library(brolgar)
 library(tsibble)
 
 data(student)
+data(countrycode)
 theme_set(theme_classic(18) +
             theme(legend.position = "bottom"))
 ```
@@ -120,12 +121,13 @@ math_slope = complete_nations %>% ## Filter for countries participated in all 7 
     year_subtract, 
     country, 
     math_wmean) %>% 
-  key_slope(math_wmean ~ year_subtract)
+  key_slope(math_wmean ~ year_subtract) %>% 
+  left_join(countrycode, by = "country")
 
 math_slope %>% 
   ggplot(aes(x = .intercept, y = .slope_year_subtract)) +
   geom_point() +
-  geom_label_repel(aes(label = country)) +
+  geom_label_repel(aes(label = country_name)) +
   labs(x = "Weighted mean math score in 2000", 
        y = "Avg. increase in weighted mean score every year")
 
@@ -134,7 +136,11 @@ math_slope_near <- math_slope %>%
   keys_near(key = country, var = .slope_year_subtract)
 
 math_slope_near
+```
 
+## Highlighting monotone countries for subjects
+
+```{r}
 # math_features <- complete_nations %>% 
 #   features(math_wmean, feat_brolgar)
 # 
@@ -157,7 +163,8 @@ plot_tbl = complete_nations %>%
   pivot_longer(cols = contains("_wmean"),
                names_to = "subject", 
                values_to = "wmean_value") %>%
-  left_join(feature_monotone_long, by = c("country", "subject"))
+  left_join(feature_monotone_long, by = c("country", "subject")) %>% 
+  left_join(countrycode, by = "country")
 
 plot_tbl
 
@@ -166,7 +173,7 @@ plot_tbl %>%
              y = wmean_value,
              group = interaction(country, subject))) +
   geom_line() + 
-  gghighlight::gghighlight(monotone_value, label_key = country) +
+  gghighlight::gghighlight(monotone_value, label_key = country_name) +
   facet_grid(direction~subject) +
   labs(x = "Year", y = "Weighted means")
 ```
