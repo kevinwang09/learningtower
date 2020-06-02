@@ -186,10 +186,12 @@ mean(student %>% filter(country == "AUS", year == 2018) %>% pull(math) <= 636.9)
 library(lme4)
 aus_data = student %>% filter(country == "AUS")
 
-glimpse(aus_data)
+# lm(math ~ escs + gender, data = aus_data) %>% summary
 
-obj = lmer(math ~ escs + (escs|year/school_id) + (escs|gender), data = aus_data)
+obj = lmer(math ~ escs + gender + (escs + gender|year/school_id), data = aus_data)
 summary(obj)
+# plot(obj)
+# qqnorm(residuals(obj))
 ```
 
 

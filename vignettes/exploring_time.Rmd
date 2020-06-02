@@ -4,8 +4,8 @@ author: "The Freemasons"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
-    fig_height: 14
-    fig_width: 10
+    fig_height: 10
+    fig_width: 14
     number_sections: true
 vignette: >
   %\VignetteIndexEntry{Temporal trends}
@@ -14,7 +14,7 @@ vignette: >
 ---
   
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(
+  knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   warning = FALSE,
@@ -43,7 +43,7 @@ theme_set(theme_classic(18) +
             theme(legend.position = "bottom"))
 ```
 
-# Time series visaulisation
+# Time series visualisation
 
 We will first visualise the time series trend of countries, regardless of when and how long they have participated in the PISA study. 
 
@@ -63,8 +63,8 @@ stu_summ = student %>%
 stu_wmean_long = stu_summ %>%
   select(year, country, contains("wmean")) %>% 
   pivot_longer(cols = contains("wmean"), 
-                      names_to = "wmean_names",
-                      values_to = "wmean_values")
+               names_to = "wmean_names",
+               values_to = "wmean_values")
 
 stu_wmean_long %>% 
   ggplot(aes(x = year, y = wmean_values, group = country)) +
@@ -91,7 +91,7 @@ stu_summ_long2 = stu_summ %>%
                values_to = "values") %>% 
   separate(col = names, into = c("subject", "statistics"), sep = "_") %>% 
   pivot_wider(names_from = "statistics",
-                     values_from = "values")
+              values_from = "values")
 stu_summ_long2
 
 
@@ -177,6 +177,191 @@ plot_tbl %>%
   facet_grid(direction~subject) +
   labs(x = "Year", y = "Weighted means")
 ```
+
+
+## Highlighting variance
+```{r}
+qcd = function(x){
+  q3 = quantile(x, 0.75, na.rm = TRUE)
+  q1 = quantile(x, 0.25, na.rm = TRUE)
+  return((q3-q1)/(q3+q1))
+}
+
+stu_var_summ = student %>% 
+  group_by(year, country) %>% 
+  summarise_at(
+    .vars = vars(math, read, science), 
+    .funs = list(
+      # sd = ~sd(., na.rm = TRUE),
+      # iqr = ~quantile(., 0.75, na.rm = TRUE) - quantile(., 0.25, na.rm = TRUE))
+    qcd = ~ qcd(.))) %>% 
+  dplyr::mutate(year = year %>% as.character() %>% as.integer) %>% 
+  group_by(country) %>% 
+  filter(n() >= 5) %>% 
+  ungroup()
+
+stu_var_summ_long = stu_var_summ %>% 
+  pivot_longer(cols = -c("year", "country"), 
+               names_to = "names",
+               values_to = "values") %>% 
+  separate(col = "names", into = c("subject", "statistic"), sep = "_")
+
+stu_var_summ_long %>% 
+  ggplot(aes(x = year, y = values,
+             group = country)) +
+  geom_line() +
+  facet_grid(subject~statistic, scales = "free")
+
+stu_var_summ = stu_var_summ %>% 
+  as_tsibble(key = country, index = year)
+
+stu_var_near = stu_var_summ %>% 
+  features(math_qcd, feat_brolgar) %>% 
+  keys_near(key = country, var = median)
+
+stu_var_near
+
+stu_var_plotdf = stu_var_summ_long %>% 
+  filter(subject == "math") %>% 
+  left_join(stu_var_near, by = "country") %>% 
+  left_join(countrycode, by = "country") %>% 
+  as_tibble() %>% 
+  mutate(label_stats_country = ifelse(is.na(stat), NA, paste0(stat, ":", country_name)))
+
+stu_var_plotdf %>% 
+  ggplot(aes(x = year, y = values,
+             group = country, colour = stat)) +
+  geom_line() +
+  gghighlight::gghighlight(!is.na(stat), label_key = label_stats_country)
+```
+
+## Gender gap over time
+
+Though not perfect measures, we will look at the differences in the average test scores for each gender. 
+
+In maths, there are more countries with a higher average for the boys. In reading, the girls completely dominates in every country. Science is more evenly spilt. 
+
+```{r}
+stu_gender_summ = student %>% 
+  filter(complete.cases(gender)) %>% 
+  group_by(year, country, gender) %>%
+  summarise_at(.vars = vars(math, read, science), 
+               .funs = list(wmean = ~w_mean(., w = stu_wgt))) %>% 
+  mutate(year = year %>% as.character() %>% as.integer) %>% 
+  group_by(country) %>%
+  filter(n() >= 10) %>% 
+  ungroup() %>% 
+  pivot_longer(cols = contains("_wmean"),
+               names_to = "names",
+               values_to = "values") %>% 
+  pivot_wider(names_from = c("gender", "names"),
+              values_from = "values")
+
+stu_ggap_summ = stu_gender_summ %>% 
+  dplyr::transmute(
+    year, country,
+    gap_math_wmean = female_math_wmean - male_math_wmean,
+    gap_read_wmean = female_read_wmean - male_read_wmean,
+    gap_science_wmean = female_science_wmean - male_science_wmean)
+
+
+stu_ggap_summ_long = stu_ggap_summ %>% 
+  pivot_longer(cols = contains("gap"),
+               names_to = "gap_names",
+               values_to = "gap_values")
+
+stu_ggap_summ_long %>%
+  ggplot(aes(x = year, y = gap_values)) +
+  geom_point() +
+  geom_line(aes(group = country)) +
+  geom_hline(yintercept = 0, colour = "red") +
+  facet_wrap(~gap_names) +
+  labs(title = "Avg. gender gaps for countries across subjects and years", 
+       subtitle = "Gap = avg. female score - avg. male score")
+```
+
+### Across all three subjects (looks a bit ugly)
+
+```{r}
+stu_ggap_summ_nest = stu_ggap_summ %>%
+  pivot_longer(contains("_wmean"),
+               names_to = "names",
+               values_to = "values") %>% 
+  group_by(names) %>% 
+  nest() %>% 
+  mutate(f_tbl = map(.x = data, 
+                     .f = ~ .x %>% 
+                       as_tsibble(key = country, index = year) %>% 
+                       features(values, feat_brolgar) %>% 
+                       keys_near(key = country, var = range2)),
+         f_data = map2(.x = data, .y = f_tbl, 
+                       .f = ~ left_join(.x, .y, by = "country")))
+
+stu_ggap_summ_plotdf = stu_ggap_summ_nest %>% 
+  select(names, f_data) %>% 
+  unnest(f_data) %>% 
+  left_join(countrycode, by = "country") %>% 
+  mutate(label_stats_country = ifelse(is.na(stat), NA, paste0(stat, ":", country_name)))
+  
+stu_ggap_summ_plotdf %>% 
+  ggplot(aes(x = year, y = values)) +
+  geom_line(aes(group = country, colour = country)) +
+  gghighlight(!is.na(stat), label_key = label_stats_country, calculate_per_facet = TRUE, keep_scales = TRUE) +
+  facet_wrap(~names)
+```
+
+
+### Math only (less elegant)
+```{r}
+stu_gap_math_near = stu_ggap_summ %>%
+  as_tsibble(key = country, index = year) %>% 
+  features(gap_math_wmean, feat_brolgar) %>%
+  keys_near(key = country, var = median)
+
+stu_gap_math_plotdf = stu_ggap_summ %>%
+  as_tibble() %>%
+  left_join(stu_gap_math_near, by = "country") %>%
+  left_join(countrycode, by = "country") %>%
+  mutate(label_stats_country = ifelse(is.na(stat), NA, paste0(stat, ":", country_name)))
+
+p_math = stu_gap_math_plotdf %>%
+  ggplot(aes(x = year, y = gap_math_wmean,
+             group = country, colour = stat)) +
+  geom_line() +
+  gghighlight::gghighlight(!is.na(stat), label_key = label_stats_country)
+
+p_math
+```
+
+
+
+```{r, eval = FALSE}
+library(lme4)
+# aus_data = student %>% filter(country == "AUS")
+# obj = lmer(math ~ gender + (gender|year/school_id), data = student,
+#              control = lmerControl(optimizer = "optimx", calc.derivs = FALSE,
+#      optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
+# 
+# summary(obj)
+
+sub_stu = student %>% filter(country %in% c("AUS"))
+
+t.test(math ~ gender, data = sub_stu)
+
+obj = lmer(math ~ gender + escs + (gender | year/school_id), data = sub_stu)
+
+summary(obj)
+
+# aus_aug = broom::augment(obj)
+
+# sub_stu = student %>% filter(country %in% c("QAT"))
+# 
+# obj = lmer(math ~ gender + escs + (gender | year/school_id), data = sub_stu)
+# 
+# summary(obj)
+```
+
+
 
 # Session info
 ```{r}
