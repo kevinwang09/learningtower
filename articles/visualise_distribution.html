@@ -85,7 +85,7 @@
       <h1 data-toc-skip>Visualise differential distribution between countries</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2020-05-31</h4>
+            <h4 class="date">2020-06-02</h4>
       
       
       <div class="hidden name"><code>visualise_distribution.Rmd</code></div>
@@ -274,10 +274,12 @@
 <div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">lme4</span>)
 <span class="no">aus_data</span> <span class="kw">=</span> <span class="no">student</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">==</span> <span class="st">"AUS"</span>)
 
-<span class="fu">glimpse</span>(<span class="no">aus_data</span>)
+<span class="co"># lm(math ~ escs + gender, data = aus_data) %&gt;% summary</span>
 
-<span class="no">obj</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span>(<span class="no">math</span> ~ <span class="no">escs</span> + (<span class="no">escs</span><span class="kw">|</span><span class="no">year</span>/<span class="no">school_id</span>) + (<span class="no">escs</span><span class="kw">|</span><span class="no">gender</span>), <span class="kw">data</span> <span class="kw">=</span> <span class="no">aus_data</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">obj</span>)</pre></body></html></div>
+<span class="no">obj</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span>(<span class="no">math</span> ~ <span class="no">escs</span> + <span class="no">gender</span> + (<span class="no">escs</span> + <span class="no">gender</span><span class="kw">|</span><span class="no">year</span>/<span class="no">school_id</span>), <span class="kw">data</span> <span class="kw">=</span> <span class="no">aus_data</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">obj</span>)
+<span class="co"># plot(obj)</span>
+<span class="co"># qqnorm(residuals(obj))</span></pre></body></html></div>
 <div class="sourceCode" id="cb29"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</pre></body></html></div>
 <pre><code>## R version 4.0.0 (2020-04-24)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
@@ -300,7 +302,7 @@
 ## [10] tibble_3.0.1             ggplot2_3.3.1            tidyverse_1.3.0         
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_1.1.0   xfun_0.14          haven_2.3.0        lattice_0.20-41   
+##  [1] tidyselect_1.1.0   xfun_0.14          haven_2.3.1        lattice_0.20-41   
 ##  [5] colorspace_1.4-1   vctrs_0.3.0        generics_0.0.2     htmltools_0.4.0   
 ##  [9] yaml_2.2.1         utf8_1.1.4         blob_1.2.1         rlang_0.4.6       
 ## [13] pkgdown_1.5.1.9000 pillar_1.4.4       withr_2.2.0        glue_1.4.1        

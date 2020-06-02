@@ -85,7 +85,7 @@
       <h1 data-toc-skip>Exploring temporal trends</h1>
                         <h4 class="author">The Freemasons</h4>
             
-            <h4 class="date">2020-05-31</h4>
+            <h4 class="date">2020-06-02</h4>
       
       
       <div class="hidden name"><code>exploring_time.Rmd</code></div>
@@ -111,9 +111,9 @@
 <span class="fu">theme_set</span>(<span class="fu">theme_classic</span>(<span class="fl">18</span>) +
             <span class="fu">theme</span>(<span class="kw">legend.position</span> <span class="kw">=</span> <span class="st">"bottom"</span>))</pre></body></html></div>
 </div>
-<div id="time-series-visaulisation" class="section level1">
+<div id="time-series-visualisation" class="section level1">
 <h1 class="hasAnchor">
-<a href="#time-series-visaulisation" class="anchor"></a>Time series visaulisation</h1>
+<a href="#time-series-visualisation" class="anchor"></a>Time series visualisation</h1>
 <p>We will first visualise the time series trend of countries, regardless of when and how long they have participated in the PISA study.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">w_mean</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>, <span class="no">w</span>){<span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>, <span class="kw">w</span> <span class="kw">=</span> <span class="no">w</span>, <span class="kw">na.rm</span><span class="kw">=</span><span class="fl">TRUE</span>)}
 
@@ -130,8 +130,8 @@
 <span class="no">stu_wmean_long</span> <span class="kw">=</span> <span class="no">stu_summ</span> <span class="kw">%&gt;%</span>
   <span class="fu">select</span>(<span class="no">year</span>, <span class="no">country</span>, <span class="fu">contains</span>(<span class="st">"wmean"</span>)) <span class="kw">%&gt;%</span>
   <span class="fu">pivot_longer</span>(<span class="kw">cols</span> <span class="kw">=</span> <span class="fu">contains</span>(<span class="st">"wmean"</span>),
-                      <span class="kw">names_to</span> <span class="kw">=</span> <span class="st">"wmean_names"</span>,
-                      <span class="kw">values_to</span> <span class="kw">=</span> <span class="st">"wmean_values"</span>)
+               <span class="kw">names_to</span> <span class="kw">=</span> <span class="st">"wmean_names"</span>,
+               <span class="kw">values_to</span> <span class="kw">=</span> <span class="st">"wmean_values"</span>)
 
 <span class="no">stu_wmean_long</span> <span class="kw">%&gt;%</span>
   <span class="fu">ggplot</span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">year</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">wmean_values</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>)) +
@@ -155,7 +155,7 @@
                <span class="kw">values_to</span> <span class="kw">=</span> <span class="st">"values"</span>) <span class="kw">%&gt;%</span>
   <span class="fu">separate</span>(<span class="kw">col</span> <span class="kw">=</span> <span class="no">names</span>, <span class="kw">into</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"subject"</span>, <span class="st">"statistics"</span>), <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"_"</span>) <span class="kw">%&gt;%</span>
   <span class="fu">pivot_wider</span>(<span class="kw">names_from</span> <span class="kw">=</span> <span class="st">"statistics"</span>,
-                     <span class="kw">values_from</span> <span class="kw">=</span> <span class="st">"values"</span>)
+              <span class="kw">values_from</span> <span class="kw">=</span> <span class="st">"values"</span>)
 <span class="no">stu_summ_long2</span>
 <span class="co">#&gt; # A tibble: 63 x 6</span>
 <span class="co">#&gt;     year country subject wmean   min   max</span>
@@ -279,11 +279,197 @@
   <span class="fu">labs</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">"Year"</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Weighted means"</span>)</pre></body></html></div>
 <p><img src="exploring_time_files/figure-html/unnamed-chunk-5-1.png" width="768"></p>
 </div>
+<div id="highlighting-variance" class="section level2">
+<h2 class="hasAnchor">
+<a href="#highlighting-variance" class="anchor"></a>Highlighting variance</h2>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">qcd</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">x</span>){
+  <span class="no">q3</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">x</span>, <span class="fl">0.75</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+  <span class="no">q1</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">x</span>, <span class="fl">0.25</span>, <span class="kw">na.rm</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>((<span class="no">q3</span>-<span class="no">q1</span>)/(<span class="no">q3</span>+<span class="no">q1</span>))
+}
+
+<span class="no">stu_var_summ</span> <span class="kw">=</span> <span class="no">student</span> <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">year</span>, <span class="no">country</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">summarise_at</span>(
+    <span class="kw">.vars</span> <span class="kw">=</span> <span class="fu">vars</span>(<span class="no">math</span>, <span class="no">read</span>, <span class="no">science</span>),
+    <span class="kw">.funs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
+      <span class="co"># sd = ~sd(., na.rm = TRUE),</span>
+      <span class="co"># iqr = ~quantile(., 0.75, na.rm = TRUE) - quantile(., 0.25, na.rm = TRUE))</span>
+    <span class="kw">qcd</span> <span class="kw">=</span> ~ <span class="fu">qcd</span>(<span class="no">.</span>))) <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">year</span> <span class="kw">=</span> <span class="no">year</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>() <span class="kw">%&gt;%</span> <span class="no">as.integer</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">country</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu">n</span>() <span class="kw">&gt;=</span> <span class="fl">5</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">ungroup</span>()
+
+<span class="no">stu_var_summ_long</span> <span class="kw">=</span> <span class="no">stu_var_summ</span> <span class="kw">%&gt;%</span>
+  <span class="fu">pivot_longer</span>(<span class="kw">cols</span> <span class="kw">=</span> -<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"year"</span>, <span class="st">"country"</span>),
+               <span class="kw">names_to</span> <span class="kw">=</span> <span class="st">"names"</span>,
+               <span class="kw">values_to</span> <span class="kw">=</span> <span class="st">"values"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">separate</span>(<span class="kw">col</span> <span class="kw">=</span> <span class="st">"names"</span>, <span class="kw">into</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"subject"</span>, <span class="st">"statistic"</span>), <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"_"</span>)
+
+<span class="no">stu_var_summ_long</span> <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">year</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">values</span>,
+             <span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>)) +
+  <span class="fu">geom_line</span>() +
+  <span class="fu">facet_grid</span>(<span class="no">subject</span>~<span class="no">statistic</span>, <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free"</span>)</pre></body></html></div>
+<p><img src="exploring_time_files/figure-html/unnamed-chunk-6-1.png" width="768"></p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r">
+<span class="no">stu_var_summ</span> <span class="kw">=</span> <span class="no">stu_var_summ</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">as_tsibble</a></span>(<span class="kw">key</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">index</span> <span class="kw">=</span> <span class="no">year</span>)
+
+<span class="no">stu_var_near</span> <span class="kw">=</span> <span class="no">stu_var_summ</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">features</a></span>(<span class="no">math_qcd</span>, <span class="no">feat_brolgar</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/keys_near.html">keys_near</a></span>(<span class="kw">key</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">var</span> <span class="kw">=</span> <span class="no">median</span>)
+
+<span class="no">stu_var_near</span>
+<span class="co">#&gt; # A tibble: 6 x 5</span>
+<span class="co">#&gt;   country median stat  stat_value  stat_diff</span>
+<span class="co">#&gt;   &lt;fct&gt;    &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 FIN      0.105 min        0.105 0         </span>
+<span class="co">#&gt; 2 ESP      0.123 q_25       0.123 0.0000715 </span>
+<span class="co">#&gt; 3 AUT      0.130 med        0.130 0.000486  </span>
+<span class="co">#&gt; 4 HRV      0.129 med        0.130 0.000486  </span>
+<span class="co">#&gt; 5 FRA      0.137 q_75       0.137 0.00000127</span>
+<span class="co">#&gt; 6 QAT      0.172 max        0.172 0</span>
+
+<span class="no">stu_var_plotdf</span> <span class="kw">=</span> <span class="no">stu_var_summ_long</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">subject</span> <span class="kw">==</span> <span class="st">"math"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">left_join</span>(<span class="no">stu_var_near</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"country"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">left_join</span>(<span class="no">countrycode</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"country"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://tsibble.tidyverts.org/reference/reexports.html">as_tibble</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">label_stats_country</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">stat</span>), <span class="fl">NA</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">stat</span>, <span class="st">":"</span>, <span class="no">country_name</span>)))
+
+<span class="no">stu_var_plotdf</span> <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">year</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">values</span>,
+             <span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">stat</span>)) +
+  <span class="fu">geom_line</span>() +
+  <span class="kw pkg">gghighlight</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/gghighlight.html">gghighlight</a></span>(!<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">stat</span>), <span class="kw">label_key</span> <span class="kw">=</span> <span class="no">label_stats_country</span>)</pre></body></html></div>
+<p><img src="exploring_time_files/figure-html/unnamed-chunk-6-2.png" width="768"></p>
+</div>
+<div id="gender-gap-over-time" class="section level2">
+<h2 class="hasAnchor">
+<a href="#gender-gap-over-time" class="anchor"></a>Gender gap over time</h2>
+<p>Though not perfect measures, we will look at the differences in the average test scores for each gender.</p>
+<p>In maths, there are more countries with a higher average for the boys. In reading, the girls completely dominates in every country. Science is more evenly spilt.</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">stu_gender_summ</span> <span class="kw">=</span> <span class="no">student</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span>(<span class="no">gender</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">year</span>, <span class="no">country</span>, <span class="no">gender</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">summarise_at</span>(<span class="kw">.vars</span> <span class="kw">=</span> <span class="fu">vars</span>(<span class="no">math</span>, <span class="no">read</span>, <span class="no">science</span>),
+               <span class="kw">.funs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">wmean</span> <span class="kw">=</span> ~<span class="fu">w_mean</span>(<span class="no">.</span>, <span class="kw">w</span> <span class="kw">=</span> <span class="no">stu_wgt</span>))) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">year</span> <span class="kw">=</span> <span class="no">year</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>() <span class="kw">%&gt;%</span> <span class="no">as.integer</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">country</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu">n</span>() <span class="kw">&gt;=</span> <span class="fl">10</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">ungroup</span>() <span class="kw">%&gt;%</span>
+  <span class="fu">pivot_longer</span>(<span class="kw">cols</span> <span class="kw">=</span> <span class="fu">contains</span>(<span class="st">"_wmean"</span>),
+               <span class="kw">names_to</span> <span class="kw">=</span> <span class="st">"names"</span>,
+               <span class="kw">values_to</span> <span class="kw">=</span> <span class="st">"values"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">pivot_wider</span>(<span class="kw">names_from</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"gender"</span>, <span class="st">"names"</span>),
+              <span class="kw">values_from</span> <span class="kw">=</span> <span class="st">"values"</span>)
+
+<span class="no">stu_ggap_summ</span> <span class="kw">=</span> <span class="no">stu_gender_summ</span> <span class="kw">%&gt;%</span>
+  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">transmute</a></span>(
+    <span class="no">year</span>, <span class="no">country</span>,
+    <span class="kw">gap_math_wmean</span> <span class="kw">=</span> <span class="no">female_math_wmean</span> - <span class="no">male_math_wmean</span>,
+    <span class="kw">gap_read_wmean</span> <span class="kw">=</span> <span class="no">female_read_wmean</span> - <span class="no">male_read_wmean</span>,
+    <span class="kw">gap_science_wmean</span> <span class="kw">=</span> <span class="no">female_science_wmean</span> - <span class="no">male_science_wmean</span>)
+
+
+<span class="no">stu_ggap_summ_long</span> <span class="kw">=</span> <span class="no">stu_ggap_summ</span> <span class="kw">%&gt;%</span>
+  <span class="fu">pivot_longer</span>(<span class="kw">cols</span> <span class="kw">=</span> <span class="fu">contains</span>(<span class="st">"gap"</span>),
+               <span class="kw">names_to</span> <span class="kw">=</span> <span class="st">"gap_names"</span>,
+               <span class="kw">values_to</span> <span class="kw">=</span> <span class="st">"gap_values"</span>)
+
+<span class="no">stu_ggap_summ_long</span> <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">year</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">gap_values</span>)) +
+  <span class="fu">geom_point</span>() +
+  <span class="fu">geom_line</span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>)) +
+  <span class="fu">geom_hline</span>(<span class="kw">yintercept</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="st">"red"</span>) +
+  <span class="fu">facet_wrap</span>(~<span class="no">gap_names</span>) +
+  <span class="fu">labs</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="st">"Avg. gender gaps for countries across subjects and years"</span>,
+       <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Gap = avg. female score - avg. male score"</span>)</pre></body></html></div>
+<p><img src="exploring_time_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
+<div id="across-all-three-subjects-looks-a-bit-ugly" class="section level3">
+<h3 class="hasAnchor">
+<a href="#across-all-three-subjects-looks-a-bit-ugly" class="anchor"></a>Across all three subjects (looks a bit ugly)</h3>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">stu_ggap_summ_nest</span> <span class="kw">=</span> <span class="no">stu_ggap_summ</span> <span class="kw">%&gt;%</span>
+  <span class="fu">pivot_longer</span>(<span class="fu">contains</span>(<span class="st">"_wmean"</span>),
+               <span class="kw">names_to</span> <span class="kw">=</span> <span class="st">"names"</span>,
+               <span class="kw">values_to</span> <span class="kw">=</span> <span class="st">"values"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="no">names</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">nest</span>() <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">f_tbl</span> <span class="kw">=</span> <span class="fu">map</span>(<span class="kw">.x</span> <span class="kw">=</span> <span class="no">data</span>,
+                     <span class="kw">.f</span> <span class="kw">=</span> ~ <span class="no">.x</span> <span class="kw">%&gt;%</span>
+                       <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">as_tsibble</a></span>(<span class="kw">key</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">index</span> <span class="kw">=</span> <span class="no">year</span>) <span class="kw">%&gt;%</span>
+                       <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">features</a></span>(<span class="no">values</span>, <span class="no">feat_brolgar</span>) <span class="kw">%&gt;%</span>
+                       <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/keys_near.html">keys_near</a></span>(<span class="kw">key</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">var</span> <span class="kw">=</span> <span class="no">range2</span>)),
+         <span class="kw">f_data</span> <span class="kw">=</span> <span class="fu">map2</span>(<span class="kw">.x</span> <span class="kw">=</span> <span class="no">data</span>, <span class="kw">.y</span> <span class="kw">=</span> <span class="no">f_tbl</span>,
+                       <span class="kw">.f</span> <span class="kw">=</span> ~ <span class="fu">left_join</span>(<span class="no">.x</span>, <span class="no">.y</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"country"</span>)))
+
+<span class="no">stu_ggap_summ_plotdf</span> <span class="kw">=</span> <span class="no">stu_ggap_summ_nest</span> <span class="kw">%&gt;%</span>
+  <span class="fu">select</span>(<span class="no">names</span>, <span class="no">f_data</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">unnest</span>(<span class="no">f_data</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">left_join</span>(<span class="no">countrycode</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"country"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">label_stats_country</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">stat</span>), <span class="fl">NA</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">stat</span>, <span class="st">":"</span>, <span class="no">country_name</span>)))
+
+<span class="no">stu_ggap_summ_plotdf</span> <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">year</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">values</span>)) +
+  <span class="fu">geom_line</span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">country</span>)) +
+  <span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/gghighlight.html">gghighlight</a></span>(!<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">stat</span>), <span class="kw">label_key</span> <span class="kw">=</span> <span class="no">label_stats_country</span>, <span class="kw">calculate_per_facet</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">keep_scales</span> <span class="kw">=</span> <span class="fl">TRUE</span>) +
+  <span class="fu">facet_wrap</span>(~<span class="no">names</span>)</pre></body></html></div>
+<p><img src="exploring_time_files/figure-html/unnamed-chunk-8-1.png" width="768"></p>
+</div>
+<div id="math-only-less-elegant" class="section level3">
+<h3 class="hasAnchor">
+<a href="#math-only-less-elegant" class="anchor"></a>Math only (less elegant)</h3>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">stu_gap_math_near</span> <span class="kw">=</span> <span class="no">stu_ggap_summ</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">as_tsibble</a></span>(<span class="kw">key</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">index</span> <span class="kw">=</span> <span class="no">year</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/reexports.html">features</a></span>(<span class="no">gap_math_wmean</span>, <span class="no">feat_brolgar</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/brolgar/man/keys_near.html">keys_near</a></span>(<span class="kw">key</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">var</span> <span class="kw">=</span> <span class="no">median</span>)
+
+<span class="no">stu_gap_math_plotdf</span> <span class="kw">=</span> <span class="no">stu_ggap_summ</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://tsibble.tidyverts.org/reference/reexports.html">as_tibble</a></span>() <span class="kw">%&gt;%</span>
+  <span class="fu">left_join</span>(<span class="no">stu_gap_math_near</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"country"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">left_join</span>(<span class="no">countrycode</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"country"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">label_stats_country</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">stat</span>), <span class="fl">NA</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">stat</span>, <span class="st">":"</span>, <span class="no">country_name</span>)))
+
+<span class="no">p_math</span> <span class="kw">=</span> <span class="no">stu_gap_math_plotdf</span> <span class="kw">%&gt;%</span>
+  <span class="fu">ggplot</span>(<span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/reexports.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">year</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">gap_math_wmean</span>,
+             <span class="kw">group</span> <span class="kw">=</span> <span class="no">country</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">stat</span>)) +
+  <span class="fu">geom_line</span>() +
+  <span class="kw pkg">gghighlight</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/gghighlight/man/gghighlight.html">gghighlight</a></span>(!<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">stat</span>), <span class="kw">label_key</span> <span class="kw">=</span> <span class="no">label_stats_country</span>)
+
+<span class="no">p_math</span></pre></body></html></div>
+<p><img src="exploring_time_files/figure-html/unnamed-chunk-9-1.png" width="768"></p>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">lme4</span>)
+<span class="co"># aus_data = student %&gt;% filter(country == "AUS")</span>
+<span class="co"># obj = lmer(math ~ gender + (gender|year/school_id), data = student,</span>
+<span class="co">#              control = lmerControl(optimizer = "optimx", calc.derivs = FALSE,</span>
+<span class="co">#      optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))</span>
+<span class="co"># </span>
+<span class="co"># summary(obj)</span>
+
+<span class="no">sub_stu</span> <span class="kw">=</span> <span class="no">student</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">country</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AUS"</span>))
+
+<span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span>(<span class="no">math</span> ~ <span class="no">gender</span>, <span class="kw">data</span> <span class="kw">=</span> <span class="no">sub_stu</span>)
+
+<span class="no">obj</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span>(<span class="no">math</span> ~ <span class="no">gender</span> + <span class="no">escs</span> + (<span class="no">gender</span> <span class="kw">|</span> <span class="no">year</span>/<span class="no">school_id</span>), <span class="kw">data</span> <span class="kw">=</span> <span class="no">sub_stu</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">obj</span>)
+
+<span class="co"># aus_aug = broom::augment(obj)</span>
+
+<span class="co"># sub_stu = student %&gt;% filter(country %in% c("QAT"))</span>
+<span class="co"># </span>
+<span class="co"># obj = lmer(math ~ gender + escs + (gender | year/school_id), data = sub_stu)</span>
+<span class="co"># </span>
+<span class="co"># summary(obj)</span></pre></body></html></div>
+</div>
+</div>
 </div>
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
 <span class="co">#&gt; R version 4.0.0 (2020-04-24)</span>
 <span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
 <span class="co">#&gt; Running under: macOS Catalina 10.15.4</span>
@@ -321,7 +507,7 @@
 <span class="co">#&gt; [49] fs_1.4.1           xml2_1.3.2         ellipsis_0.3.1     generics_0.0.2    </span>
 <span class="co">#&gt; [53] vctrs_0.3.0        tools_4.0.0        glue_1.4.1         hms_0.5.3         </span>
 <span class="co">#&gt; [57] yaml_2.2.1         colorspace_1.4-1   rvest_0.3.5        memoise_1.1.0     </span>
-<span class="co">#&gt; [61] knitr_1.28         haven_2.3.0</span></pre></body></html></div>
+<span class="co">#&gt; [61] knitr_1.28         haven_2.3.1</span></pre></body></html></div>
 </div>
   </div>
 
