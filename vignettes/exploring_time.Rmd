@@ -127,9 +127,11 @@ math_slope = complete_nations %>% ## Filter for countries participated in all 7 
 math_slope %>% 
   ggplot(aes(x = .intercept, y = .slope_year_subtract)) +
   geom_point() +
-  geom_label_repel(aes(label = country_name)) +
+  geom_text_repel(aes(label = country_name), size = 3) +
+  geom_hline(yintercept = 0, colour = "red") +
   labs(x = "Weighted mean math score in 2000", 
-       y = "Avg. increase in weighted mean score every year")
+       y = "Avg. increase in weighted mean score every year") +
+  scale_y_continuous(limits = c(-8, 8)) 
 
 
 math_slope_near <- math_slope %>%
@@ -180,11 +182,31 @@ plot_tbl %>%
 
 
 ## Highlighting variance
+
+We will use three measures of variability (standard deviation, coefficient of variation, quartile coefficient of dispersion) to visualise the general movements of countries over time. But we will use coefficient of variation as the final visualisation. 
+
 ```{r}
+student %>% 
+  group_by(year, country) %>% 
+  summarise_at(
+    .vars = vars(math, read, science), 
+    .funs = list(
+      mean = ~ mean(., na.rm = TRUE),
+      sd = ~ sd(., na.rm = TRUE))) %>%
+  ggplot(aes(x = math_mean, y = math_sd, colour = year)) +
+  geom_point() +
+  scale_colour_brewer(palette = "Dark2") +
+  labs(x = "Mean maths score", 
+       y = "SD maths score")
+
 qcd = function(x){
   q3 = quantile(x, 0.75, na.rm = TRUE)
   q1 = quantile(x, 0.25, na.rm = TRUE)
   return((q3-q1)/(q3+q1))
+}
+
+cv = function(x){
+  sd(x, na.rm = TRUE)/mean(x, na.rm = TRUE)
 }
 
 stu_var_summ = student %>% 
@@ -192,13 +214,14 @@ stu_var_summ = student %>%
   summarise_at(
     .vars = vars(math, read, science), 
     .funs = list(
-      # sd = ~sd(., na.rm = TRUE),
-      # iqr = ~quantile(., 0.75, na.rm = TRUE) - quantile(., 0.25, na.rm = TRUE))
-    qcd = ~ qcd(.))) %>% 
+      sd = ~ sd(., na.rm = TRUE),
+      qcd = ~ qcd(.),
+      cv = ~ cv(.))) %>% 
   dplyr::mutate(year = year %>% as.character() %>% as.integer) %>% 
   group_by(country) %>% 
   filter(n() >= 5) %>% 
   ungroup()
+
 
 stu_var_summ_long = stu_var_summ %>% 
   pivot_longer(cols = -c("year", "country"), 
@@ -210,19 +233,19 @@ stu_var_summ_long %>%
   ggplot(aes(x = year, y = values,
              group = country)) +
   geom_line() +
-  facet_grid(subject~statistic, scales = "free")
+  facet_grid(statistic~subject, scales = "free_y")
 
 stu_var_summ = stu_var_summ %>% 
   as_tsibble(key = country, index = year)
 
 stu_var_near = stu_var_summ %>% 
-  features(math_qcd, feat_brolgar) %>% 
+  features(math_cv, feat_brolgar) %>% 
   keys_near(key = country, var = median)
 
 stu_var_near
 
 stu_var_plotdf = stu_var_summ_long %>% 
-  filter(subject == "math") %>% 
+  filter(subject == "math", statistic == "cv") %>% 
   left_join(stu_var_near, by = "country") %>% 
   left_join(countrycode, by = "country") %>% 
   as_tibble() %>% 
@@ -232,7 +255,8 @@ stu_var_plotdf %>%
   ggplot(aes(x = year, y = values,
              group = country, colour = stat)) +
   geom_line() +
-  gghighlight::gghighlight(!is.na(stat), label_key = label_stats_country)
+  gghighlight::gghighlight(!is.na(stat), label_key = label_stats_country) +
+  labs(y = "Coef. of variation across students")
 ```
 
 ## Gender gap over time
