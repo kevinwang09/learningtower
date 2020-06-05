@@ -113,7 +113,7 @@ There are many countries/regions who did not participate in all 7 PISA countries
 complete_nations = stu_summ %>% 
   group_by(country) %>% filter(n() >= 5) %>%
   ungroup() %>%
-  mutate(year_subtract = year - 2000) %>% 
+  mutate(year_subtract = year - min(year)) %>% 
   as_tsibble(key = country, index = year_subtract)
 
 math_slope = complete_nations %>% ## Filter for countries participated in all 7 PISA studies
@@ -129,7 +129,7 @@ math_slope %>%
   geom_point() +
   geom_text_repel(aes(label = country_name), size = 3) +
   geom_hline(yintercept = 0, colour = "red") +
-  labs(x = "Weighted mean math score in 2000", 
+  labs(x = "Weighted mean math score in first participation", 
        y = "Avg. increase in weighted mean score every year") +
   scale_y_continuous(limits = c(-8, 8)) 
 
@@ -305,6 +305,7 @@ stu_ggap_summ_long %>%
 ```
 
 ### Across all three subjects (looks a bit ugly)
+
 
 ```{r}
 stu_ggap_summ_nest = stu_ggap_summ %>%
