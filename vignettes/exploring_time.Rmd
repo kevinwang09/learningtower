@@ -36,6 +36,7 @@ library(gghighlight)
 library(ggrepel)
 library(brolgar)
 library(tsibble)
+library(gganimate)
 
 data(student)
 data(countrycode)
@@ -386,6 +387,31 @@ summary(obj)
 # summary(obj)
 ```
 
+# Socio-economics visualisation 
+```{r}
+stu_eco_math_summ = student %>% 
+  group_by(year, country) %>% 
+  summarise(math_wmean = w_mean(x = math, w = stu_wgt),
+            escs_mean = mean(escs, na.rm = TRUE)) %>% 
+  group_by(country) %>%
+  filter(n() >= 5) %>% 
+  ungroup()
+
+stu_eco_math_summ %>% 
+  ggplot(aes(x = escs_mean, y = math_wmean)) +
+  geom_point() +
+  facet_wrap(~year)
+
+stu_eco_math_summ %>% 
+  mutate(year = year %>% as.character %>% as.integer) %>% 
+  left_join(countrycode, by = "country") %>% 
+  ggplot(aes(x = escs_mean, y = math_wmean, group = country, label = country_name)) +
+  # geom_point() +
+  geom_text() +
+  geom_path() +
+  transition_reveal(along = year) +
+  labs(title = 'Year: {frame_along}', x = 'Socio-economics score', y = 'Maths weighted mean score')
+```
 
 
 # Session info
