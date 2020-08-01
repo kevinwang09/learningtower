@@ -34,7 +34,9 @@ Suggests:
     brolgar (>= 0.0.5.9100),
     tsibble,
     lme4,
-    gganimate
+    gganimate,
+    ggfortify,
+    sjPlot
 Depends: R (>= 3.5.0)
 Encoding: UTF-8
 LazyData: true

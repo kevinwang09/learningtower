@@ -1,0 +1,172 @@
+---
+title: "Oi! How's 'Straya doing in the PISA study (someone think of a better name)"
+author: "The Freemasons"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    fig_height: 10
+    fig_width: 14
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Australia trends}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  error = FALSE,
+  outwidth = "100%",
+  fig.width = 8, fig.height = 6)
+```
+
+# Introduction
+The purpose of this vignette is to explore some of the variables that influence a country's performance in the PISA study, and in particular, we will explore the country of Australia. 
+
+
+# Loading packages and data
+
+```{r}
+library(learningtower)
+library(tidyverse)
+library(lme4)
+library(ggfortify)
+library(sjPlot)
+library(patchwork)
+
+
+data(student)
+data(countrycode)
+theme_set(theme_classic(18) +
+theme(legend.position = "bottom"))
+```
+
+
+# Linear regression model for the 2018 study
+
+Here, as a preliminary exploration of the data, we will fit three linear models (one for each subject of maths, reading and science) on the 2018 Australian data to get a sense of the main variables that may be influencing test scores.
+
+```{r}
+aus_data = student %>% filter(country %in% c("AUS")) %>% 
+  dplyr::mutate(
+    mother_educ = mother_educ %>% fct_relevel("less than ISCED1"),
+    father_educ = father_educ %>% fct_relevel("less than ISCED1")) 
+
+student_predictors = c("mother_educ", "father_educ", "gender", "internet", "desk", "room", "television", "computer_n", "car", "book", "wealth", "escs")
+student_formula_rhs = paste(student_predictors, collapse = "+")
+
+aus2018 = aus_data %>% 
+  filter(year == "2018") %>% 
+  dplyr::select(
+    math, read, science, 
+    all_of(student_predictors)) %>% 
+  na.omit()
+
+cat("Correlation matrix of the numeric variables")
+aus2018 %>% 
+  dplyr::select_if(is.numeric) %>% 
+  cor(use = "pairwise.complete.obs") %>% 
+  round(2)
+
+aus2018_math = lm(formula = as.formula(paste("math ~ ", student_formula_rhs)) , data = aus2018)
+aus2018_read = lm(formula = as.formula(paste("read ~ ", student_formula_rhs)) , data = aus2018)
+aus2018_science = lm(formula = as.formula(paste("science ~ ", student_formula_rhs)) , data = aus2018)
+
+sjPlot::tab_model(aus2018_math, aus2018_read, aus2018_science,
+                  show.ci = FALSE, show.aic = TRUE, show.se = TRUE,
+                  show.stat = TRUE,
+                  show.obs = FALSE)
+```
+
+
+There are some interesting discoveries from these models
+  1. All three subjects seems to be influenced by similar factors.
+  2. Father's education level seems to have a much stronger effect than mother's education level 
+  3. While most estimates agree in signs across the three subjects, the most notable exception to this is `gender`, where girls tend to perform better than boys in reading.
+  4. The most influencial predictors are those associated with socio-economic status (`escs`) and education (`book`). A number of variables that should not be directly causal to academic performance also showed up as significant. This is likely due to their associations with socio-economic status. 
+
+Upon checking the classical diagnostic plots of these models, we see no major violation on the assumptions of linear models. The large amount of variations in the data may help to explain why the models only has a moderately low $R^2$ values (~ 0.20).
+
+```{r, fig.height = 30, fig.width = 12}
+autoplot(aus2018_math) + labs(title = "2018 Australia maths model") +
+  autoplot(aus2018_read) + labs(title = "2018 Australia read model") + 
+    autoplot(aus2018_science) + labs(title = "2018 Australia science model")
+```
+
+
+# Linear mixed model
+
+We already know that the socio-economic status (SES) of a student is often the most influencial predictor and it is likely that students with similar SES will attend the same school in their local area and receive similar level of quality of teachers. Thus, it is likely that there will be a grouping effect on the students if they attended the same school. This would imply that some observations in our data are not independent observations. By building random effects in our linear model, i.e. building a linear mixed model, we should be able to produce a model with better fit if we integrate this school grouping effect into our model. 
+
+```{r}
+lmm2018 = aus_data %>% 
+  filter(year == "2018") %>% 
+  dplyr::select(
+    school_id,
+    math, read, science, 
+    all_of(student_predictors)) %>% 
+  na.omit()
+
+library(lme4)
+lmm2018_math = lmer(formula = as.formula(paste("math ~ ", student_formula_rhs, "+ (escs | school_id)")), data = lmm2018)
+lmm2018_read = lmer(formula = as.formula(paste("read ~ ", student_formula_rhs, "+ (escs | school_id)")), data = lmm2018)
+lmm2018_science = lmer(formula = as.formula(paste("science ~ ", student_formula_rhs, "+ (escs | school_id)")), data = lmm2018)
+
+sjPlot::tab_model(lmm2018_math, lmm2018_read, lmm2018_science,
+                  show.ci = FALSE, show.aic = TRUE, show.se = TRUE,
+                  show.stat = TRUE,
+                  show.obs = FALSE)
+```
+
+
+We see that the linear mixed model improved on the fit of the model, as judged by the AIC. 
+
+```{r}
+AIC(aus2018_math) - AIC(lmm2018_math)
+```
+
+# Integrating with `school` data
+
+We will now take this dataset on students and merge it with some variables from the `school` data which is also a part of this `learningtower` package. This allows us to gain more access to the school level variables that might be helpful in modelling the data. 
+
+```{r}
+selected_vars = c("father_educ", "gender", "internet", "desk", "computer_n", "car", "book", "wealth", "escs")
+data(school)
+aus_school_2018 = school %>% 
+  dplyr::filter(country == "AUS", year == "2018") %>% 
+  dplyr::mutate(school_size = log10(school_size)) %>% ## We take the log due to the scale
+  dplyr::select(-year, -country, -contains("fund"), -sch_wgt)
+
+lmm2018_sch = lmm2018 %>% 
+  left_join(aus_school_2018, by = c("school_id")) %>% na.omit()
+
+school_predictors = c("stratio", "public_private", "staff_shortage", "school_size")
+school_formula_rhs = paste(school_predictors, collapse = "+")
+
+lmm2018_sch_math = lmer(formula = as.formula(paste("math ~ ", student_formula_rhs, "+ (escs | school_id) + ",
+                                                   school_formula_rhs)), data = lmm2018_sch)
+lmm2018_sch_read = lmer(formula = as.formula(paste("read ~ ", student_formula_rhs, "+ (escs | school_id) + ",
+                                                   school_formula_rhs)), data = lmm2018_sch)
+lmm2018_sch_science = lmer(formula = as.formula(paste("science ~ ", student_formula_rhs, "+ (escs | school_id) + ",
+                                                   school_formula_rhs)), data = lmm2018_sch)
+
+
+sjPlot::tab_model(lmm2018_sch_math, lmm2018_sch_read, lmm2018_sch_science,
+                  show.ci = FALSE, show.aic = TRUE, show.se = TRUE,
+                  show.stat = TRUE,
+                  show.obs = FALSE)
+```
+
+We note the following:
+  1. The school size is a strong predictor for academic performance, implying larger schools tend to do better. This is likely a confounding variable for the urban/rural region of the school. 
+  2. Private school tends to better than public schools (note the reference level and the negative coefficient estimate). 
+  3. Perhaps surprisingly, the student-teacher ratio (`stratio`) wasn't found to be significant but the `staff_shortage` was. This would imply that as long as the school is adequently supported by staff, further reduction in the student-teacher ratio does not have a statistical significant effect on student performance. 
+
+# Session info
+```{r}
+sessionInfo()
+```
