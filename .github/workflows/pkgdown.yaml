@@ -3,7 +3,7 @@ on:
     branches: master
 
 name: pkgdown
-
+=
 jobs:
   pkgdown:
     runs-on: ubuntu-16.04
@@ -39,6 +39,11 @@ jobs:
 
       - name: Install package
         run: R CMD INSTALL .
+
+      - name: Configure git
+        run: |
+          git config --global user.email "kevin.wang@sydney.edu"
+          git config --global user.name "Kevin Wang"
 
       - name: Deploy package
         run: pkgdown::deploy_to_branch(new_process = FALSE)
