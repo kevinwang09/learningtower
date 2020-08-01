@@ -23,8 +23,12 @@ vignette: >
   outwidth = "100%",
   fig.width = 8, fig.height = 6)
 ```
-  
-  
+
+# Introduction
+
+One of the most interesting thing that we can explore in this cureated PISA data are the temporal trends for each country/region.
+
+
 # Loading packages and data
   
 ```{r}
@@ -44,9 +48,11 @@ theme_set(theme_classic(18) +
             theme(legend.position = "bottom"))
 ```
 
-# Time series visualisation
+# Basic time series visualisation
 
 We will first visualise the time series trend of countries, regardless of when and how long they have participated in the PISA study. 
+
+The code below computes the weighted means of each subject (maths, reading and science) for each country for each year. Then, after some data wrangling, we will plot the weighted means as three time series plots, where each joined line in the plots represents a country's performance in that subject over the time which they participated in the PISA study. 
 
 ```{r}
 w_mean = function(x, w){weighted.mean(x = x, w = w, na.rm=TRUE)}
@@ -82,7 +88,7 @@ stu_wmean_long %>%
 
 ## Australia, New Zealand, Indonesia
 
-We focus on three countries here. The dark line is the weighted mean score of each country for each subject. The shading indicates the min and max score of a given year. 
+A core of this package was built at the 2019 OzUnconf in Australia. Hence, we focus on three countries in the APAC region for more detailed visualisations. In the plot below, the dark line is the weighted mean score of each country for each subject. The shading indicates the min and max score of a given year. We can see that when looking at range of scores, the variations in the mean of the data is almost negligible. We will explore this effect in details later.
 
 ```{r}
 stu_summ_long2 = stu_summ %>% 
@@ -106,9 +112,17 @@ stu_summ_long2 %>%
 
 # `brolgar` visualisations 
 
-## Calculating slope
+[brolgar](https://github.com/njtierney/brolgar) is a new package that will make visualisation of time series easier. We will now use this package to pick out some interesting patterns in the data. 
 
-There are many countries/regions who did not participate in all 7 PISA countries. As we are interested in calculating linear models, we will retain only those countries/regions participated in 5 or more studies. 
+## Linear model for every country
+
+We will now consider fitting a linear model for every country's performance in maths. This will extract the general trend of performance in maths extracted from the "spaghetti" plot above. 
+
+There are many countries/regions who did not participate in all 7 PISA studies (between 2000 to 2018, a study is conducted every three years). As we are interested in calculating linear models, we will retain only those countries/regions participated in 5 or more studies.
+
+For simplicity of interpretation, we will centre each country/region's performance to the first time that country/region participated in the PISA study. Hence, the intercept terms of the linear models (x-axis in the plot below) represent the weighted means of the countries/regions when they first particulated in PISA study. The slope terms of the linear models (y-axis in the plot below) represent the average annual increase in the weighted mean score for each country/region. 
+
+Based on this interpretation, it appears that if a country/region has a good initial performance in the PISA study, then that country is likely to have reach "saturation" where it is hard for it to improve any further, and thus only has a small annual increase or even a decrease. 
 
 ```{r}
 complete_nations = stu_summ %>% 
@@ -117,7 +131,7 @@ complete_nations = stu_summ %>%
   mutate(year_subtract = year - min(year)) %>% 
   as_tsibble(key = country, index = year_subtract)
 
-math_slope = complete_nations %>% ## Filter for countries participated in all 7 PISA studies
+math_slope = complete_nations %>%
   select(
     year_subtract, 
     country, 
@@ -132,7 +146,7 @@ math_slope %>%
   geom_hline(yintercept = 0, colour = "red") +
   labs(x = "Weighted mean math score in first participation", 
        y = "Avg. increase in weighted mean score every year") +
-  scale_y_continuous(limits = c(-8, 8)) 
+  scale_y_continuous(limits = c(-5, 8)) 
 
 
 math_slope_near <- math_slope %>%
@@ -143,12 +157,11 @@ math_slope_near
 
 ## Highlighting monotone countries for subjects
 
-```{r}
-# math_features <- complete_nations %>% 
-#   features(math_wmean, feat_brolgar)
-# 
-# math_features
+There are some countries, since their initial participation in the PISA study, always exhibit monotone trending (increase or decrease). We will use the `brolgar` package to highlight these countries. 
 
+Quite interestingly, the countries exhibiting monotone decreasing patterns are Australia, New Zealand and Netherlands. Despite this decreasing pattern, all three countries remain on the top of the world in terms of their performance. This is consistent with the idea of "saturation" above as we can see a cluster of countries towards the top of the score range of each subject. On the other hand, Qatar and Peru are the two countries that massively improved their performance since the PISA study began. 
+
+```{r}
 feature_monotone = complete_nations %>%
   features_at(.var = vars(math_wmean, read_wmean, science_wmean), 
               features = feat_monotonic) %>% 
@@ -184,27 +197,22 @@ plot_tbl %>%
 
 ## Highlighting variance
 
-We will use three measures of variability (standard deviation, coefficient of variation, quartile coefficient of dispersion) to visualise the general movements of countries over time. But we will use coefficient of variation as the final visualisation. 
+As the PISA study spans multiple countries, schools and across time, there is a huge amount of variations in the data that the simple linear analyses above are not able to fully capture. Here, we will turn our attention to the variability themselves and visualise these. We will primarily use standard deviation and coefficient of variation to visualise the general trends of countries/region over time. 
 
 ```{r}
 student %>% 
   group_by(year, country) %>% 
   summarise_at(
-    .vars = vars(math, read, science), 
+    .vars = vars(math, read, science, wealth, escs), 
     .funs = list(
       mean = ~ mean(., na.rm = TRUE),
       sd = ~ sd(., na.rm = TRUE))) %>%
   ggplot(aes(x = math_mean, y = math_sd, colour = year)) +
-  geom_point() +
+  geom_point(size = 3) +
   scale_colour_brewer(palette = "Dark2") +
   labs(x = "Mean maths score", 
-       y = "SD maths score")
-
-qcd = function(x){
-  q3 = quantile(x, 0.75, na.rm = TRUE)
-  q1 = quantile(x, 0.25, na.rm = TRUE)
-  return((q3-q1)/(q3+q1))
-}
+       y = "SD maths score") + 
+  facet_wrap(~year)
 
 cv = function(x){
   sd(x, na.rm = TRUE)/mean(x, na.rm = TRUE)
@@ -216,7 +224,6 @@ stu_var_summ = student %>%
     .vars = vars(math, read, science), 
     .funs = list(
       sd = ~ sd(., na.rm = TRUE),
-      qcd = ~ qcd(.),
       cv = ~ cv(.))) %>% 
   dplyr::mutate(year = year %>% as.character() %>% as.integer) %>% 
   group_by(country) %>% 
@@ -235,7 +242,13 @@ stu_var_summ_long %>%
              group = country)) +
   geom_line() +
   facet_grid(statistic~subject, scales = "free_y")
+```
 
+In the plot above, we see that there countries that has high variations tend to lower as time passes by while low variations tend to stay stay that way. This implies that most countries/regions typically exhibit non-increasing pattern in terms of the quality of performance. 
+
+We now zoom into the mathematics performance (measured using coefficient of variation) panel and take a close look at the countries, highlighting certain countries of interest. 
+
+```{r}
 stu_var_summ = stu_var_summ %>% 
   as_tsibble(key = country, index = year)
 
@@ -260,11 +273,13 @@ stu_var_plotdf %>%
   labs(y = "Coef. of variation across students")
 ```
 
+We again see Qatar appearing in this visualisation. Qatar is highlighted as it is the country with a large amount of variations, implying a high level of inequality in the performance in mathematics. But what is particularly interesting here is that Qatar is consistently lowering the variation every time it participate in the PISA study. Combined with the visualisations above, we might conjecture that Qatar is not only improving its performance but also the equality of access. 
+
 ## Gender gap over time
 
-Though not perfect measures, we will look at the differences in the average test scores for each gender. 
+One of the ongoing myth in education is that there is a difference in the performance of different subjects by gender. While this may appear true in selected cases, it is important to note gender is often a confounding variable masking the effect of some genuine underlying cause. Together with the large amount of variations in the data across socio-economic status of different families in different countries/regions, it is never possible to draw a generalised conclusion. 
 
-In maths, there are more countries with a higher average for the boys. In reading, the girls completely dominates in every country. Science is more evenly split.  
+That being said, we will now visualise the differences in the average test scores for each gender (PISA study chose a binary coding). Across the three subjects, there are more countries with a higher average for the boys in maths. In reading, girls completely dominate in every country while performance in science is more evenly split between the genders.  
 
 ```{r}
 stu_gender_summ = student %>% 
@@ -305,10 +320,10 @@ stu_ggap_summ_long %>%
        subtitle = "Gap = avg. female score - avg. male score")
 ```
 
-### Across all three subjects (looks a bit ugly)
+### Highlighting key countries across all three subjects
 
 
-```{r}
+```{r, fig.width = 18}
 stu_ggap_summ_nest = stu_ggap_summ %>%
   pivot_longer(contains("_wmean"),
                names_to = "names",
@@ -337,7 +352,8 @@ stu_ggap_summ_plotdf %>%
 ```
 
 
-### Math only (less elegant)
+### Highlighting key countries for maths only
+
 ```{r}
 stu_gap_math_near = stu_ggap_summ %>%
   as_tsibble(key = country, index = year) %>% 
@@ -359,35 +375,10 @@ p_math = stu_gap_math_plotdf %>%
 p_math
 ```
 
+# Socio-economics visualisation (animaged)
 
+Here, we visualise the association betwen socio-economic score and the weighted maths scores in an animation. 
 
-```{r, eval = FALSE}
-library(lme4)
-# aus_data = student %>% filter(country == "AUS")
-# obj = lmer(math ~ gender + (gender|year/school_id), data = student,
-#              control = lmerControl(optimizer = "optimx", calc.derivs = FALSE,
-#      optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
-# 
-# summary(obj)
-
-sub_stu = student %>% filter(country %in% c("AUS"))
-
-t.test(math ~ gender, data = sub_stu)
-
-obj = lmer(math ~ gender + escs + (gender | year/school_id), data = sub_stu)
-
-summary(obj)
-
-# aus_aug = broom::augment(obj)
-
-# sub_stu = student %>% filter(country %in% c("QAT"))
-# 
-# obj = lmer(math ~ gender + escs + (gender | year/school_id), data = sub_stu)
-# 
-# summary(obj)
-```
-
-# Socio-economics visualisation 
 ```{r}
 stu_eco_math_summ = student %>% 
   group_by(year, country) %>% 
@@ -418,4 +409,3 @@ stu_eco_math_summ %>%
 ```{r}
 sessionInfo()
 ```
-
