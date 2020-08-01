@@ -15,7 +15,7 @@ A tibble of the following variables
     \item \code{fund_donation}: Percentage of total funding for school year from
     benefactors, donations, bequests, sponsorships, parent fundraising. Numeric.
     \item \code{enrol_boys}: Number of boys in the school. Numeric.
-    \item \code{enrol_girls}: Number of girls in the schoo. Numeric.
+    \item \code{enrol_girls}: Number of girls in the school. Numeric.
     \item \code{stratio}: Student-Teacher ratio. Numeric.
     \item \code{public_private}: Is the school a public or private school. Factor.
     \item \code{staff_shortage}: Shortage of staff. Numeric.

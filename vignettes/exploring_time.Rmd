@@ -264,7 +264,7 @@ stu_var_plotdf %>%
 
 Though not perfect measures, we will look at the differences in the average test scores for each gender. 
 
-In maths, there are more countries with a higher average for the boys. In reading, the girls completely dominates in every country. Science is more evenly spilt. 
+In maths, there are more countries with a higher average for the boys. In reading, the girls completely dominates in every country. Science is more evenly split.  
 
 ```{r}
 stu_gender_summ = student %>% 

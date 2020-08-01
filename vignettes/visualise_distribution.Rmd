@@ -11,7 +11,7 @@ vignette: >
 
 # Some prelim/working thoughts...
 
-We put forward the possibility that (despite?) the apparent decreasing trend in the performance of Australian students in the PISA standardised testing, there are more nuiances in this data than simply a decrease in the average test scores. 
+We put forward the possibility that (despite?) the apparent decreasing trend in the performance of Australian students in the PISA standardised testing, there are more nuances in this data than simply a decrease in the average test scores. 
 
 One thing that we should be aware of is that there is a huge individual variability for each country. 
 
@@ -130,7 +130,7 @@ I can agree that there is a huge variability in the individual test scores, so m
 
 But just because there is a large variability in the data, I don't think it is completely meaningless to compare across countries. Sure, the original Conversation article produced figures that zoomed into the averaged data, which might exaggerated the decreasing trends, but the solution isn't to resetting zoom to the whole range of the raw data. Because the average of many values (X-bar) will have a smaller spread than Xi's. 
 
-I put forward the argument that we should consider visualising the raw scores without any summarisation. This might be achived through ECDF. Each bump in the ECDF curve is a raw data point. So instead of trying to come up with a summarisation of location or spread, we can see the entire sample distribution of marks for each country. This way we can see the entire distribution of scores in a country and compare the distribution rather than comparing a simple one number summary and be lured into making false conclusions. 
+I put forward the argument that we should consider visualising the raw scores without any summarisation. This might be achieved through ECDF. Each bump in the ECDF curve is a raw data point. So instead of trying to come up with a summarisation of location or spread, we can see the entire sample distribution of marks for each country. This way we can see the entire distribution of scores in a country and compare the distribution rather than comparing a simple one number summary and be lured into making false conclusions. 
 
 Using the simulation from Gaussian distribution below, we can see that a difference in mean can be characterised by a horizontal shift (because the red curve is **right** of the green, it thus has a **higher** mean than green) and a small sd is characterised by a sharp increase in the middle of the curve. 
 
@@ -169,7 +169,7 @@ student %>%
 
 Interesting findings: 
 + In most cases, AUS, USA and JPN share quite similar gradient of ECDF, which might be an indication that they have similar spread. BRA tends to have a bit of sharper increase. So that could imply some advantages in favour of the top students. 
-+ If the argument is that an average student in JPN does better than an average student in AUS, then we can now refine this statement to use a precise statement using quantiles and distributions. E.g. a student who stores in the top 50% of JPN student population is able to score better than 66.5% of AUS student population. But of course, this gao narrows when you go towards the top of the distributions. 
++ If the argument is that an average student in JPN does better than an average student in AUS, then we can now refine this statement to use a precise statement using quantiles and distributions. E.g. a student who stores in the top 50% of JPN student population is able to score better than 66.5% of AUS student population. But of course, this gap narrows when you go towards the top of the distributions. 
 
 
 ```{r}
