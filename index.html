@@ -61,6 +61,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/Australia_trends.html">Oi! How's 'Straya doing in the PISA study (someone think of a better name)</a>
+    </li>
+    <li>
       <a href="articles/exploring_time.html">Exploring temporal trends</a>
     </li>
     <li>
@@ -96,16 +99,19 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the development version of learningtower from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"ropenscilabs/learningtower"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># install.packages("devtools")</span>
+<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"ropenscilabs/learningtower"</span>)
+</pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in <code>student</code> and <code>school</code> respectively (the latter coming soon). As an example, we can load the <code>student</code> data as follows:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">learningtower</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">student</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">student</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">learningtower</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">student</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">student</span>)
 <span class="co">#&gt;   year school_id student_id mother_educ father_educ gender computer internet</span>
 <span class="co">#&gt; 1 2000      1001          1          NA          NA      1       NA        2</span>
 <span class="co">#&gt; 2 2000      1001          3          NA          NA      1       NA        2</span>
@@ -126,18 +132,21 @@
 <span class="co">#&gt; 3    2  -1.46 -1.3066839     ALB</span>
 <span class="co">#&gt; 4    3  -1.46 -0.4624639     ALB</span>
 <span class="co">#&gt; 5    3  -1.13 -1.2816273     ALB</span>
-<span class="co">#&gt; 6    3  -0.40 -0.2299722     ALB</span></pre></div>
+<span class="co">#&gt; 6    3  -0.40 -0.2299722     ALB</span>
+</pre></div>
 <p>See <code><a href="reference/student.html">?student</a></code> for information pertaining to variables captured.</p>
 <p>We can get futher information on the country codes in the <code>countrycode</code> data.</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="no">countrycode</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">countrycode</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">countrycode</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">countrycode</span>)
 <span class="co">#&gt;   country country_name</span>
 <span class="co">#&gt; 1     AZE   Azerbaijan</span>
 <span class="co">#&gt; 2     ARG    Argentina</span>
 <span class="co">#&gt; 3     AUS    Australia</span>
 <span class="co">#&gt; 4     AUT      Austria</span>
 <span class="co">#&gt; 5     BEL      Belgium</span>
-<span class="co">#&gt; 6     BRA       Brazil</span></pre></div>
+<span class="co">#&gt; 6     BRA       Brazil</span>
+</pre></div>
 </div>
 <div id="exploring-the-data" class="section level2">
 <h2 class="hasAnchor">
