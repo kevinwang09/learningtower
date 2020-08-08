@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oi! How's 'Straya doing in the PISA study (someone think of a better name) • learningtower</title>
+<title>Oi! How's 'Straya doing in the PISA study (someone can think of a better name) • learningtower</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Oi! How's 'Straya doing in the PISA study (someone think of a better name)">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Oi! How's 'Straya doing in the PISA study (someone can think of a better name)">
 <meta property="og:description" content="learningtower">
 <meta property="og:image" content="https://ropenscilabs.github.io/learningtower/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -61,7 +61,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Australia_trends.html">Oi! How's 'Straya doing in the PISA study (someone think of a better name)</a>
+      <a href="../articles/Australia_trends.html">Oi! How's 'Straya doing in the PISA study (someone can think of a better name)</a>
     </li>
     <li>
       <a href="../articles/exploring_time.html">Exploring temporal trends</a>
@@ -85,10 +85,10 @@
       </header><script src="Australia_trends_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Oi! How’s ’Straya doing in the PISA study (someone think of a better name)</h1>
+      <h1 data-toc-skip>Oi! How’s ’Straya doing in the PISA study (someone can think of a better name)</h1>
                         <h4 class="author">The Freemasons</h4>
             
-            <h4 class="date">2020-08-01</h4>
+            <h4 class="date">2020-08-08</h4>
       
       
       <div class="hidden name"><code>Australia_trends.Rmd</code></div>
@@ -100,7 +100,7 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>The purpose of this vignette is to explore some of the variables that influence a country’s performance in the PISA study, and in particular, we will explore the country of Australia.</p>
+<p>The purpose of this vignette is to explore some of the variables that influenced Australia’s performance in PISA study. Note that this is an observational study (as oppose to controlled experiment), and we are inferring on factors that are correlated with academic performance rather than specific causes.</p>
 </div>
 <div id="loading-packages-and-data" class="section level1">
 <h1 class="hasAnchor">
@@ -112,7 +112,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://strengejacke.github.io/sjPlot">sjPlot</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://patchwork.data-imaginist.com">patchwork</a></span>)
-
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://github.com/slowkow/ggrepel">ggrepel</a></span>)
 
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">student</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">countrycode</span>)
@@ -120,17 +120,72 @@
 <span class="fu">theme</span>(legend.position = <span class="st">"bottom"</span>))
 </pre></div>
 </div>
+<div id="visualise-predictors-over-time" class="section level1">
+<h1 class="hasAnchor">
+<a href="#visualise-predictors-over-time" class="anchor"></a>Visualise predictors over time</h1>
+<p>Since we are expecting some time variations in the data, it is a good idea to quickly visualise the time trends.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">aus_data</span> <span class="op">=</span> <span class="kw">student</span> <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw">country</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AUS"</span>)) <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    mother_educ = <span class="kw">mother_educ</span> <span class="op">%&gt;%</span> <span class="fu">fct_relevel</span>(<span class="st">"less than ISCED1"</span>),
+    father_educ = <span class="kw">father_educ</span> <span class="op">%&gt;%</span> <span class="fu">fct_relevel</span>(<span class="st">"less than ISCED1"</span>))
+</pre></div>
+<div id="numeric-variables" class="section level2">
+<h2 class="hasAnchor">
+<a href="#numeric-variables" class="anchor"></a>Numeric variables</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">aus_data</span> <span class="op">%&gt;%</span> 
+  <span class="fu">select_if</span>(<span class="kw">is.numeric</span>) <span class="op">%&gt;%</span> 
+  <span class="fu">bind_cols</span>(<span class="kw">aus_data</span> <span class="op">%&gt;%</span> <span class="fu">select</span>(<span class="kw">year</span>)) <span class="op">%&gt;%</span> 
+  <span class="fu">pivot_longer</span>(cols = <span class="op">-</span><span class="kw">year</span>) <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span>(<span class="kw">year</span>, <span class="kw">name</span>) <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x = <span class="kw">year</span>, y = <span class="kw">value</span>,
+             colour = <span class="kw">year</span>)) <span class="op">+</span>
+  <span class="fu">geom_boxplot</span>() <span class="op">+</span>
+  <span class="fu">facet_wrap</span>(<span class="op">~</span><span class="kw">name</span>, scales = <span class="st">"free_y"</span>) <span class="op">+</span>
+  <span class="fu">theme</span>(legend.position = <span class="st">"none"</span>)
+</pre></div>
+<p><img src="Australia_trends_files/figure-html/unnamed-chunk-3-1.png" width="1152"></p>
+</div>
+<div id="factor-variables" class="section level2">
+<h2 class="hasAnchor">
+<a href="#factor-variables" class="anchor"></a>Factor variables</h2>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">aus_data</span> <span class="op">%&gt;%</span> 
+  <span class="fu">select_if</span>(<span class="kw">is.factor</span>) <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">country</span>, <span class="op">-</span><span class="kw">school_id</span>, <span class="op">-</span><span class="kw">student_id</span>) <span class="op">%&gt;%</span> 
+  <span class="fu">pivot_longer</span>(cols = <span class="op">-</span><span class="kw">year</span>) <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span>(<span class="kw">year</span>, <span class="kw">name</span>, <span class="kw">value</span>) <span class="op">%&gt;%</span> 
+  <span class="fu">tally</span>() <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    value = <span class="fu">coalesce</span>(<span class="kw">value</span>, <span class="st">"missing"</span>),
+    percent = <span class="kw">n</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">n</span>),
+    year = <span class="kw">year</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>()) <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span>(<span class="kw">name</span>, <span class="kw">value</span>) <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(last_point = <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="kw">year</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="kw">year</span>), <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="kw">value</span>), <span class="fl">NA</span>)) <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x = <span class="kw">year</span>, y = <span class="kw">percent</span>,
+             label = <span class="kw">last_point</span>,
+             group = <span class="kw">value</span>)) <span class="op">+</span>
+  <span class="fu">geom_point</span>() <span class="op">+</span> 
+  <span class="fu">geom_line</span>() <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_label_repel</a></span>(direction = <span class="st">"both"</span>, nudge_x = <span class="fl">3</span>, seed = <span class="fl">2020</span>, segment.size = <span class="fl">0</span>) <span class="op">+</span>
+  <span class="fu">facet_wrap</span>(<span class="op">~</span><span class="kw">name</span>, scales = <span class="st">"free_y"</span>) <span class="op">+</span>
+  <span class="fu">scale_x_continuous</span>(limits = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2005.5</span>, <span class="fl">2022</span>),
+                     breaks = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2006</span>, <span class="fl">2009</span>, <span class="fl">2012</span>, <span class="fl">2015</span>, <span class="fl">2018</span>)) 
+</pre></div>
+<p><img src="Australia_trends_files/figure-html/unnamed-chunk-4-1.png" width="1152"></p>
+<p>In order to reduce the complexity in modelling, we will first explore the most recent 2018 data before generalising the models/results into any trends.</p>
+</div>
+</div>
 <div id="linear-regression-model-for-the-2018-study" class="section level1">
 <h1 class="hasAnchor">
 <a href="#linear-regression-model-for-the-2018-study" class="anchor"></a>Linear regression model for the 2018 study</h1>
-<p>Here, as a preliminary exploration of the data, we will fit three linear models (one for each subject of maths, reading and science) on the 2018 Australian data to get a sense of the main variables that may be influencing test scores.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">aus_data</span> <span class="op">=</span> <span class="kw">student</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">country</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AUS"</span>)) <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-    mother_educ = <span class="kw">mother_educ</span> <span class="op">%&gt;%</span> <span class="fu">fct_relevel</span>(<span class="st">"less than ISCED1"</span>),
-    father_educ = <span class="kw">father_educ</span> <span class="op">%&gt;%</span> <span class="fu">fct_relevel</span>(<span class="st">"less than ISCED1"</span>)) 
-
+<p>We will first perform a preliminary exploration of the data using linear models. We will first fit three linear models (one for each subject of maths, reading and science) on the 2018 Australian data to get a sense of the main variables that may be influencing test scores.</p>
+<p>We will subset the <code>student</code> data to only AUS and relevel some factors for analysese later.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="kw">student_predictors</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"mother_educ"</span>, <span class="st">"father_educ"</span>, <span class="st">"gender"</span>, <span class="st">"internet"</span>, <span class="st">"desk"</span>, <span class="st">"room"</span>, <span class="st">"television"</span>, <span class="st">"computer_n"</span>, <span class="st">"car"</span>, <span class="st">"book"</span>, <span class="st">"wealth"</span>, <span class="st">"escs"</span>)
+
 <span class="kw">student_formula_rhs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw">student_predictors</span>, collapse = <span class="st">"+"</span>)
 
 <span class="kw">aus2018</span> <span class="op">=</span> <span class="kw">aus_data</span> <span class="op">%&gt;%</span> 
@@ -139,7 +194,11 @@
     <span class="kw">math</span>, <span class="kw">read</span>, <span class="kw">science</span>, 
     <span class="fu">all_of</span>(<span class="kw">student_predictors</span>)) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>()
-
+</pre></div>
+<div id="checking-correlation-matrix-of-the-numeric-variables" class="section level2">
+<h2 class="hasAnchor">
+<a href="#checking-correlation-matrix-of-the-numeric-variables" class="anchor"></a>Checking correlation matrix of the numeric variables</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span>(<span class="st">"Correlation matrix of the numeric variables"</span>)
 <span class="co">#&gt; Correlation matrix of the numeric variables</span>
 <span class="kw">aus2018</span> <span class="op">%&gt;%</span> 
@@ -152,7 +211,12 @@
 <span class="co">#&gt; science 0.84 0.84    1.00   0.03 0.31</span>
 <span class="co">#&gt; wealth  0.07 0.03    0.03   1.00 0.47</span>
 <span class="co">#&gt; escs    0.33 0.32    0.31   0.47 1.00</span>
-
+</pre></div>
+</div>
+<div id="fitting-three-linear-models" class="section level2">
+<h2 class="hasAnchor">
+<a href="#fitting-three-linear-models" class="anchor"></a>Fitting three linear models</h2>
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="kw">aus2018_math</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(formula = <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"math ~ "</span>, <span class="kw">student_formula_rhs</span>)) , data = <span class="kw">aus2018</span>)
 <span class="kw">aus2018_read</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(formula = <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"read ~ "</span>, <span class="kw">student_formula_rhs</span>)) , data = <span class="kw">aus2018</span>)
 <span class="kw">aus2018_science</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(formula = <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"science ~ "</span>, <span class="kw">student_formula_rhs</span>)) , data = <span class="kw">aus2018</span>)
@@ -1473,20 +1537,22 @@ AIC
 </td>
 </tr>
 </table>
-<p>There are some interesting discoveries from these models 1. All three subjects seems to be influenced by similar factors. 2. Father’s education level seems to have a much stronger effect than mother’s education level 3. While most estimates agree in signs across the three subjects, the most notable exception to this is <code>gender</code>, where girls tend to perform better than boys in reading. 4. The most influencial predictors are those associated with socio-economic status (<code>escs</code>) and education (<code>book</code>). A number of variables that should not be directly causal to academic performance also showed up as significant. This is likely due to their associations with socio-economic status.</p>
+<p>Some interesting discoveries from these models: 1. All three response variables seem to be influenced by similar factors. 2. Father’s education level (<code>father_educ</code>) seems to have a much stronger effect than mother’s education level (<code>mother_educ</code>). 3. While most estimates agree in signs across the three subjects, the most notable exception to this is <code>gender</code>, where girls tend to perform better than boys in reading. 4. The most influencial predictors are those associated with socio-economic status (<code>escs</code>) and education (<code>book</code>). A number of variables that should not be directly causal to academic performance also showed up as significant. This is likely due to their associations with socio-economic status.</p>
 <p>Upon checking the classical diagnostic plots of these models, we see no major violation on the assumptions of linear models. The large amount of variations in the data may help to explain why the models only has a moderately low <span class="math inline">\(R^2\)</span> values (~ 0.20).</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu">autoplot</span>(<span class="kw">aus2018_math</span>) <span class="op">+</span> <span class="fu">labs</span>(title = <span class="st">"2018 Australia maths model"</span>) <span class="op">+</span>
   <span class="fu">autoplot</span>(<span class="kw">aus2018_read</span>) <span class="op">+</span> <span class="fu">labs</span>(title = <span class="st">"2018 Australia read model"</span>) <span class="op">+</span> 
-    <span class="fu">autoplot</span>(<span class="kw">aus2018_science</span>) <span class="op">+</span> <span class="fu">labs</span>(title = <span class="st">"2018 Australia science model"</span>)
+  <span class="fu">autoplot</span>(<span class="kw">aus2018_science</span>) <span class="op">+</span> <span class="fu">labs</span>(title = <span class="st">"2018 Australia science model"</span>)
 </pre></div>
-<p><img src="Australia_trends_files/figure-html/unnamed-chunk-3-1.png" width="1152"></p>
+<p><img src="Australia_trends_files/figure-html/unnamed-chunk-8-1.png" width="1152"></p>
+</div>
 </div>
 <div id="linear-mixed-model" class="section level1">
 <h1 class="hasAnchor">
 <a href="#linear-mixed-model" class="anchor"></a>Linear mixed model</h1>
-<p>We already know that the socio-economic status (SES) of a student is often the most influencial predictor and it is likely that students with similar SES will attend the same school in their local area and receive similar level of quality of teachers. Thus, it is likely that there will be a grouping effect on the students if they attended the same school. This would imply that some observations in our data are not independent observations. By building random effects in our linear model, i.e. building a linear mixed model, we should be able to produce a model with better fit if we integrate this school grouping effect into our model.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
+<p>We already know that the socio-economic status (SES) of a student is often the most influencial predictor and it is likely that students with similar SES will attend the same schools in their neighbourhood and receive similar level of quality of education from the same teachers. Thus, it is likely that there will be a grouping effect on the students if they attended the same school. This would imply that some observations in our data are not independent observations.</p>
+<p>By building random effects in our linear model, i.e. building a linear mixed model, we should be able to produce a model with better fit if we consider this grouping effect of schools into our model.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="kw">lmm2018</span> <span class="op">=</span> <span class="kw">aus_data</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">year</span> <span class="op">==</span> <span class="st">"2018"</span>) <span class="op">%&gt;%</span> 
   <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(
@@ -1495,7 +1561,6 @@ AIC
     <span class="fu">all_of</span>(<span class="kw">student_predictors</span>)) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>()
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/lme4/lme4">lme4</a></span>)
 <span class="kw">lmm2018_math</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span>(formula = <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"math ~ "</span>, <span class="kw">student_formula_rhs</span>, <span class="st">"+ (escs | school_id)"</span>)), data = <span class="kw">lmm2018</span>)
 <span class="kw">lmm2018_read</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span>(formula = <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"read ~ "</span>, <span class="kw">student_formula_rhs</span>, <span class="st">"+ (escs | school_id)"</span>)), data = <span class="kw">lmm2018</span>)
 <span class="kw">lmm2018_science</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span>(formula = <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"science ~ "</span>, <span class="kw">student_formula_rhs</span>, <span class="st">"+ (escs | school_id)"</span>)), data = <span class="kw">lmm2018</span>)
@@ -2907,16 +2972,20 @@ AIC
 </tr>
 </table>
 <p>We see that the linear mixed model improved on the fit of the model, as judged by the AIC.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
+<div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span>(<span class="kw">aus2018_math</span>) <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span>(<span class="kw">lmm2018_math</span>)
 <span class="co">#&gt; [1] 795.2309</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span>(<span class="kw">aus2018_read</span>) <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span>(<span class="kw">lmm2018_read</span>)
+<span class="co">#&gt; [1] 479.2288</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span>(<span class="kw">aus2018_science</span>) <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span>(<span class="kw">lmm2018_science</span>)
+<span class="co">#&gt; [1] 684.2047</span>
 </pre></div>
 </div>
 <div id="integrating-with-school-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#integrating-with-school-data" class="anchor"></a>Integrating with <code>school</code> data</h1>
 <p>We will now take this dataset on students and merge it with some variables from the <code>school</code> data which is also a part of this <code>learningtower</code> package. This allows us to gain more access to the school level variables that might be helpful in modelling the data.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
+<div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="kw">selected_vars</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"father_educ"</span>, <span class="st">"gender"</span>, <span class="st">"internet"</span>, <span class="st">"desk"</span>, <span class="st">"computer_n"</span>, <span class="st">"car"</span>, <span class="st">"book"</span>, <span class="st">"wealth"</span>, <span class="st">"escs"</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="kw">school</span>)
 <span class="kw">aus_school_2018</span> <span class="op">=</span> <span class="kw">school</span> <span class="op">%&gt;%</span> 
@@ -2935,8 +3004,7 @@ AIC
 <span class="kw">lmm2018_sch_read</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span>(formula = <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"read ~ "</span>, <span class="kw">student_formula_rhs</span>, <span class="st">"+ (escs | school_id) + "</span>,
                                                    <span class="kw">school_formula_rhs</span>)), data = <span class="kw">lmm2018_sch</span>)
 <span class="kw">lmm2018_sch_science</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span>(formula = <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"science ~ "</span>, <span class="kw">student_formula_rhs</span>, <span class="st">"+ (escs | school_id) + "</span>,
-                                                   <span class="kw">school_formula_rhs</span>)), data = <span class="kw">lmm2018_sch</span>)
-
+                                                      <span class="kw">school_formula_rhs</span>)), data = <span class="kw">lmm2018_sch</span>)
 
 <span class="kw">sjPlot</span>::<span class="fu"><a href="https://rdrr.io/pkg/sjPlot/man/tab_model.html">tab_model</a></span>(<span class="kw">lmm2018_sch_math</span>, <span class="kw">lmm2018_sch_read</span>, <span class="kw">lmm2018_sch_science</span>,
                   show.ci = <span class="fl">FALSE</span>, show.aic = <span class="fl">TRUE</span>, show.se = <span class="fl">TRUE</span>,
@@ -4515,12 +4583,74 @@ AIC
 </td>
 </tr>
 </table>
-<p>We note the following: 1. The school size is a strong predictor for academic performance, implying larger schools tend to do better. This is likely a confounding variable for the urban/rural region of the school. 2. Private school tends to better than public schools (note the reference level and the negative coefficient estimate). 3. Perhaps surprisingly, the student-teacher ratio (<code>stratio</code>) wasn’t found to be significant but the <code>staff_shortage</code> was. This would imply that as long as the school is adequently supported by staff, further reduction in the student-teacher ratio does not have a statistical significant effect on student performance.</p>
+<p>We note the following: 1. The school size (<code>school_size</code>) is a strong predictor for academic performance, implying larger schools tend to do better. This is likely a confounding variable for the urban/rural region of the school which can imply a difference in available funding of school facilities.<br>
+2. Private school tends to better than public schools (note the reference level and the negative coefficient estimate in the variable <code>public_private</code>). 3. Perhaps surprisingly, the student-teacher ratio (<code>stratio</code>) wasn’t found to be significant but the shortage of staff (<code>staff_shortage</code>) was significant. This would imply that as long as the school is adequently supported by staff, further reduction in the student-teacher ratio does not have a statistical significant effect on student performance.</p>
+</div>
+<div id="visualising-coefficient-estimates-over-the-years" class="section level1">
+<h1 class="hasAnchor">
+<a href="#visualising-coefficient-estimates-over-the-years" class="anchor"></a>Visualising coefficient estimates over the years</h1>
+<p>All analyses above focused on the year 2018 for Australia, but what about the other years? We also visualise the academic performances of students as a function of time in the <a href="https://ropenscilabs.github.io/learningtower/articles/exploring_time.html">time trend vignette</a>, so in this section, we will attempt to visualise the effect of some interesting variables and their linear model coefficient estimates for each of the PISA study over time.</p>
+<p>We would expect the availability of technology (e.g. computer) could be beneficial for students at the start of the 21st century, but it is not clear if students will be helped by these technologies as time goes by.</p>
+<p>The construction goes as follow:</p>
+<ol style="list-style-type: decimal">
+<li>We first split the entire Australian data by year and fit a linear model, with <code>math</code> as the response variable.</li>
+<li>We extract the coefficient estimate for every predictor from every linear model and combine the result.</li>
+<li>We will then plot the years on the x-axis and the coefficient estimates on the y-axis as points and join each variable using a line. For categorical variables, we will split the categories as separate lines.</li>
+<li>Additionally, we will show the 95% confidence interval of each coefficient estimate using a transparent ribbon and show the y = 0 line. i.e. whenever the ribbon crosses the horizontal line, the p-value for testing this level will be &lt; 0.05.</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">aus_student_years</span> <span class="op">=</span> <span class="kw">aus_data</span> <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(
+    <span class="kw">math</span>,
+    <span class="fu">all_of</span>(<span class="kw">student_predictors</span>),
+    <span class="kw">year</span>) <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span>()
+
+<span class="kw">aus_student_years_coef</span> <span class="op">=</span> <span class="kw">aus_student_years</span> <span class="op">%&gt;%</span> 
+  <span class="fu">group_by</span>(<span class="kw">year</span>) <span class="op">%&gt;%</span> 
+  <span class="fu">nest</span>() <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    math_lm_coef = <span class="kw">purrr</span>::<span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(.x = <span class="kw">data</span>, 
+                              .f = <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(formula = <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="st">"math ~ "</span>, <span class="kw">student_formula_rhs</span>)), data = <span class="kw">.x</span>) <span class="op">%&gt;%</span> 
+                                <span class="kw">broom</span>::<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>())) <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">data</span>) <span class="op">%&gt;%</span> 
+  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(<span class="kw">math_lm_coef</span>)
+
+<span class="kw">aus_student_years_coef</span> <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="fu">str_detect</span>(<span class="kw">term</span>, <span class="st">"computer|father_educ|escs|wealth"</span>)) <span class="op">%&gt;%</span> 
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    year = <span class="kw">year</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>() <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span>(),
+    facet = <span class="fu">case_when</span>(
+      <span class="fu">str_detect</span>(<span class="kw">term</span>, <span class="st">"computer"</span>) <span class="op">~</span> <span class="st">"Number of computer"</span>,
+      <span class="fu">str_detect</span>(<span class="kw">term</span>, <span class="st">"father_educ"</span>) <span class="op">~</span> <span class="st">"Education of father"</span>,
+      <span class="co"># str_detect(term, "mother_educ") ~ "Education of mother",</span>
+      <span class="fu">str_detect</span>(<span class="kw">term</span>, <span class="st">"wealth"</span>) <span class="op">~</span> <span class="st">"Wealth"</span>,
+      <span class="fu">str_detect</span>(<span class="kw">term</span>, <span class="st">"escs"</span>) <span class="op">~</span> <span class="st">"Socio-economic index"</span>),
+    last_point = <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="kw">year</span> <span class="op">==</span> <span class="fl">2018</span>, <span class="kw">term</span>, <span class="fl">NA</span>)) <span class="op">%&gt;%</span> 
+  <span class="fu">ggplot</span>(<span class="fu">aes</span>(x = <span class="kw">year</span>, y = <span class="kw">estimate</span>,
+             colour = <span class="kw">term</span>,
+             group = <span class="kw">term</span>,
+             label = <span class="kw">last_point</span>)) <span class="op">+</span>
+  <span class="fu">geom_hline</span>(yintercept = <span class="fl">0</span>) <span class="op">+</span>
+  <span class="fu">geom_point</span>(position = <span class="fu">position_dodge</span>(width = <span class="fl">0.8</span>), size = <span class="fl">2</span>) <span class="op">+</span>
+  <span class="fu">geom_line</span>(position = <span class="fu">position_dodge</span>(width = <span class="fl">0.8</span>), size = <span class="fl">1.5</span>) <span class="op">+</span>
+  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(ymin = <span class="kw">estimate</span> <span class="op">-</span> <span class="fl">2</span><span class="op">*</span><span class="kw">std.error</span>,
+                     ymax = <span class="kw">estimate</span> <span class="op">+</span> <span class="fl">2</span><span class="op">*</span><span class="kw">std.error</span>),
+                 size = <span class="fl">4</span>, alpha = <span class="fl">0.7</span>,
+                 position = <span class="fu">position_dodge</span>(width = <span class="fl">0.8</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_label_repel</a></span>(direction = <span class="st">"both"</span>, nudge_x = <span class="fl">2</span>, seed = <span class="fl">2020</span>, segment.size = <span class="fl">0</span>) <span class="op">+</span>
+  <span class="fu">scale_x_continuous</span>(limits = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2005.5</span>, <span class="fl">2022</span>),
+                     breaks = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2006</span>, <span class="fl">2009</span>, <span class="fl">2012</span>, <span class="fl">2015</span>, <span class="fl">2018</span>)) <span class="op">+</span>
+  <span class="fu">facet_wrap</span>(<span class="op">~</span><span class="kw">facet</span>, scales = <span class="st">"free_y"</span>) <span class="op">+</span>
+  <span class="fu">theme</span>(legend.position = <span class="st">"none"</span>)
+</pre></div>
+<p><img src="Australia_trends_files/figure-html/unnamed-chunk-12-1.png" width="1440"></p>
+<p>We note the following: 1. Even though in the 2018, we found the education of father was statistically significant against students’ academic performance, this was not always the case. From 2006 to 2018, the education of father seems to have ever positive influence on students. 2. It is clear that access to computers is ever more prevalent in Australia. But surprisingly, the positive influence of computers are decreasing. It is not clear why this would be the case. One possible reason is that students might have access to computers outside of their homes (e.g. from schools) and thus the advantages of accessing computers are dampened. 3. Quite interestingly, the influence of socio-economic index is dropping, implying a gradual move towards equality.</p>
 </div>
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>Session info</h1>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()
 <span class="co">#&gt; R version 4.0.2 (2020-06-22)</span>
 <span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span>
@@ -4542,11 +4672,12 @@ AIC
 <span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt;  [1] patchwork_1.0.1          sjPlot_2.8.4             ggfortify_0.4.10        </span>
-<span class="co">#&gt;  [4] lme4_1.1-23              Matrix_1.2-18            forcats_0.5.0           </span>
-<span class="co">#&gt;  [7] stringr_1.4.0            dplyr_1.0.1              purrr_0.3.4             </span>
-<span class="co">#&gt; [10] readr_1.3.1              tidyr_1.1.1              tibble_3.0.3            </span>
-<span class="co">#&gt; [13] ggplot2_3.3.2            tidyverse_1.3.0          learningtower_0.0.0.9000</span>
+<span class="co">#&gt;  [1] ggrepel_0.8.2            patchwork_1.0.1          sjPlot_2.8.4            </span>
+<span class="co">#&gt;  [4] ggfortify_0.4.10         lme4_1.1-23              Matrix_1.2-18           </span>
+<span class="co">#&gt;  [7] forcats_0.5.0            stringr_1.4.0            dplyr_1.0.1             </span>
+<span class="co">#&gt; [10] purrr_0.3.4              readr_1.3.1              tidyr_1.1.1             </span>
+<span class="co">#&gt; [13] tibble_3.0.3             ggplot2_3.3.2            tidyverse_1.3.0         </span>
+<span class="co">#&gt; [16] learningtower_0.0.0.9000</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
 <span class="co">#&gt;  [1] nlme_3.1-148       fs_1.5.0           lubridate_1.7.9    insight_0.9.0     </span>
@@ -4558,7 +4689,7 @@ AIC
 <span class="co">#&gt; [25] scales_1.1.1       mvtnorm_1.1-1      pkgdown_1.5.1.9000 digest_0.6.25     </span>
 <span class="co">#&gt; [29] minqa_1.2.4        rmarkdown_2.3      pkgconfig_2.0.3    htmltools_0.5.0   </span>
 <span class="co">#&gt; [33] dbplyr_1.4.4       rlang_0.4.7        readxl_1.3.1       rstudioapi_0.11   </span>
-<span class="co">#&gt; [37] generics_0.0.2     farver_2.0.3       jsonlite_1.7.0     magrittr_1.5      </span>
+<span class="co">#&gt; [37] farver_2.0.3       generics_0.0.2     jsonlite_1.7.0     magrittr_1.5      </span>
 <span class="co">#&gt; [41] parameters_0.8.2   Rcpp_1.0.5         munsell_0.5.0      fansi_0.4.1       </span>
 <span class="co">#&gt; [45] lifecycle_0.2.0    stringi_1.4.6      yaml_2.2.1         MASS_7.3-51.6     </span>
 <span class="co">#&gt; [49] grid_4.0.2         blob_1.2.1         sjmisc_2.8.5       crayon_1.3.4      </span>
