@@ -2,17 +2,16 @@ Package: learningtower
 Title: OECD PISA data in a convenient format
 Version: 0.0.0.9000
 Authors@R: 
-    c(person(given = "Kim", family = "Fitter",
-           role = c("aut", "cre"),
-           email = "kimfitter@yahoo.com"),
+    c(person(given = "Kevin", family = "Wang", role = c("aut", "cre"), 
+             email = "kevin.wang09@gmail.com"),
       person(given = "Paul", family = "Yacobellis", role = "aut", 
              email = "pyacobellis@hotmail.com"),
       person(given = "Erika", family = "Siregar", role = "aut", 
              email = "erika.mukhlisina@gmail.com"),
       person(given = "Sarah", family = "Romanes", role = "aut", 
              email = "srom8308@uni.sydney.edu.au"),
-      person(given = "Kevin", family = "Wang", role = "aut", 
-             email = "kevin.wang09@gmail.com"),
+      person(given = "Kim", family = "Fitter", role = "aut",
+             email = "kimfitter@yahoo.com"),
       person(given = "Giulio", family = "Valentino Dalla Riva", role = "aut", 
              email = "me@gvdallariva.net"),
       person(given = "Dianne", family = "Cook", role = "aut", 

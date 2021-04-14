@@ -3,9 +3,9 @@
 
 # learningtower <img src='man/figures/logo.png' align="right" height="211" />
 
-![R-CMD-check](https://github.com/ropenscilabs/learningtower/workflows/R-CMD-check/badge.svg)
+![R-CMD-check](https://github.com/kevinwang09/learningtower/workflows/R-CMD-check/badge.svg)
 
-The goal of learningtower is to provide a userfriendly R package to
+The goal of learningtower is to provide a user-friendly R package to
 provide easy access to a subset of variables from PISA data collected
 from the [OECD](http://www.oecd.org/pisa/data/), for years 2000 - 2018,
 collected on a three year basis.
@@ -28,12 +28,12 @@ Read more about the Programme
 
 ## Installation
 
-You can install the development version of learningtower from
+You can install the development version of `learningtower` from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ropenscilabs/learningtower")
+devtools::install_github("kevinwang09/learningtower")
 ```
 
 ## Usage
@@ -47,35 +47,52 @@ As an example, we can load the `student` data as follows:
 library(learningtower)
 data(student)
 head(student)
-#>   year school_id student_id mother_educ father_educ gender computer internet
-#> 1 2000      1001          1          NA          NA      1       NA        2
-#> 2 2000      1001          3          NA          NA      1       NA        2
-#> 3 2000      1001          6          NA          NA      2       NA        2
-#> 4 2000      1001          8          NA          NA      1       NA        2
-#> 5 2000      1001         11          NA          NA      1       NA        2
-#> 6 2000      1001         12          NA          NA      1       NA        2
-#>     math   read science stu_wgt desk room dishwasher television computer_n car
-#> 1 324.35 397.87  345.66    2.16    1    2          2          2          4   2
-#> 2     NA 368.41  385.83    2.16    1    1          2          3          1   1
-#> 3     NA 294.17  327.94    2.16    1    1          2          3          1   1
-#> 4 235.79 241.49  341.09    2.16    1    1          2          2          2   1
-#> 5     NA 287.16  307.15    2.16    1    1          2          3          1   2
-#> 6 290.74 307.84  277.04    2.16    1    1          1          2         NA   4
-#>   book wealth       escs country
-#> 1    3  -0.60  0.1057558     ALB
-#> 2    2  -1.84 -1.4240446     ALB
-#> 3    2  -1.46 -1.3066839     ALB
-#> 4    3  -1.46 -0.4624639     ALB
-#> 5    3  -1.13 -1.2816273     ALB
-#> 6    3  -0.40 -0.2299722     ALB
+#>   year country school_id student_id mother_educ father_educ gender computer
+#> 1 2000     ALB      1001          1        <NA>        <NA> female     <NA>
+#> 2 2000     ALB      1001          3        <NA>        <NA> female     <NA>
+#> 3 2000     ALB      1001          6        <NA>        <NA>   male     <NA>
+#> 4 2000     ALB      1001          8        <NA>        <NA> female     <NA>
+#> 5 2000     ALB      1001         11        <NA>        <NA> female     <NA>
+#> 6 2000     ALB      1001         12        <NA>        <NA> female     <NA>
+#>   internet   math   read science stu_wgt desk room dishwasher television
+#> 1       no 324.35 397.87  345.66    2.16  yes   no         no          1
+#> 2       no     NA 368.41  385.83    2.16  yes  yes         no          2
+#> 3       no     NA 294.17  327.94    2.16  yes  yes         no          2
+#> 4       no 235.79 241.49  341.09    2.16  yes  yes         no          1
+#> 5       no     NA 287.16  307.15    2.16  yes  yes         no          2
+#> 6       no 290.74 307.84  277.04    2.16  yes  yes        yes          1
+#>   computer_n car  book wealth       escs
+#> 1         3+   1 11-50  -0.60  0.1057558
+#> 2          0   0  1-10  -1.84 -1.4240446
+#> 3          0   0  1-10  -1.46 -1.3066839
+#> 4          1   0 11-50  -1.46 -0.4624639
+#> 5          0   1 11-50  -1.13 -1.2816273
+#> 6       <NA>  3+ 11-50  -0.40 -0.2299722
 ```
 
 See `?student` for information pertaining to variables captured.
 
-We can get futher information on the country codes in the `countrycode`
-data.
+We can get further information on the schools and country codes in the
+`school` and `countrycode` data, respectively.
 
 ``` r
+data(school)
+head(school)
+#>   year country school_id fund_gov fund_fees fund_donation enrol_boys
+#> 1 2000     ALB     01001      100         0             0       1191
+#> 2 2000     ALB     01004       98         1             1        334
+#> 3 2000     ALB     01005       91         5             2        403
+#> 4 2000     ALB     01010      100         0             0        114
+#> 5 2000     ALB     01013        0        50            30        250
+#> 6 2000     ALB     01017       95         2             3        771
+#>   enrol_girls stratio public_private staff_shortage sch_wgt school_size
+#> 1        1176   23.67         public           0.60       1        2367
+#> 2         479   24.64         public          -0.95       1         813
+#> 3         600      NA         public          -0.17       1        1003
+#> 4         201   22.50         public           1.87       1         315
+#> 5         248   26.92        private          -0.95       1         498
+#> 6         626   25.40         public           0.27       1        1397
+
 data(countrycode)
 head(countrycode)
 #>   country country_name
@@ -96,4 +113,11 @@ various countries.
 
 Further data exploration can be found in our vignette exploring temporal
 trends
-[here](https://ropenscilabs.github.io/learningtower/articles/exploring_time.html).
+[here](https://kevinwang09.github.io/learningtower/articles/exploring_time.html).
+
+# Acknowledgement
+
+The work to make the data available is the effort of several researchers
+from Australia, New Zealand and Indonesia, conducted as part of the
+[ROpenSci OzUnconf](https://ozunconf19.ropensci.org) held in Sydney, Dec
+11-13, 2019.

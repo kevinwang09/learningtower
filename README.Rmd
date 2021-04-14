@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 # learningtower <img src='man/figures/logo.png' align="right" height="211" />
 
 
-![R-CMD-check](https://github.com/ropenscilabs/learningtower/workflows/R-CMD-check/badge.svg)
+![R-CMD-check](https://github.com/kevinwang09/learningtower/workflows/R-CMD-check/badge.svg)
 
 
 The goal of learningtower is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](http://www.oecd.org/pisa/data/), for years 2000 - 2018, collected on a three year basis.
@@ -33,11 +33,11 @@ Read more about the Programme [here](http://www.oecd.org/pisa/aboutpisa/).
 
 ## Installation
 
-You can install the development version of learningtower from [GitHub](https://github.com/) with:
+You can install the development version of `learningtower` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ropenscilabs/learningtower")
+devtools::install_github("kevinwang09/learningtower")
 ```
 
 ## Usage
@@ -52,9 +52,12 @@ head(student)
 
 See `?student` for information pertaining to variables captured.
 
-We can get futher information on the country codes in the `countrycode` data.
+We can get further information on the schools and country codes in the `school` and `countrycode` data, respectively.
 
 ```{r}
+data(school)
+head(school)
+
 data(countrycode)
 head(countrycode)
 ```
@@ -103,5 +106,8 @@ gif <- animate(s,
 gif
 ```
 
-Further data exploration can be found in our vignette exploring temporal trends [here](https://ropenscilabs.github.io/learningtower/articles/exploring_time.html).
+Further data exploration can be found in our vignette exploring temporal trends [here](https://kevinwang09.github.io/learningtower/articles/exploring_time.html).
 
+# Acknowledgement
+
+The work to make the data available is the effort of several researchers from Australia, New Zealand and Indonesia, conducted as part of the [ROpenSci OzUnconf](https://ozunconf19.ropensci.org) held in Sydney, Dec 11-13, 2019.

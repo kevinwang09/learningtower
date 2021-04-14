@@ -190,8 +190,6 @@ ggplot(gender, aes(x=year, y=score, colour=gender)) + geom_line() + facet_wrap(~
 
 # Do it yourself
 
-The a subset of variables from the PISA data across all years is provided in a convenient format in the R package, `learningtower` available from https://github.com/ropenscilabs/learningtower. Details on how to install the package, and access the data are at https://ropenscilabs.github.io/learningtower/. 
+The a subset of variables from the PISA data across all years is provided in a convenient format in the R package, `learningtower` available from https://github.com/kevinwang09/learningtower. Details on how to install the package, and access the data are at https://kevinwang09.github.io/learningtower/. 
 
 The work to make the data available is the effort of several researchers from Australia, New Zealand and Indonesia, conducted as part of the [ROpenSci OzUnconf](https://ozunconf19.ropensci.org) held in Sydney, Dec 11-13, 2019.
-
-
