@@ -264,8 +264,7 @@ aus_student_years = aus_data %>%
 aus_student_years_coef = aus_student_years %>% 
   group_by(year) %>% 
   nest() %>% 
-  dplyr::mutate(
-    math_lm_coef = purrr::map(.x = data, 
+  dplyr::mutate(math_lm_coef = purrr::map(.x = data, 
                               .f = ~ lm(formula = as.formula(paste("math ~ ", student_formula_rhs)), data = .x) %>% 
                                 broom::tidy())) %>% 
   dplyr::select(-data) %>% 

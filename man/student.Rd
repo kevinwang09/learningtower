@@ -8,7 +8,7 @@
 A tibble of the following variables
 \itemize{
     \item \code{year}: Year of the PISA data. Factor.
-    \item \code{country}: Country 3 character code. Factor.
+    \item \code{country}: Country 3 character code. Note that some regions/territories are coded as country for ease of input. Factor.
     \item \code{school_id}: The school identification number, unique for each country and year combination. Factor.
     \item \code{student_id}: The student identification number, unique for each school, country and year combination. Factor.
     \item \code{mother_educ}: Highest level of mother's education. Ranges from "less than ISCED1" to "ISCED 3A". Factor.
