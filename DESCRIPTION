@@ -1,8 +1,9 @@
 Package: learningtower
-Title: OECD PISA data in a convenient format
+Title: Organisation for Economic Co-operation and Development(OECD), Programme for International Student Assessment PISA datasets in an easy-to-use format.
 Version: 0.0.0.9000
-Authors@R: 
-    c(person(given = "Kevin", family = "Wang", role = c("aut", "cre"), 
+Date: 2021-07-23
+Authors@R: c(
+      person(given = "Kevin", family = "Wang", role = c("aut", "cre"), 
              email = "kevin.wang09@gmail.com"),
       person(given = "Paul", family = "Yacobellis", role = "aut", 
              email = "pyacobellis@hotmail.com"),
@@ -17,8 +18,11 @@ Authors@R:
       person(given = "Dianne", family = "Cook", role = "aut", 
              email = "dicook@monash.edu"),
       person(given = "Nick", family = "Tierney", role = "aut", 
-             email = "nicholas.tierney@gmail.com"))
-Description: This package provides the OECD PISA data from 2000 to 2018 .
+             email = "nicholas.tierney@gmail.com"),
+      person(given = "Priya", family = "Dingorkar", role = "aut", 
+             email = "priyadingorkar@gmail.com")
+             )
+Description: The Programme for International Student Assessment (PISA) is a global study conducted by the Organization for Economic Cooperation and Development (OECD) in member and non-member countries to assess educational systems by assessing 15-year-old school students academic performance in mathematics, science, and reading. This package contains information on their scores and other socioeconomic characteristics, as well as information about their school and its infrastructure, as well as the countries that are taking part in the program.
 Suggests: 
     tidyverse,
     dplyr,
@@ -44,3 +48,5 @@ VignetteBuilder: knitr
 Remotes: 
     njtierney/brolgar
 License: MIT + file LICENSE
+URL: https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower
+BugReports: https://github.com/kevinwang09/learningtower/issues
