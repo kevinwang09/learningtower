@@ -3,7 +3,7 @@
 
 # learningtower <img src='man/figures/logo.png' align="right" height="211" />
 
-![R-CMD-check](https://github.com/kevinwang09/learningtower/workflows/R-CMD-check/badge.svg)
+![R-CMD-check](https://github.com/priya51096/learningtower/actions/workflows/R-CMD-check/badge.svg)
 
 The goal of learningtower is to provide a user-friendly R package to
 provide easy access to a subset of variables from PISA data collected
