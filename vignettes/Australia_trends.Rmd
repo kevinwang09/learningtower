@@ -48,7 +48,7 @@ theme_set(theme_classic(18) + theme(legend.position = "bottom"))
 
 # Visualise predictors over time 
 
-Since we are expecting some time variations in the data, we will quickly visualise the time trends.
+Since we are expecting some time variations in the data, we will quickly visualize the time trends.
 
 ```{r}
 aus_data = student %>% 
