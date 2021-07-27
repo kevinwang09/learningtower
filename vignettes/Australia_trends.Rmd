@@ -48,7 +48,7 @@ theme_set(theme_classic(18) + theme(legend.position = "bottom"))
 
 # Visualise predictors over time 
 
-Since we are expecting some time variations in the data, we will quickly visualise the time trends.
+Since we are expecting some time variations in the data, we will quickly visualize the time trends.
 
 ```{r}
 aus_data = student %>% 
@@ -264,8 +264,7 @@ aus_student_years = aus_data %>%
 aus_student_years_coef = aus_student_years %>% 
   group_by(year) %>% 
   nest() %>% 
-  dplyr::mutate(
-    math_lm_coef = purrr::map(.x = data, 
+  dplyr::mutate(math_lm_coef = purrr::map(.x = data, 
                               .f = ~ lm(formula = as.formula(paste("math ~ ", student_formula_rhs)), data = .x) %>% 
                                 broom::tidy())) %>% 
   dplyr::select(-data) %>% 

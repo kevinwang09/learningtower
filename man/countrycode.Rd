@@ -7,8 +7,8 @@
 \format{
 A tibble of the following variables
 \itemize{
-    \item \code{country}: Country 3 character code. Character.
-    \item \code{country_name}: Country name. Character.
+    \item \code{country}: Country 3 character code. Note that some regions/territories are coded as country for ease of input. Character.
+    \item \code{country_name}: Country name. Note that some regions/territories are coded as country for ease of input. Character.
     }
 }
 \description{

@@ -29,6 +29,7 @@ theme_set(theme_classic(18) +
 ```
 
 # Check for dupes
+
 ```{r, eval = FALSE}
 data(student)
 student %>%
@@ -39,6 +40,8 @@ student %>%
 # Simplified boxplot
 
 ```{r}
+data(student)
+
 selected_country_avg = student %>% 
   filter(country %in% selected_countries) %>% 
   group_by(year, country) %>% 
@@ -47,6 +50,7 @@ selected_country_avg = student %>%
     math_p50 = quantile(math, 0.50, na.rm = TRUE),
     math_p75 = quantile(math, 0.75, na.rm = TRUE))
 
+data(student)
 student %>% 
   filter(country %in% selected_countries, year == 2003)
 
