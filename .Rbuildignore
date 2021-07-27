@@ -8,3 +8,5 @@
 ^README_cache$
 ^data_raw$
 ^LICENSE\.md$
+^pkgdown$
+^vignettes/articles$
