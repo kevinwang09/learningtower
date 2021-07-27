@@ -49,3 +49,11 @@ from the triennial testing of 15 year olds around
 the globe. Original data available from
  \url{https://www.oecd.org/pisa/data/}.
 }
+\examples{
+library(dplyr)
+data(student)
+dplyr::bind_rows(
+student[1,],
+student[2,]
+)
+}

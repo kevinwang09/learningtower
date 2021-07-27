@@ -44,6 +44,14 @@
 #'     }
 #' @docType data
 #' @name student
+#' @importFrom dplyr bind_rows
+#' @examples
+#' library(dplyr)
+#' data(student)
+#' dplyr::bind_rows(
+#' student[1,],
+#' student[2,]
+#' )
 NULL
 
 #' School data from 2000-2018 PISA OECD data
