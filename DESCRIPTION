@@ -23,31 +23,14 @@ Authors@R: c(
              email = "priyadingorkar@gmail.com")
              )
 Description: The Programme for International Student Assessment (PISA) is a global study conducted by the Organization for Economic Cooperation and Development (OECD) in member and non-member countries to assess educational systems by assessing 15-year-old school students academic performance in mathematics, science, and reading. This datasets contains information on their scores and other socioeconomic characteristics, information about their school and its infrastructure, as well as the countries that are taking part in the program.
-Suggests: 
-    tidyverse,
-    dplyr,
-    tidyr,
-    purrr,
-    knitr,
-    rmarkdown,
-    broom,
-    ggrepel,
-    patchwork,
-    gghighlight,
-    brolgar (>= 0.0.5.9100),
-    tsibble,
-    lme4,
-    gganimate,
-    ggfortify,
-    sjPlot
 Depends: R (>= 3.5.0)
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9001
 VignetteBuilder: knitr
-Remotes: 
-    njtierney/brolgar
 License: MIT + file LICENSE
 URL: https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower
 BugReports: https://github.com/kevinwang09/learningtower/issues
 Imports: 
-    scales
+  dplyr
+Suggests:
+  knitr
