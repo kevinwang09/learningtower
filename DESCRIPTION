@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Date: 2021-07-23
 Authors@R: c(
       person(given = "Kevin", family = "Wang", role = c("aut", "cre"), 
-             email = "kevin.wang09@gmail.com"),
+             email = "kevinwangstats@gmail.com"),
       person(given = "Paul", family = "Yacobellis", role = "aut", 
              email = "pyacobellis@hotmail.com"),
       person(given = "Erika", family = "Siregar", role = "aut", 
