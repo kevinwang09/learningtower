@@ -31,7 +31,6 @@ License: MIT + file LICENSE
 URL: https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower
 BugReports: https://github.com/kevinwang09/learningtower/issues
 Imports: 
-  dplyr,
-  utils
+  dplyr
 Suggests:
   knitr
