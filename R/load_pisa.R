@@ -22,7 +22,7 @@
 #'
 #'@export
 student_data <- function(year){
-  x <- year
+
 
 data("student_year_2000")
 data("student_year_2003")
