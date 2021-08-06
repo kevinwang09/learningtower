@@ -22,8 +22,8 @@ years from 2000-2018, the function requires any of the year as it argument or a 
 that will return the all the PISA scores of the student from 2000-2018.
 }
 \examples{
-## load_student("2000")
-## load_student("all")
-## load_student("2009")
+load_student("2000")
+##load_student("all")
+##load_student(c("2000", "2003"))
 
 }

@@ -18,9 +18,9 @@
 #'@usage load_student(year = "2000")
 #'
 #'@examples
-#'## load_student("2000")
-#'## load_student("all")
-#'## load_student("2009")
+#' load_student("2000")
+#' ##load_student("all")
+#' ##load_student(c("2000", "2003"))
 #'
 #'@export
 load_student <- function(year = "2000"){
@@ -47,7 +47,7 @@ load_student <- function(year = "2000"){
 }
 
 download_single_student <- function(year){
-  url_git = base::paste0("https://github.com/priya51096/learningtower/raw/master/student_full_data/student_year_", year, ".rds")
+  url_git = base::paste0("https://github.com/kevinwang09/learningtower/raw/master/student_full_data/student_", year, ".rds")
   tmp <- tempfile()
   utils::download.file(url = url_git, destfile = tmp)
   return(base::readRDS(file = tmp))
