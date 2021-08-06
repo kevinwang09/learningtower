@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>School data from 2000-2018 PISA OECD data — school • learningtower</title>
+<title>load_student function allows the user to extract the PISA scores for any desired year
+from 2000-2018 — load_student • learningtower</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,11 +47,11 @@
 
 
 
-<meta property="og:title" content="School data from 2000-2018 PISA OECD data — school" />
-<meta property="og:description" content="A dataset containing school weight and other information
-from the triennial testing of 15 year olds around
-the globe. Original data available from
- https://www.oecd.org/pisa/data/." />
+<meta property="og:title" content="load_student function allows the user to extract the PISA scores for any desired year
+from 2000-2018 — load_student" />
+<meta property="og:description" content="load_student function was created to extract the data of student's scores in any
+years from 2000-2018, the function requires any of the year as it argument or a string &quot;all&quot;
+that will return the all the PISA scores of the student from 2000-2018." />
 <meta property="og:image" content="https://ropenscilabs.github.io/learningtower/logo.png" />
 
 
@@ -119,40 +120,42 @@ the globe. Original data available from
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>School data from 2000-2018 PISA OECD data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kevinwang09/learningtower/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>school.Rd</code></div>
+    <h1>load_student function allows the user to extract the PISA scores for any desired year
+from 2000-2018</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kevinwang09/learningtower/blob/master/R/load_student.R'><code>R/load_student.R</code></a></small>
+    <div class="hidden name"><code>load_student.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A dataset containing school weight and other information
-from the triennial testing of 15 year olds around
-the globe. Original data available from
- <a href='https://www.oecd.org/pisa/data/'>https://www.oecd.org/pisa/data/</a>.</p>
+    <p>load_student function was created to extract the data of student's scores in any
+years from 2000-2018, the function requires any of the year as it argument or a string "all"
+that will return the all the PISA scores of the student from 2000-2018.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>load_student</span><span class='op'>(</span>year <span class='op'>=</span> <span class='st'>"2000"</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>year</th>
+      <td><p>is the required parameter for the function to display the
+dataset the user wants to view the PISA scores for the selected year else the entire student
+data will be available to the user</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble of the following variables</p><ul>
-<li><p><code>year</code>: Year of the PISA data. Factor.</p></li>
-<li><p><code>country_iso3c</code>: Country 3 character code. Note that some regions/territories are coded as country for ease of input. Factor.</p></li>
-<li><p><code>school_id</code>: The school identification number, unique for each country and year combination. Factor.</p></li>
-<li><p><code>fund_gov</code>: Percentage of total funding for school year from government. Numeric.</p></li>
-<li><p><code>fund_fees</code>: Percentage of total funding for school year from student fees or school charges paid by parents. Numeric.</p></li>
-<li><p><code>fund_donation</code>: Percentage of total funding for school year from
-    benefactors, donations, bequests, sponsorships, parent fundraising. Numeric.</p></li>
-<li><p><code>enrol_boys</code>: Number of boys in the school. Numeric.</p></li>
-<li><p><code>enrol_girls</code>: Number of girls in the school. Numeric.</p></li>
-<li><p><code>stratio</code>: Student-Teacher ratio. Numeric.</p></li>
-<li><p><code>public_private</code>: Is the school a public or private school. Factor.</p></li>
-<li><p><code>staff_shortage</code>: Shortage of staff. Numeric.</p></li>
-<li><p><code>sch_wgt</code>: The final survey weight score for the schools. Numeric.</p></li>
-<li><p><code>school_size</code>: The school size. Numeric.</p></li>
-</ul>
+    <p>A dataset of PISA scores of students that took the test in the selected year as per user
+from 2000-2018</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>## load_student("2000")</span>
+<span class='co'>## load_student("all")</span>
+<span class='co'>## load_student("2009")</span>
 
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
