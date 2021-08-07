@@ -1,6 +1,6 @@
-#' @title Student data from 2000-2018 PISA OECD data
+#' @title Sample Student data from 2000-2018 PISA OECD data
 #'
-#' @description A dataset containing scores and other information
+#' @description A sample dataset containing scores and other information
 #' from the triennial testing of 15 year olds around
 #' the globe. Original data available from
 #'  \url{https://www.oecd.org/pisa/data/}.
@@ -43,46 +43,52 @@
 #'     \item \code{escs}: Index of economic, social and cultural status. Numeric.
 #'     }
 #' @docType data
-#' @name student_year_2000
+#' @name student_subset_2000
 #' @rdname student
 #' @importFrom dplyr bind_rows
 #' @examples
 #' library(dplyr)
-#' data(student_year_2000)
-#' data(student_year_2003)
+#' data(student_subset_2000)
+#' data(student_subset_2003)
 #' dplyr::bind_rows(
-#' student_year_2000,
-#' student_year_2003
+#' student_subset_2000,
+#' student_subset_2003
 #' )
 NULL
 
+
 #' @docType data
-#' @name student_year_2003
+#' @name student_subset_2000
 #' @rdname student
 NULL
 
 #' @docType data
-#' @name student_year_2006
+#' @name student_subset_2003
 #' @rdname student
 NULL
 
 #' @docType data
-#' @name student_year_2009
+#' @name student_subset_2006
 #' @rdname student
 NULL
 
 #' @docType data
-#' @name student_year_2012
+#' @name student_subset_2009
 #' @rdname student
 NULL
 
 #' @docType data
-#' @name student_year_2015
+#' @name student_subset_2012
 #' @rdname student
 NULL
 
 #' @docType data
-#' @name student_year_2018
+#' @name student_subset_2015
+#' @rdname student
+NULL
+
+#' @docType data
+#' @name student_subset_2018
 #' @rdname student
 NULL
 
@@ -127,3 +133,4 @@ NULL
 #' @docType data
 #' @name countrycode
 NULL
+
