@@ -1,4 +1,4 @@
-test_that("load multiple yeas", {
+test_that("load multiple years", {
   load_student(c("2000", "2003"))
 })
 
