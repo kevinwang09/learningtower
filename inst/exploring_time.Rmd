@@ -42,7 +42,7 @@ library(brolgar)
 library(tsibble)
 library(gganimate)
 
-data(student)
+student <- load_student("all")
 data(countrycode)
 theme_set(theme_classic(18) +
             theme(legend.position = "bottom"))

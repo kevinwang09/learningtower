@@ -24,7 +24,7 @@ China samples schools and students selectively, with OECD approval, and it is no
 ```{r loaddata, out.width="50%", echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE, fig.show="hide"}
 library(tidyverse)
 library(learningtower)
-data(student)
+student <- load_student("all")
 ```
 
 ```{r collection, out.width="50%", echo = FALSE, fig.retina = 4, message = FALSE, warning = FALSE, cache=TRUE, fig.show="hide", eval=FALSE}
