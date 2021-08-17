@@ -1,0 +1,175 @@
+---
+title: "Using Student and Country Data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+echo = TRUE,
+collapse = TRUE,
+comment = "#>",
+warning = FALSE,
+message = FALSE,
+error = FALSE,
+outwidth = "100%",
+fig.width = 8,
+fig.height = 6,
+fig.align = "center")
+```
+
+# Introduction
+
+The PISA 2018 results were released on 3 December 2019. This led to wringing of hands in the Australian press, with titles of stories like [Vital Signs: Australia's slipping student scores will lead to greater income inequality](https://theconversation.com/vital-signs-australias-slipping-student-scores-will-lead-to-greater-income-inequality-128301) and [In China, Nicholas studied maths 20 hours a week. In Australia, it's three](https://www.smh.com.au/education/in-china-nicholas-studied-maths-20-hours-a-week-in-australia-it-s-three-20191203-p53ggv.html).
+
+Australia's neighbours, New Zealand and Indonesia, are also worrying: [New Zealand top-end in OECD's latest PISA report but drop in achievements 'worrying'](https://www.stuff.co.nz/national/education/117890945/new-zealand-topend-in-oecds-latest-pisa-report-but-drop-in-achievements-worrying), [Not even mediocre? Indonesian students score low in math, reading, science: PISA report](https://www.thejakartapost.com/news/2019/12/04/not-even-mediocre-indonesian-students-score-low-in-math-reading-science-pisa-report.html). 
+
+The data from this survey and all of the surveys conducted since the first collection in 2000, is publicly available. We have made a more convenient subset of the data available in a new R package, called `learningtower`, along with sample code for analysis, openly available.
+
+The goal of learningtower is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](http://www.oecd.org/pisa/data/), for years 2000 - 2018, collected on a three year basis.
+
+This vignette documents how to access these datasets, and shows a few typical methods to explore the data.
+
+# Exploring the Student Data
+
+## Usage of the student subset data
+
+- The student subset of the data consists of sample datasets comprising scores and other information from triennial testing of 15-year-olds worldwide. Original data may be obtained from [OECD](https://www.oecd.org/pisa/data/.)
+
+- These student data are simply samples or may be used as a starting point for the complete student data set that which are available as part of package and can be loaded using the load student function included in this package.
+
+- In the student subset data, for each year it have almost 50 or more observations for each country that participated in the PISA experiment during the years this experiment was performed, a subset of this student dataset is accessible and be loaded. 
+
+- Here is typical example of this can data can be loaded with an analysis example
+
+
+```{r plot1, fig.cap="Usage & Analysis of the Student Subset Data"}
+library(tidyverse)
+library(learningtower)
+
+#load the subset student data for the year 2018
+data(student_subset_2018)
+#load the countrycode data
+data(countrycode)
+
+#lets plot the score of avergae math score of girls and boys for a few randomly selected countries
+student_subset_2018 %>% 
+  group_by(country, gender) %>% 
+  dplyr::filter(country %in% c("AUS", "QAT", "USA" , "JPN", 
+                               "ALB", "PER", "FIN",  "SGP")) %>% 
+  summarise(avg_math = mean(math, na.rm = TRUE)) %>% 
+  left_join(countrycode, by = "country") %>% 
+  arrange(avg_math) %>% 
+  mutate(country_name = fct_reorder(country_name, desc(avg_math))) %>% 
+#joining the data  with country code fetches the country name
+  ggplot(aes(x = avg_math, 
+             y = country_name)) +
+   geom_segment(aes(xend=0, yend=country_name)) +
+    geom_point( size=4, color="orange") +
+  facet_wrap(~gender) +
+  theme_bw()+
+  labs(title = "Average Maths Scores of Boys v/s Girls",
+       x = "Average Maths Score",
+       y = "")
+```
+
+- In the figure above, we see from the student subgroup data for the 2018 PISA results in the chosen nations like Singapore, Australia and Canada that boys perform better as compared to the girls. However, in countries such as Finland, Qatar and Japan, girls perform better than the  boys or are on the same level with boys when it comes to mathematics scores.
+
+- Furthermore, if you want to learn more about the trend in each year of the selected nations or know more about the yearly student scores, we retrieved the complete student data for that/those years or all years using the `load_student()` function included in this package.
+
+## Usage of the entire student data
+
+- In order to load and download the complete student data for each year, here are the various ways to retrieve the entire student data for each year for additional study or analysis purposes.
+
+```{r, eval=FALSE}
+#load the entire student data for the year 2018
+student_data_2018 <- load_student(2018)
+
+#load the entire student data for two/three years (2000, 2012, 2018)
+student_data_2012_2018 <- load_student(c(2012, 2018))
+student_data_2000_2012_2018 <- load_student(c(2000, 2012, 2018))
+
+#load the entire student 
+student_data_all <- load_student("all")
+```
+
+- Note, now that we can load and download the the entire student data. Let us plot the difference in score between the randomly picked countries previously and observe how they have grown in terms their average maths from the year 2012 to 2018.
+
+```{r echo=FALSE}
+student_data_2012_2018 <- load_student(c(2012, 2018))
+
+plot_data <- student_data_2012_2018 %>% 
+  group_by(country, year) %>%  
+  dplyr::filter(country %in% c("AUS", "QAT", "USA" , "JPN", 
+                               "ALB", "PER", "FIN",  "SGP")) %>% 
+  dplyr::summarise(avg_math = mean(math, na.rm = TRUE)) %>%  
+  left_join(countrycode, by = "country") %>% 
+  dplyr::select(country_name, year, avg_math) %>% 
+  pivot_wider(names_from = year, 
+              values_from = avg_math) 
+  
+plot_data$class = c( "#E69F00", "#009E73", 
+                      "#F0E442", "#D55E00", 
+                      "#88CCEE", "#CC6677", 
+                     "#DDCC77", "#117733")
+
+
+
+p <- ggplot(plot_data) + 
+  geom_segment(aes(x=1.25, 
+                   xend=1.75, 
+                   y=`2012`, 
+                   yend=`2018`, 
+                   col=class), 
+               size=0.75, 
+               show.legend=FALSE) + 
+  geom_vline(xintercept=1.25, 
+             linetype="dashed", 
+             size=0.1) + 
+  geom_vline(xintercept=1.75, 
+             linetype="dashed", 
+             size=0.1)  + 
+  labs(x="", 
+       y="Average Maths Score") +
+  xlim(1,2)
+
+left_label <- paste(plot_data$country_name, round(plot_data$`2012`),sep=", ")
+
+p <- p + 
+  geom_text(label=left_label, 
+            y=plot_data$`2012`, 
+            x=rep(1.25, NROW(plot_data)), 
+            hjust=1.1, size=3.5)
+
+p <- p + 
+  geom_text(label="2012",
+               x=1.25,
+               y=(max(plot_data$`2012`) + 5),
+            size = 6.3)
+
+p <- p + 
+  geom_text(label="2018",
+               x=1.75,
+               y=(max(plot_data$`2012`) + 5),
+            size = 6.3)
+
+p <- p + theme(panel.background = element_blank(), 
+           panel.grid = element_blank(),
+           axis.ticks = element_blank(),
+           axis.text.x = element_blank(),
+           panel.border = element_blank())
+
+p
+```
+
+- The figure above assists us in deducing the score change in the previously randomly selected countries. The figure enables us to deduce that Albania, Qatar, and Peru have dramatically boosted their average mathematics score between the years 2012 and 2018.
+
+- Similarly, you may import student data for any chosen year and experiment with PISA scores growth or additional analysis of these datasets with their other elements that assist contributor comprehend the data. Refer to our articles on the [github website](https://kevinwang09.github.io/learningtower/) for additional interesting analyses and plots.
+
+
+
+
+
