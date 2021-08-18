@@ -32,10 +32,10 @@ URL: https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang0
 BugReports: https://github.com/kevinwang09/learningtower/issues
 Imports: 
     tibble,
-    dplyr,
-    tidyverse
+    dplyr
 Suggests:
     testthat (>= 3.0.0),
     knitr,
-    rmarkdown
+    rmarkdown,
+    tidyverse
 Config/testthat/edition: 3

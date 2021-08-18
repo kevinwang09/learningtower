@@ -1,0 +1,89 @@
+---
+title: "Using the Student and School Data" 
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{student_school}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+echo = TRUE,
+collapse = TRUE,
+comment = "#>",
+warning = FALSE,
+message = FALSE,
+error = FALSE,
+outwidth = "100%",
+fig.width = 8,
+fig.height = 6,
+fig.align = "center")
+```
+
+# Introduction
+
+The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](http://www.oecd.org/pisa/data/), for years 2000 - 2018, collected on a three year basis.
+
+This package provides us with mainly three datasets for the analysis of OECD PISA scores 
+- student dataset 
+- school dataset 
+- country dataset
+
+You can explore more on this dataset for various analysis and statistical computations.
+
+This vignette documents how to access these datasets, and shows a few typical methods to explore the data.
+
+# Using the Student and School Data
+
+## Using the student subset data and school data
+
+```{r}
+library(tidyverse)
+library(learningtower)
+
+#loading the student subset data 
+data(student_subset_2018)
+
+#loading the school data
+data(school)
+
+#loading the country data
+data(countrycode)
+
+
+#joining the student, school datasets
+school_student_subset_2018 <- left_join(student_subset_2018, 
+                                        school, 
+                                        by = "school_id") 
+
+#check the count of public and private schools in the a few randomly selected countries
+school_student_subset_2018 %>% 
+    dplyr::filter(country.x %in% c("AUS", "QAT", "USA" , "JPN", 
+                               "ALB", "PER", "FIN",  "SGP")) %>%
+  group_by(country.x, public_private) %>% 
+  count() %>% 
+  mutate(country = fct_reorder(country.x, n)) %>% 
+  left_join(countrycode, by = "country") %>% 
+#joining the data with countrycode to fetch the country names
+  na.omit() %>% 
+  ggplot(aes(y = public_private,
+             x = n,
+             fill = public_private)) +
+  geom_bar(stat="identity", alpha=.63, width=.45, position = "dodge") +
+  facet_wrap(~country_name, ncol = 2) +
+  theme(legend.position = "none") +
+  labs(title = "Distribution of Public and Private School", 
+       y = "",
+       x = "Count of Schools")
+```
+
+- The graph assists us in understanding the distribution of public and private schools in few countries based on the datasets. Taking a closer look at the above plot, we can see infer that most countries have more public schools than private schools. Surprisingly, countries like Australia have a nearly equal mix of public and private schools.
+
+- Similarly, we may derive additional intriguing patterns and analysis by considering the other variables in the school dataset.
+
+- In addition, to perform  a detail analysis on the school and entire student data it can download for the desired years using the `load_student` function available in this package. 
+
+- Similarly, you may import student data for any chosen year and experiment with PISA scores growth or additional analysis of these datasets with their other elements that assist contributor comprehend the data. Refer to our articles on the [github website](https://kevinwang09.github.io/learningtower/) for additional interesting analyses and plots.
+
+

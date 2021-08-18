@@ -1,5 +1,5 @@
 ---
-title: "Using Student and Country Data"
+title: "Using the Student and Country Data"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{my-vignette}
@@ -37,16 +37,16 @@ This vignette documents how to access these datasets, and shows a few typical me
 
 ## Usage of the student subset data
 
-- The student subset of the data consists of sample datasets comprising scores and other information from triennial testing of 15-year-olds worldwide. Original data may be obtained from [OECD](https://www.oecd.org/pisa/data/.)
+- The student subset data consists of sample datasets comprising scores and other information from triennial testing of 15-year-olds worldwide. Original data may be obtained from [OECD](https://www.oecd.org/pisa/data/.)
 
-- These student data are simply samples or may be used as a starting point for the complete student data set that which are available as part of package and can be loaded using the load student function included in this package.
+- The student subset dataset for different years are simply samples of the student data and can be used as a starting point. The complete student dataset is  available as part of the `learningtower` package and can be loaded using the `load_student()` function included in this package.
 
-- In the student subset data, for each year it have almost 50 or more observations for each country that participated in the PISA experiment during the years this experiment was performed, a subset of this student dataset is accessible and be loaded. 
+- In the student subset data available for each year contains almost 50 or more observations for each country that participated in the PISA experiment during the years this experiment was performed.
 
-- Here is typical example of this can data can be loaded with an analysis example
+- Here is typical example of this can data can be loaded and analysed.
 
 
-```{r plot1, fig.cap="Usage & Analysis of the Student Subset Data"}
+```{r plot1}
 library(tidyverse)
 library(learningtower)
 
@@ -64,7 +64,7 @@ student_subset_2018 %>%
   left_join(countrycode, by = "country") %>% 
   arrange(avg_math) %>% 
   mutate(country_name = fct_reorder(country_name, desc(avg_math))) %>% 
-#joining the data  with country code fetches the country name
+#joining the data  with countrycode fetches the country name
   ggplot(aes(x = avg_math, 
              y = country_name)) +
    geom_segment(aes(xend=0, yend=country_name)) +
@@ -76,13 +76,13 @@ student_subset_2018 %>%
        y = "")
 ```
 
-- In the figure above, we see from the student subgroup data for the 2018 PISA results in the chosen nations like Singapore, Australia and Canada that boys perform better as compared to the girls. However, in countries such as Finland, Qatar and Japan, girls perform better than the  boys or are on the same level with boys when it comes to mathematics scores.
+- In the figure above, we see that from the student subset data for the year 2018, in countries like Singapore, Australia and Canada boys perform better as compared to the girls. However, in countries such as Finland, Qatar and Japan, girls perform better than the boys or are on the same level with boys when it comes to their average mathematics scores.
 
-- Furthermore, if you want to learn more about the trend in each year of the selected nations or know more about the yearly student scores, we retrieved the complete student data for that/those years or all years using the `load_student()` function included in this package.
+- Furthermore, if we want to learn more about the trend in each year of the selected countries or know more about the yearly student scores,  the complete student data can be retrieved  for that/those years or all years using the `load_student()` function included in this package.
 
 ## Usage of the entire student data
 
-- In order to load and download the complete student data for each year, here are the various ways to retrieve the entire student data for each year for additional study or analysis purposes.
+- In order to load and download the complete student data for each year(s), here are the various ways to retrieve the entire student dataset for each year(s) for additional study or analysis purposes.
 
 ```{r, eval=FALSE}
 #load the entire student data for the year 2018
@@ -96,7 +96,7 @@ student_data_2000_2012_2018 <- load_student(c(2000, 2012, 2018))
 student_data_all <- load_student("all")
 ```
 
-- Note, now that we can load and download the the entire student data. Let us plot the difference in score between the randomly picked countries previously and observe how they have grown in terms their average maths from the year 2012 to 2018.
+- Note, now that we can load and download the the entire student data. Let us plot the difference in score between the randomly picked countries seen previously and observe how they have grown in terms their average mathematics score from the year 2012 to 2018.
 
 ```{r echo=FALSE}
 student_data_2012_2018 <- load_student(c(2012, 2018))
@@ -156,18 +156,20 @@ p <- p +
                y=(max(plot_data$`2012`) + 5),
             size = 6.3)
 
-p <- p + theme(panel.background = element_blank(), 
-           panel.grid = element_blank(),
-           axis.ticks = element_blank(),
-           axis.text.x = element_blank(),
-           panel.border = element_blank())
+p <- p +
+  theme(panel.background = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(), 
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(), 
+        )
 
-p
+p 
 ```
 
-- The figure above assists us in deducing the score change in the previously randomly selected countries. The figure enables us to deduce that Albania, Qatar, and Peru have dramatically boosted their average mathematics score between the years 2012 and 2018.
+- The figure above assists us in deducing the score change in the different countries form the year 2012 to 2018. This figure enables us to deduce that Albania, Qatar, and Peru have significantly boosted their average mathematics score between these years. While we also observe drop in average mathematics score for Japan.
 
-- Similarly, you may import student data for any chosen year and experiment with PISA scores growth or additional analysis of these datasets with their other elements that assist contributor comprehend the data. Refer to our articles on the [github website](https://kevinwang09.github.io/learningtower/) for additional interesting analyses and plots.
+- Similarly, you may import student data for any chosen year and experiment with the PISA scores or additional analysis of these datasets with their other variables that assist contributor comprehend the data. Refer to our articles on the [github website](https://kevinwang09.github.io/learningtower/) for additional interesting analyses and plots.
 
 
 
