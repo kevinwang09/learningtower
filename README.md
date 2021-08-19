@@ -11,12 +11,12 @@
 
 The goal of `learningtower` is to provide a user-friendly R package to
 provide easy access to a subset of variables from PISA data collected
-from the [OECD](http://www.oecd.org/pisa/data/), for years 2000 - 2018,
-collected on a three year basis. This is an excellent dataset for
-exploring and visualizing data. This dataset is also be used for other
+from the [OECD](http://www.oecd.org/pisa/data/), for the years 2000 -
+2018, collected on a three year basis. This is an excellent dataset for
+exploring and visualizing data. This dataset can also be used for other
 analytically purposes as well as statistical computations.
 
-## **What is PISA?**
+## What is PISA?
 
 <img src="man/figures/pisa_image.png" width="54%" style="display: block; margin: auto;" />
 
@@ -55,12 +55,12 @@ devtools::install_github("kevinwang09/learningtower")
 <!-- Confirm with Kevin, The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in `student` and `school` respectively (the latter coming soon). -->
 
 The `learningtower` gives access to a subset of variables from PISA data
-originally collected and are available from the
+originally collected and are available from
 [OECD](http://www.oecd.org/pisa/data/), for the years 2000 - 2018,
 collected on a three year basis.
 
-The `learningtower` package contains mainly three datasets - student
-dataset - school dataset - countrycode dataset
+The `learningtower` package contains mainly three datasets student
+dataset, school dataset and countrycode dataset
 
 This provides us with information about the students scores in
 mathematics, reading and science. Their school details, and which
@@ -69,18 +69,17 @@ downloaded.
 
 <!-- Confirm with Kevin, The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in `student` and `school` respectively (the latter coming soon). -->
 
-### Student Data
+### Student Dataset
 
-The student dataset comprises scores and other data from the triennial
-testing of 15-year-olds worldwide. In addition, this dataset contains
-interesting information on their parents’ qualifications, family wealth,
+The student dataset comprises of the scores from the triennial testing
+of 15-year-olds worldwide. In addition, this dataset contains
+interesting information on their parents qualifications, family wealth,
 gender, and possession of computers, internet, cars, books, rooms,
-desks, and other similar variables. We can use these variable and
-dataset to give meaningful insights and perform useful analysis.
+desks, and similar other variables.
 
 Keeping in mind the package’s size constraints. The package only
 includes a portion of student data, called the student subset data, this
-subset of student data is available for all the years when PISA
+subset of student data is available for all the years when the PISA
 experiment took place. The full year wise student data set can be
 downloaded using the `load_student()` function included in this package.
 
@@ -91,7 +90,7 @@ As an example, we can load the `student` data as follows:
 ``` r
 library(learningtower)
 
-#loading the data
+#loading the student subset data for the year 2018
 data(student_subset_2018)
 
 
@@ -122,7 +121,7 @@ student_data_2018 <- load_student(2018)
 student_data_2012_2018 <- load_student(c(2012, 2018))
 student_data_2000_2012_2018 <- load_student(c(2000, 2012, 2018))
 
-#load the entire student 
+#load the entire student data
 student_data_all <- load_student("all")
 ```
 
@@ -156,12 +155,13 @@ head(school)
 #> #   school_size <dbl>
 ```
 
-See `?school` for more information on the different variables that of
-the school dataset.
+See `?school` for more information on the different variables present in
+the the school dataset.
 
 ### Countrycode Dataset
 
-A dataset containing mapping of the [country ISO code to the country
+The countrycode dataset contains mapping of the [country ISO code to the
+country
 name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf).
 
 ``` r
@@ -180,25 +180,52 @@ head(countrycode)
 #> 6 BRA     Brazil
 ```
 
-See `?countrycode` for more detailed information on the country names
-participating in this PISA experiment.
+See `?countrycode` for more detailed information on the countries that
+participated in the PISA experiment.
 
 ## Exploring the data
 
 In the `gif` shown below, we observe changing of the scales
-over-highlights the differences in the means between various countries.
+over-highlights and the differences in the means between various
+countries.
 
     #> NULL
 
--   Similarly, You can find more code examples and data visualizations
-    for exploring `learningtower` in `vignette("student_country")` and
-    `vignette("student_school")`.
+-   Similarly, you can find more code examples and data visualizations
+    for exploring `learningtower` through our vignettes.
 
--   Further data exploration can be found in our vignette exploring
+-   Further data exploration can be found in our articles exploring
     temporal trends
     [here](https://kevinwang09.github.io/learningtower/articles/exploring_time.html).
 
-# Acknowledgement
+## Citation
+
+To cite the `learningtower` package, please use:
+
+``` r
+citation("learningtower")
+#> 
+#> To cite package 'learningtower' in publications use:
+#> 
+#>   Kevin Wang, Paul Yacobellis, Erika Siregar, Sarah Romanes, Kim
+#>   Fitter, Giulio Valentino Dalla Riva, Dianne Cook, Nick Tierney and
+#>   Priya Dingorkar (2021). learningtower: Organisation for Economic
+#>   Co-operation and Development(OECD), Programme for International
+#>   Student Assessment PISA datasets in an easy-to-use format.
+#>   https://kevinwang09.github.io/learningtower/,
+#>   https://github.com/kevinwang09/learningtower.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {learningtower: Organisation for Economic Co-operation and Development(OECD), Programme for International Student Assessment PISA datasets in an easy-to-use format},
+#>     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio {Valentino Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},
+#>     year = {2021},
+#>     note = {https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower},
+#>   }
+```
+
+## Acknowledgement
 
 The work to make the data available is the effort of several researchers
 from Australia, New Zealand and Indonesia, conducted as part of the
