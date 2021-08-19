@@ -7,20 +7,35 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "54%",
+  fig.align = 'center'
 )
+library(tidyverse)
+library(learningtower)
 ```
+
 # learningtower <img src='man/figures/logo.png' align="right" height="211" />
 
 
+<!-- badges: start -->
+
 ![R-CMD-check](https://github.com/kevinwang09/learningtower/workflows/R-CMD-check/badge.svg)
 
+<!-- badges: end -->
 
-The goal of learningtower is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](http://www.oecd.org/pisa/data/), for years 2000 - 2018, collected on a three year basis.
+The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](http://www.oecd.org/pisa/data/), for years 2000 - 2018, collected on a three year basis. This is an excellent dataset for exploring and visualizing data. This dataset is also be used for other analytically purposes as well as statistical computations.
 
-**What is PISA?**
+## **What is PISA?**
+
+
+```{r pic, echo=FALSE}
+knitr::include_graphics("man/figures/pisa_image.png")
+```
+
 
 The Programme for International Student Assessment (PISA) is an international assessment measuring student performance in reading, mathematical and scientific literacy.
 
@@ -33,43 +48,105 @@ Read more about the Programme [here](http://www.oecd.org/pisa/aboutpisa/).
 
 ## Installation
 
-You can install the development version of `learningtower` from [GitHub](https://github.com/) with:
+You can install the `learningtower` package from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# install.packages("devtools")
+install.packages("learningtower")
+```
+
+To install the development version of `learningtower` from [GitHub](https://github.com/) use: 
+
+``` r
 devtools::install_github("kevinwang09/learningtower")
 ```
 
-## Usage
+## Data Description and Usage
 
-The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in `student` and `school` respectively (the latter coming soon). As an example, we can load the `student` data as follows:
+<!-- Confirm with Kevin, The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in `student` and `school` respectively (the latter coming soon). -->
 
-```{r, warning = FALSE, message = FALSE}
-library(learningtower)
-data(student)
-head(student)
-```
+The `learningtower` gives access to a subset of variables from PISA data originally collected and are available from the [OECD](http://www.oecd.org/pisa/data/), for the years 2000 - 2018, collected on a three year basis.
 
-See `?student` for information pertaining to variables captured.
+The `learningtower` package contains mainly three datasets 
+- student dataset 
+- school dataset 
+- countrycode dataset
 
-We can get further information on the schools and country codes in the `school` and `countrycode` data, respectively.
+This provides us with information about the students scores in mathematics, reading and science. Their school details, and which country they are from. Let's have a look at how these datasets can be downloaded. 
+
+<!-- Confirm with Kevin, The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in `student` and `school` respectively (the latter coming soon). -->
+
+### Student Data 
+
+The student dataset comprises scores and other data from the triennial testing of 15-year-olds worldwide. In addition, this dataset contains interesting information on their parents' qualifications, family wealth, gender, and possession of computers, internet, cars, books, rooms, desks, and other similar variables. We can use these variable and dataset to give meaningful insights and perform useful analysis.
+
+Keeping in mind the package's size constraints. The package only includes a portion of student data, called the student subset data, this subset of student data is available for all the years when PISA experiment took place. The full year wise student data set can be downloaded using the `load_student()` function included in this package.
+
+As an example, we can load the `student` data as follows:
+
+- The student subset dataset can be loaded as follows
 
 ```{r}
-data(school)
-head(school)
+library(learningtower)
 
+#loading the data
+data(student_subset_2018)
+
+
+head(student_subset_2018)
+```
+- The entire student data can be downloaded as follows:
+
+```{r, eval=FALSE}
+#load the entire student data for a single year
+student_data_2018 <- load_student(2018)
+
+#load the entire student data for two/three years (2000, 2012, 2018)
+student_data_2012_2018 <- load_student(c(2012, 2018))
+student_data_2000_2012_2018 <- load_student(c(2000, 2012, 2018))
+
+#load the entire student 
+student_data_all <- load_student("all")
+```
+
+See `?student_subset_2000` for information pertaining to variables captured.
+
+### School Dataset
+
+The school dataset comprises school weight and other information such as the funding distribution of the schools, whether the school is private or public, the enrollment of boys and girls, the school size, and similar other characteristics of interest of different school these 15-year-olds attend throughout the world.
+
+```{r}
+#loading the school data
+data(school)
+
+head(school)
+```
+
+See `?school` for more information on the different variables that of the school dataset.
+
+
+### Countrycode Dataset
+
+A dataset containing mapping of the [country ISO code to the country name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf).
+
+```{r}
+#loading the countrycode data
 data(countrycode)
+
 head(countrycode)
 ```
 
+See `?countrycode` for more detailed information on the country names participating in this PISA experiment.
 
 ## Exploring the data 
 
-Changing the scales over-highlights differences in the means between various countries.
+In the `gif` shown below, we observe changing of the scales over-highlights the differences in the means between various countries.
 
 ```{r, echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE}
+library(dplyr)
 library(gganimate)
 library(learningtower)
+
+student <- load_student("all")
 
 s <- student %>% 
   filter(country == "SGP" | country == "CAN"| country == "FIN" | country == "NZL" | country == "USA" | country == "JPN" | country == "GBR" | country == "AUS") %>% 
@@ -106,8 +183,20 @@ gif <- animate(s,
 gif
 ```
 
-Further data exploration can be found in our vignette exploring temporal trends [here](https://kevinwang09.github.io/learningtower/articles/exploring_time.html).
 
-# Acknowledgement
+- Similarly, You can find  more code examples and data visualizations for exploring `learningtower` in `vignette("student_country")` and `vignette("student_school")`.
+
+- Further data exploration can be found in our vignette exploring temporal trends [here](https://kevinwang09.github.io/learningtower/articles/exploring_time.html).
+
+## Citation
+
+To cite the `learningtower` package, please use:
+
+```{r}
+citation("learningtower")
+```
+
+
+## Acknowledgement
 
 The work to make the data available is the effort of several researchers from Australia, New Zealand and Indonesia, conducted as part of the [ROpenSci OzUnconf](https://ozunconf19.ropensci.org) held in Sydney, Dec 11-13, 2019.
