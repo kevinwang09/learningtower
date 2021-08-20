@@ -22,7 +22,6 @@
 #' ##load_student("all")
 #' ##load_student(c("2000", "2003"))
 #'
-#' @examples
 #' ## student_full = load_student("all")
 #' ## student_subset_2000 = student_full %>%
 #' ## dplyr::filter(year = 2000)
@@ -32,7 +31,6 @@
 #' ## file = "student_subset_2000.rda",
 #' ## compress = "xz")
 #'
-#' #' @examples
 #' ## student_full = load_student("all")
 #' ## student_subset_2018 = student_full %>%
 #' ## dplyr::filter(year = 2018)

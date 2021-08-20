@@ -51,6 +51,8 @@ jobs:
           install.packages("gganimate")
           install.packages("ggfortify")
           install.packages("sjPlot")
+          install.packages("kableExtra")
+          install.packages("dplyr")
         shell: Rscript {0}
 
       - name: Install package

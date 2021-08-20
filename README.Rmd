@@ -31,9 +31,9 @@ The goal of `learningtower` is to provide a user-friendly R package to provide e
 ## What is PISA?
 
 
-```{r pic, echo=FALSE, fig.align='center'}
-knitr::include_graphics("man/figures/pisa_image.png")
-```
+<p align="center">
+  <img width="400" height="400" src="man/figures/pisa_image.png">
+</p>
 
 
 The Programme for International Student Assessment (PISA) is an international assessment measuring student performance in reading, mathematical and scientific literacy.
@@ -61,15 +61,19 @@ devtools::install_github("kevinwang09/learningtower")
 
 ## Data Description and Usage
 
-<!-- Confirm with Kevin, The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in `student` and `school` respectively (the latter coming soon). -->
+
 
 The `learningtower` gives access to a subset of variables from PISA data originally collected and are available from [OECD](http://www.oecd.org/pisa/data/), for the years 2000 - 2018, collected on a three year basis.
 
-The `learningtower` package contains mainly three datasets student dataset, school dataset and countrycode dataset
+The `learningtower` package contains mainly three datasets:
+
++ `student`
++ `school`
++ `countrycode`
 
 This provides us with information about the students scores in mathematics, reading and science. Their school details, and which country they are from. Let's have a look at how these datasets can be downloaded. 
 
-<!-- Confirm with Kevin, The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in `student` and `school` respectively (the latter coming soon). -->
+
 
 ### Student Dataset
 
@@ -137,7 +141,7 @@ See `?countrycode` for more detailed information on the countries that participa
 
 In the `gif` shown below, we observe changing of the scales over-highlights and the differences in the means between various countries.
 
-```{r, echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE}
+```
 library(dplyr)
 library(gganimate)
 library(learningtower)
@@ -153,10 +157,10 @@ s <- student %>%
   geom_point()+
   ylim(c(250,800)) + 
   theme_minimal() +
-  ylab("Score") +
-  xlab("Year")+
+  labs(x = "Year",
+       y = "Score",
+       title = "Mathematics PISA Scores from 2000 - 2018")+ 
   theme(text = element_text(size=20)) +
-  ggtitle("Mathematics PISA Scores from 2000 - 2018") +
   scale_color_brewer(palette = "Dark2") +
   view_zoom_manual(pause_length = 1,
                    step_length = 10, 
@@ -168,7 +172,6 @@ s <- student %>%
                    fixed_x = TRUE)
 
 gif <- animate(s, 
-               device = "png",
                 type="cairo",
                 units="in", 
                 width=9, 
@@ -178,6 +181,8 @@ gif <- animate(s,
 
 gif
 ```
+
+Attach the link to the gif.
 
 
 - Similarly, you can find  more code examples and data visualizations for exploring `learningtower` through our vignettes.

@@ -18,7 +18,11 @@ analytically purposes as well as statistical computations.
 
 ## What is PISA?
 
-<img src="man/figures/pisa_image.png" width="54%" style="display: block; margin: auto;" />
+<p align="center">
+<img width="400" height="400" src="man/figures/pisa_image.png">
+</p>
+
+# `{r pic, echo=FALSE, fig.align='center'} # knitr::include_graphics("man/figures/pisa_image.png") #`
 
 The Programme for International Student Assessment (PISA) is an
 international assessment measuring student performance in reading,
@@ -52,22 +56,21 @@ devtools::install_github("kevinwang09/learningtower")
 
 ## Data Description and Usage
 
-<!-- Confirm with Kevin, The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in `student` and `school` respectively (the latter coming soon). -->
-
 The `learningtower` gives access to a subset of variables from PISA data
 originally collected and are available from
 [OECD](http://www.oecd.org/pisa/data/), for the years 2000 - 2018,
 collected on a three year basis.
 
-The `learningtower` package contains mainly three datasets student
-dataset, school dataset and countrycode dataset
+The `learningtower` package contains mainly three datasets:
+
+-   `student`
+-   `school`
+-   `countrycode`
 
 This provides us with information about the students scores in
 mathematics, reading and science. Their school details, and which
 country they are from. Let’s have a look at how these datasets can be
 downloaded.
-
-<!-- Confirm with Kevin, The PISA assessment measures responses from individual students and school principals. A subset of features of these questionnaires can be found in `student` and `school` respectively (the latter coming soon). -->
 
 ### Student Dataset
 
@@ -189,7 +192,46 @@ In the `gif` shown below, we observe changing of the scales
 over-highlights and the differences in the means between various
 countries.
 
-    #> NULL
+    library(dplyr)
+    library(gganimate)
+    library(learningtower)
+
+    student <- load_student("all")
+
+    s <- student %>% 
+      filter(country == "SGP" | country == "CAN"| country == "FIN" | country == "NZL" | country == "USA" | country == "JPN" | country == "GBR" | country == "AUS") %>% 
+      group_by(year, country) %>%
+      summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
+      ggplot(aes(x=year, y=math, group=country, color = country)) + 
+      geom_line() +
+      geom_point()+
+      ylim(c(250,800)) + 
+      theme_minimal() +
+      labs(x = "Year",
+           y = "Score",
+           title = "Mathematics PISA Scores from 2000 - 2018")+ 
+      theme(text = element_text(size=20)) +
+      scale_color_brewer(palette = "Dark2") +
+      view_zoom_manual(pause_length = 1,
+                       step_length = 10, 
+                       xmin = c(2000, 2018),
+                       xmax = c(2000, 2018),
+                       ymin =c(200, 450),
+                       ymax = c(800, 600),
+                       wrap = FALSE,
+                       fixed_x = TRUE)
+
+    gif <- animate(s, 
+                    type="cairo",
+                    units="in", 
+                    width=9, 
+                    height=6, 
+                    pointsize=24, 
+                    res=200)
+
+    gif
+
+Attach the link to the gif.
 
 -   Similarly, you can find more code examples and data visualizations
     for exploring `learningtower` through our vignettes.
@@ -211,14 +253,14 @@ citation("learningtower")
 #>   Fitter, Giulio Valentino Dalla Riva, Dianne Cook, Nick Tierney and
 #>   Priya Dingorkar (2021). learningtower: Organisation for Economic
 #>   Co-operation and Development(OECD), Programme for International
-#>   Student Assessment PISA datasets in an easy-to-use format.
+#>   Student Assessment (PISA) datasets in an easy-to-use format.
 #>   https://kevinwang09.github.io/learningtower/,
 #>   https://github.com/kevinwang09/learningtower.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {learningtower: Organisation for Economic Co-operation and Development(OECD), Programme for International Student Assessment PISA datasets in an easy-to-use format},
+#>     title = {learningtower: Organisation for Economic Co-operation and Development(OECD), Programme for International Student Assessment (PISA) datasets in an easy-to-use format},
 #>     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio {Valentino Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},
 #>     year = {2021},
 #>     note = {https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower},
