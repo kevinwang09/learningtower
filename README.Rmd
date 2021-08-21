@@ -32,7 +32,7 @@ The goal of `learningtower` is to provide a user-friendly R package to provide e
 
 
 <p align="center">
-  <img width="400" height="400" src="man/figures/pisa_image.png">
+  <img width="450" height="450" src="man/figures/pisa_image.png">
 </p>
 
 
@@ -112,7 +112,7 @@ See `?student_subset_2000` for information pertaining to variables captured.
 
 ### School Dataset
 
-The school dataset comprises school weight and other information such as the funding distribution of the schools, whether the school is private or public, the enrollment of boys and girls, the school size, and similar other characteristics of interest of different school these 15-year-olds attend throughout the world.
+The school dataset comprises school weight and other information such as the funding distribution of the schools, whether the school is private or public, the enrollment of boys and girls, the school size, and similar other characteristics of interest of different schools these 15-year-olds attend throughout the world.
 
 ```{r}
 #loading the school data
@@ -126,7 +126,7 @@ See `?school` for more information on the different variables present in the the
 
 ### Countrycode Dataset
 
-The countrycode dataset contains mapping of the [country ISO code to the country name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf).
+The countrycode dataset contains mapping of the [country ISO code to the country name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf). More information on the participating countries can be found [here](https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm)
 
 ```{r}
 #loading the countrycode data
@@ -139,9 +139,9 @@ See `?countrycode` for more detailed information on the countries that participa
 
 ## Exploring the data 
 
-In the `gif` shown below, we observe changing of the scales over-highlights and the differences in the means between various countries.
+In the `gif` shown below, shows the weighted mean of mathematics scores of these 15 year old students for a few selected countries, this `gif` helps us observe changing of the scales over-highlights and the differences in the means between various countries in the different years.
 
-```
+```{r, eval = FALSE, echo = FALSE}
 library(dplyr)
 library(gganimate)
 library(learningtower)
@@ -149,7 +149,8 @@ library(learningtower)
 student <- load_student("all")
 
 s <- student %>% 
-  filter(country == "SGP" | country == "CAN"| country == "FIN" | country == "NZL" | country == "USA" | country == "JPN" | country == "GBR" | country == "AUS") %>% 
+  dplyr::filter(country %in% c("SGP","CAN", "FIN", "NZL", 
+                               "USA", "JPN", "GBR", "AUS")) %>% 
   group_by(year, country) %>%
   summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
   ggplot(aes(x=year, y=math, group=country, color = country)) + 
@@ -178,14 +179,14 @@ gif <- animate(s,
                 height=6, 
                 pointsize=24, 
                 res=200)
-
-gif
 ```
 
-Attach the link to the gif.
+<p align="center">
+  <img width="630" height="540" src="man/figures/readme.gif">
+</p>
 
 
-- Similarly, you can find  more code examples and data visualizations for exploring `learningtower` through our vignettes.
+- Similarly, you can find  more code examples and data visualizations for exploring `learningtower` through our vignettes and articles
 
 - Further data exploration can be found in our articles exploring temporal trends [here](https://kevinwang09.github.io/learningtower/articles/exploring_time.html).
 

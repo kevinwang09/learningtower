@@ -19,10 +19,8 @@ analytically purposes as well as statistical computations.
 ## What is PISA?
 
 <p align="center">
-<img width="400" height="400" src="man/figures/pisa_image.png">
+<img width="450" height="450" src="man/figures/pisa_image.png">
 </p>
-
-# `{r pic, echo=FALSE, fig.align='center'} # knitr::include_graphics("man/figures/pisa_image.png") #`
 
 The Programme for International Student Assessment (PISA) is an
 international assessment measuring student performance in reading,
@@ -136,7 +134,7 @@ captured.
 The school dataset comprises school weight and other information such as
 the funding distribution of the schools, whether the school is private
 or public, the enrollment of boys and girls, the school size, and
-similar other characteristics of interest of different school these
+similar other characteristics of interest of different schools these
 15-year-olds attend throughout the world.
 
 ``` r
@@ -166,6 +164,8 @@ the the school dataset.
 The countrycode dataset contains mapping of the [country ISO code to the
 country
 name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf).
+More information on the participating countries can be found
+[here](https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm)
 
 ``` r
 #loading the countrycode data
@@ -188,53 +188,18 @@ participated in the PISA experiment.
 
 ## Exploring the data
 
-In the `gif` shown below, we observe changing of the scales
-over-highlights and the differences in the means between various
-countries.
+In the `gif` shown below, shows the weighted mean of mathematics scores
+of these 15 year old students for a few selected countries, this `gif`
+helps us observe changing of the scales over-highlights and the
+differences in the means between various countries in the different
+years.
 
-    library(dplyr)
-    library(gganimate)
-    library(learningtower)
-
-    student <- load_student("all")
-
-    s <- student %>% 
-      filter(country == "SGP" | country == "CAN"| country == "FIN" | country == "NZL" | country == "USA" | country == "JPN" | country == "GBR" | country == "AUS") %>% 
-      group_by(year, country) %>%
-      summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
-      ggplot(aes(x=year, y=math, group=country, color = country)) + 
-      geom_line() +
-      geom_point()+
-      ylim(c(250,800)) + 
-      theme_minimal() +
-      labs(x = "Year",
-           y = "Score",
-           title = "Mathematics PISA Scores from 2000 - 2018")+ 
-      theme(text = element_text(size=20)) +
-      scale_color_brewer(palette = "Dark2") +
-      view_zoom_manual(pause_length = 1,
-                       step_length = 10, 
-                       xmin = c(2000, 2018),
-                       xmax = c(2000, 2018),
-                       ymin =c(200, 450),
-                       ymax = c(800, 600),
-                       wrap = FALSE,
-                       fixed_x = TRUE)
-
-    gif <- animate(s, 
-                    type="cairo",
-                    units="in", 
-                    width=9, 
-                    height=6, 
-                    pointsize=24, 
-                    res=200)
-
-    gif
-
-Attach the link to the gif.
+<p align="center">
+<img width="630" height="540" src="man/figures/readme.gif">
+</p>
 
 -   Similarly, you can find more code examples and data visualizations
-    for exploring `learningtower` through our vignettes.
+    for exploring `learningtower` through our vignettes and articles
 
 -   Further data exploration can be found in our articles exploring
     temporal trends
