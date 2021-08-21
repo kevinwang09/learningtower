@@ -232,6 +232,34 @@ citation("learningtower")
 #>   }
 ```
 
+## Motivation for `learningtower`
+
+-   The PISA 2018 results were released on 3 December 2019. This led to
+    wringing of hands in the Australian press, with titles of stories
+    like [Vital Signs: Australia’s slipping student scores will lead to
+    greater income
+    inequality](https://theconversation.com/vital-signs-australias-slipping-student-scores-will-lead-to-greater-income-inequality-128301)
+    and [In China, Nicholas studied maths 20 hours a week. In Australia,
+    it’s
+    three](https://www.smh.com.au/education/in-china-nicholas-studied-maths-20-hours-a-week-in-australia-it-s-three-20191203-p53ggv.html).
+
+<p align="center">
+<img width="720" height="360" src="man/figures/conversation_holden.png">
+</p>
+
+-   Australia’s neighbours, New Zealand and Indonesia, are also
+    worrying: [New Zealand top-end in OECD’s latest PISA report but drop
+    in achievements
+    ‘worrying’](https://www.stuff.co.nz/national/education/117890945/new-zealand-topend-in-oecds-latest-pisa-report-but-drop-in-achievements-worrying),
+    [Not even mediocre? Indonesian students score low in math, reading,
+    science: PISA
+    report](https://www.thejakartapost.com/news/2019/12/04/not-even-mediocre-indonesian-students-score-low-in-math-reading-science-pisa-report.html).
+
+-   The data from this survey and all of the surveys conducted since the
+    first collection in 2000, is publicly available. We decided to have
+    made a more convenient subset of the data available in a new R
+    package, called `learningtower`
+
 ## Acknowledgement
 
 The work to make the data available is the effort of several researchers
