@@ -9,7 +9,7 @@
 \alias{student_subset_2012}
 \alias{student_subset_2015}
 \alias{student_subset_2018}
-\title{Sample Student data from 2000-2018 PISA OECD data}
+\title{Sample student data available for the years 2000-2018 from the PISA OECD database}
 \format{
 A tibble of the following variables
 \itemize{
@@ -22,6 +22,7 @@ A tibble of the following variables
     \item \code{father_educ}: Highest level of father's education. Ranges from "less than ISCED1" to "ISCED 3A". Factor.
     Note that in 2000, all entries are missing.
     \item \code{gender}: Gender of the student. Only "male" and "female" are recorded. Factor.
+    Note that we call this variable gender and not sex as we provide data from the OECD PISA database.
     \item \code{computer}: Possession of computer. Only "yes" and "no" are recorded. Factor.
     \item \code{internet}: Access to internet. Only "yes" and "no" are recorded. Factor.
     \item \code{math}: Simulated score in mathematics. Numeric.
@@ -42,15 +43,15 @@ A tibble of the following variables
     "0", "1", "2" are code for no, one and two cars in the house. "3+" codes for three or more cars Factor.
     Note that in 2003, all entries are missing.
     \item \code{book}: Number of books. Factor.
-    Note that encodings are different in 2000 and 2003 compare to all other years. Factor.
-    Evalute \code{table(student$book, student$year)} for a demo.
+    Note that encoding is different in the years 2000 and 2003 compared to all other years. Factor.
+    Evaluate \code{table(student$book, student$year)} for a demo.
     \item \code{wealth}: Family wealth. Numeric.
     Note that in 2003, all entries are missing.
     \item \code{escs}: Index of economic, social and cultural status. Numeric.
     }
 }
 \description{
-A sample dataset containing scores and other information
+A sample student subset dataset containing scores and other information
 from the triennial testing of 15 year olds around
 the globe. Original data available from
  \url{https://www.oecd.org/pisa/data/}.

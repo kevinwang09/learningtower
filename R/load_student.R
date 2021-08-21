@@ -1,9 +1,9 @@
-#'@title load_student function allows the user to extract the PISA scores for any desired year
+#'@title load_student() function allows the user to extract the PISA student scores for any desired year
 #'from 2000-2018
 #'
-#'@description load_student function was created to extract the data of student's scores in any
+#'@description load_student() function was created to extract the data of student's scores in any
 #'years from 2000-2018, the function requires any of the year as it argument or a string "all"
-#'that will return the all the PISA scores of the student from 2000-2018.
+#'that will return all the PISA scores of the students from the years 2000-2018.
 #'
 #'@param year is the required parameter for the function to display the
 #'dataset the user wants to view the PISA scores for the selected year else the entire student
@@ -13,7 +13,7 @@
 #'@importFrom tibble tibble
 #'
 #'@return A dataset of PISA scores of students that took the test in the selected year as per user
-#'from 2000-2018
+#'from the years 2000-2018
 #'
 #'@usage load_student(year = "2000")
 #'
@@ -21,15 +21,6 @@
 #' ##load_student("2000")
 #' ##load_student("all")
 #' ##load_student(c("2000", "2003"))
-#'
-#' ## student_full = load_student("all")
-#' ## student_subset_2000 = student_full %>%
-#' ## dplyr::filter(year = 2000)
-#' ## dplyr::group_by(country) %>%
-#' ## dplyr::sample_n(50)
-#' ## save(student_subset_2000,
-#' ## file = "student_subset_2000.rda",
-#' ## compress = "xz")
 #'
 #' ## student_full = load_student("all")
 #' ## student_subset_2018 = student_full %>%

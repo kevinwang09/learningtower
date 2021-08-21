@@ -3,7 +3,7 @@
 \docType{data}
 \name{school}
 \alias{school}
-\title{School data from 2000-2018 PISA OECD data}
+\title{School data available for the years 2000-2018 from the PISA OECD database}
 \format{
 A tibble of the following variables
 \itemize{
@@ -13,7 +13,7 @@ A tibble of the following variables
     \item \code{fund_gov}: Percentage of total funding for school year from government. Numeric.
     \item \code{fund_fees}: Percentage of total funding for school year from student fees or school charges paid by parents. Numeric.
     \item \code{fund_donation}: Percentage of total funding for school year from
-    benefactors, donations, bequests, sponsorships, parent fundraising. Numeric.
+    benefactors, donations, bequests, sponsorship, parent fundraising. Numeric.
     \item \code{enrol_boys}: Number of boys in the school. Numeric.
     \item \code{enrol_girls}: Number of girls in the school. Numeric.
     \item \code{stratio}: Student-Teacher ratio. Numeric.

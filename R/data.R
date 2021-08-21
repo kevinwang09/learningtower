@@ -1,6 +1,6 @@
-#' @title Sample Student data from 2000-2018 PISA OECD data
+#' @title Sample student data available for the years 2000-2018 from the PISA OECD database
 #'
-#' @description A sample dataset containing scores and other information
+#' @description A sample student subset dataset containing scores and other information
 #' from the triennial testing of 15 year olds around
 #' the globe. Original data available from
 #'  \url{https://www.oecd.org/pisa/data/}.
@@ -16,6 +16,7 @@
 #'     \item \code{father_educ}: Highest level of father's education. Ranges from "less than ISCED1" to "ISCED 3A". Factor.
 #'     Note that in 2000, all entries are missing.
 #'     \item \code{gender}: Gender of the student. Only "male" and "female" are recorded. Factor.
+#'     Note that we call this variable gender and not sex as we provide data from the OECD PISA database.
 #'     \item \code{computer}: Possession of computer. Only "yes" and "no" are recorded. Factor.
 #'     \item \code{internet}: Access to internet. Only "yes" and "no" are recorded. Factor.
 #'     \item \code{math}: Simulated score in mathematics. Numeric.
@@ -36,8 +37,8 @@
 #'     "0", "1", "2" are code for no, one and two cars in the house. "3+" codes for three or more cars Factor.
 #'     Note that in 2003, all entries are missing.
 #'     \item \code{book}: Number of books. Factor.
-#'     Note that encodings are different in 2000 and 2003 compare to all other years. Factor.
-#'     Evalute \code{table(student$book, student$year)} for a demo.
+#'     Note that encoding is different in the years 2000 and 2003 compared to all other years. Factor.
+#'     Evaluate \code{table(student$book, student$year)} for a demo.
 #'     \item \code{wealth}: Family wealth. Numeric.
 #'     Note that in 2003, all entries are missing.
 #'     \item \code{escs}: Index of economic, social and cultural status. Numeric.
@@ -92,9 +93,9 @@ NULL
 #' @rdname student
 NULL
 
-#' School data from 2000-2018 PISA OECD data
+#' @title School data available for the years 2000-2018 from the PISA OECD database
 #'
-#' A dataset containing school weight and other information
+#' @description A dataset containing school weight and other information
 #' from the triennial testing of 15 year olds around
 #' the globe. Original data available from
 #'  \url{https://www.oecd.org/pisa/data/}.
@@ -107,7 +108,7 @@ NULL
 #'     \item \code{fund_gov}: Percentage of total funding for school year from government. Numeric.
 #'     \item \code{fund_fees}: Percentage of total funding for school year from student fees or school charges paid by parents. Numeric.
 #'     \item \code{fund_donation}: Percentage of total funding for school year from
-#'     benefactors, donations, bequests, sponsorships, parent fundraising. Numeric.
+#'     benefactors, donations, bequests, sponsorship, parent fundraising. Numeric.
 #'     \item \code{enrol_boys}: Number of boys in the school. Numeric.
 #'     \item \code{enrol_girls}: Number of girls in the school. Numeric.
 #'     \item \code{stratio}: Student-Teacher ratio. Numeric.
@@ -120,10 +121,11 @@ NULL
 #' @name school
 NULL
 
-#' Country iso3c and name mapping for PISA OECD countries [participants](http://www.oecd.org/pisa/aboutpisa/pisa-participants.htm)
+#' @title Country iso3c and name mapping for PISA OECD countries participants.
 #'
-#' A dataset containing mapping of the [country ISO code to the country name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf).
-#'
+#' @description A dataset containing mapping of the country ISO code to the country names.
+#' More information on participating countries can be found at
+#' \url{https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm}.
 #'
 #' @format A tibble of the following variables
 #' \itemize{
