@@ -26,7 +26,7 @@ library(learningtower)
 
 <!-- badges: end -->
 
-The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](http://www.oecd.org/pisa/data/), for the years 2000 - 2018, collected on a three year basis. This is an excellent dataset for exploring and visualizing data. This dataset can also be used for other analytically purposes as well as statistical computations.
+The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](https://www.oecd.org/pisa/data/), for the years 2000 - 2018, collected on a three year basis. This is an excellent dataset for exploring and visualizing data. This dataset can also be used for other analytically purposes as well as statistical computations.
 
 ## What is PISA?
 
@@ -42,7 +42,7 @@ PISA assesses the extent to which 15-year-old students have acquired some of the
 
 In 2018, PISA involved 79 countries and 600,000+ students worldwide. 
 
-Read more about the Programme [here](http://www.oecd.org/pisa/aboutpisa/).
+Read more about the Programme [here](https://www.oecd.org/pisa/aboutpisa/).
 
 
 ## Installation
@@ -63,7 +63,7 @@ devtools::install_github("kevinwang09/learningtower")
 
 
 
-The `learningtower` gives access to a subset of variables from PISA data originally collected and are available from [OECD](http://www.oecd.org/pisa/data/), for the years 2000 - 2018, collected on a three year basis.
+The `learningtower` gives access to a subset of variables from PISA data originally collected and are available from [OECD](https://www.oecd.org/pisa/data/), for the years 2000 - 2018, collected on a three year basis.
 
 The `learningtower` package contains mainly three datasets:
 
@@ -182,7 +182,7 @@ gif <- animate(s,
 ```
 
 <p align="center">
-  <img width="630" height="540" src="man/figures/readme.gif">
+  <img width="630" height="540" src="vignettes/articles/readme.gif">
 </p>
 
 

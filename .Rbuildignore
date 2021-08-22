@@ -12,3 +12,5 @@
 ^vignettes/articles$
 ^student_full_data$
 ^Code_of_Conduct\.md$
+^CRAN-RELEASE$
+^cran-comments\.md$

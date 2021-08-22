@@ -23,7 +23,7 @@ fig.align = "center")
 
 # Introduction
 
-The goal of `learningtower` is to provide a user-friendly access to a subset of variables from the Programme for International Student Assessment (PISA) data collected by the [OECD](http://www.oecd.org/pisa/data/). The data is collected on a three year basis, between the years 2000-2018.
+The goal of `learningtower` is to provide a user-friendly access to a subset of variables from the Programme for International Student Assessment (PISA) data collected by the [OECD](https://www.oecd.org/pisa/data/). The data is collected on a three year basis, between the years 2000-2018.
 
 You can explore more on this dataset for various analysis and statistical computations.
 
