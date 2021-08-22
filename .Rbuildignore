@@ -11,3 +11,4 @@
 ^pkgdown$
 ^vignettes/articles$
 ^student_full_data$
+^Code_of_Conduct\.md$
