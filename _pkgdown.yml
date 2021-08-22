@@ -1,2 +1,4 @@
-destination: docs
-url: https://ropenscilabs.github.io/learningtower/
+url: https://kevinwang09.github.io/learningtower/
+template:
+  params:
+    bootswatch: flatly
