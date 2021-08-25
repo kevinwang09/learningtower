@@ -23,25 +23,28 @@ fig.align = "center")
 
 # Introduction
 
+The goal of `learningtower` is to provide a user-friendly access to a subset of variables from the Programme for International Student Assessment (PISA) data collected by the [OECD](https://www.oecd.org/pisa/data/). The data is collected on a three year basis, between the years 2000-2018.
 
-The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](http://www.oecd.org/pisa/data/), for years 2000-2018, collected on a three year basis.
+You can explore more on this dataset for various analysis and statistical computations.
 
-This vignette documents how to access these datasets, and shows a few typical methods to explore the data.
+This vignette documents how to access these dataset, and shows a few typical methods to explore the data.
 
-# Exploring the Student Data
+# Exploring the student Data
 
 ## Usage of the student subset data
 
-- The student subset data consists of sample datasets comprising scores and other information from triennial testing of 15-year-olds worldwide. Original data may be obtained from [OECD](https://www.oecd.org/pisa/data/.)
+- In `learningtower`, the main data is the student data. This data contains information regarding student test scores and some selected variables regarding their schooling and socio-economic status. The original and complete data may be obtained from [OECD](https://www.oecd.org/pisa/data/).
 
-- The student subset dataset for different years are simply samples of the student data and can be used as a reference point. The complete student dataset is available as part of the `learningtower` package and can be loaded using the `load_student()` function included in this package.
+- However, the size of the full `student` is too big to fit inside the package. Hence, in our package, we provide a random subset of the student data, stored as `student_subset_20xx` data objects (where `xx` denotes the specific year of the study). These subset data can be used to understanding the data structure before using the full dataset which is available for download.
 
-- In the student subset data available for each year contains almost 50 or more observations for each country that participated in the PISA experiment during the years this experiment was performed.
+- The student subset data is constructed by randomly sampling from the full student data. For each year and each country, we randomly sample approximately 50 observations.
 
-- Here is typical example of this can data can be loaded and analysed.
+- The complete student dataset is [available for download](https://github.com/kevinwang09/learningtower/tree/master/student_full_data) and can be loaded using the `load_student()` function included in this package.
 
 
-```{r plot1}
+Below is a quick example of loading the 2018 subset student data.
+
+```{r}
 library(tidyverse)
 library(learningtower)
 
@@ -50,26 +53,26 @@ data(student_subset_2018)
 #load the countrycode data
 data(countrycode)
 
-#lets plot the average maths score of girls and boys for a few randomly selected countries
+glimpse(student_subset_2018)
+```
+
+```{r}
 student_subset_2018 %>% 
   group_by(country, gender) %>% 
   dplyr::filter(country %in% c("AUS", "QAT", "USA" , "JPN", 
                                "ALB", "PER", "FIN",  "SGP")) %>% 
-  summarise(avg_math = mean(math, na.rm = TRUE)) %>% 
-  left_join(countrycode, by = "country") %>% 
-  arrange(avg_math) %>% 
-  mutate(country_name = factor(country_name, 
-                               levels = c("Singapore", "Australia", "Japan", "Finland", 
-                                          "United States", "Albania", "Peru", "Qatar"))) %>% 
-#joining the data with countrycode dataset fetches the country name
-  ggplot(aes(x = avg_math, 
-             y = country_name)) +
-  geom_segment(aes(xend=0, yend=country_name)) +
-  geom_point( size=4, color="orange") +
-  facet_wrap(~gender) +
-  theme_bw()+
-  labs(title = "Average maths scores of boys v/s girls",
-       x = "Average maths score",
+  dplyr::left_join(countrycode, by = "country") %>% 
+  dplyr::mutate(country_name = factor(
+    country_name, 
+    levels = c("Singapore", "Australia", "Japan", 
+                "United States", "Finland", "Albania", "Peru", "Qatar"))) %>% 
+  ggplot(aes(x = math,
+             y = country_name,
+             fill = gender)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("#FF7F0EFF", "#1F77B4FF")) +
+  theme_classic() +
+  labs(x = "Math score", 
        y = "")
 ```
 
@@ -105,70 +108,44 @@ plot_data <- student_data_2012_2018 %>%
   dplyr::summarise(avg_math = mean(math, na.rm = TRUE)) %>%  
   left_join(countrycode, by = "country") %>% 
   dplyr::select(country_name, year, avg_math) %>% 
-  pivot_wider(names_from = year, 
-              values_from = avg_math) 
+  ungroup() %>% 
+  dplyr::mutate(
+    year = year %>% as.character %>% as.integer, 
+    label_x_pos = ifelse(year == 2012, 2012 - 2, 2018 + 1),
+    label = ifelse(
+      year == 2012,
+      paste0(country_name, ", ", round(avg_math)),
+      round(avg_math)))
   
-plot_data$class = c( "#E69F00", "#009E73", 
-                      "#F0E442", "#D55E00", 
-                      "#88CCEE", "#CC6677", 
-                     "#DDCC77", "#117733")
-
-
-
-p <- ggplot(plot_data) + 
-  geom_segment(aes(x=1.25, 
-                   xend=1.75, 
-                   y=`2012`, 
-                   yend=`2018`, 
-                   col=class), 
-               size=0.75, 
-               show.legend=FALSE) + 
-  geom_vline(xintercept=1.25, 
-             linetype="dashed", 
+plot_data %>% 
+  ggplot(aes(x = year, 
+             y = avg_math,
+             label = label,
+             colour = country_name,
+             group = country_name)) +
+  geom_point() +
+  geom_line() +
+  geom_vline(xintercept=2012,
+             linetype="dashed",
+             size=0.1) +
+  geom_vline(xintercept=2018,
+             linetype="dashed",
              size=0.1) + 
-  geom_vline(xintercept=1.75, 
-             linetype="dashed", 
-             size=0.1)  + 
-  labs(x="", 
-       y="Average maths score") +
-  xlim(1,2)
-
-left_label <- paste(plot_data$country_name, round(plot_data$`2012`),sep=", ")
-
-p <- p + 
-  geom_text(label=left_label, 
-            y=plot_data$`2012`, 
-            x=rep(1.25, NROW(plot_data)), 
-            hjust=1.1, size=3.5)
-
-p <- p + 
-  geom_text(label="2012",
-               x=1.25,
-               y=(max(plot_data$`2012`) + 5),
-            size = 6.3)
-
-p <- p + 
-  geom_text(label="2018",
-               x=1.75,
-               y=(max(plot_data$`2012`) + 5),
-            size = 6.3)
-
-p <- p +
-  theme(panel.background = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.text.x = element_blank(), 
-        axis.ticks.y = element_blank(),
-        axis.text.y = element_blank(), 
-        )
-
-p 
+  geom_text(aes(x = label_x_pos),
+            position = position_nudge(y = 0)) +
+  scale_x_continuous(breaks = c(2012, 2018),
+                     limits = c(2008, 2020)) +
+  scale_colour_manual(values = c("#1F77B4FF", "#FF7F0EFF", "#2CA02CFF", "#D62728FF", 
+                                 "#9467BDFF", "#8C564BFF", "#E377C2FF", "#7F7F7FFF")) +
+  labs(x = "",
+       y = "Average maths score") +
+  theme_classic() +
+  theme(axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none")
 ```
 
 - The figure above assists us in deducing the score change in the different countries from the year 2012 to 2018. This figure enables us to deduce that Albania, Qatar, and Peru have significantly boosted their average mathematics score between these years. While we also observe drop in average mathematics score for Japan.
 
 - Similarly, you may import student data for any chosen year and experiment with the PISA scores or additional analysis of these datasets with their other variables that assist contributor comprehend the data. Refer to our articles [here](https://kevinwang09.github.io/learningtower/articles/exploring_time.html) for additional interesting analyses and plots.
-
-
-
-
 

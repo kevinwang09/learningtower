@@ -37,5 +37,6 @@ Suggests:
     testthat (>= 3.0.0),
     knitr,
     rmarkdown,
-    tidyverse
+    tidyverse,
+    scales
 Config/testthat/edition: 3

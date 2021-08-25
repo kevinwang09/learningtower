@@ -22,7 +22,7 @@ A tibble of the following variables
     \item \code{father_educ}: Highest level of father's education. Ranges from "less than ISCED1" to "ISCED 3A". Factor.
     Note that in 2000, all entries are missing.
     \item \code{gender}: Gender of the student. Only "male" and "female" are recorded. Factor.
-    Note that we call this variable gender and not sex as we provide data from the OECD PISA database.
+    Note that we call this variable gender and not sex as this term was used in the OECD PISA database.
     \item \code{computer}: Possession of computer. Only "yes" and "no" are recorded. Factor.
     \item \code{internet}: Access to internet. Only "yes" and "no" are recorded. Factor.
     \item \code{math}: Simulated score in mathematics. Numeric.
