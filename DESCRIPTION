@@ -1,6 +1,6 @@
 Package: learningtower
-Title: Organisation for Economic Co-operation and Development(OECD), Programme for International Student Assessment (PISA) datasets in an easy-to-use format
-Version: 0.0.0.9000
+Title: OECD PISA datasets from 2000-2018 in an easy-to-use format
+Version: 1.0.0
 Date: 2021-07-23
 Authors@R: c(
       person(given = "Kevin", family = "Wang", role = c("aut", "cre"), 
