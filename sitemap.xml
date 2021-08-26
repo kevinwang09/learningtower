@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ropenscilabs.github.io/learningtower//index.html</loc>
+    <loc>https://kevinwang09.github.io/learningtower//index.html</loc>
   </url>
   <url>
-    <loc>https://ropenscilabs.github.io/learningtower//reference/countrycode.html</loc>
+    <loc>https://kevinwang09.github.io/learningtower//reference/countrycode.html</loc>
   </url>
   <url>
-    <loc>https://ropenscilabs.github.io/learningtower//reference/load_student.html</loc>
+    <loc>https://kevinwang09.github.io/learningtower//reference/load_student.html</loc>
   </url>
   <url>
-    <loc>https://ropenscilabs.github.io/learningtower//reference/school.html</loc>
+    <loc>https://kevinwang09.github.io/learningtower//reference/school.html</loc>
   </url>
   <url>
-    <loc>https://ropenscilabs.github.io/learningtower//reference/student.html</loc>
+    <loc>https://kevinwang09.github.io/learningtower//reference/student.html</loc>
+  </url>
+  <url>
+    <loc>https://kevinwang09.github.io/learningtower//articles/articles/Australia_trends.html</loc>
+  </url>
+  <url>
+    <loc>https://kevinwang09.github.io/learningtower//articles/articles/exploring_time.html</loc>
+  </url>
+  <url>
+    <loc>https://kevinwang09.github.io/learningtower//articles/learningtower_school.html</loc>
+  </url>
+  <url>
+    <loc>https://kevinwang09.github.io/learningtower//articles/learningtower_student.html</loc>
   </url>
 </urlset>
