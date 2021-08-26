@@ -1,7 +1,6 @@
 Package: learningtower
-Title: OECD PISA datasets from 2000-2018 in an easy-to-use format
+Title: OECD PISA Datasets from 2000-2018 in an Easy-to-Use Format
 Version: 1.0.0
-Date: 2021-07-23
 Authors@R: c(
       person(given = "Kevin", family = "Wang", role = c("aut", "cre"), 
              email = "kevinwangstats@gmail.com"),
