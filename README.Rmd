@@ -182,13 +182,13 @@ gif <- animate(s,
 ```
 
 <p align="center">
-  <img width="630" height="540" src="vignettes/articles/readme.gif">
+  <img width="630" height="540" src="man/figures/readme.gif">
 </p>
 
 
 - Similarly, you can find  more code examples and data visualizations for exploring `learningtower` through our vignettes and articles
 
-- Further data exploration can be found in our articles exploring temporal trends [here](https://kevinwang09.github.io/learningtower/articles/exploring_time.html).
+- Further data exploration can be found in our articles exploring temporal trends [here](https://kevinwang09.github.io/learningtower/articles/articles/exploring_time.html).
 
 ## Citation
 
