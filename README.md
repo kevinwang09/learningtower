@@ -96,7 +96,7 @@ data(student_subset_2018)
 
 
 head(student_subset_2018)
-#> # A tibble: 6 × 22
+#> # A tibble: 6 x 22
 #> # Groups:   country [1]
 #>   year  country school_id student_id mother_educ father_educ gender computer
 #>   <fct> <fct>   <fct>     <fct>      <fct>       <fct>       <fct>  <fct>   
@@ -106,7 +106,7 @@ head(student_subset_2018)
 #> 4 2018  ALB     800278    803561     ISCED 2     ISCED 2     male   yes     
 #> 5 2018  ALB     800055    801356     ISCED 3A    ISCED 2     female <NA>    
 #> 6 2018  ALB     800279    804382     ISCED 3A    ISCED 3A    male   yes     
-#> # … with 14 more variables: internet <fct>, math <dbl>, read <dbl>,
+#> # ... with 14 more variables: internet <fct>, math <dbl>, read <dbl>,
 #> #   science <dbl>, stu_wgt <dbl>, desk <fct>, room <fct>, dishwasher <fct>,
 #> #   television <fct>, computer_n <fct>, car <fct>, book <fct>, wealth <dbl>,
 #> #   escs <dbl>
@@ -142,7 +142,7 @@ similar other characteristics of interest of different schools these
 data(school)
 
 head(school)
-#> # A tibble: 6 × 13
+#> # A tibble: 6 x 13
 #>   year  country school_id fund_gov fund_fees fund_donation enrol_boys
 #>   <fct> <fct>   <fct>        <dbl>     <dbl>         <dbl>      <dbl>
 #> 1 2000  ALB     01001          100         0             0       1191
@@ -151,7 +151,7 @@ head(school)
 #> 4 2000  ALB     01010          100         0             0        114
 #> 5 2000  ALB     01013            0        50            30        250
 #> 6 2000  ALB     01017           95         2             3        771
-#> # … with 6 more variables: enrol_girls <dbl>, stratio <dbl>,
+#> # ... with 6 more variables: enrol_girls <dbl>, stratio <dbl>,
 #> #   public_private <fct>, staff_shortage <dbl>, sch_wgt <dbl>,
 #> #   school_size <dbl>
 ```
@@ -172,7 +172,7 @@ More information on the participating countries can be found
 data(countrycode)
 
 head(countrycode)
-#> # A tibble: 6 × 2
+#> # A tibble: 6 x 2
 #>   country country_name
 #>   <chr>   <chr>       
 #> 1 AZE     Azerbaijan  
@@ -195,7 +195,7 @@ differences in the means between various countries in the different
 years.
 
 <p align="center">
-<img width="630" height="540" src="vignettes/articles/readme.gif">
+<img width="630" height="540" src="man/figures/readme.gif">
 </p>
 
 -   Similarly, you can find more code examples and data visualizations
@@ -203,7 +203,7 @@ years.
 
 -   Further data exploration can be found in our articles exploring
     temporal trends
-    [here](https://kevinwang09.github.io/learningtower/articles/exploring_time.html).
+    [here](https://kevinwang09.github.io/learningtower/articles/articles/exploring_time.html).
 
 ## Citation
 
@@ -216,16 +216,15 @@ citation("learningtower")
 #> 
 #>   Kevin Wang, Paul Yacobellis, Erika Siregar, Sarah Romanes, Kim
 #>   Fitter, Giulio Valentino Dalla Riva, Dianne Cook, Nick Tierney and
-#>   Priya Dingorkar (2021). learningtower: Organisation for Economic
-#>   Co-operation and Development(OECD), Programme for International
-#>   Student Assessment (PISA) datasets in an easy-to-use format.
+#>   Priya Dingorkar (2021). learningtower: OECD PISA datasets from
+#>   2000-2018 in an easy-to-use format.
 #>   https://kevinwang09.github.io/learningtower/,
 #>   https://github.com/kevinwang09/learningtower.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {learningtower: Organisation for Economic Co-operation and Development(OECD), Programme for International Student Assessment (PISA) datasets in an easy-to-use format},
+#>     title = {learningtower: OECD PISA datasets from 2000-2018 in an easy-to-use format},
 #>     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio {Valentino Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},
 #>     year = {2021},
 #>     note = {https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower},
