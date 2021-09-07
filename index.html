@@ -150,7 +150,7 @@
 
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 22</span>
+<span class="co">#&gt; # A tibble: 6 x 22</span>
 <span class="co">#&gt; # Groups:   country [1]</span>
 <span class="co">#&gt;   year  country school_id student_id mother_educ father_educ gender computer</span>
 <span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;      &lt;fct&gt;       &lt;fct&gt;       &lt;fct&gt;  &lt;fct&gt;   </span>
@@ -160,7 +160,7 @@
 <span class="co">#&gt; 4 2018  ALB     800278    803561     ISCED 2     ISCED 2     male   yes     </span>
 <span class="co">#&gt; 5 2018  ALB     800055    801356     ISCED 3A    ISCED 2     female &lt;NA&gt;    </span>
 <span class="co">#&gt; 6 2018  ALB     800279    804382     ISCED 3A    ISCED 3A    male   yes     </span>
-<span class="co">#&gt; # … with 14 more variables: internet &lt;fct&gt;, math &lt;dbl&gt;, read &lt;dbl&gt;,</span>
+<span class="co">#&gt; # ... with 14 more variables: internet &lt;fct&gt;, math &lt;dbl&gt;, read &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   science &lt;dbl&gt;, stu_wgt &lt;dbl&gt;, desk &lt;fct&gt;, room &lt;fct&gt;, dishwasher &lt;fct&gt;,</span>
 <span class="co">#&gt; #   television &lt;fct&gt;, computer_n &lt;fct&gt;, car &lt;fct&gt;, book &lt;fct&gt;, wealth &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   escs &lt;dbl&gt;</span></code></pre></div>
@@ -188,7 +188,7 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 13</span>
+<span class="co">#&gt; # A tibble: 6 x 13</span>
 <span class="co">#&gt;   year  country school_id fund_gov fund_fees fund_donation enrol_boys</span>
 <span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 2000  ALB     01001          100         0             0       1191</span>
@@ -197,7 +197,7 @@
 <span class="co">#&gt; 4 2000  ALB     01010          100         0             0        114</span>
 <span class="co">#&gt; 5 2000  ALB     01013            0        50            30        250</span>
 <span class="co">#&gt; 6 2000  ALB     01017           95         2             3        771</span>
-<span class="co">#&gt; # … with 6 more variables: enrol_girls &lt;dbl&gt;, stratio &lt;dbl&gt;,</span>
+<span class="co">#&gt; # ... with 6 more variables: enrol_girls &lt;dbl&gt;, stratio &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   public_private &lt;fct&gt;, staff_shortage &lt;dbl&gt;, sch_wgt &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   school_size &lt;dbl&gt;</span></code></pre></div>
 <p>See <code><a href="reference/school.html">?school</a></code> for more information on the different variables present in the the school dataset.</p>
@@ -211,7 +211,7 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 2</span>
+<span class="co">#&gt; # A tibble: 6 x 2</span>
 <span class="co">#&gt;   country country_name</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;       </span>
 <span class="co">#&gt; 1 AZE     Azerbaijan  </span>
@@ -228,10 +228,10 @@
 <a href="#exploring-the-data" class="anchor"></a>Exploring the data</h2>
 <p>In the <code>gif</code> shown below, shows the weighted mean of mathematics scores of these 15 year old students for a few selected countries, this <code>gif</code> helps us observe changing of the scales over-highlights and the differences in the means between various countries in the different years.</p>
 <p align="center">
-<img width="630" height="540" src="articles/articles/readme.gif"></p>
+<img width="630" height="540" src="reference/figures/readme.gif"></p>
 <ul>
 <li><p>Similarly, you can find more code examples and data visualizations for exploring <code>learningtower</code> through our vignettes and articles</p></li>
-<li><p>Further data exploration can be found in our articles exploring temporal trends <a href="https://kevinwang09.github.io/learningtower/articles/exploring_time.html">here</a>.</p></li>
+<li><p>Further data exploration can be found in our articles exploring temporal trends <a href="https://kevinwang09.github.io/learningtower/articles/articles/exploring_time.html">here</a>.</p></li>
 </ul>
 </div>
 <div id="citation" class="section level2">
@@ -245,16 +245,15 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   Kevin Wang, Paul Yacobellis, Erika Siregar, Sarah Romanes, Kim</span>
 <span class="co">#&gt;   Fitter, Giulio Valentino Dalla Riva, Dianne Cook, Nick Tierney and</span>
-<span class="co">#&gt;   Priya Dingorkar (2021). learningtower: Organisation for Economic</span>
-<span class="co">#&gt;   Co-operation and Development(OECD), Programme for International</span>
-<span class="co">#&gt;   Student Assessment (PISA) datasets in an easy-to-use format.</span>
+<span class="co">#&gt;   Priya Dingorkar (2021). learningtower: OECD PISA datasets from</span>
+<span class="co">#&gt;   2000-2018 in an easy-to-use format.</span>
 <span class="co">#&gt;   https://kevinwang09.github.io/learningtower/,</span>
 <span class="co">#&gt;   https://github.com/kevinwang09/learningtower.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;   @Manual{,</span>
-<span class="co">#&gt;     title = {learningtower: Organisation for Economic Co-operation and Development(OECD), Programme for International Student Assessment (PISA) datasets in an easy-to-use format},</span>
+<span class="co">#&gt;     title = {learningtower: OECD PISA datasets from 2000-2018 in an easy-to-use format},</span>
 <span class="co">#&gt;     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio {Valentino Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},</span>
 <span class="co">#&gt;     year = {2021},</span>
 <span class="co">#&gt;     note = {https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower},</span>
@@ -286,6 +285,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=learningtower">https://​cloud.r-project.org/​package=learningtower</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/kevinwang09/learningtower/">https://​github.com/​kevinwang09/​learningtower/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/kevinwang09/learningtower/issues">https://​github.com/​kevinwang09/​learningtower/​issues</a>
