@@ -33,6 +33,26 @@ jobs:
           extra-packages: any::pkgdown, local::.
           needs: website
 
+      - name: Install dependencies
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          install.packages("pkgdown", type = "binary")
+          install.packages("tidyverse")
+          install.packages("rmarkdown")
+          install.packages("broom")
+          install.packages("knitr")
+          install.packages("ggrepel")
+          install.packages("patchwork")
+          install.packages("gghighlight")
+          install.packages("brolgar")
+          install.packages("tsibble")
+          install.packages("lme4")
+          install.packages("gganimate")
+          install.packages("ggfortify")
+          install.packages("sjPlot")
+          install.packages("kableExtra")
+        shell: Rscript {0}
+
       - name: Build site
         run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
         shell: Rscript {0}
