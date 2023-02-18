@@ -21,9 +21,7 @@ library(learningtower)
 
 
 <!-- badges: start -->
-
-![R-CMD-check](https://github.com/kevinwang09/learningtower/workflows/R-CMD-check/badge.svg)
-
+[![R-CMD-check](https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](https://www.oecd.org/pisa/data/), for the years 2000 - 2018, collected on a three year basis. This is an excellent dataset for exploring and visualizing data. This dataset can also be used for other analytically purposes as well as statistical computations.
