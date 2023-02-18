@@ -1,6 +1,6 @@
 Package: learningtower
 Title: OECD PISA Datasets from 2000-2018 in an Easy-to-Use Format
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(
       person(given = "Kevin", family = "Wang", role = c("aut", "cre"), 
              email = "kevinwangstats@gmail.com"),
@@ -24,7 +24,7 @@ Authors@R: c(
 Description: The Programme for International Student Assessment (PISA) is a global study conducted by the Organization for Economic Cooperation and Development (OECD) in member and non-member countries to assess educational systems by assessing 15-year-old school students academic performance in mathematics, science, and reading. This datasets contains information on their scores and other socioeconomic characteristics, information about their school and its infrastructure, as well as the countries that are taking part in the program.
 Depends: R (>= 3.5.0)
 Encoding: UTF-8
-RoxygenNote: 7.1.1.9001
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 URL: https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower
@@ -36,6 +36,7 @@ Suggests:
     testthat (>= 3.0.0),
     knitr,
     rmarkdown,
-    tidyverse,
+    ggplot2,
+    forcats,
     scales
 Config/testthat/edition: 3

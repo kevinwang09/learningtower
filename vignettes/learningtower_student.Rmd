@@ -45,7 +45,8 @@ This vignette documents how to access these dataset, and shows a few typical met
 Below is a quick example of loading the 2018 subset student data.
 
 ```{r}
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 library(learningtower)
 
 #load the subset student data for the year 2018

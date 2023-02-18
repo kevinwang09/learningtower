@@ -38,7 +38,9 @@ In the `student_subset_2018` and `school` data, there are three common columns, 
 ## Using the student subset data and school data
 
 ```{r}
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(forcats)
 library(learningtower)
 
 #loading the student subset data 
