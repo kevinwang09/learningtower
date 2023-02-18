@@ -33,10 +33,9 @@ jobs:
           extra-packages: any::pkgdown, local::.
           needs: website
 
-      - name: Install dependencies
+      - name: Install additional dependencies
         run: |
-          remotes::install_deps(dependencies = TRUE)
-          install.packages("pkgdown", type = "binary")
+          install.packages("remotes")
           install.packages("tidyverse")
           install.packages("rmarkdown")
           install.packages("broom")
