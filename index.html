@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,33 +40,27 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">learningtower</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/articles/Australia_trends.html">How did Australia do in the PISA study</a>
+      <a href="articles/Australia_trends.html">How did Australia do in the PISA study</a>
     </li>
     <li>
-      <a href="articles/articles/exploring_time.html">Exploring temporal trends</a>
+      <a href="articles/exploring_time.html">Exploring temporal trends</a>
     </li>
     <li>
       <a href="articles/learningtower_school.html">Using the Student and School Data</a>
@@ -77,7 +73,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/kevinwang09/learningtower/">
+  <a href="https://github.com/kevinwang09/learningtower/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -94,38 +90,36 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="learningtower-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#learningtower-" class="anchor"></a>learningtower <img src="reference/figures/logo.png" align="right" height="211">
+<div class="section level1">
+<div class="page-header"><h1 id="learningtower-">learningtower <img src="reference/figures/logo.png" align="right" height="211"><a class="anchor" aria-label="anchor" href="#learningtower-"></a>
 </h1></div>
 <!-- badges: start -->
-<p><img src="https://github.com/kevinwang09/learningtower/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></p>
-<!-- badges: end -->
-<p>The goal of <code>learningtower</code> is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the <a href="https://www.oecd.org/pisa/data/">OECD</a>, for the years 2000 - 2018, collected on a three year basis. This is an excellent dataset for exploring and visualizing data. This dataset can also be used for other analytically purposes as well as statistical computations.</p>
-<div id="what-is-pisa" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-is-pisa" class="anchor"></a>What is PISA?</h2>
+
+<p>The goal of <code>learningtower</code> is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>, for the years 2000 - 2018, collected on a three year basis. This is an excellent dataset for exploring and visualizing data. This dataset can also be used for other analytically purposes as well as statistical computations.</p>
+<div class="section level2">
+<h2 id="what-is-pisa">What is PISA?<a class="anchor" aria-label="anchor" href="#what-is-pisa"></a>
+</h2>
 <p align="center">
 <img width="450" height="450" src="reference/figures/pisa_image.png"></p>
 <p>The Programme for International Student Assessment (PISA) is an international assessment measuring student performance in reading, mathematical and scientific literacy.</p>
 <p>PISA assesses the extent to which 15-year-old students have acquired some of the knowledge and skills that are essential for full participation in society, and how well they are prepared for lifelong learning in the areas of reading, mathematical and scientific literacy.</p>
 <p>In 2018, PISA involved 79 countries and 600,000+ students worldwide.</p>
-<p>Read more about the Programme <a href="https://www.oecd.org/pisa/aboutpisa/">here</a>.</p>
+<p>Read more about the Programme <a href="https://www.oecd.org/pisa/aboutpisa/" class="external-link">here</a>.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the <code>learningtower</code> package from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the <code>learningtower</code> package from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"learningtower"</span><span class="op">)</span></code></pre></div>
-<p>To install the development version of <code>learningtower</code> from <a href="https://github.com/">GitHub</a> use:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"learningtower"</span><span class="op">)</span></span></code></pre></div>
+<p>To install the development version of <code>learningtower</code> from <a href="https://github.com/" class="external-link">GitHub</a> use:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kevinwang09/learningtower"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kevinwang09/learningtower"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="data-description-and-usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-description-and-usage" class="anchor"></a>Data Description and Usage</h2>
-<p>The <code>learningtower</code> gives access to a subset of variables from PISA data originally collected and are available from <a href="https://www.oecd.org/pisa/data/">OECD</a>, for the years 2000 - 2018, collected on a three year basis.</p>
+<div class="section level2">
+<h2 id="data-description-and-usage">Data Description and Usage<a class="anchor" aria-label="anchor" href="#data-description-and-usage"></a>
+</h2>
+<p>The <code>learningtower</code> gives access to a subset of variables from PISA data originally collected and are available from <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>, for the years 2000 - 2018, collected on a three year basis.</p>
 <p>The <code>learningtower</code> package contains mainly three datasets:</p>
 <ul>
 <li><code>student</code></li>
@@ -133,9 +127,9 @@
 <li><code>countrycode</code></li>
 </ul>
 <p>This provides us with information about the students scores in mathematics, reading and science. Their school details, and which country they are from. Let’s have a look at how these datasets can be downloaded.</p>
-<div id="student-dataset" class="section level3">
-<h3 class="hasAnchor">
-<a href="#student-dataset" class="anchor"></a>Student Dataset</h3>
+<div class="section level3">
+<h3 id="student-dataset">Student Dataset<a class="anchor" aria-label="anchor" href="#student-dataset"></a>
+</h3>
 <p>The student dataset comprises of the scores from the triennial testing of 15-year-olds worldwide. In addition, this dataset contains interesting information on their parents qualifications, family wealth, gender, and possession of computers, internet, cars, books, rooms, desks, and similar other variables.</p>
 <p>Keeping in mind the package’s size constraints. The package only includes a portion of student data, called the student subset data, this subset of student data is available for all the years when the PISA experiment took place. The full year wise student data set can be downloaded using the <code><a href="reference/load_student.html">load_student()</a></code> function included in this package.</p>
 <p>As an example, we can load the <code>student</code> data as follows:</p>
@@ -143,171 +137,171 @@
 <li>The student subset dataset can be loaded as follows</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://kevinwang09.github.io/learningtower/">learningtower</a></span><span class="op">)</span>
-
-<span class="co">#loading the student subset data for the year 2018</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span>
-
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 22</span>
-<span class="co">#&gt; # Groups:   country [1]</span>
-<span class="co">#&gt;   year  country school_id student_id mother_educ father_educ gender computer</span>
-<span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;      &lt;fct&gt;       &lt;fct&gt;       &lt;fct&gt;  &lt;fct&gt;   </span>
-<span class="co">#&gt; 1 2018  ALB     800059    805376     ISCED 3A    ISCED 3A    male   yes     </span>
-<span class="co">#&gt; 2 2018  ALB     800084    802061     ISCED 3A    ISCED 3B, C female yes     </span>
-<span class="co">#&gt; 3 2018  ALB     800093    800674     ISCED 3A    ISCED 2     male   yes     </span>
-<span class="co">#&gt; 4 2018  ALB     800278    803561     ISCED 2     ISCED 2     male   yes     </span>
-<span class="co">#&gt; 5 2018  ALB     800055    801356     ISCED 3A    ISCED 2     female &lt;NA&gt;    </span>
-<span class="co">#&gt; 6 2018  ALB     800279    804382     ISCED 3A    ISCED 3A    male   yes     </span>
-<span class="co">#&gt; # ... with 14 more variables: internet &lt;fct&gt;, math &lt;dbl&gt;, read &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   science &lt;dbl&gt;, stu_wgt &lt;dbl&gt;, desk &lt;fct&gt;, room &lt;fct&gt;, dishwasher &lt;fct&gt;,</span>
-<span class="co">#&gt; #   television &lt;fct&gt;, computer_n &lt;fct&gt;, car &lt;fct&gt;, book &lt;fct&gt;, wealth &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   escs &lt;dbl&gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kevinwang09.github.io/learningtower/">learningtower</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#loading the student subset data for the year 2018</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 22</span></span>
+<span><span class="co">#&gt; # Groups:   country [1]</span></span>
+<span><span class="co">#&gt;   year  country school_id student…¹ mothe…² fathe…³ gender compu…⁴ inter…⁵  math</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 2018  ALB     800059    805376    ISCED … ISCED … male   yes     yes      430.</span></span>
+<span><span class="co">#&gt; 2 2018  ALB     800084    802061    ISCED … ISCED … female yes     no       435.</span></span>
+<span><span class="co">#&gt; 3 2018  ALB     800093    800674    ISCED … ISCED 2 male   yes     yes      372.</span></span>
+<span><span class="co">#&gt; 4 2018  ALB     800278    803561    ISCED 2 ISCED 2 male   yes     yes      474.</span></span>
+<span><span class="co">#&gt; 5 2018  ALB     800055    801356    ISCED … ISCED 2 female &lt;NA&gt;    &lt;NA&gt;     441.</span></span>
+<span><span class="co">#&gt; 6 2018  ALB     800279    804382    ISCED … ISCED … male   yes     yes      402.</span></span>
+<span><span class="co">#&gt; # … with 12 more variables: read &lt;dbl&gt;, science &lt;dbl&gt;, stu_wgt &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   desk &lt;fct&gt;, room &lt;fct&gt;, dishwasher &lt;fct&gt;, television &lt;fct&gt;,</span></span>
+<span><span class="co">#&gt; #   computer_n &lt;fct&gt;, car &lt;fct&gt;, book &lt;fct&gt;, wealth &lt;dbl&gt;, escs &lt;dbl&gt;, and</span></span>
+<span><span class="co">#&gt; #   abbreviated variable names ¹​student_id, ²​mother_educ, ³​father_educ,</span></span>
+<span><span class="co">#&gt; #   ⁴​computer, ⁵​internet</span></span></code></pre></div>
 <ul>
 <li>The entire student data can be downloaded as follows:</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#load the entire student data for a single year</span>
-<span class="va">student_data_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fl">2018</span><span class="op">)</span>
-
-<span class="co">#load the entire student data for two/three years (2000, 2012, 2018)</span>
-<span class="va">student_data_2012_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2012</span>, <span class="fl">2018</span><span class="op">)</span><span class="op">)</span>
-<span class="va">student_data_2000_2012_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">2012</span>, <span class="fl">2018</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co">#load the entire student data</span>
-<span class="va">student_data_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="st">"all"</span><span class="op">)</span></code></pre></div>
-<p>See <code><a href="reference/student_subset_2000.html">?student_subset_2000</a></code> for information pertaining to variables captured.</p>
+<code class="sourceCode R"><span><span class="co">#load the entire student data for a single year</span></span>
+<span><span class="va">student_data_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fl">2018</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#load the entire student data for two/three years (2000, 2012, 2018)</span></span>
+<span><span class="va">student_data_2012_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2012</span>, <span class="fl">2018</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">student_data_2000_2012_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">2012</span>, <span class="fl">2018</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#load the entire student data</span></span>
+<span><span class="va">student_data_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
+<p>See <code><a href="reference/student.html">?student_subset_2000</a></code> for information pertaining to variables captured.</p>
 </div>
-<div id="school-dataset" class="section level3">
-<h3 class="hasAnchor">
-<a href="#school-dataset" class="anchor"></a>School Dataset</h3>
+<div class="section level3">
+<h3 id="school-dataset">School Dataset<a class="anchor" aria-label="anchor" href="#school-dataset"></a>
+</h3>
 <p>The school dataset comprises school weight and other information such as the funding distribution of the schools, whether the school is private or public, the enrollment of boys and girls, the school size, and similar other characteristics of interest of different schools these 15-year-olds attend throughout the world.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#loading the school data</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 13</span>
-<span class="co">#&gt;   year  country school_id fund_gov fund_fees fund_donation enrol_boys</span>
-<span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 2000  ALB     01001          100         0             0       1191</span>
-<span class="co">#&gt; 2 2000  ALB     01004           98         1             1        334</span>
-<span class="co">#&gt; 3 2000  ALB     01005           91         5             2        403</span>
-<span class="co">#&gt; 4 2000  ALB     01010          100         0             0        114</span>
-<span class="co">#&gt; 5 2000  ALB     01013            0        50            30        250</span>
-<span class="co">#&gt; 6 2000  ALB     01017           95         2             3        771</span>
-<span class="co">#&gt; # ... with 6 more variables: enrol_girls &lt;dbl&gt;, stratio &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   public_private &lt;fct&gt;, staff_shortage &lt;dbl&gt;, sch_wgt &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   school_size &lt;dbl&gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#loading the school data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 13</span></span>
+<span><span class="co">#&gt;   year  country school…¹ fund_…² fund_…³ fund_…⁴ enrol…⁵ enrol…⁶ stratio publi…⁷</span></span>
+<span><span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;fct&gt;  </span></span>
+<span><span class="co">#&gt; 1 2000  ALB     01001        100       0       0    1191    1176    23.7 public </span></span>
+<span><span class="co">#&gt; 2 2000  ALB     01004         98       1       1     334     479    24.6 public </span></span>
+<span><span class="co">#&gt; 3 2000  ALB     01005         91       5       2     403     600    NA   public </span></span>
+<span><span class="co">#&gt; 4 2000  ALB     01010        100       0       0     114     201    22.5 public </span></span>
+<span><span class="co">#&gt; 5 2000  ALB     01013          0      50      30     250     248    26.9 private</span></span>
+<span><span class="co">#&gt; 6 2000  ALB     01017         95       2       3     771     626    25.4 public </span></span>
+<span><span class="co">#&gt; # … with 3 more variables: staff_shortage &lt;dbl&gt;, sch_wgt &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   school_size &lt;dbl&gt;, and abbreviated variable names ¹​school_id, ²​fund_gov,</span></span>
+<span><span class="co">#&gt; #   ³​fund_fees, ⁴​fund_donation, ⁵​enrol_boys, ⁶​enrol_girls, ⁷​public_private</span></span></code></pre></div>
 <p>See <code><a href="reference/school.html">?school</a></code> for more information on the different variables present in the the school dataset.</p>
 </div>
-<div id="countrycode-dataset" class="section level3">
-<h3 class="hasAnchor">
-<a href="#countrycode-dataset" class="anchor"></a>Countrycode Dataset</h3>
-<p>The countrycode dataset contains mapping of the <a href="https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf">country ISO code to the country name</a>. More information on the participating countries can be found <a href="https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm">here</a></p>
+<div class="section level3">
+<h3 id="countrycode-dataset">Countrycode Dataset<a class="anchor" aria-label="anchor" href="#countrycode-dataset"></a>
+</h3>
+<p>The countrycode dataset contains mapping of the <a href="https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf" class="external-link">country ISO code to the country name</a>. More information on the participating countries can be found <a href="https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm" class="external-link">here</a></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#loading the countrycode data</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 2</span>
-<span class="co">#&gt;   country country_name</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;       </span>
-<span class="co">#&gt; 1 AZE     Azerbaijan  </span>
-<span class="co">#&gt; 2 ARG     Argentina   </span>
-<span class="co">#&gt; 3 AUS     Australia   </span>
-<span class="co">#&gt; 4 AUT     Austria     </span>
-<span class="co">#&gt; 5 BEL     Belgium     </span>
-<span class="co">#&gt; 6 BRA     Brazil</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#loading the countrycode data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 2</span></span>
+<span><span class="co">#&gt;   country country_name</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;       </span></span>
+<span><span class="co">#&gt; 1 AZE     Azerbaijan  </span></span>
+<span><span class="co">#&gt; 2 ARG     Argentina   </span></span>
+<span><span class="co">#&gt; 3 AUS     Australia   </span></span>
+<span><span class="co">#&gt; 4 AUT     Austria     </span></span>
+<span><span class="co">#&gt; 5 BEL     Belgium     </span></span>
+<span><span class="co">#&gt; 6 BRA     Brazil</span></span></code></pre></div>
 <p>See <code><a href="reference/countrycode.html">?countrycode</a></code> for more detailed information on the countries that participated in the PISA experiment.</p>
 </div>
 </div>
-<div id="exploring-the-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exploring-the-data" class="anchor"></a>Exploring the data</h2>
+<div class="section level2">
+<h2 id="exploring-the-data">Exploring the data<a class="anchor" aria-label="anchor" href="#exploring-the-data"></a>
+</h2>
 <p>In the <code>gif</code> shown below, shows the weighted mean of mathematics scores of these 15 year old students for a few selected countries, this <code>gif</code> helps us observe changing of the scales over-highlights and the differences in the means between various countries in the different years.</p>
 <p align="center">
-<img width="630" height="540" src="reference/figures/readme.gif"></p>
+<img width="800" height="400" src="reference/figures/readme.gif"></p>
 <ul>
 <li><p>Similarly, you can find more code examples and data visualizations for exploring <code>learningtower</code> through our vignettes and articles</p></li>
 <li><p>Further data exploration can be found in our articles exploring temporal trends <a href="https://kevinwang09.github.io/learningtower/articles/articles/exploring_time.html">here</a>.</p></li>
 </ul>
 </div>
-<div id="citation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h2>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
 <p>To cite the <code>learningtower</code> package, please use:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"learningtower"</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; To cite package 'learningtower' in publications use:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   Kevin Wang, Paul Yacobellis, Erika Siregar, Sarah Romanes, Kim</span>
-<span class="co">#&gt;   Fitter, Giulio Valentino Dalla Riva, Dianne Cook, Nick Tierney and</span>
-<span class="co">#&gt;   Priya Dingorkar (2021). learningtower: OECD PISA datasets from</span>
-<span class="co">#&gt;   2000-2018 in an easy-to-use format.</span>
-<span class="co">#&gt;   https://kevinwang09.github.io/learningtower/,</span>
-<span class="co">#&gt;   https://github.com/kevinwang09/learningtower.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   @Manual{,</span>
-<span class="co">#&gt;     title = {learningtower: OECD PISA datasets from 2000-2018 in an easy-to-use format},</span>
-<span class="co">#&gt;     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio {Valentino Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},</span>
-<span class="co">#&gt;     year = {2021},</span>
-<span class="co">#&gt;     note = {https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower},</span>
-<span class="co">#&gt;   }</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"learningtower"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; To cite package 'learningtower' in publications use:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Wang K, Yacobellis P, Siregar E, Romanes S, Fitter K, Valentino Dalla</span></span>
+<span><span class="co">#&gt;   Riva G, Cook D, Tierney N, Dingorkar P (????). _learningtower: OECD</span></span>
+<span><span class="co">#&gt;   PISA Datasets from 2000-2018 in an Easy-to-Use Format_.</span></span>
+<span><span class="co">#&gt;   https://kevinwang09.github.io/learningtower/,</span></span>
+<span><span class="co">#&gt;   https://github.com/kevinwang09/learningtower.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   @Manual{,</span></span>
+<span><span class="co">#&gt;     title = {learningtower: OECD PISA Datasets from 2000-2018 in an Easy-to-Use Format},</span></span>
+<span><span class="co">#&gt;     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio {Valentino Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},</span></span>
+<span><span class="co">#&gt;     note = {https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower},</span></span>
+<span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
-<div id="motivation-for-learningtower" class="section level2">
-<h2 class="hasAnchor">
-<a href="#motivation-for-learningtower" class="anchor"></a>Motivation for <code>learningtower</code>
+<div class="section level2">
+<h2 id="motivation-for-learningtower">Motivation for <code>learningtower</code>
+<a class="anchor" aria-label="anchor" href="#motivation-for-learningtower"></a>
 </h2>
 <ul>
-<li>The PISA 2018 results were released on 3 December 2019. This led to wringing of hands in the Australian press, with titles of stories like <a href="https://theconversation.com/vital-signs-australias-slipping-student-scores-will-lead-to-greater-income-inequality-128301">Vital Signs: Australia’s slipping student scores will lead to greater income inequality</a> and <a href="https://www.smh.com.au/education/in-china-nicholas-studied-maths-20-hours-a-week-in-australia-it-s-three-20191203-p53ggv.html">In China, Nicholas studied maths 20 hours a week. In Australia, it’s three</a>.</li>
+<li>The PISA 2018 results were released on 3 December 2019. This led to wringing of hands in the Australian press, with titles of stories like <a href="https://theconversation.com/vital-signs-australias-slipping-student-scores-will-lead-to-greater-income-inequality-128301" class="external-link">Vital Signs: Australia’s slipping student scores will lead to greater income inequality</a> and <a href="https://www.smh.com.au/education/in-china-nicholas-studied-maths-20-hours-a-week-in-australia-it-s-three-20191203-p53ggv.html" class="external-link">In China, Nicholas studied maths 20 hours a week. In Australia, it’s three</a>.</li>
 </ul>
 <p align="center">
 <img width="720" height="360" src="reference/figures/conversation_holden.png"></p>
 <ul>
-<li><p>Australia’s neighbours, New Zealand and Indonesia, are also worrying: <a href="https://www.stuff.co.nz/national/education/117890945/new-zealand-topend-in-oecds-latest-pisa-report-but-drop-in-achievements-worrying">New Zealand top-end in OECD’s latest PISA report but drop in achievements ‘worrying’</a>, <a href="https://www.thejakartapost.com/news/2019/12/04/not-even-mediocre-indonesian-students-score-low-in-math-reading-science-pisa-report.html">Not even mediocre? Indonesian students score low in math, reading, science: PISA report</a>.</p></li>
+<li><p>Australia’s neighbours, New Zealand and Indonesia, are also worrying: <a href="https://www.stuff.co.nz/national/education/117890945/new-zealand-topend-in-oecds-latest-pisa-report-but-drop-in-achievements-worrying" class="external-link">New Zealand top-end in OECD’s latest PISA report but drop in achievements ‘worrying’</a>, <a href="https://www.thejakartapost.com/news/2019/12/04/not-even-mediocre-indonesian-students-score-low-in-math-reading-science-pisa-report.html" class="external-link">Not even mediocre? Indonesian students score low in math, reading, science: PISA report</a>.</p></li>
 <li><p>The data from this survey and all of the surveys conducted since the first collection in 2000, is publicly available. We decided to have made a more convenient subset of the data available in a new R package, called <code>learningtower</code></p></li>
 </ul>
 </div>
-<div id="acknowledgement" class="section level2">
-<h2 class="hasAnchor">
-<a href="#acknowledgement" class="anchor"></a>Acknowledgement</h2>
-<p>The work to make the data available is the effort of several researchers from Australia, New Zealand and Indonesia, conducted as part of the <a href="https://ozunconf19.ropensci.org">ROpenSci OzUnconf</a> held in Sydney, Dec 11-13, 2019.</p>
+<div class="section level2">
+<h2 id="acknowledgement">Acknowledgement<a class="anchor" aria-label="anchor" href="#acknowledgement"></a>
+</h2>
+<p>The work to make the data available is the effort of several researchers from Australia, New Zealand and Indonesia, conducted as part of the <a href="https://ozunconf19.ropensci.org" class="external-link">ROpenSci OzUnconf</a> held in Sydney, Dec 11-13, 2019.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=learningtower">https://​cloud.r-project.org/​package=learningtower</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/kevinwang09/learningtower/">https://​github.com/​kevinwang09/​learningtower/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/kevinwang09/learningtower/issues">https://​github.com/​kevinwang09/​learningtower/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=learningtower" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/kevinwang09/learningtower/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/kevinwang09/learningtower/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
-<div class="community">
-<h2>Community</h2>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+<li><a href="authors.html#citation">Citing learningtower</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Kevin Wang <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Paul Yacobellis <br><small class="roles"> Author </small>  </li>
@@ -321,16 +315,25 @@
 </ul>
 </div>
 
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
+
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Kevin Wang, Paul Yacobellis, Erika Siregar, Sarah Romanes, Kim Fitter, Giulio Valentino Dalla Riva, Dianne Cook, Nick Tierney, Priya Dingorkar.</p>
+  <p></p>
+<p>Developed by Kevin Wang, Paul Yacobellis, Erika Siregar, Sarah Romanes, Kim Fitter, Giulio Valentino Dalla Riva, Dianne Cook, Nick Tierney, Priya Dingorkar.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -338,6 +341,8 @@
 
   
 
+
+  
 
   </body>
 </html>
