@@ -171,16 +171,18 @@ s <- student %>%
                    fixed_x = TRUE)
 
 gif <- animate(s, 
-                type="cairo",
-                units="in", 
-                width=9, 
-                height=6, 
-                pointsize=24, 
-                res=200)
+               units="px", 
+               width=800, 
+               height=400, 
+               pointsize=4, 
+               res=100, 
+               nframes=40)
+
+anim_save(filename = "man/figures/readme.gif", animation = gif)
 ```
 
 <p align="center">
-  <img width="630" height="540" src="man/figures/readme.gif">
+  <img width="800" height="400" src="man/figures/readme.gif">
 </p>
 
 

@@ -14,3 +14,4 @@
 ^CODE_OF_CONDUCT\.md$
 ^CRAN-RELEASE$
 ^cran-comments\.md$
+^man/figures/readme.gif$
