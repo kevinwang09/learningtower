@@ -1,10 +1,9 @@
 Package: learningtower
-Title: Organisation for Economic Co-operation and Development(OECD), Programme for International Student Assessment PISA datasets in an easy-to-use format
-Version: 0.0.0.9000
-Date: 2021-07-23
+Title: OECD PISA Datasets from 2000-2018 in an Easy-to-Use Format
+Version: 1.0.1
 Authors@R: c(
       person(given = "Kevin", family = "Wang", role = c("aut", "cre"), 
-             email = "kevin.wang09@gmail.com"),
+             email = "kevinwangstats@gmail.com"),
       person(given = "Paul", family = "Yacobellis", role = "aut", 
              email = "pyacobellis@hotmail.com"),
       person(given = "Erika", family = "Siregar", role = "aut", 
@@ -25,12 +24,19 @@ Authors@R: c(
 Description: The Programme for International Student Assessment (PISA) is a global study conducted by the Organization for Economic Cooperation and Development (OECD) in member and non-member countries to assess educational systems by assessing 15-year-old school students academic performance in mathematics, science, and reading. This datasets contains information on their scores and other socioeconomic characteristics, information about their school and its infrastructure, as well as the countries that are taking part in the program.
 Depends: R (>= 3.5.0)
 Encoding: UTF-8
-RoxygenNote: 7.1.1.9001
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 URL: https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower
 BugReports: https://github.com/kevinwang09/learningtower/issues
 Imports: 
-  dplyr
+    tibble,
+    dplyr
 Suggests:
-  knitr
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown,
+    ggplot2,
+    forcats,
+    scales
+Config/testthat/edition: 3

@@ -3,14 +3,23 @@
 
 # learningtower <img src='man/figures/logo.png' align="right" height="211" />
 
+<!-- badges: start -->
+
 [![R-CMD-check](https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
-The goal of learningtower is to provide a user-friendly R package to
+The goal of `learningtower` is to provide a user-friendly R package to
 provide easy access to a subset of variables from PISA data collected
-from the [OECD](http://www.oecd.org/pisa/data/), for years 2000 - 2018,
-collected on a three year basis.
+from the [OECD](https://www.oecd.org/pisa/data/), for the years 2000 -
+2018, collected on a three year basis. This is an excellent dataset for
+exploring and visualizing data. This dataset can also be used for other
+analytically purposes as well as statistical computations.
 
-**What is PISA?**
+## What is PISA?
+
+<p align="center">
+<img width="450" height="450" src="man/figures/pisa_image.png">
+</p>
 
 The Programme for International Student Assessment (PISA) is an
 international assessment measuring student performance in reading,
@@ -24,98 +33,231 @@ learning in the areas of reading, mathematical and scientific literacy.
 In 2018, PISA involved 79 countries and 600,000+ students worldwide.
 
 Read more about the Programme
-[here](http://www.oecd.org/pisa/aboutpisa/).
+[here](https://www.oecd.org/pisa/aboutpisa/).
 
 ## Installation
 
-You can install the development version of `learningtower` from
-[GitHub](https://github.com/) with:
+You can install the `learningtower` package from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# install.packages("devtools")
+install.packages("learningtower")
+```
+
+To install the development version of `learningtower` from
+[GitHub](https://github.com/) use:
+
+``` r
 devtools::install_github("kevinwang09/learningtower")
 ```
 
-## Usage
+## Data Description and Usage
 
-The PISA assessment measures responses from individual students and
-school principals. A subset of features of these questionnaires can be
-found in `student` and `school` respectively (the latter coming soon).
+The `learningtower` gives access to a subset of variables from PISA data
+originally collected and are available from
+[OECD](https://www.oecd.org/pisa/data/), for the years 2000 - 2018,
+collected on a three year basis.
+
+The `learningtower` package contains mainly three datasets:
+
+- `student`
+- `school`
+- `countrycode`
+
+This provides us with information about the students scores in
+mathematics, reading and science. Their school details, and which
+country they are from. Let’s have a look at how these datasets can be
+downloaded.
+
+### Student Dataset
+
+The student dataset comprises of the scores from the triennial testing
+of 15-year-olds worldwide. In addition, this dataset contains
+interesting information on their parents qualifications, family wealth,
+gender, and possession of computers, internet, cars, books, rooms,
+desks, and similar other variables.
+
+Keeping in mind the package’s size constraints. The package only
+includes a portion of student data, called the student subset data, this
+subset of student data is available for all the years when the PISA
+experiment took place. The full year wise student data set can be
+downloaded using the `load_student()` function included in this package.
+
 As an example, we can load the `student` data as follows:
+
+- The student subset dataset can be loaded as follows
 
 ``` r
 library(learningtower)
-data(student)
-head(student)
-#>   year country school_id student_id mother_educ father_educ gender computer
-#> 1 2000     ALB      1001          1        <NA>        <NA> female     <NA>
-#> 2 2000     ALB      1001          3        <NA>        <NA> female     <NA>
-#> 3 2000     ALB      1001          6        <NA>        <NA>   male     <NA>
-#> 4 2000     ALB      1001          8        <NA>        <NA> female     <NA>
-#> 5 2000     ALB      1001         11        <NA>        <NA> female     <NA>
-#> 6 2000     ALB      1001         12        <NA>        <NA> female     <NA>
-#>   internet   math   read science stu_wgt desk room dishwasher television
-#> 1       no 324.35 397.87  345.66    2.16  yes   no         no          1
-#> 2       no     NA 368.41  385.83    2.16  yes  yes         no          2
-#> 3       no     NA 294.17  327.94    2.16  yes  yes         no          2
-#> 4       no 235.79 241.49  341.09    2.16  yes  yes         no          1
-#> 5       no     NA 287.16  307.15    2.16  yes  yes         no          2
-#> 6       no 290.74 307.84  277.04    2.16  yes  yes        yes          1
-#>   computer_n car  book wealth       escs
-#> 1         3+   1 11-50  -0.60  0.1057558
-#> 2          0   0  1-10  -1.84 -1.4240446
-#> 3          0   0  1-10  -1.46 -1.3066839
-#> 4          1   0 11-50  -1.46 -0.4624639
-#> 5          0   1 11-50  -1.13 -1.2816273
-#> 6       <NA>  3+ 11-50  -0.40 -0.2299722
+
+#loading the student subset data for the year 2018
+data(student_subset_2018)
+
+
+head(student_subset_2018)
+#> # A tibble: 6 × 22
+#> # Groups:   country [1]
+#>   year  country school_id student…¹ mothe…² fathe…³ gender compu…⁴ inter…⁵  math
+#>   <fct> <fct>   <fct>     <fct>     <fct>   <fct>   <fct>  <fct>   <fct>   <dbl>
+#> 1 2018  ALB     800059    805376    ISCED … ISCED … male   yes     yes      430.
+#> 2 2018  ALB     800084    802061    ISCED … ISCED … female yes     no       435.
+#> 3 2018  ALB     800093    800674    ISCED … ISCED 2 male   yes     yes      372.
+#> 4 2018  ALB     800278    803561    ISCED 2 ISCED 2 male   yes     yes      474.
+#> 5 2018  ALB     800055    801356    ISCED … ISCED 2 female <NA>    <NA>     441.
+#> 6 2018  ALB     800279    804382    ISCED … ISCED … male   yes     yes      402.
+#> # … with 12 more variables: read <dbl>, science <dbl>, stu_wgt <dbl>,
+#> #   desk <fct>, room <fct>, dishwasher <fct>, television <fct>,
+#> #   computer_n <fct>, car <fct>, book <fct>, wealth <dbl>, escs <dbl>, and
+#> #   abbreviated variable names ¹​student_id, ²​mother_educ, ³​father_educ,
+#> #   ⁴​computer, ⁵​internet
 ```
 
-See `?student` for information pertaining to variables captured.
-
-We can get further information on the schools and country codes in the
-`school` and `countrycode` data, respectively.
+- The entire student data can be downloaded as follows:
 
 ``` r
-data(school)
-head(school)
-#>   year country school_id fund_gov fund_fees fund_donation enrol_boys
-#> 1 2000     ALB     01001      100         0             0       1191
-#> 2 2000     ALB     01004       98         1             1        334
-#> 3 2000     ALB     01005       91         5             2        403
-#> 4 2000     ALB     01010      100         0             0        114
-#> 5 2000     ALB     01013        0        50            30        250
-#> 6 2000     ALB     01017       95         2             3        771
-#>   enrol_girls stratio public_private staff_shortage sch_wgt school_size
-#> 1        1176   23.67         public           0.60       1        2367
-#> 2         479   24.64         public          -0.95       1         813
-#> 3         600      NA         public          -0.17       1        1003
-#> 4         201   22.50         public           1.87       1         315
-#> 5         248   26.92        private          -0.95       1         498
-#> 6         626   25.40         public           0.27       1        1397
+#load the entire student data for a single year
+student_data_2018 <- load_student(2018)
 
-data(countrycode)
-head(countrycode)
-#>   country country_name
-#> 1     AZE   Azerbaijan
-#> 2     ARG    Argentina
-#> 3     AUS    Australia
-#> 4     AUT      Austria
-#> 5     BEL      Belgium
-#> 6     BRA       Brazil
+#load the entire student data for two/three years (2000, 2012, 2018)
+student_data_2012_2018 <- load_student(c(2012, 2018))
+student_data_2000_2012_2018 <- load_student(c(2000, 2012, 2018))
+
+#load the entire student data
+student_data_all <- load_student("all")
 ```
+
+See `?student_subset_2000` for information pertaining to variables
+captured.
+
+### School Dataset
+
+The school dataset comprises school weight and other information such as
+the funding distribution of the schools, whether the school is private
+or public, the enrollment of boys and girls, the school size, and
+similar other characteristics of interest of different schools these
+15-year-olds attend throughout the world.
+
+``` r
+#loading the school data
+data(school)
+
+head(school)
+#> # A tibble: 6 × 13
+#>   year  country school…¹ fund_…² fund_…³ fund_…⁴ enrol…⁵ enrol…⁶ stratio publi…⁷
+#>   <fct> <fct>   <fct>      <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl> <fct>  
+#> 1 2000  ALB     01001        100       0       0    1191    1176    23.7 public 
+#> 2 2000  ALB     01004         98       1       1     334     479    24.6 public 
+#> 3 2000  ALB     01005         91       5       2     403     600    NA   public 
+#> 4 2000  ALB     01010        100       0       0     114     201    22.5 public 
+#> 5 2000  ALB     01013          0      50      30     250     248    26.9 private
+#> 6 2000  ALB     01017         95       2       3     771     626    25.4 public 
+#> # … with 3 more variables: staff_shortage <dbl>, sch_wgt <dbl>,
+#> #   school_size <dbl>, and abbreviated variable names ¹​school_id, ²​fund_gov,
+#> #   ³​fund_fees, ⁴​fund_donation, ⁵​enrol_boys, ⁶​enrol_girls, ⁷​public_private
+```
+
+See `?school` for more information on the different variables present in
+the the school dataset.
+
+### Countrycode Dataset
+
+The countrycode dataset contains mapping of the [country ISO code to the
+country
+name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf).
+More information on the participating countries can be found
+[here](https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm)
+
+``` r
+#loading the countrycode data
+data(countrycode)
+
+head(countrycode)
+#> # A tibble: 6 × 2
+#>   country country_name
+#>   <chr>   <chr>       
+#> 1 AZE     Azerbaijan  
+#> 2 ARG     Argentina   
+#> 3 AUS     Australia   
+#> 4 AUT     Austria     
+#> 5 BEL     Belgium     
+#> 6 BRA     Brazil
+```
+
+See `?countrycode` for more detailed information on the countries that
+participated in the PISA experiment.
 
 ## Exploring the data
 
-Changing the scales over-highlights differences in the means between
-various countries.
+In the `gif` shown below, shows the weighted mean of mathematics scores
+of these 15 year old students for a few selected countries, this `gif`
+helps us observe changing of the scales over-highlights and the
+differences in the means between various countries in the different
+years.
 
-<img src="man/figures/README-unnamed-chunk-4-1.gif" width="100%" />
+<p align="center">
+<img width="800" height="400" src="man/figures/readme.gif">
+</p>
 
-Further data exploration can be found in our vignette exploring temporal
-trends
-[here](https://kevinwang09.github.io/learningtower/articles/exploring_time.html).
+- Similarly, you can find more code examples and data visualizations for
+  exploring `learningtower` through our vignettes and articles
 
-# Acknowledgement
+- Further data exploration can be found in our articles exploring
+  temporal trends
+  [here](https://kevinwang09.github.io/learningtower/articles/articles/exploring_time.html).
+
+## Citation
+
+To cite the `learningtower` package, please use:
+
+``` r
+citation("learningtower")
+#> 
+#> To cite package 'learningtower' in publications use:
+#> 
+#>   Wang K, Yacobellis P, Siregar E, Romanes S, Fitter K, Valentino Dalla
+#>   Riva G, Cook D, Tierney N, Dingorkar P (????). _learningtower: OECD
+#>   PISA Datasets from 2000-2018 in an Easy-to-Use Format_.
+#>   https://kevinwang09.github.io/learningtower/,
+#>   https://github.com/kevinwang09/learningtower.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Manual{,
+#>     title = {learningtower: OECD PISA Datasets from 2000-2018 in an Easy-to-Use Format},
+#>     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio {Valentino Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},
+#>     note = {https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower},
+#>   }
+```
+
+## Motivation for `learningtower`
+
+- The PISA 2018 results were released on 3 December 2019. This led to
+  wringing of hands in the Australian press, with titles of stories like
+  [Vital Signs: Australia’s slipping student scores will lead to greater
+  income
+  inequality](https://theconversation.com/vital-signs-australias-slipping-student-scores-will-lead-to-greater-income-inequality-128301)
+  and [In China, Nicholas studied maths 20 hours a week. In Australia,
+  it’s
+  three](https://www.smh.com.au/education/in-china-nicholas-studied-maths-20-hours-a-week-in-australia-it-s-three-20191203-p53ggv.html).
+
+<p align="center">
+<img width="720" height="360" src="man/figures/conversation_holden.png">
+</p>
+
+- Australia’s neighbours, New Zealand and Indonesia, are also worrying:
+  [New Zealand top-end in OECD’s latest PISA report but drop in
+  achievements
+  ‘worrying’](https://www.stuff.co.nz/national/education/117890945/new-zealand-topend-in-oecds-latest-pisa-report-but-drop-in-achievements-worrying),
+  [Not even mediocre? Indonesian students score low in math, reading,
+  science: PISA
+  report](https://www.thejakartapost.com/news/2019/12/04/not-even-mediocre-indonesian-students-score-low-in-math-reading-science-pisa-report.html).
+
+- The data from this survey and all of the surveys conducted since the
+  first collection in 2000, is publicly available. We decided to have
+  made a more convenient subset of the data available in a new R
+  package, called `learningtower`
+
+## Acknowledgement
 
 The work to make the data available is the effort of several researchers
 from Australia, New Zealand and Indonesia, conducted as part of the
