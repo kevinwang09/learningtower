@@ -1,13 +1,12 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
-  Australia_trends: Australia_trends.html
-  exploring_time: exploring_time.html
+  articles/Australia_trends: Australia_trends.html
+  articles/exploring_time: exploring_time.html
   learningtower_school: learningtower_school.html
   learningtower_student: learningtower_student.html
-last_built: 2023-02-18T07:18Z
+last_built: 2024-08-02T01:59Z
 urls:
   reference: https://kevinwang09.github.io/learningtower/reference
   article: https://kevinwang09.github.io/learningtower/articles
-

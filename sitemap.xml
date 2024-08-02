@@ -1,51 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/404.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/Code_of_Conduct.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/articles/Australia_trends.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/articles/exploring_time.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/articles/learningtower_school.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/articles/learningtower_student.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/index.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/reference/countrycode.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/reference/load_student.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/reference/school.html</loc>
-  </url>
-  <url>
-    <loc>https://kevinwang09.github.io/learningtower/reference/student.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://kevinwang09.github.io/learningtower/404.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/Code_of_Conduct.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/LICENSE-text.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/LICENSE.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/articles/Australia_trends.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/articles/exploring_time.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/articles/index.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/articles/learningtower_school.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/articles/learningtower_student.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/authors.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/index.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/reference/countrycode.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/reference/index.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/reference/load_student.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/reference/school.html</loc></url>
+<url><loc>https://kevinwang09.github.io/learningtower/reference/student.html</loc></url>
 </urlset>
+
