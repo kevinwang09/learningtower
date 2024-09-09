@@ -31,11 +31,12 @@ load_student <- function(year = "2000"){
   stopifnot(all(year %in% c("2000", "2003",
                             "2006", "2009",
                             "2012", "2015",
-                            "2018", "all")))
+                            "2018", "2022",
+                            "all")))
 
   ## If "all" is in the year vector, we will download everything
   if("all" %in% year){
-    year = c("2000", "2003", "2006", "2009", "2012", "2015", "2018")
+    year = c("2000", "2003", "2006", "2009", "2012", "2015", "2018", "2022")
   }
 
   result = tibble::tibble()

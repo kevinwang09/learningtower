@@ -93,6 +93,12 @@ NULL
 #' @rdname student
 NULL
 
+#' @docType data
+#' @name student_subset_2022
+#' @rdname student
+NULL
+
+
 #' @title School data available for the years 2000-2018 from the PISA OECD database
 #'
 #' @description A dataset containing school weight and other information
