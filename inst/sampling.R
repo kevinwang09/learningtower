@@ -13,8 +13,8 @@ student_2022 <- readRDS(here("student_full_data/student_2022.rds"))
 
 # Create subset dataset
 student_subset_2022 <- student_2022 %>%
-  group_by(country_iso3c) %>%  # Group by country
-  sample_n(size = 50)          # Randomly sample 50 students from each country
+  group_by(country) %>%  # Group by country
+  sample_n(size = 50)    # Randomly sample 50 students from each country
 
 # Save the dataset file
 save(student_subset_2022, file = "data/student_subset_2022.rda")
