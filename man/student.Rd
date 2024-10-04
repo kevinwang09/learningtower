@@ -9,6 +9,7 @@
 \alias{student_subset_2012}
 \alias{student_subset_2015}
 \alias{student_subset_2018}
+\alias{student_subset_2022}
 \title{Sample student data available for the years 2000-2018 from the PISA OECD database}
 \format{
 A tibble of the following variables

@@ -1,27 +1,35 @@
 # This is the code to generate the subset of full student dataset to go into package
 library(here)
 library(tidyverse)
+library(usethis)
 
-FOLDER_PATH = here("student_full_data/")
+FULLDATA_PATH = here::here("student_full_data")
+SUBSETDATA_PATH = here::here("data")
 
-# List all the full RDS file names
-rds_files <- list.files(FOLDER_PATH, pattern = "\\.rds$", full.names = TRUE) %>%
-  sort()
+years = c(2000, 2003, 2006, 2009, 2012, 2015, 2018, 2022)
 
-# Set seed for reproducibility
-set.seed(2024)
-for (file in rds_files) {
+sampling_full_data = function(full_data_path){
 
-  year <- basename(file) %>%
-    stringr::str_remove("student_") %>%
-    stringr::str_remove(".rds")
+  stopifnot(file.exists(full_data_path))
+  set.seed(2024)
+  # Set seed for reproducibility
+  full_data <- readRDS(full_data_path)
 
-  student_data <- readRDS(file)
-
-  student_subset <- student_data %>%
+  subset_data <- full_data %>%
     dplyr::group_by(country) %>%
-    dplyr::sample_n(size = 50)
+    dplyr::sample_n(size = 50) %>%
+    dplyr::ungroup()
 
-  cat("Saving data for the year: ", year, "\n")
-  save(student_subset, file = here::here(paste0("data/student_subset_", year, ".rda")))
+  return(subset_data)
 }
+
+for (y in years) {
+  this_year_full_data_path = paste0(FULLDATA_PATH, "/student_", y, ".rds")
+  this_year_subset_data_name = paste0("student_subset_", y)
+  this_year_subset_data_fullname = paste0(SUBSETDATA_PATH, "/", this_year_subset_data_name, ".rda")
+  assign(this_year_subset_data_name, sampling_full_data(this_year_full_data_path))
+
+  cat("Saving data for the year: ", y, "\n")
+  save(list = this_year_subset_data_name, file = this_year_subset_data_fullname, compress = "xz")
+}
+
