@@ -190,7 +190,7 @@ student %>%
   theme_minimal() +
   labs(x = "Year",
        y = "Score",
-       title = "Mathematics PISA Scores from 2000 - 2022") + 
+       title = "Math Scores 2000 - 2022") + 
   theme(text = element_text(size=10),
         legend.title = element_blank()) +
   scale_color_brewer(palette = "Dark2")
