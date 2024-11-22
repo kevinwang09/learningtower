@@ -86,12 +86,11 @@ As an example, we can load the `student` data as follows:
 ```{r}
 library(learningtower)
 
-#loading the student subset data for the year 2018
+# loading the student subset data for the year 2018
 data(student_subset_2018)
-
-
 head(student_subset_2018)
 ```
+
 - The entire student data can be downloaded as follows:
 
 ```{r, eval=FALSE}
@@ -113,9 +112,8 @@ See `?student_subset_2000` for information pertaining to variables captured.
 The school dataset comprises school weight and other information such as the funding distribution of the schools, whether the school is private or public, the enrollment of boys and girls, the school size, and similar other characteristics of interest of different schools these 15-year-olds attend throughout the world.
 
 ```{r}
-#loading the school data
+# loading the school data
 data(school)
-
 head(school)
 ```
 
@@ -127,9 +125,8 @@ See `?school` for more information on the different variables present in the the
 The countrycode dataset contains mapping of the [country ISO code to the country name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf). More information on the participating countries can be found [here](https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm)
 
 ```{r}
-#loading the countrycode data
+# loading the countrycode data
 data(countrycode)
-
 head(countrycode)
 ```
 
@@ -137,7 +134,7 @@ See `?countrycode` for more detailed information on the countries that participa
 
 ## Exploring the data 
 
-In the `gif` shown below, shows the weighted mean of mathematics scores of these 15 year old students for a few selected countries, this `gif` helps us observe changing of the scales over-highlights and the differences in the means between various countries in the different years.
+In the plot shown below, shows the weighted mean of mathematics scores of these 15 year old students for a few selected countries over the available years.
 
 ```{r, eval = FALSE, echo = FALSE}
 library(dplyr)
@@ -158,13 +155,13 @@ s <- student %>%
   theme_minimal() +
   labs(x = "Year",
        y = "Score",
-       title = "Mathematics PISA Scores from 2000 - 2018")+ 
+       title = "Mathematics PISA Scores from 2000 - 2022")+ 
   theme(text = element_text(size=20)) +
   scale_color_brewer(palette = "Dark2") +
   view_zoom_manual(pause_length = 1,
                    step_length = 10, 
-                   xmin = c(2000, 2018),
-                   xmax = c(2000, 2018),
+                   xmin = c(2000, 2022),
+                   xmax = c(2000, 2022),
                    ymin =c(200, 450),
                    ymax = c(800, 600),
                    wrap = FALSE,
@@ -179,10 +176,29 @@ gif <- animate(s,
                nframes=40)
 
 anim_save(filename = "man/figures/readme.gif", animation = gif)
+
+# Just use a static plot with the small range
+student %>% 
+  dplyr::filter(country %in% c("SGP","CAN", "FIN", "NZL", 
+                               "USA", "JPN", "GBR", "AUS")) %>% 
+  group_by(year, country) %>%
+  summarise(math = weighted.mean(math, stu_wgt, na.rm=TRUE)) %>%
+  ggplot(aes(x=year, y=math, group=country, color = country)) + 
+  geom_line(alpha=0.6, linewidth = 2) +
+  geom_point(alpha=0.6, size=3)+
+  ylim(c(450, 600)) + 
+  theme_minimal() +
+  labs(x = "Year",
+       y = "Score",
+       title = "Mathematics PISA Scores from 2000 - 2022") + 
+  theme(text = element_text(size=10),
+        legend.title = element_blank()) +
+  scale_color_brewer(palette = "Dark2")
+ggsave(filename = "man/figures/readme.png", width=1600, height=1200, units="px")
 ```
 
 <p align="center">
-  <img width="800" height="400" src="man/figures/readme.gif">
+  <img width="800" height="400" src="man/figures/readme.png">
 </p>
 
 

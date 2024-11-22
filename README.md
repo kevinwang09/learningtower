@@ -18,6 +18,7 @@ analytically purposes as well as statistical computations.
 ## What is PISA?
 
 <p align="center">
+
 <img width="450" height="450" src="man/figures/pisa_image.png">
 </p>
 
@@ -90,26 +91,21 @@ As an example, we can load the `student` data as follows:
 ``` r
 library(learningtower)
 
-#loading the student subset data for the year 2018
+# loading the student subset data for the year 2018
 data(student_subset_2018)
-
-
 head(student_subset_2018)
 #> # A tibble: 6 × 22
-#> # Groups:   country [1]
-#>   year  country school_id student…¹ mothe…² fathe…³ gender compu…⁴ inter…⁵  math
-#>   <fct> <fct>   <fct>     <fct>     <fct>   <fct>   <fct>  <fct>   <fct>   <dbl>
-#> 1 2018  ALB     800059    805376    ISCED … ISCED … male   yes     yes      430.
-#> 2 2018  ALB     800084    802061    ISCED … ISCED … female yes     no       435.
-#> 3 2018  ALB     800093    800674    ISCED … ISCED 2 male   yes     yes      372.
-#> 4 2018  ALB     800278    803561    ISCED 2 ISCED 2 male   yes     yes      474.
-#> 5 2018  ALB     800055    801356    ISCED … ISCED 2 female <NA>    <NA>     441.
-#> 6 2018  ALB     800279    804382    ISCED … ISCED … male   yes     yes      402.
-#> # … with 12 more variables: read <dbl>, science <dbl>, stu_wgt <dbl>,
-#> #   desk <fct>, room <fct>, dishwasher <fct>, television <fct>,
-#> #   computer_n <fct>, car <fct>, book <fct>, wealth <dbl>, escs <dbl>, and
-#> #   abbreviated variable names ¹​student_id, ²​mother_educ, ³​father_educ,
-#> #   ⁴​computer, ⁵​internet
+#>   year  country school_id student_id mother_educ father_educ gender computer
+#>   <fct> <fct>   <fct>     <fct>      <fct>       <fct>       <fct>  <fct>   
+#> 1 2018  ALB     800296    805457     ISCED 2     ISCED 2     female no      
+#> 2 2018  ALB     800251    805241     ISCED 3A    ISCED 3A    female yes     
+#> 3 2018  ALB     800194    801631     ISCED 2     ISCED 2     male   no      
+#> 4 2018  ALB     800257    800960     ISCED 3A    ISCED 3A    female yes     
+#> 5 2018  ALB     800282    806606     ISCED 3A    ISCED 3A    female yes     
+#> 6 2018  ALB     800266    801723     ISCED 2     ISCED 2     female yes     
+#> # ℹ 14 more variables: internet <fct>, math <dbl>, read <dbl>, science <dbl>,
+#> #   stu_wgt <dbl>, desk <fct>, room <fct>, dishwasher <fct>, television <fct>,
+#> #   computer_n <fct>, car <fct>, book <fct>, wealth <dbl>, escs <dbl>
 ```
 
 - The entire student data can be downloaded as follows:
@@ -138,22 +134,20 @@ similar other characteristics of interest of different schools these
 15-year-olds attend throughout the world.
 
 ``` r
-#loading the school data
+# loading the school data
 data(school)
-
 head(school)
 #> # A tibble: 6 × 13
-#>   year  country school…¹ fund_…² fund_…³ fund_…⁴ enrol…⁵ enrol…⁶ stratio publi…⁷
-#>   <fct> <fct>   <fct>      <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl> <fct>  
-#> 1 2000  ALB     01001        100       0       0    1191    1176    23.7 public 
-#> 2 2000  ALB     01004         98       1       1     334     479    24.6 public 
-#> 3 2000  ALB     01005         91       5       2     403     600    NA   public 
-#> 4 2000  ALB     01010        100       0       0     114     201    22.5 public 
-#> 5 2000  ALB     01013          0      50      30     250     248    26.9 private
-#> 6 2000  ALB     01017         95       2       3     771     626    25.4 public 
-#> # … with 3 more variables: staff_shortage <dbl>, sch_wgt <dbl>,
-#> #   school_size <dbl>, and abbreviated variable names ¹​school_id, ²​fund_gov,
-#> #   ³​fund_fees, ⁴​fund_donation, ⁵​enrol_boys, ⁶​enrol_girls, ⁷​public_private
+#>   year  country school_id fund_gov fund_fees fund_donation enrol_boys
+#>   <fct> <fct>   <fct>        <dbl>     <dbl>         <dbl>      <dbl>
+#> 1 2000  ALB     01001          100         0             0       1191
+#> 2 2000  ALB     01004           98         1             1        334
+#> 3 2000  ALB     01005           91         5             2        403
+#> 4 2000  ALB     01010          100         0             0        114
+#> 5 2000  ALB     01013            0        50            30        250
+#> 6 2000  ALB     01017           95         2             3        771
+#> # ℹ 6 more variables: enrol_girls <dbl>, stratio <dbl>, public_private <fct>,
+#> #   staff_shortage <dbl>, sch_wgt <dbl>, school_size <dbl>
 ```
 
 See `?school` for more information on the different variables present in
@@ -168,9 +162,8 @@ More information on the participating countries can be found
 [here](https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm)
 
 ``` r
-#loading the countrycode data
+# loading the countrycode data
 data(countrycode)
-
 head(countrycode)
 #> # A tibble: 6 × 2
 #>   country country_name
@@ -188,14 +181,13 @@ participated in the PISA experiment.
 
 ## Exploring the data
 
-In the `gif` shown below, shows the weighted mean of mathematics scores
-of these 15 year old students for a few selected countries, this `gif`
-helps us observe changing of the scales over-highlights and the
-differences in the means between various countries in the different
-years.
+In the plot shown below, shows the weighted mean of mathematics scores
+of these 15 year old students for a few selected countries over the
+available years.
 
 <p align="center">
-<img width="800" height="400" src="man/figures/readme.gif">
+
+<img width="800" height="400" src="man/figures/readme.png">
 </p>
 
 - Similarly, you can find more code examples and data visualizations for
@@ -211,21 +203,22 @@ To cite the `learningtower` package, please use:
 
 ``` r
 citation("learningtower")
-#> 
 #> To cite package 'learningtower' in publications use:
 #> 
 #>   Wang K, Yacobellis P, Siregar E, Romanes S, Fitter K, Valentino Dalla
-#>   Riva G, Cook D, Tierney N, Dingorkar P (????). _learningtower: OECD
-#>   PISA Datasets from 2000-2018 in an Easy-to-Use Format_.
-#>   https://kevinwang09.github.io/learningtower/,
-#>   https://github.com/kevinwang09/learningtower.
+#>   Riva G, Cook D, Tierney N, Dingorkar P (2024). _learningtower: OECD
+#>   PISA Datasets from 2000-2022 in an Easy-to-Use Format_. R package
+#>   version 1.0.1, commit 3a11c911218b6d1f665f27a83c7d83f0c0174d4b,
+#>   <https://github.com/kevinwang09/learningtower>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {learningtower: OECD PISA Datasets from 2000-2018 in an Easy-to-Use Format},
+#>     title = {learningtower: OECD PISA Datasets from 2000-2022 in an Easy-to-Use Format},
 #>     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio {Valentino Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},
-#>     note = {https://kevinwang09.github.io/learningtower/, https://github.com/kevinwang09/learningtower},
+#>     year = {2024},
+#>     note = {R package version 1.0.1, commit 3a11c911218b6d1f665f27a83c7d83f0c0174d4b},
+#>     url = {https://github.com/kevinwang09/learningtower},
 #>   }
 ```
 
@@ -241,6 +234,7 @@ citation("learningtower")
   three](https://www.smh.com.au/education/in-china-nicholas-studied-maths-20-hours-a-week-in-australia-it-s-three-20191203-p53ggv.html).
 
 <p align="center">
+
 <img width="720" height="360" src="man/figures/conversation_holden.png">
 </p>
 
