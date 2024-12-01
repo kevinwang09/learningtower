@@ -1,6 +1,6 @@
 Package: learningtower
 Title: OECD PISA Datasets from 2000-2022 in an Easy-to-Use Format
-Version: 1.0.1
+Version: 1.1.0
 Authors@R: c(
       person(given = "Kevin", family = "Wang", role = c("aut", "cre"), 
              email = "kevinwangstats@gmail.com"),
@@ -40,3 +40,5 @@ Suggests:
     forcats,
     scales
 Config/testthat/edition: 3
+LazyData: true
+LazyDataCompression: xz
