@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">learningtower</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
                         <h4 data-toc-skip class="author">The
 Freemasons</h4>
             
-            <h4 data-toc-skip class="date">2024-11-22</h4>
+            <h4 data-toc-skip class="date">2024-12-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/kevinwang09/learningtower/blob/master/vignettes/articles/Australia_trends.Rmd" class="external-link"><code>vignettes/articles/Australia_trends.Rmd</code></a></small>
       <div class="hidden name"><code>Australia_trends.Rmd</code></div>
@@ -121,6 +121,7 @@ rather than specific causes.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">student</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_student.html">load_student</a></span><span class="op">(</span><span class="st">"all"</span><span class="op">)</span></span>
+<span><span class="va">school</span> <span class="op">=</span> <span class="fu"><a href="../reference/load_school.html">load_school</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="fl">18</span><span class="op">)</span> </span>
@@ -454,37 +455,37 @@ p
 (Intercept)
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-330.18
+363.48
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-16.51
+16.41
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-20.00
+22.15
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-280.37
+346.45
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-18.97
+18.86
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-14.78
+18.37
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-318.64
+379.52
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-18.14
+18.03
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-17.57
+21.05
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
 <strong>&lt;0.001</strong>
@@ -1353,43 +1354,84 @@ car [3+]
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-book101-200
+book0-10
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-34.36
+-33.30
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.11
+3.89
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-11.03
+-8.57
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-58.51
+-66.07
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-3.58
+4.47
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-16.34
+-14.79
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-53.46
+-60.88
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.42
+4.27
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-15.62
+-14.26
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
 <strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+book101-200
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+1.06
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.28
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.32
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.747
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-7.56
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+3.77
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
+-2.01
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
+<strong>0.045</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
+-7.42
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
+3.60
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
+-2.06
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
+<strong>0.039</strong>
 </td>
 </tr>
 <tr>
@@ -1397,40 +1439,40 @@ book101-200
 book11-25
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-10.24
+-23.06
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.25
+3.66
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.15
+-6.30
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>0.002</strong>
+<strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-12.32
+-53.75
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-3.74
+4.21
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-3.29
+-12.78
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
-<strong>0.001</strong>
+<strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-6.75
+-54.13
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.58
+4.02
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-1.89
+-13.46
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
-0.059
+<strong>&lt;0.001</strong>
 </td>
 </tr>
 <tr>
@@ -1438,40 +1480,40 @@ book11-25
 book201-500
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-48.97
+15.67
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.32
+3.37
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-14.73
+4.65
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-74.83
+8.76
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-3.82
+3.88
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-19.59
+2.26
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
-<strong>&lt;0.001</strong>
+<strong>0.024</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-69.20
+8.32
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.65
+3.70
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-18.95
+2.25
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
-<strong>&lt;0.001</strong>
+<strong>0.025</strong>
 </td>
 </tr>
 <tr>
@@ -1479,78 +1521,37 @@ book201-500
 book26-100
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-31.12
+-2.19
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-2.87
+3.18
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-10.83
+-0.69
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001</strong>
+0.492
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-45.04
+-21.03
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-3.30
+3.66
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-13.64
+-5.75
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-40.73
+-20.15
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.16
+3.50
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-12.90
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
-<strong>&lt;0.001</strong>
-</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-book [more than 500]
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-33.30
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.89
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-8.57
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001</strong>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-66.07
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-4.47
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-14.79
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
-<strong>&lt;0.001</strong>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-60.88
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-4.27
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-14.26
+-5.76
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
 <strong>&lt;0.001</strong>
@@ -1794,37 +1795,37 @@ p
 (Intercept)
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-317.19
+349.60
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-16.19
+16.10
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-19.59
+21.71
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-266.75
+332.05
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-18.94
+18.84
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-14.08
+17.62
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-304.84
+364.92
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-17.84
+17.74
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-17.09
+20.57
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
 <strong>&lt;0.001</strong>
@@ -2693,43 +2694,84 @@ car [3+]
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-book101-200
+book0-10
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-31.59
+-32.41
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.00
+3.76
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-10.54
+-8.62
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-55.33
+-65.30
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-3.51
+4.40
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-15.76
+-14.85
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-50.09
+-60.08
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.32
+4.15
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-15.11
+-14.46
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
 <strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+book101-200
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.82
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.16
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.26
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.795
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-9.97
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+3.70
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
+-2.69
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
+<strong>0.007</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
+-9.99
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
+3.49
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
+-2.86
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
+<strong>0.004</strong>
 </td>
 </tr>
 <tr>
@@ -2737,40 +2779,40 @@ book101-200
 book11-25
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-10.12
+-22.29
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.11
+3.54
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.25
+-6.30
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>0.001</strong>
+<strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-12.01
+-53.29
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-3.65
+4.14
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-3.29
+-12.88
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
-<strong>0.001</strong>
+<strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-6.77
+-53.30
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.45
+3.91
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-1.97
+-13.63
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
-<strong>0.049</strong>
+<strong>&lt;0.001</strong>
 </td>
 </tr>
 <tr>
@@ -2778,40 +2820,40 @@ book11-25
 book201-500
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-44.39
+11.98
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.20
+3.24
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-13.88
+3.69
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-70.78
+5.48
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-3.75
+3.80
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-18.89
+1.44
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
-<strong>&lt;0.001</strong>
+0.149
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-64.62
+4.54
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.54
+3.58
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-18.27
+1.27
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
-<strong>&lt;0.001</strong>
+0.205
 </td>
 </tr>
 <tr>
@@ -2819,78 +2861,37 @@ book201-500
 book26-100
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-29.19
+-3.22
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-2.76
+3.08
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-10.58
+-1.05
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001</strong>
+0.296
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-43.13
+-22.17
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-3.23
+3.60
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-13.34
+-6.16
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-39.00
+-21.07
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.05
+3.40
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-12.78
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
-<strong>&lt;0.001</strong>
-</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-book [more than 500]
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-32.41
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.76
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-8.62
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001</strong>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-65.30
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-4.40
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-14.85
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
-<strong>&lt;0.001</strong>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-60.08
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-4.15
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-14.46
+-6.19
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
 <strong>&lt;0.001</strong>
@@ -2988,7 +2989,7 @@ Random Effects
 σ<sup>2</sup>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">
-5898.15
+5898.14
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">
 8154.47
@@ -3002,7 +3003,7 @@ Random Effects
 τ<sub>00</sub>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">
-732.06 <sub>school_id</sub>
+732.08 <sub>school_id</sub>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">
 718.60 <sub>school_id</sub>
@@ -3016,7 +3017,7 @@ Random Effects
 τ<sub>11</sub>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">
-133.29 <sub>school_id.escs</sub>
+133.30 <sub>school_id.escs</sub>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="4">
 145.17 <sub>school_id.escs</sub>
@@ -3241,37 +3242,37 @@ p
 (Intercept)
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-208.64
+244.46
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-23.11
+22.95
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-9.03
+10.65
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-165.01
+232.84
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-25.92
+25.73
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-6.37
+9.05
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-212.87
+276.55
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-25.15
+24.98
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-8.46
+11.07
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
 <strong>&lt;0.001</strong>
@@ -4140,43 +4141,84 @@ car [3+]
 </tr>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-book101-200
+book0-10
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-32.87
+-35.82
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.27
+4.10
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-10.05
+-8.74
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-56.25
+-67.82
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-3.83
+4.80
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-14.67
+-14.12
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-51.98
+-63.68
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.61
+4.53
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-14.38
+-14.06
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
 <strong>&lt;0.001</strong>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+book101-200
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-2.95
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+3.44
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.86
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.390
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-11.58
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
+4.03
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
+-2.88
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
+<strong>0.004</strong>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
+-11.70
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
+3.79
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
+-3.08
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
+<strong>0.002</strong>
 </td>
 </tr>
 <tr>
@@ -4184,40 +4226,40 @@ book101-200
 book11-25
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-13.70
+-22.12
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.42
+3.87
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-4.00
+-5.72
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-14.52
+-53.30
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-4.02
+4.53
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-3.61
+-11.77
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-11.10
+-52.58
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.78
+4.27
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-2.94
+-12.31
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
-<strong>0.003</strong>
+<strong>&lt;0.001</strong>
 </td>
 </tr>
 <tr>
@@ -4225,40 +4267,40 @@ book11-25
 book201-500
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-46.10
+10.28
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.49
+3.52
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-13.22
+2.92
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001</strong>
+<strong>0.004</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-71.34
+3.52
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-4.09
+4.13
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-17.44
+0.85
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
-<strong>&lt;0.001</strong>
+0.395
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-66.97
+3.29
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.86
+3.89
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-17.37
+0.84
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
-<strong>&lt;0.001</strong>
+0.398
 </td>
 </tr>
 <tr>
@@ -4266,78 +4308,37 @@ book201-500
 book26-100
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-29.81
+-6.01
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-3.01
+3.35
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-9.89
+-1.79
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001</strong>
+0.073
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-42.65
+-25.17
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-3.54
+3.93
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-12.06
+-6.41
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
 <strong>&lt;0.001</strong>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-39.32
+-24.36
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-3.33
+3.70
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-11.80
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
-<strong>&lt;0.001</strong>
-</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-book [more than 500]
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-35.82
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-4.10
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-8.74
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001</strong>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-67.82
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">
-4.80
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">
-14.12
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">
-<strong>&lt;0.001</strong>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">
-63.68
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">
-4.53
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">
-14.06
+-6.58
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">
 <strong>&lt;0.001</strong>
@@ -4845,11 +4846,11 @@ dropping, implying a gradual move towards equality.</p></li>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
 <span><span class="co">#&gt;  [1] kableExtra_1.4.0    ggrepel_0.9.6       patchwork_1.3.0    </span></span>
-<span><span class="co">#&gt;  [4] sjPlot_2.8.16       ggfortify_0.4.17    lme4_1.1-35.5      </span></span>
+<span><span class="co">#&gt;  [4] sjPlot_2.8.17       ggfortify_0.4.17    lme4_1.1-35.5      </span></span>
 <span><span class="co">#&gt;  [7] Matrix_1.7-1        lubridate_1.9.3     forcats_1.0.0      </span></span>
 <span><span class="co">#&gt; [10] stringr_1.5.1       dplyr_1.1.4         purrr_1.0.2        </span></span>
 <span><span class="co">#&gt; [13] readr_2.1.5         tidyr_1.3.1         tibble_3.2.1       </span></span>
-<span><span class="co">#&gt; [16] ggplot2_3.5.1       tidyverse_2.0.0     learningtower_1.0.1</span></span>
+<span><span class="co">#&gt; [16] ggplot2_3.5.1       tidyverse_2.0.0     learningtower_1.1.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;  [1] tidyselect_1.2.1   sjlabelled_1.2.0   viridisLite_0.4.2  farver_2.1.2      </span></span>
@@ -4859,13 +4860,13 @@ dropping, implying a gradual move towards equality.</p></li>
 <span><span class="co">#&gt; [17] yaml_2.3.10        knitr_1.49         labeling_0.4.3     xml2_1.3.6        </span></span>
 <span><span class="co">#&gt; [21] withr_3.0.2        desc_1.4.3         grid_4.4.2         datawizard_0.13.0 </span></span>
 <span><span class="co">#&gt; [25] fansi_1.0.6        colorspace_2.1-1   scales_1.3.0       MASS_7.3-61       </span></span>
-<span><span class="co">#&gt; [29] insight_0.20.5     cli_3.6.3          rmarkdown_2.29     ragg_1.3.3        </span></span>
+<span><span class="co">#&gt; [29] insight_1.0.0      cli_3.6.3          rmarkdown_2.29     ragg_1.3.3        </span></span>
 <span><span class="co">#&gt; [33] generics_0.1.3     rstudioapi_0.17.1  performance_0.12.4 tzdb_0.4.0        </span></span>
-<span><span class="co">#&gt; [37] parameters_0.23.0  minqa_1.2.8        cachem_1.1.0       splines_4.4.2     </span></span>
+<span><span class="co">#&gt; [37] parameters_0.24.0  minqa_1.2.8        cachem_1.1.0       splines_4.4.2     </span></span>
 <span><span class="co">#&gt; [41] effectsize_0.8.9   vctrs_0.6.5        boot_1.3-31        jsonlite_1.8.9    </span></span>
 <span><span class="co">#&gt; [45] hms_1.1.3          systemfonts_1.1.0  jquerylib_0.1.4    glue_1.8.0        </span></span>
 <span><span class="co">#&gt; [49] nloptr_2.1.1       pkgdown_2.1.1      stringi_1.8.4      gtable_0.3.6      </span></span>
-<span><span class="co">#&gt; [53] ggeffects_1.7.2    munsell_0.5.1      pillar_1.9.0       htmltools_0.5.8.1 </span></span>
+<span><span class="co">#&gt; [53] ggeffects_2.0.0    munsell_0.5.1      pillar_1.9.0       htmltools_0.5.8.1 </span></span>
 <span><span class="co">#&gt; [57] R6_2.5.1           textshaping_0.4.0  evaluate_1.0.1     lattice_0.22-6    </span></span>
 <span><span class="co">#&gt; [61] backports_1.5.0    broom_1.0.7        bslib_0.8.0        Rcpp_1.0.13-1     </span></span>
 <span><span class="co">#&gt; [65] svglite_2.1.3      gridExtra_2.3      nlme_3.1-166       xfun_0.49         </span></span>

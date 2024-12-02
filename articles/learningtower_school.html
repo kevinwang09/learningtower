@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">learningtower</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@ the keys <code>c("school_id", "country", "year")</code>.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#loading the school data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">school_subset</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#loading the country data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span></span>
@@ -141,7 +141,7 @@ the keys <code>c("school_id", "country", "year")</code>.</p>
 <span><span class="co">#joining the student, school dataset</span></span>
 <span><span class="va">school_student_subset_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
 <span>  <span class="va">student_subset_2018</span>, </span>
-<span>  <span class="va">school</span>, </span>
+<span>  <span class="va">school_subset</span>, </span>
 <span>  by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"school_id"</span>, <span class="st">"country"</span>, <span class="st">"year"</span><span class="op">)</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="co">#check the count of public and private schools in the a few randomly selected countries</span></span>
