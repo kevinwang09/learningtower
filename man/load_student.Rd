@@ -3,7 +3,7 @@
 \name{load_student}
 \alias{load_student}
 \title{load_student() function allows the user to extract the PISA student scores for any desired year
-from 2000-2018}
+from 2000-2022}
 \usage{
 load_student(year = "2000")
 }
@@ -18,8 +18,8 @@ from the years 2000-2018
 }
 \description{
 load_student() function was created to extract the data of student's scores in any
-years from 2000-2018, the function requires any of the year as it argument or a string "all"
-that will return all the PISA scores of the students from the years 2000-2018.
+years from 2000-2022, the function requires any of the year as it argument or a string "all"
+that will return all the PISA scores of the students from the years 2000-2022.
 }
 \examples{
 \dontrun{

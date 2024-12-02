@@ -4,7 +4,11 @@
 \alias{load_school}
 \title{load_school() function downloads the entire PISA school data}
 \usage{
-load_school()
+load_school(year="all")
+}
+\arguments{
+\item{year}{School data across all the years are downloaded,
+regardless of the input value of "year".}
 }
 \value{
 A dataset containing all PISA school data across all years.

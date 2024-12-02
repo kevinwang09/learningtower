@@ -101,7 +101,7 @@ NULL
 
 #' @title Subset of the School data available for the years 2000-2022 from the PISA OECD database
 #'
-#' @description A dataset containing school weight and other information
+#' @description A subset data containing school weight and other information
 #' from the triennial testing of 15 year olds around
 #' the globe. Original data available from
 #'  \url{https://www.oecd.org/pisa/data/}.

@@ -24,7 +24,7 @@ A tibble of the following variables
     }
 }
 \description{
-A dataset containing school weight and other information
+A subset data containing school weight and other information
 from the triennial testing of 15 year olds around
 the globe. Original data available from
  \url{https://www.oecd.org/pisa/data/}.
