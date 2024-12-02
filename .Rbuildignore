@@ -10,7 +10,8 @@
 ^LICENSE\.md$
 ^pkgdown$
 ^vignettes/articles$
-^full_data$
+^student_full_data$
+^school_full_data$
 ^CODE_OF_CONDUCT\.md$
 ^CRAN-RELEASE$
 ^cran-comments\.md$

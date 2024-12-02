@@ -7,14 +7,13 @@ library(tibble)
 
 source(here::here("inst/data_integrity_utils.R"))
 
-FULLDATA_PATH = here::here("full_data")
 PKGDATA_PATH = here::here("data")
 
 # Number of years for which the data is available in this package.
 YEARS = c(2000, 2003, 2006, 2009, 2012, 2015, 2018, 2022)
 
-full_student_data = readRDS(paste0(FULLDATA_PATH, "/student.rds"))
-full_school_data = readRDS(paste0(FULLDATA_PATH, "/school.rds"))
+full_student_data = readRDS(here::here("student_full_data/student.rds"))
+full_school_data = readRDS(here::here("school_full_data/school.rds"))
 
 sampling_student_data = function(full_data_path){
 
@@ -41,7 +40,7 @@ for (y in YEARS){
   stopifnot(nrow(this_year_full_student_data) < nrow(full_student_data))
 
   message("Saving the full student data for the year: ", y, "\n")
-  this_year_full_student_data_path = paste0(FULLDATA_PATH, "/student_", y, ".rds")
+  this_year_full_student_data_path = here::here("student_full_data/student_", y, ".rds")
   saveRDS(object = this_year_full_student_data,
           file = this_year_full_student_data_path,
           compress = "xz")

@@ -27,7 +27,7 @@ load_school <- function(year = "all") {
     warning("The whole school data will always be downloaded")
   }
 
-  url_git <- base::paste0("https://github.com/kevinwang09/learningtower/raw/master/full_data/school.rds")
+  url_git <- base::paste0("https://github.com/kevinwang09/learningtower/raw/master/school_full_data/school.rds")
   tmp <- tempfile()
   utils::download.file(url = url_git, destfile = tmp, quiet = TRUE)
   return(base::readRDS(file = tmp))
