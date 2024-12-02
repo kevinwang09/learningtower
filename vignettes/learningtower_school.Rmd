@@ -88,7 +88,7 @@ school_student_subset_2018 %>%
 
 ```{r, echo=FALSE}
 student_data_2018 <- load_student("2018")
-school = load_schoo("all")
+school = load_school()
 
 data(countrycode)
 

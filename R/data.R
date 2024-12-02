@@ -1,4 +1,4 @@
-#' @title Sample student data available for the years 2000-2018 from the PISA OECD database
+#' @title Sample student data available for the years 2000-2022 from the PISA OECD database
 #'
 #' @description A sample student subset dataset containing scores and other information
 #' from the triennial testing of 15 year olds around
@@ -99,7 +99,7 @@ NULL
 NULL
 
 
-#' @title School data available for the years 2000-2018 from the PISA OECD database
+#' @title Subset of the School data available for the years 2000-2022 from the PISA OECD database
 #'
 #' @description A dataset containing school weight and other information
 #' from the triennial testing of 15 year olds around
@@ -124,7 +124,7 @@ NULL
 #'     \item \code{school_size}: The school size. Numeric.
 #'     }
 #' @docType data
-#' @name school
+#' @name school_subset
 NULL
 
 #' @title Country iso3c and name mapping for PISA OECD countries participants.
