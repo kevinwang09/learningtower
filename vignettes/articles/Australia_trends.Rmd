@@ -9,8 +9,10 @@ output:
     number_sections: true
 vignette: >
   %\VignetteIndexEntry{How did Australia do in the PISA study}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
   
 ```{r setup, include = FALSE}
@@ -71,7 +73,7 @@ A boxplot is a standardized method of presenting data distribution. It informs w
 ```{r, fig.height = 9, fig.width = 15}
 # plotting the distribution of numeric variables via boxplots
 aus_data %>% 
-  select(where(is.numeric)) %>% 
+  select(where(is.numeric), -school_id, -student_id) %>% 
   bind_cols(aus_data %>% select(year)) %>% 
   pivot_longer(cols = -year) %>% 
   ggplot(aes(x = year, y = value,
@@ -92,7 +94,7 @@ Missing data is a common issue that data professionals must deal with on a daily
 #checking the missing values in the factor variables of the data
 aus_fct_plotdata = aus_data %>% 
   select(where(is.factor)) %>% 
-  dplyr::select(-country, -school_id, -student_id) %>% 
+  dplyr::select(-country) %>% 
   pivot_longer(cols = -year) %>% 
   group_by(year, name, value) %>% 
   tally() %>% 
@@ -126,7 +128,7 @@ Linear regression analysis predicts the value of one variable depending on the v
 
 We begin by doing a basic data exploration using linear regression models. To begin, we fit three linear models (one for each subject of math, reading, and science) to the 2018 Australian data to gain an understanding of the key variables that may be impacting test scores.
 
-We filter the student data (we use the complete student data obtained by the load student("all") function) to pick the scores in Australia and re level some variables for further analyses.
+We filter the student data (we will load the complete student data using `load student("all")`) to pick the scores in Australia and re level some variables for further analyses.
 
 ```{r}
 #filtering the data to Australia, defining the predictors and selecting the scores
@@ -137,7 +139,7 @@ student_predictors = c("mother_educ", "father_educ", "gender", "internet",
 student_formula_rhs = paste(student_predictors, collapse = "+")
 
 aus2018 = aus_data %>% 
-  filter(year == "2018") %>% 
+  dplyr::filter(year == "2018") %>% 
   dplyr::select(
     math, read, science, 
     all_of(student_predictors)) %>% 
@@ -189,6 +191,8 @@ Some interesting discoveries from these models:
 
 4. The most influential predictors are those associated with socioeconomic status (`escs`) and education (`book`). A number of variables that should not be directly causal to academic performance also showed up as significant. This is likely due to their associations with socio-economic status. 
 
+Note that in making these conclusions, we have ignored the effects of multicollinearity.
+
 Upon checking the classical diagnostic plots of these models, we see no major violation on the assumptions of linear models. The large amount of variations in the data may help to explain why the models only has a moderately low $R^2$ values (~ 0.20).
 
 ```{r, fig.height = 30, fig.width = 12}
@@ -212,8 +216,8 @@ By building random effects in our linear model, that is building a linear mixed 
 ```{r}
 # joining school and student data, building a linear mixed model
 lmm2018 = aus_data %>% 
-  filter(year == "2018") %>% 
-  select(
+  filter(year == 2018) %>% 
+  dplyr::select(
     school_id,
     math, read, science, 
     all_of(student_predictors)) %>% 
