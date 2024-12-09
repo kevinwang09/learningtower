@@ -3,8 +3,10 @@ title: "Using the Student and School Data"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{learningtower_school}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
@@ -16,22 +18,20 @@ warning = FALSE,
 message = FALSE,
 error = FALSE,
 outwidth = "100%",
-fig.width = 8,
-fig.height = 6,
+fig.width = 6,
+fig.height = 4,
 fig.align = "center")
 ```
 
 # Introduction
 
-The goal of `learningtower` is to provide a user-friendly access to a subset of variables from the Programme for International Student Assessment (PISA) data collected by the [OECD](https://www.oecd.org/pisa/data/). The data is collected on a three year basis, between the years 2000-2018.
+The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](https://www.oecd.org/pisa/data/). Version `r utils::packageVersion("learningtower")` of this package provides the data for the years `r learningtower:::data_range()`. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualizing and statistical computations.
 
-You can explore more on this dataset for various analysis and statistical computations.
+This vignette documents how to access the data, and shows a few ways of integrating the data.
 
-This vignette documents how to access these dataset, and shows a few ways of integrating the data.
+# Using both the `student` and `school` data
 
-# Using the student and school data
-
-The size of the full `student` is too big to fit inside the package. Hence, in our package, we provide a random subset of the student data, stored as `student_subset_20xx` data objects (where `xx` denotes the specific year of the study). These subset data can be used to understanding the data structure before using the full dataset which is available for download.
+The size of the full `student` is too big to fit inside the package. Hence, in our package, we provide a random subset of the student data, stored as `student_subset_yyyy` data objects (where `yyyy` denotes the specific year of the study). These subset data can be used to understanding the data structure before using the full dataset which is available for download.
 
 In the `student_subset_2018` and `school` data, there are three common columns, `school_id`, `country` and `year`. It should be noted that `school_id` is only meaningful within a country within a specific year; meaning that when we join the two data, we need to use the keys `c("school_id", "country", "year")`.
 
@@ -47,29 +47,27 @@ library(learningtower)
 data(student_subset_2018)
 
 #loading the school data
-data(school_subset)
+data(school)
 
 #loading the country data
 data(countrycode)
 
+selected_countries = c("AUS", "FIN", "JPN", "USA", "NZL", "ESP")
+
 #joining the student, school dataset
 school_student_subset_2018 <- left_join(
   student_subset_2018, 
-  school_subset, 
+  school, 
   by = c("school_id", "country", "year")) 
 
 #check the count of public and private schools in the a few randomly selected countries
 school_student_subset_2018 %>% 
-  dplyr::filter(country %in% c("AUS", "QAT", "USA" , "JPN", 
-                              "ALB", "PER", "FIN",  "SGP")) %>%
+  dplyr::filter(country %in% selected_countries) %>%
   group_by(country, public_private) %>% 
   tally() %>% 
   dplyr::mutate(percent = n/sum(n)) %>% 
   dplyr::ungroup() %>% 
   left_join(countrycode, by = "country") %>% 
-  dplyr::mutate(country_name = fct_relevel(
-    country_name, 
-    c("Finland", "United States", "Albania", "Peru", "Japan", "Qatar", "Australia"))) %>% 
   ggplot(aes(x = percent,
              y = country_name,
              fill = public_private)) +
@@ -82,24 +80,23 @@ school_student_subset_2018 %>%
        fill = "")
 ```
 
-- The graph assists us in understanding the distribution of public and private schools in few countries based on the datasets. Taking a closer look at the above plot, we can infer that most countries have more public schools than private schools. Interestingly, Australia had a nearly equal mix of public and private schools in the year 2018. This public/private information is missing in Signapore.
+- The graph assists us in understanding the distribution of public and private schools in few countries based on the datasets. Taking a closer look at the above plot, we can infer that most countries have more public schools than private schools. Interestingly, Spain had a nearly equal mix of public and private schools in the year 2018.
 
 - Similarly, we may derive additional intriguing patterns and analysis by considering the other variables in the school dataset.
 
 ```{r, echo=FALSE}
 student_data_2018 <- load_student("2018")
-school = load_school()
+data(school)
 
 data(countrycode)
 
 school_student_2018 <- left_join(
   student_data_2018, 
-  school_subset, 
+  school,
   by = c("school_id", "country", "year"))
 
 school_student_2018 %>%
-  dplyr::filter(country %in% c("AUS", "QAT", "USA" , "JPN", 
-                               "ALB", "PER", "FIN",  "SGP")) %>% 
+  dplyr::filter(country %in% selected_countries) %>% 
   group_by(country) %>% 
   summarise(avg_fund_gov = mean(fund_gov, na.rm = TRUE)) %>% 
   arrange(avg_fund_gov) %>% 

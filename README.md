@@ -1,25 +1,19 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # learningtower <img src='man/figures/logo.png' align="right" height="211" />
 
-<!-- badges: start -->
-
 [![R-CMD-check](https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
 
 The goal of `learningtower` is to provide a user-friendly R package to
 provide easy access to a subset of variables from PISA data collected
-from the [OECD](https://www.oecd.org/pisa/data/), for the years 2000 -
-2018, collected on a three year basis. This is an excellent dataset for
-exploring and visualizing data. This dataset can also be used for other
-analytically purposes as well as statistical computations.
+from the [OECD](https://www.oecd.org/pisa/data/). Version 1.1.0 of this
+package provides the data for the years 2000 - 2022. The survey data is
+published every three years. This is an excellent real world dataset for
+data exploring, data visualizing and statistical computations.
 
 ## What is PISA?
 
 <p align="center">
-
-<img width="450" height="450" src="man/figures/pisa_image.png">
+<img width="300" height="300" src="man/figures/pisa_image.png">
 </p>
 
 The Programme for International Student Assessment (PISA) is an
@@ -31,7 +25,7 @@ some of the knowledge and skills that are essential for full
 participation in society, and how well they are prepared for lifelong
 learning in the areas of reading, mathematical and scientific literacy.
 
-In 2018, PISA involved 79 countries and 600,000+ students worldwide.
+In 2022, PISA involved 79 countries and 600,000+ students worldwide.
 
 Read more about the Programme
 [here](https://www.oecd.org/pisa/aboutpisa/).
@@ -52,12 +46,12 @@ To install the development version of `learningtower` from
 devtools::install_github("kevinwang09/learningtower")
 ```
 
-## Data Description and Usage
+## Data Description
 
 The `learningtower` gives access to a subset of variables from PISA data
 originally collected and are available from
-[OECD](https://www.oecd.org/pisa/data/), for the years 2000 - 2018,
-collected on a three year basis.
+[OECD](https://www.oecd.org/pisa/data/), collected on a three year
+basis.
 
 The `learningtower` package contains mainly three datasets:
 
@@ -67,91 +61,89 @@ The `learningtower` package contains mainly three datasets:
 
 This provides us with information about the students scores in
 mathematics, reading and science. Their school details, and which
-country they are from. Let’s have a look at how these datasets can be
-downloaded.
+country they are from. The number of entries for the `student` and
+`school` data are shown below.
+
+| Year | Number of Students | Number of Schools |
+|------|-------------------:|------------------:|
+| 2000 |            127,236 |             8,526 |
+| 2003 |            276,165 |            10,274 |
+| 2006 |            398,750 |            14,365 |
+| 2009 |            515,958 |            18,641 |
+| 2012 |            480,174 |            18,139 |
+| 2015 |            519,334 |            17,908 |
+| 2018 |            612,004 |            21,903 |
+| 2022 |            613,744 |            21,629 |
 
 ### Student Dataset
 
-The student dataset comprises of the scores from the triennial testing
+The `student` dataset comprises of the scores from the triennial testing
 of 15-year-olds worldwide. In addition, this dataset contains
 interesting information on their parents qualifications, family wealth,
 gender, and possession of computers, internet, cars, books, rooms,
 desks, and similar other variables.
 
-Keeping in mind the package’s size constraints. The package only
-includes a portion of student data, called the student subset data, this
-subset of student data is available for all the years when the PISA
-experiment took place. The full year wise student data set can be
-downloaded using the `load_student()` function included in this package.
+The full dataset is approximately 50MB in size, which is much larger
+than the CRAN’s allowed package size limit. As the result, the package
+itself only includes a random 50 rows from the [38 OECD
+countries](https://en.wikipedia.org/wiki/OECD#Member_countries), for
+each of the survey years. i.e. `student_subset_2000`,
+`student_subset_2003` etc.
 
-As an example, we can load the `student` data as follows:
-
-- The student subset dataset can be loaded as follows
+The `student` subset dataset can be loaded easily. See
+`?student_subset_2000` for detailed information on the measured
+variables.
 
 ``` r
 library(learningtower)
 
-# loading the student subset data for the year 2018
 data(student_subset_2018)
-head(student_subset_2018)
-#> # A tibble: 6 × 22
-#>   year  country school_id student_id mother_educ father_educ gender computer
-#>   <fct> <fct>   <fct>     <fct>      <fct>       <fct>       <fct>  <fct>   
-#> 1 2018  ALB     800296    805457     ISCED 2     ISCED 2     female no      
-#> 2 2018  ALB     800251    805241     ISCED 3A    ISCED 3A    female yes     
-#> 3 2018  ALB     800194    801631     ISCED 2     ISCED 2     male   no      
-#> 4 2018  ALB     800257    800960     ISCED 3A    ISCED 3A    female yes     
-#> 5 2018  ALB     800282    806606     ISCED 3A    ISCED 3A    female yes     
-#> 6 2018  ALB     800266    801723     ISCED 2     ISCED 2     female yes     
-#> # ℹ 14 more variables: internet <fct>, math <dbl>, read <dbl>, science <dbl>,
-#> #   stu_wgt <dbl>, desk <fct>, room <fct>, dishwasher <fct>, television <fct>,
-#> #   computer_n <fct>, car <fct>, book <fct>, wealth <dbl>, escs <dbl>
+dim(student_subset_2018)
+#> [1] 1900   22
 ```
 
-- The entire student data can be downloaded as follows:
+The entire `student` data can be downloaded using the `load_student`
+function.
 
 ``` r
 #load the entire student data for a single year
 student_data_2018 <- load_student(2018)
 
-#load the entire student data for two/three years (2000, 2012, 2018)
+#load the entire student data for two of the years (2012, 2018)
 student_data_2012_2018 <- load_student(c(2012, 2018))
-student_data_2000_2012_2018 <- load_student(c(2000, 2012, 2018))
 
 #load the entire student data
 student_data_all <- load_student("all")
 ```
 
-See `?student_subset_2000` for information pertaining to variables
-captured.
+Note that because of changing data specification over the survery years,
+not all variables were measured consistently across the years.
+
+<p align="center">
+<img width="1200" height="500" src="man/figures/README_student_data_missing_values_summary.png">
+</p>
 
 ### School Dataset
 
-The school dataset comprises school weight and other information such as
-the funding distribution of the schools, whether the school is private
-or public, the enrollment of boys and girls, the school size, and
-similar other characteristics of interest of different schools these
+The `school` dataset comprises school weight and other information such
+as the funding distribution of the schools, whether the school is
+private or public, the enrollment of boys and girls, the school size,
+and similar other characteristics of interest of different schools these
 15-year-olds attend throughout the world.
+
+- The school subset dataset can be loaded as follows
 
 ``` r
 # loading the school data
 data(school)
-head(school)
-#> # A tibble: 6 × 13
-#>   year  country school_id fund_gov fund_fees fund_donation enrol_boys
-#>   <fct> <fct>   <fct>        <dbl>     <dbl>         <dbl>      <dbl>
-#> 1 2000  ALB     01001          100         0             0       1191
-#> 2 2000  ALB     01004           98         1             1        334
-#> 3 2000  ALB     01005           91         5             2        403
-#> 4 2000  ALB     01010          100         0             0        114
-#> 5 2000  ALB     01013            0        50            30        250
-#> 6 2000  ALB     01017           95         2             3        771
-#> # ℹ 6 more variables: enrol_girls <dbl>, stratio <dbl>, public_private <fct>,
-#> #   staff_shortage <dbl>, sch_wgt <dbl>, school_size <dbl>
 ```
 
 See `?school` for more information on the different variables present in
 the the school dataset.
+
+<p align="center">
+<img width="1200" height="500" src="man/figures/README_school_data_missing_values_summary.png">
+</p>
 
 ### Countrycode Dataset
 
@@ -186,8 +178,7 @@ of these 15 year old students for a few selected countries over the
 available years.
 
 <p align="center">
-
-<img width="800" height="400" src="man/figures/readme.png">
+<img width="600" height="400" src="man/figures/readme.png">
 </p>
 
 - Similarly, you can find more code examples and data visualizations for
@@ -205,20 +196,19 @@ To cite the `learningtower` package, please use:
 citation("learningtower")
 #> To cite package 'learningtower' in publications use:
 #> 
-#>   Wang K, Yacobellis P, Siregar E, Romanes S, Fitter K, Valentino Dalla
-#>   Riva G, Cook D, Tierney N, Dingorkar P (2024). _learningtower: OECD
-#>   PISA Datasets from 2000-2022 in an Easy-to-Use Format_. R package
-#>   version 1.0.1, commit 3a11c911218b6d1f665f27a83c7d83f0c0174d4b,
-#>   <https://github.com/kevinwang09/learningtower>.
+#>   Wang K, Yacobellis P, Siregar E, Romanes S, Fitter K, Dalla Riva G,
+#>   Cook D, Tierney N, Dingorkar P (????). _learningtower: OECD PISA
+#>   Datasets from 2000-2022 in an Easy-to-Use Format_. R package version
+#>   1.1.0, https://github.com/kevinwang09/learningtower,
+#>   <https://kevinwang09.github.io/learningtower/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {learningtower: OECD PISA Datasets from 2000-2022 in an Easy-to-Use Format},
-#>     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio {Valentino Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},
-#>     year = {2024},
-#>     note = {R package version 1.0.1, commit 3a11c911218b6d1f665f27a83c7d83f0c0174d4b},
-#>     url = {https://github.com/kevinwang09/learningtower},
+#>     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio Valentino {Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},
+#>     note = {R package version 1.1.0, https://github.com/kevinwang09/learningtower},
+#>     url = {https://kevinwang09.github.io/learningtower/},
 #>   }
 ```
 
@@ -234,7 +224,6 @@ citation("learningtower")
   three](https://www.smh.com.au/education/in-china-nicholas-studied-maths-20-hours-a-week-in-australia-it-s-three-20191203-p53ggv.html).
 
 <p align="center">
-
 <img width="720" height="360" src="man/figures/conversation_holden.png">
 </p>
 

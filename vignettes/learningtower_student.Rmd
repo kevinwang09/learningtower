@@ -3,11 +3,14 @@ title: "Using the Student and Country Data"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{learningtower_student}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
 knitr::opts_chunk$set(
 echo = TRUE,
 collapse = TRUE,
@@ -23,15 +26,13 @@ fig.align = "center")
 
 # Introduction
 
-The goal of `learningtower` is to provide a user-friendly access to a subset of variables from the Programme for International Student Assessment (PISA) data collected by the [OECD](https://www.oecd.org/pisa/data/). The data is collected on a three year basis, between the years 2000-2018.
+The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](https://www.oecd.org/pisa/data/). Version `r utils::packageVersion("learningtower")` of this package provides the data for the years `r learningtower:::data_range()`. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualizing and statistical computations.
 
-You can explore more on this dataset for various analysis and statistical computations.
+This vignette documents how to access the data, and shows a few typical methods to explore the data.
 
-This vignette documents how to access these dataset, and shows a few typical methods to explore the data.
+# Exploring the `student` data
 
-# Exploring the student Data
-
-## Usage of the student subset data
+## Usage of the subset of the `student` data
 
 - In `learningtower`, the main data is the student data. This data contains information regarding student test scores and some selected variables regarding their schooling and socio-economic status. The original and complete data may be obtained from [OECD](https://www.oecd.org/pisa/data/).
 
@@ -85,13 +86,12 @@ student_subset_2018 %>%
 
 - In order to load and download the complete student data for each year(s), here are the various ways to retrieve the entire student dataset for each year(s) for additional study or analysis purposes.
 
-```{r, eval=FALSE}
+```
 #load the entire student data for the year 2018
 student_data_2018 <- load_student(2018)
 
-#load the entire student data for two/three years (2000, 2012, 2018)
+#load the entire student data for two of the years (2012, 2018)
 student_data_2012_2018 <- load_student(c(2012, 2018))
-student_data_2000_2012_2018 <- load_student(c(2000, 2012, 2018))
 
 #load the entire student 
 student_data_all <- load_student("all")
@@ -99,7 +99,7 @@ student_data_all <- load_student("all")
 
 - Note, now that we can load and download the the entire student data. Let us plot the difference in score between a few randomly picked countries seen previously and observe how they have grown in terms their average mathematics score from the year 2012 to 2018.
 
-```{r echo=FALSE}
+```{r}
 student_data_2012_2018 <- load_student(c(2012, 2018))
 
 plot_data <- student_data_2012_2018 %>% 
@@ -128,10 +128,10 @@ plot_data %>%
   geom_line() +
   geom_vline(xintercept=2012,
              linetype="dashed",
-             size=0.1) +
+             linewidth=0.1) +
   geom_vline(xintercept=2018,
              linetype="dashed",
-             size=0.1) + 
+             linewidth=0.1) + 
   geom_text(aes(x = label_x_pos),
             position = position_nudge(y = 0)) +
   scale_x_continuous(breaks = c(2012, 2018),

@@ -44,7 +44,7 @@ library(ggrepel)
 library(kableExtra)
 
 student <- load_student("all")
-school = load_school()
+data(school)
 data(countrycode)
 
 theme_set(theme_classic(18) 

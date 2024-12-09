@@ -1,0 +1,18 @@
+bibentry(
+  bibtype  = "Manual",
+  title    = "learningtower: OECD PISA Datasets from 2000-2022 in an Easy-to-Use Format",
+  author   = c(
+    person("Kevin", "Wang"),
+    person("Paul", "Yacobellis"),
+    person("Erika", "Siregar"),
+    person("Sarah", "Romanes"),
+    person("Kim", "Fitter"),
+    person("Giulio Valentino", "Dalla Riva"),
+    person("Dianne", "Cook"),
+    person("Nick", "Tierney"),
+    person("Priya", "Dingorkar")
+  ),
+  note     = "R package version 1.1.0, https://github.com/kevinwang09/learningtower",
+  url      = "https://kevinwang09.github.io/learningtower/",
+  year = "2024"
+)

@@ -16,3 +16,5 @@
 ^CRAN-RELEASE$
 ^cran-comments\.md$
 ^man/figures/readme.gif$
+^man/figures/README_student_data_missing_values_summary.png$
+^man/figures/README_school_data_missing_values_summary.png$
