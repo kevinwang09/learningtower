@@ -97,19 +97,20 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>The goal of <code>learningtower</code> is to provide a user-friendly
-access to a subset of variables from the Programme for International
-Student Assessment (PISA) data collected by the <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>. The data is collected
-on a three year basis, between the years 2000-2018.</p>
-<p>You can explore more on this dataset for various analysis and
+R package to provide easy access to a subset of variables from PISA data
+collected from the <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>.
+Version 1.1.0 of this package provides the data for the years 2000 -
+2022. The survey data is published every three years. This is an
+excellent real world dataset for data exploring, data visualizing and
 statistical computations.</p>
-<p>This vignette documents how to access these dataset, and shows a few
+<p>This vignette documents how to access the data, and shows a few
 typical methods to explore the data.</p>
 </div>
 <div class="section level2">
-<h2 id="exploring-the-student-data">Exploring the student Data<a class="anchor" aria-label="anchor" href="#exploring-the-student-data"></a>
+<h2 id="exploring-the-student-data">Exploring the <code>student</code> data<a class="anchor" aria-label="anchor" href="#exploring-the-student-data"></a>
 </h2>
 <div class="section level3">
-<h3 id="usage-of-the-student-subset-data">Usage of the student subset data<a class="anchor" aria-label="anchor" href="#usage-of-the-student-subset-data"></a>
+<h3 id="usage-of-the-subset-of-the-student-data">Usage of the subset of the <code>student</code> data<a class="anchor" aria-label="anchor" href="#usage-of-the-subset-of-the-student-data"></a>
 </h3>
 <ul>
 <li><p>In <code>learningtower</code>, the main data is the student data.
@@ -142,31 +143,30 @@ function included in this package.</p></li>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 2,400</span></span>
-<span><span class="co">#&gt; Columns: 23</span></span>
-<span><span class="co">#&gt; $ year        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018…</span></span>
-<span><span class="co">#&gt; $ country     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> ALB, ALB, ALB, ALB, ALB, ALB, ALB, ALB, ALB, ALB, ALB, ALB…</span></span>
-<span><span class="co">#&gt; $ school_id   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 800296, 800251, 800194, 800257, 800282, 800266, 800145, 80…</span></span>
-<span><span class="co">#&gt; $ student_id  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 805457, 805241, 801631, 800960, 806606, 801723, 806155, 80…</span></span>
-<span><span class="co">#&gt; $ mother_educ <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> "ISCED 2", "ISCED 3A", "ISCED 2", "ISCED 3A", "ISCED 3A", …</span></span>
-<span><span class="co">#&gt; $ father_educ <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> "ISCED 2", "ISCED 3A", "ISCED 2", "ISCED 3A", "ISCED 3A", …</span></span>
-<span><span class="co">#&gt; $ gender      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> female, female, male, female, female, female, female, fema…</span></span>
-<span><span class="co">#&gt; $ computer    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> no, yes, no, yes, yes, yes, yes, yes, yes, yes, no, yes, y…</span></span>
-<span><span class="co">#&gt; $ internet    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> no, yes, no, yes, yes, yes, yes, yes, yes, yes, no, yes, y…</span></span>
-<span><span class="co">#&gt; $ math        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 417.038, 420.752, 346.280, 222.754, 491.874, 377.617, 471.…</span></span>
-<span><span class="co">#&gt; $ read        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 346.229, 462.345, 311.453, 326.082, 517.068, 400.937, 495.…</span></span>
-<span><span class="co">#&gt; $ science     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 372.077, 454.940, 342.219, 307.969, 511.720, 380.052, 475.…</span></span>
-<span><span class="co">#&gt; $ stu_wgt     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.67283, 3.46011, 6.07334, 3.83333, 3.26669, 3.22783, 3.32…</span></span>
-<span><span class="co">#&gt; $ desk        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> no, yes, yes, yes, yes, yes, yes, yes, yes, yes, no, yes, …</span></span>
-<span><span class="co">#&gt; $ room        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> yes, yes, yes, yes, yes, yes, yes, yes, yes, yes, no, yes,…</span></span>
+<span><span class="co">#&gt; Rows: 1,900</span></span>
+<span><span class="co">#&gt; Columns: 22</span></span>
+<span><span class="co">#&gt; $ country     <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> AUS, AUS, AUS, AUS, AUS, AUS, AUS, AUS, AUS, AUS, AUS, AUS…</span></span>
+<span><span class="co">#&gt; $ school_id   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 3600310, 3600251, 3600639, 3600704, 3600736, 3600715, 3600…</span></span>
+<span><span class="co">#&gt; $ student_id  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 3606824, 3605794, 3613122, 3611607, 3606403, 3621081, 3611…</span></span>
+<span><span class="co">#&gt; $ mother_educ <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> "ISCED 3A", "ISCED 2", "ISCED 3A", "ISCED 3A", NA, "ISCED …</span></span>
+<span><span class="co">#&gt; $ father_educ <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> "ISCED 3A", "ISCED 1", "ISCED 3A", "ISCED 1", NA, "ISCED 3…</span></span>
+<span><span class="co">#&gt; $ gender      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> male, female, female, female, male, female, male, female, …</span></span>
+<span><span class="co">#&gt; $ computer    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> yes, yes, yes, no, yes, yes, yes, yes, yes, yes, yes, yes,…</span></span>
+<span><span class="co">#&gt; $ internet    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> yes, yes, yes, yes, no, yes, yes, yes, yes, yes, yes, yes,…</span></span>
+<span><span class="co">#&gt; $ math        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 427.631, 479.464, 490.057, 517.379, 527.985, 462.708, 307.…</span></span>
+<span><span class="co">#&gt; $ read        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 425.307, 513.694, 593.488, 588.042, 535.348, 401.866, 258.…</span></span>
+<span><span class="co">#&gt; $ science     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 369.288, 486.794, 469.697, 584.995, 560.943, 467.130, 325.…</span></span>
+<span><span class="co">#&gt; $ stu_wgt     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 3.11283, 27.41035, 14.56053, 21.68163, 15.57013, 10.96668,…</span></span>
+<span><span class="co">#&gt; $ desk        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> yes, yes, yes, yes, yes, yes, yes, yes, yes, yes, yes, yes…</span></span>
+<span><span class="co">#&gt; $ room        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> yes, yes, yes, yes, yes, yes, yes, yes, no, yes, yes, yes,…</span></span>
 <span><span class="co">#&gt; $ dishwasher  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">#&gt; $ television  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 1, 2, 2, 2, 2, 3+, 3+, 2, 2, 2, 1, 2, 2, 3+, 2, 2, 1, 2, 1…</span></span>
-<span><span class="co">#&gt; $ computer_n  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 1, 1, 0, 2, 1, 1, 2, 2, 1, 1, 0, 2, 2, 1, 0, 2, 1, 1, 1, 1…</span></span>
-<span><span class="co">#&gt; $ laptop_n    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…</span></span>
-<span><span class="co">#&gt; $ car         <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 2, 0, 0, 1, 1, 0, 2, 2, 2, 0, 0, 0, 1, 0, 0, 0, 1, 2, NA, …</span></span>
-<span><span class="co">#&gt; $ book        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 0-10, 0-10, 11-25, 201-500, 26-100, 0-10, 0-10, 0-10, 0-10…</span></span>
-<span><span class="co">#&gt; $ wealth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -1.6793, -1.0031, -2.4229, 0.1054, -0.7251, -1.4482, -0.05…</span></span>
-<span><span class="co">#&gt; $ escs        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -1.7778, -0.5958, -1.6827, 0.1701, 0.4610, -1.4442, -0.296…</span></span></code></pre></div>
+<span><span class="co">#&gt; $ television  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 1, 3+, 3+, 2, 2, 3+, 2, 3+, 3+, 3+, 3+, 3+, 2, 1, NA, 2, 1…</span></span>
+<span><span class="co">#&gt; $ computer_n  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 2, 1, 3+, 1, 3+, 3+, 3+, 3+, 3+, 2, 3+, 1, 3+, 3+, NA, 3+,…</span></span>
+<span><span class="co">#&gt; $ car         <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 3+, 3+, 3+, 3+, 2, 3+, 2, 2, 1, 3+, 3+, 2, 2, 2, NA, 3+, 1…</span></span>
+<span><span class="co">#&gt; $ book        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 201-500, 101-200, 0-10, 0-10, 26-100, 201-500, 101-200, 26…</span></span>
+<span><span class="co">#&gt; $ wealth      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.1688, 0.6327, 1.4097, -0.1318, 0.2886, 1.8571, 0.9773, 0…</span></span>
+<span><span class="co">#&gt; $ escs        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.2100, -0.8160, 0.0932, -0.4153, NA, 0.7428, 0.2569, -0.6…</span></span>
+<span><span class="co">#&gt; $ year        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018…</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">student_subset_2018</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">country</span>, <span class="va">gender</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -208,23 +208,66 @@ this package.</p></li>
 year(s), here are the various ways to retrieve the entire student
 dataset for each year(s) for additional study or analysis purposes.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#load the entire student data for the year 2018</span></span>
+<pre><code><span><span class="co">#load the entire student data for the year 2018</span></span>
 <span><span class="va">student_data_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fl">2018</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#load the entire student data for two/three years (2000, 2012, 2018)</span></span>
+<span><span class="co">#load the entire student data for two of the years (2012, 2018)</span></span>
 <span><span class="va">student_data_2012_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2012</span>, <span class="fl">2018</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">student_data_2000_2012_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">2012</span>, <span class="fl">2018</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#load the entire student </span></span>
-<span><span class="va">student_data_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_student.html">load_student</a></span><span class="op">(</span><span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">student_data_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_student.html">load_student</a></span><span class="op">(</span><span class="st">"all"</span><span class="op">)</span></span></code></pre>
 <ul>
 <li>Note, now that we can load and download the the entire student data.
 Let us plot the difference in score between a few randomly picked
 countries seen previously and observe how they have grown in terms their
 average mathematics score from the year 2012 to 2018.</li>
 </ul>
-<p><img src="learningtower_student_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">student_data_2012_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2012</span>, <span class="fl">2018</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="va">student_data_2012_2018</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">country</span>, <span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AUS"</span>, <span class="st">"QAT"</span>, <span class="st">"USA"</span> , <span class="st">"JPN"</span>, </span>
+<span>                               <span class="st">"ALB"</span>, <span class="st">"PER"</span>, <span class="st">"FIN"</span>,  <span class="st">"SGP"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>avg_math <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">math</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>  </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">countrycode</span>, by <span class="op">=</span> <span class="st">"country"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">country_name</span>, <span class="va">year</span>, <span class="va">avg_math</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    year <span class="op">=</span> <span class="va">year</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">as.character</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="va">as.integer</span>, </span>
+<span>    label_x_pos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2012</span>, <span class="fl">2012</span> <span class="op">-</span> <span class="fl">2</span>, <span class="fl">2018</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span></span>
+<span>      <span class="va">year</span> <span class="op">==</span> <span class="fl">2012</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">country_name</span>, <span class="st">", "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">avg_math</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">avg_math</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="va">plot_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, </span>
+<span>             y <span class="op">=</span> <span class="va">avg_math</span>,</span>
+<span>             label <span class="op">=</span> <span class="va">label</span>,</span>
+<span>             colour <span class="op">=</span> <span class="va">country_name</span>,</span>
+<span>             group <span class="op">=</span> <span class="va">country_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept<span class="op">=</span><span class="fl">2012</span>,</span>
+<span>             linetype<span class="op">=</span><span class="st">"dashed"</span>,</span>
+<span>             linewidth<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept<span class="op">=</span><span class="fl">2018</span>,</span>
+<span>             linetype<span class="op">=</span><span class="st">"dashed"</span>,</span>
+<span>             linewidth<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">label_x_pos</span><span class="op">)</span>,</span>
+<span>            position <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_nudge.html" class="external-link">position_nudge</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2012</span>, <span class="fl">2018</span><span class="op">)</span>,</span>
+<span>                     limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2008</span>, <span class="fl">2020</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#1F77B4FF"</span>, <span class="st">"#FF7F0EFF"</span>, <span class="st">"#2CA02CFF"</span>, <span class="st">"#D62728FF"</span>, </span>
+<span>                                 <span class="st">"#9467BDFF"</span>, <span class="st">"#8C564BFF"</span>, <span class="st">"#E377C2FF"</span>, <span class="st">"#7F7F7FFF"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">""</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Average maths score"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.ticks.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="learningtower_student_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;"></p>
 <ul>
 <li><p>The figure above assists us in deducing the score change in the
 different countries from the year 2012 to 2018. This figure enables us

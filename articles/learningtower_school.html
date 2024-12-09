@@ -97,21 +97,23 @@
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>The goal of <code>learningtower</code> is to provide a user-friendly
-access to a subset of variables from the Programme for International
-Student Assessment (PISA) data collected by the <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>. The data is collected
-on a three year basis, between the years 2000-2018.</p>
-<p>You can explore more on this dataset for various analysis and
+R package to provide easy access to a subset of variables from PISA data
+collected from the <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>.
+Version 1.1.0 of this package provides the data for the years 2000 -
+2022. The survey data is published every three years. This is an
+excellent real world dataset for data exploring, data visualizing and
 statistical computations.</p>
-<p>This vignette documents how to access these dataset, and shows a few
-ways of integrating the data.</p>
+<p>This vignette documents how to access the data, and shows a few ways
+of integrating the data.</p>
 </div>
 <div class="section level2">
-<h2 id="using-the-student-and-school-data">Using the student and school data<a class="anchor" aria-label="anchor" href="#using-the-student-and-school-data"></a>
+<h2 id="using-both-the-student-and-school-data">Using both the <code>student</code> and <code>school</code>
+data<a class="anchor" aria-label="anchor" href="#using-both-the-student-and-school-data"></a>
 </h2>
 <p>The size of the full <code>student</code> is too big to fit inside
 the package. Hence, in our package, we provide a random subset of the
-student data, stored as <code>student_subset_20xx</code> data objects
-(where <code>xx</code> denotes the specific year of the study). These
+student data, stored as <code>student_subset_yyyy</code> data objects
+(where <code>yyyy</code> denotes the specific year of the study). These
 subset data can be used to understanding the data structure before using
 the full dataset which is available for download.</p>
 <p>In the <code>student_subset_2018</code> and <code>school</code> data,
@@ -133,29 +135,27 @@ the keys <code>c("school_id", "country", "year")</code>.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#loading the school data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">school_subset</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#loading the country data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">selected_countries</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AUS"</span>, <span class="st">"FIN"</span>, <span class="st">"JPN"</span>, <span class="st">"USA"</span>, <span class="st">"NZL"</span>, <span class="st">"ESP"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co">#joining the student, school dataset</span></span>
 <span><span class="va">school_student_subset_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
 <span>  <span class="va">student_subset_2018</span>, </span>
-<span>  <span class="va">school_subset</span>, </span>
+<span>  <span class="va">school</span>, </span>
 <span>  by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"school_id"</span>, <span class="st">"country"</span>, <span class="st">"year"</span><span class="op">)</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="co">#check the count of public and private schools in the a few randomly selected countries</span></span>
 <span><span class="va">school_student_subset_2018</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AUS"</span>, <span class="st">"QAT"</span>, <span class="st">"USA"</span> , <span class="st">"JPN"</span>, </span>
-<span>                              <span class="st">"ALB"</span>, <span class="st">"PER"</span>, <span class="st">"FIN"</span>,  <span class="st">"SGP"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">selected_countries</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">country</span>, <span class="va">public_private</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">tally</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>percent <span class="op">=</span> <span class="va">n</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">countrycode</span>, by <span class="op">=</span> <span class="st">"country"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>country_name <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html" class="external-link">fct_relevel</a></span><span class="op">(</span></span>
-<span>    <span class="va">country_name</span>, </span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Finland"</span>, <span class="st">"United States"</span>, <span class="st">"Albania"</span>, <span class="st">"Peru"</span>, <span class="st">"Japan"</span>, <span class="st">"Qatar"</span>, <span class="st">"Australia"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">percent</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">country_name</span>,</span>
 <span>             fill <span class="op">=</span> <span class="va">public_private</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -166,19 +166,19 @@ the keys <code>c("school_id", "country", "year")</code>.</p>
 <span>       y <span class="op">=</span> <span class="st">""</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"Percentage of schools"</span>,</span>
 <span>       fill <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
-<p><img src="learningtower_school_files/figure-html/unnamed-chunk-1-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="learningtower_school_files/figure-html/unnamed-chunk-1-1.png" width="576" style="display: block; margin: auto;"></p>
 <ul>
 <li><p>The graph assists us in understanding the distribution of public
 and private schools in few countries based on the datasets. Taking a
 closer look at the above plot, we can infer that most countries have
-more public schools than private schools. Interestingly, Australia had a
-nearly equal mix of public and private schools in the year 2018. This
-public/private information is missing in Signapore.</p></li>
+more public schools than private schools. Interestingly, Spain had a
+nearly equal mix of public and private schools in the year
+2018.</p></li>
 <li><p>Similarly, we may derive additional intriguing patterns and
 analysis by considering the other variables in the school
 dataset.</p></li>
 </ul>
-<p><img src="learningtower_school_files/figure-html/unnamed-chunk-2-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="learningtower_school_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;"></p>
 <ul>
 <li><p>The above figure shows the average percentage of overall
 financing in various schools for a random sample of countries. We

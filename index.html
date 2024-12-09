@@ -87,17 +87,16 @@
 <div class="section level1">
 <div class="page-header"><h1 id="learningtower-">learningtower <img src="reference/figures/logo.png" align="right" height="211"><a class="anchor" aria-label="anchor" href="#learningtower-"></a>
 </h1></div>
-<!-- badges: start -->
-
-<p>The goal of <code>learningtower</code> is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>, for the years 2000 - 2018, collected on a three year basis. This is an excellent dataset for exploring and visualizing data. This dataset can also be used for other analytically purposes as well as statistical computations.</p>
+<p><a href="https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
+<p>The goal of <code>learningtower</code> is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>. Version 1.1.0 of this package provides the data for the years 2000 - 2022. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualizing and statistical computations.</p>
 <div class="section level2">
 <h2 id="what-is-pisa">What is PISA?<a class="anchor" aria-label="anchor" href="#what-is-pisa"></a>
 </h2>
 <p align="center">
-<img width="450" height="450" src="reference/figures/pisa_image.png"></p>
+<img width="300" height="300" src="reference/figures/pisa_image.png"></p>
 <p>The Programme for International Student Assessment (PISA) is an international assessment measuring student performance in reading, mathematical and scientific literacy.</p>
 <p>PISA assesses the extent to which 15-year-old students have acquired some of the knowledge and skills that are essential for full participation in society, and how well they are prepared for lifelong learning in the areas of reading, mathematical and scientific literacy.</p>
-<p>In 2018, PISA involved 79 countries and 600,000+ students worldwide.</p>
+<p>In 2022, PISA involved 79 countries and 600,000+ students worldwide.</p>
 <p>Read more about the Programme <a href="https://www.oecd.org/pisa/aboutpisa/" class="external-link">here</a>.</p>
 </div>
 <div class="section level2">
@@ -111,78 +110,104 @@
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kevinwang09/learningtower"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="data-description-and-usage">Data Description and Usage<a class="anchor" aria-label="anchor" href="#data-description-and-usage"></a>
+<h2 id="data-description">Data Description<a class="anchor" aria-label="anchor" href="#data-description"></a>
 </h2>
-<p>The <code>learningtower</code> gives access to a subset of variables from PISA data originally collected and are available from <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>, for the years 2000 - 2018, collected on a three year basis.</p>
+<p>The <code>learningtower</code> gives access to a subset of variables from PISA data originally collected and are available from <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>, collected on a three year basis.</p>
 <p>The <code>learningtower</code> package contains mainly three datasets:</p>
 <ul>
 <li><code>student</code></li>
 <li><code>school</code></li>
 <li><code>countrycode</code></li>
 </ul>
-<p>This provides us with information about the students scores in mathematics, reading and science. Their school details, and which country they are from. Let’s have a look at how these datasets can be downloaded.</p>
+<p>This provides us with information about the students scores in mathematics, reading and science. Their school details, and which country they are from. The number of entries for the <code>student</code> and <code>school</code> data are shown below.</p>
+<table class="table">
+<thead><tr class="header">
+<th>Year</th>
+<th align="right">Number of Students</th>
+<th align="right">Number of Schools</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>2000</td>
+<td align="right">127,236</td>
+<td align="right">8,526</td>
+</tr>
+<tr class="even">
+<td>2003</td>
+<td align="right">276,165</td>
+<td align="right">10,274</td>
+</tr>
+<tr class="odd">
+<td>2006</td>
+<td align="right">398,750</td>
+<td align="right">14,365</td>
+</tr>
+<tr class="even">
+<td>2009</td>
+<td align="right">515,958</td>
+<td align="right">18,641</td>
+</tr>
+<tr class="odd">
+<td>2012</td>
+<td align="right">480,174</td>
+<td align="right">18,139</td>
+</tr>
+<tr class="even">
+<td>2015</td>
+<td align="right">519,334</td>
+<td align="right">17,908</td>
+</tr>
+<tr class="odd">
+<td>2018</td>
+<td align="right">612,004</td>
+<td align="right">21,903</td>
+</tr>
+<tr class="even">
+<td>2022</td>
+<td align="right">613,744</td>
+<td align="right">21,629</td>
+</tr>
+</tbody>
+</table>
 <div class="section level3">
 <h3 id="student-dataset">Student Dataset<a class="anchor" aria-label="anchor" href="#student-dataset"></a>
 </h3>
-<p>The student dataset comprises of the scores from the triennial testing of 15-year-olds worldwide. In addition, this dataset contains interesting information on their parents qualifications, family wealth, gender, and possession of computers, internet, cars, books, rooms, desks, and similar other variables.</p>
-<p>Keeping in mind the package’s size constraints. The package only includes a portion of student data, called the student subset data, this subset of student data is available for all the years when the PISA experiment took place. The full year wise student data set can be downloaded using the <code><a href="reference/load_student.html">load_student()</a></code> function included in this package.</p>
-<p>As an example, we can load the <code>student</code> data as follows:</p>
-<ul>
-<li>The student subset dataset can be loaded as follows</li>
-</ul>
+<p>The <code>student</code> dataset comprises of the scores from the triennial testing of 15-year-olds worldwide. In addition, this dataset contains interesting information on their parents qualifications, family wealth, gender, and possession of computers, internet, cars, books, rooms, desks, and similar other variables.</p>
+<p>The full dataset is approximately 50MB in size, which is much larger than the CRAN’s allowed package size limit. As the result, the package itself only includes a random 50 rows from the <a href="https://en.wikipedia.org/wiki/OECD#Member_countries" class="external-link">38 OECD countries</a>, for each of the survey years. i.e. <code>student_subset_2000</code>, <code>student_subset_2003</code> etc.</p>
+<p>The <code>student</code> subset dataset can be loaded easily. See <code><a href="reference/student.html">?student_subset_2000</a></code> for detailed information on the measured variables.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kevinwang09.github.io/learningtower/">learningtower</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># loading the student subset data for the year 2018</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 22</span></span>
-<span><span class="co">#&gt;   year  country school_id student_id mother_educ father_educ gender computer</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;     &lt;fct&gt;      &lt;fct&gt;       &lt;fct&gt;       &lt;fct&gt;  &lt;fct&gt;   </span></span>
-<span><span class="co">#&gt; 1 2018  ALB     800296    805457     ISCED 2     ISCED 2     female no      </span></span>
-<span><span class="co">#&gt; 2 2018  ALB     800251    805241     ISCED 3A    ISCED 3A    female yes     </span></span>
-<span><span class="co">#&gt; 3 2018  ALB     800194    801631     ISCED 2     ISCED 2     male   no      </span></span>
-<span><span class="co">#&gt; 4 2018  ALB     800257    800960     ISCED 3A    ISCED 3A    female yes     </span></span>
-<span><span class="co">#&gt; 5 2018  ALB     800282    806606     ISCED 3A    ISCED 3A    female yes     </span></span>
-<span><span class="co">#&gt; 6 2018  ALB     800266    801723     ISCED 2     ISCED 2     female yes     </span></span>
-<span><span class="co">#&gt; # ℹ 14 more variables: internet &lt;fct&gt;, math &lt;dbl&gt;, read &lt;dbl&gt;, science &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   stu_wgt &lt;dbl&gt;, desk &lt;fct&gt;, room &lt;fct&gt;, dishwasher &lt;fct&gt;, television &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   computer_n &lt;fct&gt;, car &lt;fct&gt;, book &lt;fct&gt;, wealth &lt;dbl&gt;, escs &lt;dbl&gt;</span></span></code></pre></div>
-<ul>
-<li>The entire student data can be downloaded as follows:</li>
-</ul>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">student_subset_2018</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1900   22</span></span></code></pre></div>
+<p>The entire <code>student</code> data can be downloaded using the <code>load_student</code> function.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#load the entire student data for a single year</span></span>
 <span><span class="va">student_data_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fl">2018</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#load the entire student data for two/three years (2000, 2012, 2018)</span></span>
+<span><span class="co">#load the entire student data for two of the years (2012, 2018)</span></span>
 <span><span class="va">student_data_2012_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2012</span>, <span class="fl">2018</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">student_data_2000_2012_2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2000</span>, <span class="fl">2012</span>, <span class="fl">2018</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">#load the entire student data</span></span>
 <span><span class="va">student_data_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/load_student.html">load_student</a></span><span class="op">(</span><span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
-<p>See <code><a href="reference/student.html">?student_subset_2000</a></code> for information pertaining to variables captured.</p>
+<p>Note that because of changing data specification over the survery years, not all variables were measured consistently across the years.</p>
+<p align="center">
+<img width="1200" height="500" src="reference/figures/README_student_data_missing_values_summary.png"></p>
 </div>
 <div class="section level3">
 <h3 id="school-dataset">School Dataset<a class="anchor" aria-label="anchor" href="#school-dataset"></a>
 </h3>
-<p>The school dataset comprises school weight and other information such as the funding distribution of the schools, whether the school is private or public, the enrollment of boys and girls, the school size, and similar other characteristics of interest of different schools these 15-year-olds attend throughout the world.</p>
+<p>The <code>school</code> dataset comprises school weight and other information such as the funding distribution of the schools, whether the school is private or public, the enrollment of boys and girls, the school size, and similar other characteristics of interest of different schools these 15-year-olds attend throughout the world.</p>
+<ul>
+<li>The school subset dataset can be loaded as follows</li>
+</ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># loading the school data</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 13</span></span>
-<span><span class="co">#&gt;   year  country school_id fund_gov fund_fees fund_donation enrol_boys</span></span>
-<span><span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;        &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 2000  ALB     01001          100         0             0       1191</span></span>
-<span><span class="co">#&gt; 2 2000  ALB     01004           98         1             1        334</span></span>
-<span><span class="co">#&gt; 3 2000  ALB     01005           91         5             2        403</span></span>
-<span><span class="co">#&gt; 4 2000  ALB     01010          100         0             0        114</span></span>
-<span><span class="co">#&gt; 5 2000  ALB     01013            0        50            30        250</span></span>
-<span><span class="co">#&gt; 6 2000  ALB     01017           95         2             3        771</span></span>
-<span><span class="co">#&gt; # ℹ 6 more variables: enrol_girls &lt;dbl&gt;, stratio &lt;dbl&gt;, public_private &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   staff_shortage &lt;dbl&gt;, sch_wgt &lt;dbl&gt;, school_size &lt;dbl&gt;</span></span></code></pre></div>
-<p>See <code>?school</code> for more information on the different variables present in the the school dataset.</p>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span></span></code></pre></div>
+<p>See <code><a href="reference/school.html">?school</a></code> for more information on the different variables present in the the school dataset.</p>
+<p align="center">
+<img width="1200" height="500" src="reference/figures/README_school_data_missing_values_summary.png"></p>
 </div>
 <div class="section level3">
 <h3 id="countrycode-dataset">Countrycode Dataset<a class="anchor" aria-label="anchor" href="#countrycode-dataset"></a>
@@ -209,7 +234,7 @@
 </h2>
 <p>In the plot shown below, shows the weighted mean of mathematics scores of these 15 year old students for a few selected countries over the available years.</p>
 <p align="center">
-<img width="800" height="400" src="reference/figures/readme.png"></p>
+<img width="600" height="400" src="reference/figures/readme.png"></p>
 <ul>
 <li><p>Similarly, you can find more code examples and data visualizations for exploring <code>learningtower</code> through our vignettes and articles</p></li>
 <li><p>Further data exploration can be found in our articles exploring temporal trends <a href="https://kevinwang09.github.io/learningtower/articles/articles/exploring_time.html">here</a>.</p></li>
@@ -223,20 +248,19 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"learningtower"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; To cite package 'learningtower' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Wang K, Yacobellis P, Siregar E, Romanes S, Fitter K, Valentino Dalla</span></span>
-<span><span class="co">#&gt;   Riva G, Cook D, Tierney N, Dingorkar P (2024). _learningtower: OECD</span></span>
-<span><span class="co">#&gt;   PISA Datasets from 2000-2022 in an Easy-to-Use Format_. R package</span></span>
-<span><span class="co">#&gt;   version 1.0.1, commit 3a11c911218b6d1f665f27a83c7d83f0c0174d4b,</span></span>
-<span><span class="co">#&gt;   &lt;https://github.com/kevinwang09/learningtower&gt;.</span></span>
+<span><span class="co">#&gt;   Wang K, Yacobellis P, Siregar E, Romanes S, Fitter K, Dalla Riva G,</span></span>
+<span><span class="co">#&gt;   Cook D, Tierney N, Dingorkar P (????). _learningtower: OECD PISA</span></span>
+<span><span class="co">#&gt;   Datasets from 2000-2022 in an Easy-to-Use Format_. R package version</span></span>
+<span><span class="co">#&gt;   1.1.0, https://github.com/kevinwang09/learningtower,</span></span>
+<span><span class="co">#&gt;   &lt;https://kevinwang09.github.io/learningtower/&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   @Manual{,</span></span>
 <span><span class="co">#&gt;     title = {learningtower: OECD PISA Datasets from 2000-2022 in an Easy-to-Use Format},</span></span>
-<span><span class="co">#&gt;     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio {Valentino Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},</span></span>
-<span><span class="co">#&gt;     year = {2024},</span></span>
-<span><span class="co">#&gt;     note = {R package version 1.0.1, commit 3a11c911218b6d1f665f27a83c7d83f0c0174d4b},</span></span>
-<span><span class="co">#&gt;     url = {https://github.com/kevinwang09/learningtower},</span></span>
+<span><span class="co">#&gt;     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio Valentino {Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},</span></span>
+<span><span class="co">#&gt;     note = {R package version 1.1.0, https://github.com/kevinwang09/learningtower},</span></span>
+<span><span class="co">#&gt;     url = {https://kevinwang09.github.io/learningtower/},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -302,12 +326,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
