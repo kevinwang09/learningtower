@@ -59,10 +59,10 @@ Since we are expecting some time variations in the data, let's quickly visualize
 
 ```{r}
 #filtering the data for Australia
-aus_data = student %>% 
-  dplyr::filter(country %in% c("AUS")) %>% 
-  dplyr::mutate(mother_educ = mother_educ %>% fct_relevel("less than ISCED1"),
-    father_educ = father_educ %>% fct_relevel("less than ISCED1"))
+aus_data = student |> 
+  dplyr::filter(country %in% c("AUS")) |> 
+  dplyr::mutate(mother_educ = mother_educ |> fct_relevel("less than ISCED1"),
+    father_educ = father_educ |> fct_relevel("less than ISCED1"))
 ```
 
 
@@ -72,9 +72,9 @@ A boxplot is a standardized method of presenting data distribution. It informs w
 
 ```{r, fig.height = 9, fig.width = 15}
 # plotting the distribution of numeric variables via boxplots
-aus_data %>% 
-  select(where(is.numeric), -school_id, -student_id) %>% 
-  pivot_longer(cols = -year) %>% 
+aus_data |> 
+  select(where(is.numeric), -school_id, -student_id) |> 
+  pivot_longer(cols = -year) |> 
   ggplot(aes(x = factor(year), 
              y = value,
              colour = factor(year))) +
@@ -92,20 +92,20 @@ Missing data is a common issue that data professionals must deal with on a daily
 
 ```{r, fig.height = 15, fig.width = 15}
 #checking the missing values in the factor variables of the data
-aus_fct_plotdata = aus_data %>% 
-  select(year, where(is.factor)) %>% 
-  dplyr::select(-country) %>% 
-  pivot_longer(cols = -year) %>% 
-  group_by(year, name, value) %>% 
-  tally() %>% 
+aus_fct_plotdata = aus_data |> 
+  select(year, where(is.factor)) |> 
+  dplyr::select(-country) |> 
+  pivot_longer(cols = -year) |> 
+  group_by(year, name, value) |> 
+  tally() |> 
   dplyr::mutate(
     value = coalesce(value, "missing"),
     percent = n/sum(n),
-    year = year %>% as.character() %>% as.integer()) %>% 
-  group_by(name, value) %>% 
+    year = year |> as.character() |> as.integer()) |> 
+  group_by(name, value) |> 
   dplyr::mutate(last_point = ifelse(year == max(year), as.character(value), NA))
 
-aus_fct_plotdata %>% 
+aus_fct_plotdata |> 
   ggplot(aes(x = year, y = percent,
              label = last_point,
              group = value)) +
@@ -138,11 +138,11 @@ student_predictors = c("mother_educ", "father_educ", "gender", "internet",
 
 student_formula_rhs = paste(student_predictors, collapse = "+")
 
-aus2018 = aus_data %>% 
-  dplyr::filter(year == "2018") %>% 
+aus2018 = aus_data |> 
+  dplyr::filter(year == "2018") |> 
   dplyr::select(
     math, read, science, 
-    all_of(student_predictors)) %>% 
+    all_of(student_predictors)) |> 
   na.omit()
 ```
 
@@ -152,11 +152,11 @@ A correlation matrix is a table that displays the coefficients of correlation be
 
 ```{r}
 #correlation matrix for the numeric variables
-aus2018 %>% 
-  select(where(is.numeric)) %>% 
-  cor(use = "pairwise.complete.obs") %>% 
-  round(2) %>% 
-  kbl(caption = "Correlation Matrix") %>% 
+aus2018 |> 
+  select(where(is.numeric)) |> 
+  cor(use = "pairwise.complete.obs") |> 
+  round(2) |> 
+  kbl(caption = "Correlation Matrix") |> 
   kable_styling(full_width = NULL,
                 position = "center",
                 bootstrap_options = c("hover", "striped"))
@@ -215,12 +215,12 @@ By building random effects in our linear model, that is building a linear mixed 
 
 ```{r}
 # joining school and student data, building a linear mixed model
-lmm2018 = aus_data %>% 
-  filter(year == 2018) %>% 
+lmm2018 = aus_data |> 
+  filter(year == 2018) |> 
   dplyr::select(
     school_id,
     math, read, science, 
-    all_of(student_predictors)) %>% 
+    all_of(student_predictors)) |> 
   na.omit()
 
 lmm2018_math = lmer(formula = as.formula(paste("math ~ ", student_formula_rhs, "+ (escs | school_id)")), data = lmm2018)
@@ -243,11 +243,11 @@ bind_cols(
 AIC(aus2018_math) - AIC(lmm2018_math),
 AIC(aus2018_read) - AIC(lmm2018_read),
 AIC(aus2018_science) - AIC(lmm2018_science)
-) %>% 
+) |> 
   rename(maths = ...1,
          read = ...2,
-         science = ...3) %>% 
-  kbl(caption = "AIC Values") %>% 
+         science = ...3) |> 
+  kbl(caption = "AIC Values") |> 
   kable_styling(full_width = NULL,
                 position = "center",
                 bootstrap_options = c("hover", "striped"))
@@ -265,13 +265,13 @@ selected_vars = c("father_educ", "gender", "internet",
 
 data(school)
 
-aus_school_2018 = school %>% 
-  dplyr::filter(country == "AUS", year == "2018") %>% 
-  dplyr::mutate(school_size = log10(school_size)) %>% ## We take the log due to the scale
+aus_school_2018 = school |> 
+  dplyr::filter(country == "AUS", year == "2018") |> 
+  dplyr::mutate(school_size = log10(school_size)) |> ## We take the log due to the scale
   dplyr::select(-year, -country, -contains("fund"), -sch_wgt)
 
-lmm2018_sch = lmm2018 %>% 
-  left_join(aus_school_2018, by = c("school_id")) %>% na.omit()
+lmm2018_sch = lmm2018 |> 
+  left_join(aus_school_2018, by = c("school_id")) |> na.omit()
 
 school_predictors = c("stratio", "public_private", "staff_shortage", "school_size")
 school_formula_rhs = paste(school_predictors, collapse = "+")
@@ -318,33 +318,33 @@ The construction goes as follow:
 
 ```{r, fig.height = 12, fig.width = 15}
 #Fitting a linear model, extracting the coefficients and visualizing every predictor
-aus_student_years = aus_data %>% 
+aus_student_years = aus_data |> 
   dplyr::select(
     math,
     all_of(student_predictors),
-    year) %>% 
+    year) |> 
   na.omit()
 
-aus_student_years_coef = aus_student_years %>% 
-  group_by(year) %>% 
-  nest() %>% 
+aus_student_years_coef = aus_student_years |> 
+  group_by(year) |> 
+  nest() |> 
   dplyr::mutate(math_lm_coef = purrr::map(.x = data, 
-                              .f = ~ lm(formula = as.formula(paste("math ~ ", student_formula_rhs)), data = .x) %>% 
-                                broom::tidy())) %>% 
-  dplyr::select(-data) %>% 
+                              .f = ~ lm(formula = as.formula(paste("math ~ ", student_formula_rhs)), data = .x) |> 
+                                broom::tidy())) |> 
+  dplyr::select(-data) |> 
   tidyr::unnest(math_lm_coef)
 
-aus_student_years_coef %>% 
-  dplyr::filter(str_detect(term, "computer|father_educ|escs|wealth")) %>% 
+aus_student_years_coef |> 
+  dplyr::filter(str_detect(term, "computer|father_educ|escs|wealth")) |> 
   dplyr::mutate(
-    year = year %>% as.character() %>% as.integer(),
+    year = year |> as.character() |> as.integer(),
     facet = case_when(
       str_detect(term, "computer") ~ "Number of computer",
       str_detect(term, "father_educ") ~ "Education of father",
       # str_detect(term, "mother_educ") ~ "Education of mother",
       str_detect(term, "wealth") ~ "Wealth",
       str_detect(term, "escs") ~ "Socio-economic index"),
-    last_point = ifelse(year == 2018, term, NA)) %>% 
+    last_point = ifelse(year == 2018, term, NA)) |> 
   ggplot(aes(x = year, y = estimate,
              colour = term,
              group = term,

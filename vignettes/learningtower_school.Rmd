@@ -61,13 +61,13 @@ school_student_subset_2018 <- left_join(
   by = c("school_id", "country", "year")) 
 
 #check the count of public and private schools in the a few randomly selected countries
-school_student_subset_2018 %>% 
-  dplyr::filter(country %in% selected_countries) %>%
-  group_by(country, public_private) %>% 
-  tally() %>% 
-  dplyr::mutate(percent = n/sum(n)) %>% 
-  dplyr::ungroup() %>% 
-  left_join(countrycode, by = "country") %>% 
+school_student_subset_2018 |> 
+  dplyr::filter(country %in% selected_countries) |>
+  group_by(country, public_private) |> 
+  tally() |> 
+  dplyr::mutate(percent = n/sum(n)) |> 
+  dplyr::ungroup() |> 
+  left_join(countrycode, by = "country") |> 
   ggplot(aes(x = percent,
              y = country_name,
              fill = public_private)) +
@@ -95,14 +95,14 @@ school_student_2018 <- left_join(
   school,
   by = c("school_id", "country", "year"))
 
-school_student_2018 %>%
-  dplyr::filter(country %in% selected_countries) %>% 
-  group_by(country) %>% 
-  summarise(avg_fund_gov = mean(fund_gov, na.rm = TRUE)) %>% 
-  arrange(avg_fund_gov) %>% 
-  mutate(country = fct_reorder(country, avg_fund_gov)) %>% 
-  left_join(countrycode, by = "country") %>% 
-  mutate(country_name = fct_reorder(country_name, avg_fund_gov)) %>% 
+school_student_2018 |>
+  dplyr::filter(country %in% selected_countries) |> 
+  group_by(country) |> 
+  summarise(avg_fund_gov = mean(fund_gov, na.rm = TRUE)) |> 
+  arrange(avg_fund_gov) |> 
+  mutate(country = fct_reorder(country, avg_fund_gov)) |> 
+  left_join(countrycode, by = "country") |> 
+  mutate(country_name = fct_reorder(country_name, avg_fund_gov)) |> 
   ggplot(aes(x=country_name, y=avg_fund_gov)) +
   geom_segment(aes(xend=country_name, yend=0)) +
   geom_point(size=4, color="orange") +

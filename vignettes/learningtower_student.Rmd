@@ -59,15 +59,13 @@ glimpse(student_subset_2018)
 ```
 
 ```{r}
-student_subset_2018 %>% 
-  group_by(country, gender) %>% 
-  dplyr::filter(country %in% c("AUS", "QAT", "USA" , "JPN", 
-                               "ALB", "PER", "FIN",  "SGP")) %>% 
-  dplyr::left_join(countrycode, by = "country") %>% 
-  dplyr::mutate(country_name = factor(
-    country_name, 
-    levels = c("Singapore", "Australia", "Japan", 
-                "United States", "Finland", "Albania", "Peru", "Qatar"))) %>% 
+selected_countries = c("AUS", "USA", "TUR", "SWE", 
+                       "CHE", "NZL", "BEL", "DEU")
+
+student_subset_2018 |> 
+  group_by(country, gender) |> 
+  dplyr::filter(country %in% selected_countries) |>
+  dplyr::left_join(countrycode, by = "country") |> 
   ggplot(aes(x = math,
              y = country_name,
              fill = gender)) +
@@ -78,7 +76,7 @@ student_subset_2018 %>%
        y = "")
 ```
 
-- In the figure above, we see that from the student subset data for the year 2018, in the countries like Singapore and Australia boys perform better as compared to the girls. However, in countries such as Finland, Qatar and Japan, girls perform better than the boys or are on the same level with boys when it comes to their average mathematics scores.
+- In the figure above, we see that from the student subset data for the year 2018, in the countries like USA and Belgium boys perform better as compared to the girls. However, in countries such as Turkey and Switzerland, girls perform better than the boys or are on the same level with boys when it comes to their average mathematics scores.
 
 - Furthermore, if we want to learn more about the trend in each year of the selected countries or know more about the yearly student scores,  the complete student data can be retrieved  for that/those years or all years using the `load_student()` function included in this package.
 
@@ -102,23 +100,21 @@ student_data_all <- load_student("all")
 ```{r}
 student_data_2012_2018 <- load_student(c(2012, 2018))
 
-plot_data <- student_data_2012_2018 %>% 
-  group_by(country, year) %>%  
-  dplyr::filter(country %in% c("AUS", "QAT", "USA" , "JPN", 
-                               "ALB", "PER", "FIN",  "SGP")) %>% 
-  dplyr::summarise(avg_math = mean(math, na.rm = TRUE)) %>%  
-  left_join(countrycode, by = "country") %>% 
-  dplyr::select(country_name, year, avg_math) %>% 
-  ungroup() %>% 
+plot_data <- student_data_2012_2018 |> 
+  group_by(country, year) |>  
+  dplyr::filter(country %in% selected_countries) |> 
+  dplyr::summarise(avg_math = mean(math, na.rm = TRUE)) |>  
+  left_join(countrycode, by = "country") |> 
+  dplyr::select(country_name, year, avg_math) |> 
+  ungroup() |> 
   dplyr::mutate(
-    year = year %>% as.character %>% as.integer, 
     label_x_pos = ifelse(year == 2012, 2012 - 2, 2018 + 1),
     label = ifelse(
       year == 2012,
       paste0(country_name, ", ", round(avg_math)),
       round(avg_math)))
   
-plot_data %>% 
+plot_data |> 
   ggplot(aes(x = year, 
              y = avg_math,
              label = label,
