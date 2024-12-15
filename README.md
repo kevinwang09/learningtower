@@ -213,16 +213,17 @@ citation("learningtower")
 #> To cite package 'learningtower' in publications use:
 #> 
 #>   Wang K, Yacobellis P, Siregar E, Romanes S, Fitter K, Dalla Riva G,
-#>   Cook D, Tierney N, Dingorkar P (2024). _learningtower: OECD PISA
-#>   Datasets from 2000-2022 in an Easy-to-Use Format_. R package version
-#>   1.1.0, https://github.com/kevinwang09/learningtower,
+#>   Cook D, Tierney N, Dingorkar P, Sai Subramanian S, Chen G (2024).
+#>   _learningtower: OECD PISA Datasets from 2000-2022 in an Easy-to-Use
+#>   Format_. R package version 1.1.0,
+#>   https://github.com/kevinwang09/learningtower,
 #>   <https://kevinwang09.github.io/learningtower/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {learningtower: OECD PISA Datasets from 2000-2022 in an Easy-to-Use Format},
-#>     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio Valentino {Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},
+#>     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio Valentino {Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar and Shabarish {Sai Subramanian} and Guan Ru Chen},
 #>     note = {R package version 1.1.0, https://github.com/kevinwang09/learningtower},
 #>     url = {https://kevinwang09.github.io/learningtower/},
 #>     year = {2024},

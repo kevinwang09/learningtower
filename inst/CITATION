@@ -10,7 +10,9 @@ bibentry(
     person("Giulio Valentino", "Dalla Riva"),
     person("Dianne", "Cook"),
     person("Nick", "Tierney"),
-    person("Priya", "Dingorkar")
+    person("Priya", "Dingorkar"),
+    person("Shabarish", "Sai Subramanian"),
+    person("Guan Ru", "Chen")
   ),
   note     = "R package version 1.1.0, https://github.com/kevinwang09/learningtower",
   url      = "https://kevinwang09.github.io/learningtower/",
