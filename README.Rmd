@@ -100,7 +100,7 @@ The `student` dataset comprises of the scores from the triennial testing of 15-y
 
 The full dataset is approximately 50MB in size, which is much larger than the CRAN's allowed package size limit. As the result, the package itself only includes a random 50 rows from the [38 OECD countries](https://en.wikipedia.org/wiki/OECD#Member_countries), for each of the survey years. i.e. `student_subset_2000`, `student_subset_2003` etc. 
 
-The `student` subset dataset can be loaded easily. See `?student_subset_2000` for detailed information on the measured variables. 
+The `student` subset dataset can be loaded easily. See `?student` for detailed information on the measured variables. 
 
 ```{r}
 library(learningtower)

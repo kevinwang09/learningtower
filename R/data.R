@@ -1,20 +1,19 @@
-#' @title Sample student data available for the years 2000-2022 from the PISA OECD database
+#' @title Processed and Sampled PISA Student Data (2000-2022)
 #'
-#' @description A sample student subset dataset containing scores and other information
-#' from the triennial testing of 15 year olds around
-#' the globe. Original data available from
-#'  \url{https://www.oecd.org/pisa/data/}.
+#' @description This dataset provides a clean and processed subset of the OECD PISA student data
+#' for the years 2000-2022. The original data is sourced from
+#' \url{https://www.oecd.org/pisa/data/} and has been prepared for analysis.
+#' A sampling of 50 students per country (for OECD countries) has been included for each year.
+#' The data curation and sampling process are documented in \url{https://github.com/kevinwang09/learningtower_masonry/blob/master/Code/student_bind_rows.Rmd}
 #'
 #' @format A tibble of the following variables
 #' \itemize{
-#'     \item \code{year}: Year of the PISA data. Factor.
-#'     \item \code{country}: Country 3 character code. Note that some regions/territories are coded as country for ease of input. Factor.
-#'     \item \code{school_id}: The school identification number, unique for each country and year combination. Character.
-#'     \item \code{student_id}: The student identification number, unique for each school, country and year combination. Integer
-#'     \item \code{mother_educ}: Highest level of mother's education. Ranges from "less than ISCED1" to "ISCED 3A". Factor.
-#'     Note that in 2000, all entries are missing.
-#'     \item \code{father_educ}: Highest level of father's education. Ranges from "less than ISCED1" to "ISCED 3A". Factor.
-#'     Note that in 2000, all entries are missing.
+#'     \item \code{year}: Year of the PISA data. Integer.
+#'     \item \code{country}: Country 3 character code. Note that some regions/territories are coded as "country" for ease of input. Factor.
+#'     \item \code{school_id}: Unique school identifier for each country and year. Character.
+#'     \item \code{student_id}: Unique student identifier within each school. Integer.
+#'     \item \code{mother_educ}: Mother's highest level of education, from "less than ISCED1" to "ISCED 3A". Factor.
+#'     \item \code{father_educ}: Father's highest level of education, from "less than ISCED1" to "ISCED 3A". Factor.
 #'     \item \code{gender}: Gender of the student. Only "male" and "female" are recorded. Factor.
 #'     Note that we call this variable gender and not sex as this term was used in the OECD PISA database.
 #'     \item \code{computer}: Possession of computer. Only "yes" and "no" are recorded. Factor.
@@ -39,12 +38,12 @@
 #'     \item \code{book}: Number of books. Factor.
 #'     Note that encoding is different in the years 2000 and 2003 compared to all other years. Factor.
 #'     Evaluate \code{table(student$book, student$year)} for a demo.
-#'     \item \code{wealth}: Family wealth. Numeric.
+#'     \item \code{wealth}: Index of family wealth. Numeric.
 #'     Note that in 2003, all entries are missing.
 #'     \item \code{escs}: Index of economic, social and cultural status. Numeric.
 #'     }
 #' @docType data
-#' @name student_subset_2000
+#' @name student
 #' @rdname student
 #' @importFrom dplyr bind_rows
 #' @examples
@@ -108,9 +107,9 @@ NULL
 #'
 #' @format A tibble of the following variables
 #' \itemize{
-#'     \item \code{year}: Year of the PISA data. Factor.
+#'     \item \code{year}: Year of the PISA data. Integer.
 #'     \item \code{country_iso3c}: Country 3 character code. Note that some regions/territories are coded as country for ease of input. Factor.
-#'     \item \code{school_id}: The school identification number, unique for each country and year combination. Factor.
+#'     \item \code{school_id}: The school identification number, unique for each country and year combination. Character.
 #'     \item \code{fund_gov}: Percentage of total funding for school year from government. Numeric.
 #'     \item \code{fund_fees}: Percentage of total funding for school year from student fees or school charges paid by parents. Numeric.
 #'     \item \code{fund_donation}: Percentage of total funding for school year from

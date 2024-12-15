@@ -90,9 +90,8 @@ countries](https://en.wikipedia.org/wiki/OECD#Member_countries), for
 each of the survey years. i.e. `student_subset_2000`,
 `student_subset_2003` etc.
 
-The `student` subset dataset can be loaded easily. See
-`?student_subset_2000` for detailed information on the measured
-variables.
+The `student` subset dataset can be loaded easily. See `?student` for
+detailed information on the measured variables.
 
 ``` r
 library(learningtower)
@@ -151,7 +150,7 @@ The countrycode dataset contains mapping of the [country ISO code to the
 country
 name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf).
 More information on the participating countries can be found
-[here](https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm)
+[here](https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm).
 
 ``` r
 # loading the countrycode data
@@ -197,7 +196,7 @@ citation("learningtower")
 #> To cite package 'learningtower' in publications use:
 #> 
 #>   Wang K, Yacobellis P, Siregar E, Romanes S, Fitter K, Dalla Riva G,
-#>   Cook D, Tierney N, Dingorkar P (????). _learningtower: OECD PISA
+#>   Cook D, Tierney N, Dingorkar P (2024). _learningtower: OECD PISA
 #>   Datasets from 2000-2022 in an Easy-to-Use Format_. R package version
 #>   1.1.0, https://github.com/kevinwang09/learningtower,
 #>   <https://kevinwang09.github.io/learningtower/>.
@@ -209,6 +208,7 @@ citation("learningtower")
 #>     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio Valentino {Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},
 #>     note = {R package version 1.1.0, https://github.com/kevinwang09/learningtower},
 #>     url = {https://kevinwang09.github.io/learningtower/},
+#>     year = {2024},
 #>   }
 ```
 
