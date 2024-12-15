@@ -64,6 +64,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -174,7 +177,7 @@
 </h3>
 <p>The <code>student</code> dataset comprises of the scores from the triennial testing of 15-year-olds worldwide. In addition, this dataset contains interesting information on their parents qualifications, family wealth, gender, and possession of computers, internet, cars, books, rooms, desks, and similar other variables.</p>
 <p>The full dataset is approximately 50MB in size, which is much larger than the CRAN’s allowed package size limit. As the result, the package itself only includes a random 50 rows from the <a href="https://en.wikipedia.org/wiki/OECD#Member_countries" class="external-link">38 OECD countries</a>, for each of the survey years. i.e. <code>student_subset_2000</code>, <code>student_subset_2003</code> etc.</p>
-<p>The <code>student</code> subset dataset can be loaded easily. See <code><a href="reference/student.html">?student_subset_2000</a></code> for detailed information on the measured variables.</p>
+<p>The <code>student</code> subset dataset can be loaded easily. See <code><a href="reference/student.html">?student</a></code> for detailed information on the measured variables.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kevinwang09.github.io/learningtower/">learningtower</a></span><span class="op">)</span></span>
 <span></span>
@@ -212,7 +215,7 @@
 <div class="section level3">
 <h3 id="countrycode-dataset">Countrycode Dataset<a class="anchor" aria-label="anchor" href="#countrycode-dataset"></a>
 </h3>
-<p>The countrycode dataset contains mapping of the <a href="https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf" class="external-link">country ISO code to the country name</a>. More information on the participating countries can be found <a href="https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm" class="external-link">here</a></p>
+<p>The countrycode dataset contains mapping of the <a href="https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf" class="external-link">country ISO code to the country name</a>. More information on the participating countries can be found <a href="https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># loading the countrycode data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span></span>
@@ -249,7 +252,7 @@
 <span><span class="co">#&gt; To cite package 'learningtower' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Wang K, Yacobellis P, Siregar E, Romanes S, Fitter K, Dalla Riva G,</span></span>
-<span><span class="co">#&gt;   Cook D, Tierney N, Dingorkar P (????). _learningtower: OECD PISA</span></span>
+<span><span class="co">#&gt;   Cook D, Tierney N, Dingorkar P (2024). _learningtower: OECD PISA</span></span>
 <span><span class="co">#&gt;   Datasets from 2000-2022 in an Easy-to-Use Format_. R package version</span></span>
 <span><span class="co">#&gt;   1.1.0, https://github.com/kevinwang09/learningtower,</span></span>
 <span><span class="co">#&gt;   &lt;https://kevinwang09.github.io/learningtower/&gt;.</span></span>
@@ -261,6 +264,7 @@
 <span><span class="co">#&gt;     author = {Kevin Wang and Paul Yacobellis and Erika Siregar and Sarah Romanes and Kim Fitter and Giulio Valentino {Dalla Riva} and Dianne Cook and Nick Tierney and Priya Dingorkar},</span></span>
 <span><span class="co">#&gt;     note = {R package version 1.1.0, https://github.com/kevinwang09/learningtower},</span></span>
 <span><span class="co">#&gt;     url = {https://kevinwang09.github.io/learningtower/},</span></span>
+<span><span class="co">#&gt;     year = {2024},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
 <div class="section level2">
