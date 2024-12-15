@@ -91,9 +91,9 @@
 <div class="page-header"><h1 id="learningtower-">learningtower <img src="reference/figures/logo.png" align="right" height="211"><a class="anchor" aria-label="anchor" href="#learningtower-"></a>
 </h1></div>
 <p><a href="https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
-<p>The goal of <code>learningtower</code> is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>. Version 1.1.0 of this package provides the data for the years 2000 - 2022. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualizing and statistical computations.</p>
+<p>The goal of <code>learningtower</code> is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the <a href="https://www.oecd.org/pisa/data/" class="external-link">OECD</a>. Version 1.1.0 of this package provides the data for the years 2000 - 2022. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualising and statistical computations.</p>
 <div class="section level2">
-<h2 id="what-is-pisa">What is PISA?<a class="anchor" aria-label="anchor" href="#what-is-pisa"></a>
+<h2 id="what-is-the-pisa-dataset">What is the PISA dataset?<a class="anchor" aria-label="anchor" href="#what-is-the-pisa-dataset"></a>
 </h2>
 <p align="center">
 <img width="300" height="300" src="reference/figures/pisa_image.png"></p>
@@ -122,7 +122,8 @@
 <li><code>school</code></li>
 <li><code>countrycode</code></li>
 </ul>
-<p>This provides us with information about the students scores in mathematics, reading and science. Their school details, and which country they are from. The number of entries for the <code>student</code> and <code>school</code> data are shown below.</p>
+<p>This provides us with information about the students scores in mathematics, reading and science, their school details, and which country they are from. The data provided in this package is a cleaned version of the full published PISA organisation, with reproducible code available in <a href="https://github.com/kevinwang09/learningtower_masonry" class="external-link">this repository</a>.</p>
+<p>The number of entries for the <code>student</code> and <code>school</code> data are shown below.</p>
 <table class="table">
 <thead><tr class="header">
 <th>Year</th>
@@ -229,7 +230,15 @@
 <span><span class="co">#&gt; 4 AUT     Austria     </span></span>
 <span><span class="co">#&gt; 5 BEL     Belgium     </span></span>
 <span><span class="co">#&gt; 6 BRA     Brazil</span></span></code></pre></div>
-<p>See <code><a href="reference/countrycode.html">?countrycode</a></code> for more detailed information on the countries that participated in the PISA experiment.</p>
+<details><summary>
+Notes on countries
+</summary><ul>
+<li>Not all data entries in the <code>countrycode</code> are countries. For example, “QCN” refers to “Shanghai-China”.
+<ul>
+<li>Due to differences in country codes, not all <code>student_subset_yyyy</code> data has all 38 OECD countries.</li>
+</ul>
+</li>
+</ul></details><p>See <code><a href="reference/countrycode.html">?countrycode</a></code> for more detailed information on the countries that participated in the PISA experiment.</p>
 </div>
 </div>
 <div class="section level2">
