@@ -72,12 +72,12 @@ data(school)
 
 library(dplyr)
 
-student_summary <- student %>%
-  group_by(year) %>%
+student_summary <- student |>
+  group_by(year) |>
   tally(name = "Number of Students")
 
-school_summary <- school %>%
-  group_by(year) %>%
+school_summary <- school |>
+  group_by(year) |>
   tally(name = "Number of Schools")
 
 combined_summary <- full_join(student_summary, school_summary, by = "year")

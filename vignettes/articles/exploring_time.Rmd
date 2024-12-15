@@ -58,23 +58,22 @@ We begin by visualizing the time series trend of countries independent of when a
 #calculating the weighted means for all three subjects and plotting them
 w_mean = function(x, w){weighted.mean(x = x, w = w, na.rm=TRUE)}
 
-stu_summ = student %>% 
-  group_by(year, country) %>%
+stu_summ = student |> 
+  group_by(year, country) |>
   summarise_at(.vars = vars(math, read, science), 
                .funs = list(wmean = ~w_mean(., w = stu_wgt),
                             min = ~min(., na.rm = TRUE), 
-                            max = ~max(., na.rm = TRUE))) %>% 
-  ungroup() %>% 
-  dplyr::mutate(year = year %>% as.character() %>% as.integer)
+                            max = ~max(., na.rm = TRUE))) |> 
+  ungroup()
 
 
-stu_wmean_long = stu_summ %>%
-  select(year, country, contains("wmean")) %>% 
+stu_wmean_long = stu_summ |>
+  select(year, country, contains("wmean")) |> 
   pivot_longer(cols = contains("wmean"), 
                names_to = "wmean_names",
                values_to = "wmean_values")
 
-stu_wmean_long %>% 
+stu_wmean_long |> 
   ggplot(aes(x = year, y = wmean_values, group = country)) +
   geom_line() +
   facet_wrap(~wmean_names) +
@@ -90,17 +89,17 @@ A core of this package was built at the 2019 OzUnconf in Australia. Hence, we fo
 
 ```{r}
 #plotting the weighted mean score with minimum and maximum range for the three countries
-stu_summ_long2 = stu_summ %>% 
-  filter(country %in% c("AUS", "NZL", "IDN")) %>% 
+stu_summ_long2 = stu_summ |> 
+  filter(country %in% c("AUS", "NZL", "IDN")) |> 
   pivot_longer(cols = math_wmean:science_max, 
                names_to = "names",
-               values_to = "values") %>% 
-  separate(col = names, into = c("subject", "statistics"), sep = "_") %>% 
+               values_to = "values") |> 
+  separate(col = names, into = c("subject", "statistics"), sep = "_") |> 
   pivot_wider(names_from = "statistics",
               values_from = "values")
 
 
-stu_summ_long2 %>% 
+stu_summ_long2 |> 
   ggplot(aes(x = year, y = wmean)) +
   geom_ribbon(aes(ymin = min, ymax = max), fill = "grey70") +
   geom_line(colour = "black", size = 2) +
@@ -125,21 +124,22 @@ Based on this interpretation, it appears that if a country/region has a good ini
 
 ```{r}
 #considering countries whose participation is 5 or more, calculating the math slope and plotting it
-complete_nations = stu_summ %>% 
-  group_by(country) %>% filter(n() >= 5) %>%
-  ungroup() %>%
-  mutate(year_subtract = year - min(year)) %>% 
+complete_nations = stu_summ |> 
+  group_by(country) |> 
+  filter(n() >= 5) |>
+  ungroup() |>
+  mutate(year_subtract = year - min(year)) |> 
   as_tsibble(key = country, index = year_subtract)
 
-math_slope = complete_nations %>%
+math_slope = complete_nations |>
   select(
     year_subtract, 
     country, 
-    math_wmean) %>% 
-  key_slope(math_wmean ~ year_subtract) %>% 
+    math_wmean) |> 
+  key_slope(math_wmean ~ year_subtract) |> 
   left_join(countrycode, by = "country")
 
-math_slope %>% 
+math_slope |> 
   ggplot(aes(x = .intercept, y = .slope_year_subtract)) +
   geom_point() +
   geom_text_repel(aes(label = country_name), size = 3) +
@@ -150,11 +150,11 @@ math_slope %>%
   scale_y_continuous(limits = c(-5, 8)) 
 
 
-math_slope_near <- math_slope %>%
+math_slope_near <- math_slope |>
   keys_near(key = country, var = .slope_year_subtract)
 
-math_slope_near %>% 
-  kbl(caption = "Summary Statistics") %>% 
+math_slope_near |> 
+  kbl(caption = "Summary Statistics") |> 
   kable_styling(full_width = NULL,
                 position = "center",
                 bootstrap_options = c("hover", "striped"))
@@ -168,27 +168,27 @@ Quite interestingly, the countries exhibiting monotone decreasing patterns are A
 
 ```{r}
 #plotting increasing and decreasing patterns in countries for all three subjects
-feature_monotone = complete_nations %>%
+feature_monotone = complete_nations |>
   features_at(.var = vars(math_wmean, read_wmean, science_wmean), 
-              features = feat_monotonic) %>% 
+              features = feat_monotonic) |> 
   dplyr::select(country, contains("increase"), contains("decrease"))
 
-feature_monotone_long = feature_monotone %>% 
+feature_monotone_long = feature_monotone |> 
   pivot_longer(cols = -country,
                names_to = "names", 
-               values_to = "monotone_value") %>% 
+               values_to = "monotone_value") |> 
   separate(col = names, into = c("subject", "direction"), sep = "_(?!.*_)")
 
-plot_tbl = complete_nations %>% 
-  as_tibble() %>% 
-  select(year, country, math_wmean, read_wmean, science_wmean) %>% 
+plot_tbl = complete_nations |> 
+  as_tibble() |> 
+  select(year, country, math_wmean, read_wmean, science_wmean) |> 
   pivot_longer(cols = contains("_wmean"),
                names_to = "subject", 
-               values_to = "wmean_value") %>%
-  left_join(feature_monotone_long, by = c("country", "subject")) %>% 
+               values_to = "wmean_value") |>
+  left_join(feature_monotone_long, by = c("country", "subject")) |> 
   left_join(countrycode, by = "country")
 
-plot_tbl %>% 
+plot_tbl |> 
   ggplot(aes(x = year,
              y = wmean_value,
              group = interaction(country, subject))) +
@@ -206,13 +206,13 @@ plot_tbl %>%
 As the PISA study spans multiple countries, schools and across time, there is a huge amount of variations in the data that the simple linear analyses above are not able to fully capture. Here, we turn our attention to the variability themselves and visualize these. We primarily use standard deviation and coefficient of variation to visualize the general trends of countries/region over time. 
 
 ```{r}
-student %>% 
-  group_by(year, country) %>% 
+student |> 
+  group_by(year, country) |> 
   summarise_at(
     .vars = vars(math, read, science, wealth, escs), 
     .funs = list(
       mean = ~ mean(., na.rm = TRUE),
-      sd = ~ sd(., na.rm = TRUE))) %>%
+      sd = ~ sd(., na.rm = TRUE))) |>
   ggplot(aes(x = math_mean, y = math_sd, colour = factor(year))) +
   geom_point(size = 3) +
   scale_colour_brewer(palette = "Dark2") +
@@ -226,26 +226,25 @@ cv = function(x){
   sd(x, na.rm = TRUE)/mean(x, na.rm = TRUE)
 }
 
-stu_var_summ = student %>% 
-  group_by(year, country) %>% 
+stu_var_summ = student |> 
+  group_by(year, country) |> 
   summarise_at(
     .vars = vars(math, read, science), 
     .funs = list(
       sd = ~ sd(., na.rm = TRUE),
-      cv = ~ cv(.))) %>% 
-  dplyr::mutate(year = year %>% as.character() %>% as.integer) %>% 
-  group_by(country) %>% 
-  filter(n() >= 5) %>% 
+      cv = ~ cv(.))) |> 
+  group_by(country) |> 
+  filter(n() >= 5) |> 
   ungroup()
 
 
-stu_var_summ_long = stu_var_summ %>% 
+stu_var_summ_long = stu_var_summ |> 
   pivot_longer(cols = -c("year", "country"), 
                names_to = "names",
-               values_to = "values") %>% 
+               values_to = "values") |> 
   separate(col = "names", into = c("subject", "statistic"), sep = "_")
 
-stu_var_summ_long %>% 
+stu_var_summ_long |> 
   ggplot(aes(x = year, y = values,
              group = country)) +
   geom_line() +
@@ -260,21 +259,21 @@ In the plot above, we see that there countries that has high variations tend to 
 We now zoom into the mathematics performance (measured using coefficient of variation) panel and take a close look at the countries, highlighting certain countries of interest. 
 
 ```{r}
-stu_var_summ = stu_var_summ %>% 
+stu_var_summ = stu_var_summ |> 
   as_tsibble(key = country, index = year)
 
-stu_var_near = stu_var_summ %>% 
-  features(math_cv, feat_brolgar) %>% 
+stu_var_near = stu_var_summ |> 
+  features(math_cv, feat_brolgar) |> 
   keys_near(key = country, var = median)
 
-stu_var_plotdf = stu_var_summ_long %>% 
-  filter(subject == "math", statistic == "cv") %>% 
-  left_join(stu_var_near, by = "country") %>% 
-  left_join(countrycode, by = "country") %>% 
-  as_tibble() %>% 
+stu_var_plotdf = stu_var_summ_long |> 
+  filter(subject == "math", statistic == "cv") |> 
+  left_join(stu_var_near, by = "country") |> 
+  left_join(countrycode, by = "country") |> 
+  as_tibble() |> 
   mutate(label_stats_country = ifelse(is.na(stat), NA, paste0(stat, ":", country_name)))
 
-stu_var_plotdf %>% 
+stu_var_plotdf |> 
   ggplot(aes(x = year, y = values,
              group = country, colour = stat)) +
   geom_line() +
@@ -293,22 +292,21 @@ One of the ongoing myth in education is that there is a difference in the perfor
 That being said, we now visualize the differences in the average test scores for each gender (PISA study chose a binary coding). Across the three subjects, there are more countries with a higher average for the boys in maths. In reading, girls completely dominate in every country while performance in science is more evenly split between the genders.  
 
 ```{r}
-stu_gender_summ = student %>% 
-  filter(complete.cases(gender)) %>% 
-  group_by(year, country, gender) %>%
+stu_gender_summ = student |> 
+  filter(complete.cases(gender)) |> 
+  group_by(year, country, gender) |>
   summarise_at(.vars = vars(math, read, science), 
-               .funs = list(wmean = ~w_mean(., w = stu_wgt))) %>% 
-  mutate(year = year %>% as.character() %>% as.integer) %>% 
-  group_by(country) %>%
-  filter(n() >= 10) %>% 
-  ungroup() %>% 
+               .funs = list(wmean = ~w_mean(., w = stu_wgt))) |> 
+  group_by(country) |>
+  filter(n() >= 10) |> 
+  ungroup() |> 
   pivot_longer(cols = contains("_wmean"),
                names_to = "names",
-               values_to = "values") %>% 
+               values_to = "values") |> 
   pivot_wider(names_from = c("gender", "names"),
               values_from = "values")
 
-stu_ggap_summ = stu_gender_summ %>% 
+stu_ggap_summ = stu_gender_summ |> 
   dplyr::transmute(
     year, country,
     gap_math_wmean = female_math_wmean - male_math_wmean,
@@ -316,12 +314,12 @@ stu_ggap_summ = stu_gender_summ %>%
     gap_science_wmean = female_science_wmean - male_science_wmean)
 
 
-stu_ggap_summ_long = stu_ggap_summ %>% 
+stu_ggap_summ_long = stu_ggap_summ |> 
   pivot_longer(cols = contains("gap"),
                names_to = "gap_names",
                values_to = "gap_values")
 
-stu_ggap_summ_long %>%
+stu_ggap_summ_long |>
   ggplot(aes(x = year, y = gap_values)) +
   geom_point() +
   geom_line(aes(group = country)) +
@@ -337,27 +335,27 @@ stu_ggap_summ_long %>%
 
 
 ```{r, fig.width = 18}
-stu_ggap_summ_nest = stu_ggap_summ %>%
+stu_ggap_summ_nest = stu_ggap_summ |>
   pivot_longer(contains("_wmean"),
                names_to = "names",
-               values_to = "values") %>% 
-  group_by(names) %>% 
-  nest() %>% 
+               values_to = "values") |> 
+  group_by(names) |> 
+  nest() |> 
   mutate(f_tbl = map(.x = data, 
-                     .f = ~ .x %>% 
-                       as_tsibble(key = country, index = year) %>% 
-                       features(values, feat_brolgar) %>% 
+                     .f = ~ .x |> 
+                       as_tsibble(key = country, index = year) |> 
+                       features(values, feat_brolgar) |> 
                        keys_near(key = country, var = range2)),
          f_data = map2(.x = data, .y = f_tbl, 
                        .f = ~ left_join(.x, .y, by = "country")))
 
-stu_ggap_summ_plotdf = stu_ggap_summ_nest %>% 
-  select(names, f_data) %>% 
-  unnest(f_data) %>% 
-  left_join(countrycode, by = "country") %>% 
+stu_ggap_summ_plotdf = stu_ggap_summ_nest |> 
+  select(names, f_data) |> 
+  unnest(f_data) |> 
+  left_join(countrycode, by = "country") |> 
   mutate(label_stats_country = ifelse(is.na(stat), NA, paste0(stat, ":", country_name)))
   
-stu_ggap_summ_plotdf %>% 
+stu_ggap_summ_plotdf |> 
   ggplot(aes(x = year, y = values)) +
   geom_line(aes(group = country, colour = country)) +
   gghighlight(!is.na(stat), label_key = label_stats_country, calculate_per_facet = TRUE, keep_scales = TRUE) +
@@ -371,18 +369,18 @@ stu_ggap_summ_plotdf %>%
 ### Highlighting key countries for maths only
 
 ```{r}
-stu_gap_math_near = stu_ggap_summ %>%
-  as_tsibble(key = country, index = year) %>% 
-  features(gap_math_wmean, feat_brolgar) %>%
+stu_gap_math_near = stu_ggap_summ |>
+  as_tsibble(key = country, index = year) |> 
+  features(gap_math_wmean, feat_brolgar) |>
   keys_near(key = country, var = median)
 
-stu_gap_math_plotdf = stu_ggap_summ %>%
-  as_tibble() %>%
-  left_join(stu_gap_math_near, by = "country") %>%
-  left_join(countrycode, by = "country") %>%
+stu_gap_math_plotdf = stu_ggap_summ |>
+  as_tibble() |>
+  left_join(stu_gap_math_near, by = "country") |>
+  left_join(countrycode, by = "country") |>
   mutate(label_stats_country = ifelse(is.na(stat), NA, paste0(stat, ":", country_name)))
 
-p_math = stu_gap_math_plotdf %>%
+p_math = stu_gap_math_plotdf |>
   ggplot(aes(x = year, y = gap_math_wmean,
              group = country, colour = stat)) +
   geom_line() +

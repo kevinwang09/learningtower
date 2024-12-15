@@ -19,7 +19,11 @@ Authors@R: c(
       person(given = "Nick", family = "Tierney", role = "aut", 
              email = "nicholas.tierney@gmail.com"),
       person(given = "Priya", family = "Dingorkar", role = "aut", 
-             email = "priyadingorkar@gmail.com")
+             email = "priyadingorkar@gmail.com"),
+      person(given = "Shabarish", family = "Sai Subramanian", role = "aut", 
+             email = "shabarish161@gmail.com"),
+      person(given = "Guan Ru", family = "Chen", role = "aut", 
+             email = "rix09207@gmail.com")
              )
 Description: The Programme for International Student Assessment (PISA) is a global study conducted by the Organization for Economic Cooperation and Development (OECD) in member and non-member countries to assess educational systems by assessing 15-year-old school students academic performance in mathematics, science, and reading. This datasets contains information on their scores and other socioeconomic characteristics, information about their school and its infrastructure, as well as the countries that are taking part in the program.
 Depends: R (>= 3.5.0)
