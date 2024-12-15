@@ -74,10 +74,10 @@ A boxplot is a standardized method of presenting data distribution. It informs w
 # plotting the distribution of numeric variables via boxplots
 aus_data %>% 
   select(where(is.numeric), -school_id, -student_id) %>% 
-  bind_cols(aus_data %>% select(year)) %>% 
   pivot_longer(cols = -year) %>% 
-  ggplot(aes(x = year, y = value,
-             colour = year)) +
+  ggplot(aes(x = factor(year), 
+             y = value,
+             colour = factor(year))) +
   geom_boxplot() +
   facet_wrap(~name, scales = "free_y") +
   theme(legend.position = "none") +
@@ -93,7 +93,7 @@ Missing data is a common issue that data professionals must deal with on a daily
 ```{r, fig.height = 15, fig.width = 15}
 #checking the missing values in the factor variables of the data
 aus_fct_plotdata = aus_data %>% 
-  select(where(is.factor)) %>% 
+  select(year, where(is.factor)) %>% 
   dplyr::select(-country) %>% 
   pivot_longer(cols = -year) %>% 
   group_by(year, name, value) %>% 
