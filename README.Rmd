@@ -19,9 +19,9 @@ library(learningtower)
 
 [![R-CMD-check](https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml)
 
-The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](https://www.oecd.org/pisa/data/). Version `r utils::packageVersion("learningtower")` of this package provides the data for the years `r learningtower:::data_range()`. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualizing and statistical computations.
+The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](https://www.oecd.org/pisa/data/). Version `r utils::packageVersion("learningtower")` of this package provides the data for the years `r learningtower:::data_range()`. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualising and statistical computations.
 
-## What is PISA?
+## What is the PISA dataset?
 
 <p align="center">
   <img width="300" height="300" src="man/figures/pisa_image.png">
@@ -61,7 +61,9 @@ The `learningtower` package contains mainly three datasets:
 + `school`
 + `countrycode`
 
-This provides us with information about the students scores in mathematics, reading and science. Their school details, and which country they are from. The number of entries for the `student` and `school` data are shown below.
+This provides us with information about the students scores in mathematics, reading and science, their school details, and which country they are from. The data provided in this package is a cleaned version of the full published PISA organisation, with reproducible code available in [this repository](https://github.com/kevinwang09/learningtower_masonry). 
+
+The number of entries for the `student` and `school` data are shown below.
 
 ```{r, eval=FALSE, echo=FALSE}
 library(learningtower)
@@ -154,6 +156,12 @@ The countrycode dataset contains mapping of the [country ISO code to the country
 data(countrycode)
 head(countrycode)
 ```
+
+<details>
+  <summary>Notes on countries</summary>
+  + Not all data entries in the `countrycode` are countries. For example, "QCN" refers to "Shanghai-China". 
+  + Due to differences in country codes, not all `student_subset_yyyy` data has all 38 OECD countries. 
+</details>
 
 See `?countrycode` for more detailed information on the countries that participated in the PISA experiment.
 

@@ -8,9 +8,9 @@ provide easy access to a subset of variables from PISA data collected
 from the [OECD](https://www.oecd.org/pisa/data/). Version 1.1.0 of this
 package provides the data for the years 2000 - 2022. The survey data is
 published every three years. This is an excellent real world dataset for
-data exploring, data visualizing and statistical computations.
+data exploring, data visualising and statistical computations.
 
-## What is PISA?
+## What is the PISA dataset?
 
 <p align="center">
 <img width="300" height="300" src="man/figures/pisa_image.png">
@@ -60,9 +60,14 @@ The `learningtower` package contains mainly three datasets:
 - `countrycode`
 
 This provides us with information about the students scores in
-mathematics, reading and science. Their school details, and which
-country they are from. The number of entries for the `student` and
-`school` data are shown below.
+mathematics, reading and science, their school details, and which
+country they are from. The data provided in this package is a cleaned
+version of the full published PISA organisation, with reproducible code
+available in [this
+repository](https://github.com/kevinwang09/learningtower_masonry).
+
+The number of entries for the `student` and `school` data are shown
+below.
 
 | Year | Number of Students | Number of Schools |
 |------|-------------------:|------------------:|
@@ -166,6 +171,18 @@ head(countrycode)
 #> 5 BEL     Belgium     
 #> 6 BRA     Brazil
 ```
+
+<details>
+<summary>
+Notes on countries
+</summary>
+
+- Not all data entries in the `countrycode` are countries. For example,
+  “QCN” refers to “Shanghai-China”.
+  - Due to differences in country codes, not all `student_subset_yyyy`
+    data has all 38 OECD countries.
+
+</details>
 
 See `?countrycode` for more detailed information on the countries that
 participated in the PISA experiment.
