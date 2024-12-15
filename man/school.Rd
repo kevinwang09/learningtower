@@ -8,7 +8,7 @@
 A tibble of the following variables
 \itemize{
     \item \code{year}: Year of the PISA data. Integer.
-    \item \code{country_iso3c}: Country 3 character code. Note that some regions/territories are coded as country for ease of input. Factor.
+    \item \code{country}: Country 3 character code. Note that some regions/territories are coded as country for ease of input. Chracter.
     \item \code{school_id}: The school identification number, unique for each country and year combination. Character.
     \item \code{fund_gov}: Percentage of total funding for school year from government. Numeric.
     \item \code{fund_fees}: Percentage of total funding for school year from student fees or school charges paid by parents. Numeric.
