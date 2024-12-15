@@ -213,7 +213,7 @@ student %>%
     .funs = list(
       mean = ~ mean(., na.rm = TRUE),
       sd = ~ sd(., na.rm = TRUE))) %>%
-  ggplot(aes(x = math_mean, y = math_sd, colour = year)) +
+  ggplot(aes(x = math_mean, y = math_sd, colour = factor(year))) +
   geom_point(size = 3) +
   scale_colour_brewer(palette = "Dark2") +
   labs(x = "Mean maths score", 
