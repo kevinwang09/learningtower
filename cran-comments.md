@@ -8,4 +8,4 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
 
-Winbuilder gave some errors, but these are on URLs that are valid: https://win-builder.r-project.org/O7qG479Sn4gS/00check.log.
+Winbuilder gave some notes, but these are on URLs that are valid: https://win-builder.r-project.org/O7qG479Sn4gS/00check.log.
