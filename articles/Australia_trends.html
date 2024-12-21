@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">The
 Freemasons</h4>
             
-            <h4 data-toc-skip class="date">2024-12-15</h4>
+            <h4 data-toc-skip class="date">2024-12-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/kevinwang09/learningtower/blob/master/vignettes/articles/Australia_trends.Rmd" class="external-link"><code>vignettes/articles/Australia_trends.Rmd</code></a></small>
       <div class="hidden name"><code>Australia_trends.Rmd</code></div>
@@ -115,6 +115,8 @@ rather than specific causes.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#loading the data and libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kevinwang09.github.io/learningtower/">learningtower</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
+<span><span class="co">#&gt;   object 'type_sum.accel' not found</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify" class="external-link">ggfortify</a></span><span class="op">)</span></span>
@@ -4858,24 +4860,24 @@ dropping, implying a gradual move towards equality.</p></li>
 <span><span class="co">#&gt; [16] ggplot2_3.5.1       tidyverse_2.0.0     learningtower_1.1.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] tidyselect_1.2.1   sjlabelled_1.2.0   viridisLite_0.4.2  farver_2.1.2      </span></span>
-<span><span class="co">#&gt;  [5] fastmap_1.2.0      bayestestR_0.15.0  sjstats_0.19.0     digest_0.6.37     </span></span>
-<span><span class="co">#&gt;  [9] timechange_0.3.0   lifecycle_1.0.4    magrittr_2.0.3     compiler_4.4.2    </span></span>
-<span><span class="co">#&gt; [13] rlang_1.1.4        sass_0.4.9         tools_4.4.2        utf8_1.2.4        </span></span>
-<span><span class="co">#&gt; [17] yaml_2.3.10        knitr_1.49         labeling_0.4.3     xml2_1.3.6        </span></span>
-<span><span class="co">#&gt; [21] withr_3.0.2        desc_1.4.3         grid_4.4.2         datawizard_0.13.0 </span></span>
-<span><span class="co">#&gt; [25] fansi_1.0.6        colorspace_2.1-1   scales_1.3.0       MASS_7.3-61       </span></span>
-<span><span class="co">#&gt; [29] insight_1.0.0      cli_3.6.3          rmarkdown_2.29     ragg_1.3.3        </span></span>
-<span><span class="co">#&gt; [33] generics_0.1.3     rstudioapi_0.17.1  performance_0.12.4 tzdb_0.4.0        </span></span>
-<span><span class="co">#&gt; [37] parameters_0.24.0  minqa_1.2.8        cachem_1.1.0       splines_4.4.2     </span></span>
-<span><span class="co">#&gt; [41] effectsize_0.8.9   vctrs_0.6.5        boot_1.3-31        jsonlite_1.8.9    </span></span>
-<span><span class="co">#&gt; [45] hms_1.1.3          systemfonts_1.1.0  jquerylib_0.1.4    glue_1.8.0        </span></span>
-<span><span class="co">#&gt; [49] nloptr_2.1.1       pkgdown_2.1.1      stringi_1.8.4      gtable_0.3.6      </span></span>
-<span><span class="co">#&gt; [53] ggeffects_2.0.0    munsell_0.5.1      pillar_1.9.0       htmltools_0.5.8.1 </span></span>
-<span><span class="co">#&gt; [57] R6_2.5.1           textshaping_0.4.1  evaluate_1.0.1     lattice_0.22-6    </span></span>
-<span><span class="co">#&gt; [61] backports_1.5.0    broom_1.0.7        bslib_0.8.0        Rcpp_1.0.13-1     </span></span>
-<span><span class="co">#&gt; [65] svglite_2.1.3      gridExtra_2.3      nlme_3.1-166       xfun_0.49         </span></span>
-<span><span class="co">#&gt; [69] fs_1.6.5           sjmisc_2.8.10      pkgconfig_2.0.3</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] gtable_0.3.6       bayestestR_0.15.0  xfun_0.49          bslib_0.8.0       </span></span>
+<span><span class="co">#&gt;  [5] insight_1.0.0      lattice_0.22-6     tzdb_0.4.0         sjstats_0.19.0    </span></span>
+<span><span class="co">#&gt;  [9] vctrs_0.6.5        tools_4.4.2        generics_0.1.3     datawizard_0.13.0 </span></span>
+<span><span class="co">#&gt; [13] pkgconfig_2.0.3    desc_1.4.3         ggeffects_2.0.0    lifecycle_1.0.4   </span></span>
+<span><span class="co">#&gt; [17] farver_2.1.2       compiler_4.4.2     sjmisc_2.8.10      textshaping_0.4.1 </span></span>
+<span><span class="co">#&gt; [21] munsell_0.5.1      htmltools_0.5.8.1  sass_0.4.9         yaml_2.3.10       </span></span>
+<span><span class="co">#&gt; [25] pillar_1.10.0      pkgdown_2.1.1      nloptr_2.1.1       jquerylib_0.1.4   </span></span>
+<span><span class="co">#&gt; [29] MASS_7.3-61        cachem_1.1.0       boot_1.3-31        nlme_3.1-166      </span></span>
+<span><span class="co">#&gt; [33] tidyselect_1.2.1   sjlabelled_1.2.0   digest_0.6.37      performance_0.12.4</span></span>
+<span><span class="co">#&gt; [37] stringi_1.8.4      labeling_0.4.3     splines_4.4.2      fastmap_1.2.0     </span></span>
+<span><span class="co">#&gt; [41] grid_4.4.2         colorspace_2.1-1   cli_3.6.3          magrittr_2.0.3    </span></span>
+<span><span class="co">#&gt; [45] broom_1.0.7        withr_3.0.2        backports_1.5.0    scales_1.3.0      </span></span>
+<span><span class="co">#&gt; [49] timechange_0.3.0   rmarkdown_2.29     gridExtra_2.3      ragg_1.3.3        </span></span>
+<span><span class="co">#&gt; [53] hms_1.1.3          evaluate_1.0.1     knitr_1.49         parameters_0.24.0 </span></span>
+<span><span class="co">#&gt; [57] viridisLite_0.4.2  rlang_1.1.4        Rcpp_1.0.13-1      glue_1.8.0        </span></span>
+<span><span class="co">#&gt; [61] xml2_1.3.6         effectsize_0.8.9   svglite_2.1.3      rstudioapi_0.17.1 </span></span>
+<span><span class="co">#&gt; [65] minqa_1.2.8        jsonlite_1.8.9     R6_2.5.1           systemfonts_1.1.0 </span></span>
+<span><span class="co">#&gt; [69] fs_1.6.5</span></span></code></pre></div>
 </div>
   </div>
 
