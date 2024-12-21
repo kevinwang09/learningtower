@@ -28,7 +28,7 @@ learning in the areas of reading, mathematical and scientific literacy.
 In 2022, PISA involved 79 countries and 600,000+ students worldwide.
 
 Read more about the Programme
-[here](https://www.oecd.org/pisa/aboutpisa/).
+[here](https://www.oecd.org/en/about/programmes/pisa.html).
 
 ## Installation
 
@@ -153,9 +153,9 @@ the the school dataset.
 
 The countrycode dataset contains mapping of the [country ISO code to the
 country
-name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf).
+name](https://www.oecd.org/content/dam/oecd/en/about/programmes/edu/pisa/publications/technical-report/PISA2015_TechRep_Final.pdf).
 More information on the participating countries can be found
-[here](https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm).
+[here](https://www.oecd.org/en/about/programmes/pisa/pisa-participants.html).
 
 ``` r
 # loading the countrycode data

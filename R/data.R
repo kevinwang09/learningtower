@@ -2,7 +2,7 @@
 #'
 #' @description This dataset provides a clean and processed subset of the OECD PISA student data
 #' for the years 2000-2022. The original data is sourced from
-#' \url{https://www.oecd.org/pisa/data/} and has been prepared for analysis.
+#' \url{https://www.oecd.org/en/about/programmes/pisa/pisa-data.html} and has been prepared for analysis.
 #' A sampling of 50 students per country (for OECD countries) has been included for each year.
 #' The data curation and sampling process are documented in \url{https://github.com/kevinwang09/learningtower_masonry/blob/master/Code/student_bind_rows.Rmd}
 #'
@@ -103,7 +103,7 @@ NULL
 #' @description A subset data containing school weight and other information
 #' from the triennial testing of 15 year olds around
 #' the globe. Original data available from
-#'  \url{https://www.oecd.org/pisa/data/}.
+#'  \url{https://www.oecd.org/en/about/programmes/pisa/pisa-data.html}.
 #'
 #' @format A tibble of the following variables
 #' \itemize{

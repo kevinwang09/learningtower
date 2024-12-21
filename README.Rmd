@@ -34,7 +34,7 @@ PISA assesses the extent to which 15-year-old students have acquired some of the
 
 In 2022, PISA involved 79 countries and 600,000+ students worldwide.
 
-Read more about the Programme [here](https://www.oecd.org/pisa/aboutpisa/).
+Read more about the Programme [here](https://www.oecd.org/en/about/programmes/pisa.html).
 
 
 ## Installation
@@ -149,7 +149,7 @@ See `?school` for more information on the different variables present in the the
 
 ### Countrycode Dataset
 
-The countrycode dataset contains mapping of the [country ISO code to the country name](https://www.oecd.org/pisa/sitedocument/PISA-2015-Technical-Report-Readers-Guide.pdf). More information on the participating countries can be found [here](https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm).
+The countrycode dataset contains mapping of the [country ISO code to the country name](https://www.oecd.org/content/dam/oecd/en/about/programmes/edu/pisa/publications/technical-report/PISA2015_TechRep_Final.pdf). More information on the participating countries can be found [here](https://www.oecd.org/en/about/programmes/pisa/pisa-participants.html).
 
 ```{r}
 # loading the countrycode data

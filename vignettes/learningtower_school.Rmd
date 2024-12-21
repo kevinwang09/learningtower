@@ -25,7 +25,7 @@ fig.align = "center")
 
 # Introduction
 
-The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](https://www.oecd.org/pisa/data/). Version `r utils::packageVersion("learningtower")` of this package provides the data for the years `r learningtower:::data_range()`. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualizing and statistical computations.
+The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](https://www.oecd.org/en/about/programmes/pisa/pisa-data.html). Version `r utils::packageVersion("learningtower")` of this package provides the data for the years `r learningtower:::data_range()`. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualizing and statistical computations.
 
 This vignette documents how to access the data, and shows a few ways of integrating the data.
 
