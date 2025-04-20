@@ -1,0 +1,133 @@
+---
+title: "Exploring propensity scores"
+author: "The Freemasons"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    fig_height: 10
+    fig_width: 14
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Temporal trends}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+  
+```{r setup, include = FALSE}
+  knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  error = FALSE,
+  outwidth = "100%",
+  fig.width = 8, 
+  fig.height = 6)
+```
+
+# Introduction
+
+We will explore propensity scores in this data
+
+
+# Loading packages and data
+  
+```{r}
+#loading the data and libraries 
+library(learningtower)
+library(tidyverse)
+library(patchwork)
+library(MatchIt)
+
+student2018 <- load_student("2018")
+data(school)
+data(countrycode)
+school2018 = school |> filter(year == 2018)
+theme_set(theme_classic(18) +
+            theme(legend.position = "bottom"))
+```
+
+# Basic time series visual
+
+```{r}
+regdata = student2018 |> 
+  left_join(school2018, by = c("year", "school_id", "country")) |>
+  dplyr::filter(public_private %in% c("private", "public"),
+                country == "AUS")
+
+set.seed(123)
+selected_schools = regdata |> 
+  distinct(school_id, public_private) |> 
+  group_by(public_private) |> 
+  sample_n(size=50)
+
+regdata = regdata |> 
+  dplyr::filter(school_id %in% selected_schools$school_id) |> 
+  dplyr::select(public_private, math, escs, gender) |> 
+  na.omit()
+```
+
+```{r}
+regdata |>
+  group_by(public_private) |> 
+  summarise(mean_math = mean(math, na.rm = TRUE))
+```
+
+# Step 1: construct a logistic regression on the assignment of the public/private
+
+This is very crude, but will work.
+
+```{r}
+model_pp = glm(
+  public_private ~ . - math, 
+  data = regdata, family = "binomial")
+
+plotdf = regdata |> 
+  dplyr::mutate(ps = predict(model_pp, type = "response"))
+
+plotdf |> 
+  ggplot(aes(x = ps,
+             colour = public_private)) +
+  # geom_histogram(aes(y = ..density..), bins = 30) +
+  geom_density() +
+  scale_x_continuous(limits = c(0,1))
+  # facet_wrap(~public_private)
+```
+
+# Step 2: Matching between the groups using the PS
+
+```{r}
+mod_match = matchit(
+  public_private ~ . -math, 
+  data = regdata,
+  # method = "optimal",
+  # method = "full",
+  method = "nearest",
+  distance = "glm")
+
+matchdata = match.data(mod_match)
+dim(matchdata)
+
+summary(mod_match)
+
+plot(summary(mod_match))
+
+plot(mod_match, type = "density", interactive = FALSE)
+```
+
+```{r}
+lm(math ~ public_private + escs + gender, data=matchdata) |> 
+  summary()
+```
+
+```{r}
+lm(math ~ public_private + escs + gender, data=matchdata, weights=matchdata$distance) |> 
+  summary()
+```
+
+# Session info
+```{r}
+sessionInfo()
+```
