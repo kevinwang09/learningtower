@@ -1,3 +1,7 @@
+# learningtower 1.1.1
+
+* Gracefully handle internet resource unavailability during `load_student()` by skipping downloads instead of throwing errors to comply with CRAN checks.
+
 # learningtower 1.1.0
 
 * Added 2022 data set. 
