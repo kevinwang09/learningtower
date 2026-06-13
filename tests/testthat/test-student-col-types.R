@@ -34,6 +34,7 @@ test_that("student_subset_* datasets have correct structure", {
 test_that("load_student() returns correct structure for full datasets", {
   for (year in c("2000", "2003", "2006", "2009", "2012", "2015", "2018", "2022")) {
     dataset <- load_student(year)
+    if (is.null(dataset)) skip(paste("Data for year", year, "could not be downloaded"))
 
     # Check column names
     expect_named(dataset, expected_student_columns, info = paste("Column names for full dataset of", year))
