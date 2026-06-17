@@ -14,5 +14,5 @@ A tibble of the following variables
 \description{
 A dataset containing mapping of the country ISO code to the country names.
 More information on participating countries can be found at
-\url{https://www.oecd.org/pisa/aboutpisa/pisa-participants.htm}.
+\url{https://www.oecd.org/en/about/programmes/pisa/pisa-participants.html}.
 }
