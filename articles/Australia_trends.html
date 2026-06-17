@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">learningtower</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
                         <h4 data-toc-skip class="author">The
 Freemasons</h4>
             
-            <h4 data-toc-skip class="date">2024-12-21</h4>
+            <h4 data-toc-skip class="date">2026-06-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/kevinwang09/learningtower/blob/master/vignettes/articles/Australia_trends.Rmd" class="external-link"><code>vignettes/articles/Australia_trends.Rmd</code></a></small>
       <div class="hidden name"><code>Australia_trends.Rmd</code></div>
@@ -115,8 +115,6 @@ rather than specific causes.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#loading the data and libraries</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kevinwang09.github.io/learningtower/">learningtower</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in get(paste0(generic, ".", class), envir = get_method_env()) : </span></span>
-<span><span class="co">#&gt;   object 'type_sum.accel' not found</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/" class="external-link">lme4</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify" class="external-link">ggfortify</a></span><span class="op">)</span></span>
@@ -129,7 +127,7 @@ rather than specific causes.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">school</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">countrycode</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="fl">18</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="fl">18</span><span class="op">)</span> </span>
 <span>          <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -166,7 +164,7 @@ years via boxplots.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>, </span>
 <span>       y <span class="op">=</span> <span class="st">""</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"The distribution of numerical variables in the student dataset over all years"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Australia_trends_files/figure-html/unnamed-chunk-3-1.png" width="1440"></p>
+<p><img src="Australia_trends_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="1440"></p>
 </div>
 <div class="section level3">
 <h3 id="factor-variables">Factor variables<a class="anchor" aria-label="anchor" href="#factor-variables"></a>
@@ -203,7 +201,7 @@ dataset.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>, </span>
 <span>       y <span class="op">=</span> <span class="st">"Percentage of missing values"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Missing values in the student dataset's factor variables"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Australia_trends_files/figure-html/unnamed-chunk-4-1.png" width="1440"></p>
+<p><img src="Australia_trends_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="1440"></p>
 <p>We initially investigate the most current 2018 data before
 generalizing the models/results into any patterns due to the quantity of
 missing values in the data in previous years and also to decrease the
@@ -1702,7 +1700,7 @@ values (~ 0.20).</p>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">aus2018_math</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"2018 Australia maths model"</span><span class="op">)</span> <span class="op">+</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">aus2018_read</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"2018 Australia read model"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">aus2018_science</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"2018 Australia science model"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Australia_trends_files/figure-html/unnamed-chunk-8-1.png" width="1152"></p>
+<p><img src="Australia_trends_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="1152"></p>
 </div>
 </div>
 <div class="section level2">
@@ -4783,7 +4781,7 @@ testing this level will be &lt; 0.05.</p></li>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">term</span>, <span class="st">"computer|father_educ|escs|wealth"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    year <span class="op">=</span> <span class="va">year</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    facet <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
+<span>    facet <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
 <span>      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">term</span>, <span class="st">"computer"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Number of computer"</span>,</span>
 <span>      <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html" class="external-link">str_detect</a></span><span class="op">(</span><span class="va">term</span>, <span class="st">"father_educ"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Education of father"</span>,</span>
 <span>      <span class="co"># str_detect(term, "mother_educ") ~ "Education of mother",</span></span>
@@ -4809,7 +4807,7 @@ testing this level will be &lt; 0.05.</p></li>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Estimate"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Graphing coefficient estimates throughout time"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Australia_trends_files/figure-html/unnamed-chunk-12-1.png" width="1440"></p>
+<p><img src="Australia_trends_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="1440"></p>
 <p>We note the following:</p>
 <ol style="list-style-type: decimal">
 <li><p>Even though in the 2018, we found the education of father was
@@ -4831,13 +4829,13 @@ dropping, implying a gradual move towards equality.</p></li>
 </h2>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; R version 4.4.2 (2024-10-31)</span></span>
+<span><span class="co">#&gt; R version 4.6.0 (2026-04-24)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu</span></span>
-<span><span class="co">#&gt; Running under: Ubuntu 22.04.5 LTS</span></span>
+<span><span class="co">#&gt; Running under: Ubuntu 24.04.4 LTS</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
 <span><span class="co">#&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 </span></span>
-<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so;  LAPACK version 3.10.0</span></span>
+<span><span class="co">#&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; locale:</span></span>
 <span><span class="co">#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       </span></span>
@@ -4852,32 +4850,32 @@ dropping, implying a gradual move towards equality.</p></li>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt;  [1] kableExtra_1.4.0    ggrepel_0.9.6       patchwork_1.3.0    </span></span>
-<span><span class="co">#&gt;  [4] sjPlot_2.8.17       ggfortify_0.4.17    lme4_1.1-35.5      </span></span>
-<span><span class="co">#&gt;  [7] Matrix_1.7-1        lubridate_1.9.3     forcats_1.0.0      </span></span>
-<span><span class="co">#&gt; [10] stringr_1.5.1       dplyr_1.1.4         purrr_1.0.2        </span></span>
-<span><span class="co">#&gt; [13] readr_2.1.5         tidyr_1.3.1         tibble_3.2.1       </span></span>
-<span><span class="co">#&gt; [16] ggplot2_3.5.1       tidyverse_2.0.0     learningtower_1.1.0</span></span>
+<span><span class="co">#&gt;  [1] kableExtra_1.4.0    ggrepel_0.9.8       patchwork_1.3.2    </span></span>
+<span><span class="co">#&gt;  [4] sjPlot_2.9.0        ggfortify_0.4.19    lme4_2.0-1         </span></span>
+<span><span class="co">#&gt;  [7] Matrix_1.7-5        lubridate_1.9.5     forcats_1.0.1      </span></span>
+<span><span class="co">#&gt; [10] stringr_1.6.0       dplyr_1.2.1         purrr_1.2.2        </span></span>
+<span><span class="co">#&gt; [13] readr_2.2.0         tidyr_1.3.2         tibble_3.3.1       </span></span>
+<span><span class="co">#&gt; [16] ggplot2_4.0.3       tidyverse_2.0.0     learningtower_1.1.1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] gtable_0.3.6       bayestestR_0.15.0  xfun_0.49          bslib_0.8.0       </span></span>
-<span><span class="co">#&gt;  [5] insight_1.0.0      lattice_0.22-6     tzdb_0.4.0         sjstats_0.19.0    </span></span>
-<span><span class="co">#&gt;  [9] vctrs_0.6.5        tools_4.4.2        generics_0.1.3     datawizard_0.13.0 </span></span>
-<span><span class="co">#&gt; [13] pkgconfig_2.0.3    desc_1.4.3         ggeffects_2.0.0    lifecycle_1.0.4   </span></span>
-<span><span class="co">#&gt; [17] farver_2.1.2       compiler_4.4.2     sjmisc_2.8.10      textshaping_0.4.1 </span></span>
-<span><span class="co">#&gt; [21] munsell_0.5.1      htmltools_0.5.8.1  sass_0.4.9         yaml_2.3.10       </span></span>
-<span><span class="co">#&gt; [25] pillar_1.10.0      pkgdown_2.1.1      nloptr_2.1.1       jquerylib_0.1.4   </span></span>
-<span><span class="co">#&gt; [29] MASS_7.3-61        cachem_1.1.0       boot_1.3-31        nlme_3.1-166      </span></span>
-<span><span class="co">#&gt; [33] tidyselect_1.2.1   sjlabelled_1.2.0   digest_0.6.37      performance_0.12.4</span></span>
-<span><span class="co">#&gt; [37] stringi_1.8.4      labeling_0.4.3     splines_4.4.2      fastmap_1.2.0     </span></span>
-<span><span class="co">#&gt; [41] grid_4.4.2         colorspace_2.1-1   cli_3.6.3          magrittr_2.0.3    </span></span>
-<span><span class="co">#&gt; [45] broom_1.0.7        withr_3.0.2        backports_1.5.0    scales_1.3.0      </span></span>
-<span><span class="co">#&gt; [49] timechange_0.3.0   rmarkdown_2.29     gridExtra_2.3      ragg_1.3.3        </span></span>
-<span><span class="co">#&gt; [53] hms_1.1.3          evaluate_1.0.1     knitr_1.49         parameters_0.24.0 </span></span>
-<span><span class="co">#&gt; [57] viridisLite_0.4.2  rlang_1.1.4        Rcpp_1.0.13-1      glue_1.8.0        </span></span>
-<span><span class="co">#&gt; [61] xml2_1.3.6         effectsize_0.8.9   svglite_2.1.3      rstudioapi_0.17.1 </span></span>
-<span><span class="co">#&gt; [65] minqa_1.2.8        jsonlite_1.8.9     R6_2.5.1           systemfonts_1.1.0 </span></span>
-<span><span class="co">#&gt; [69] fs_1.6.5</span></span></code></pre></div>
+<span><span class="co">#&gt;  [1] tidyselect_1.2.1   sjlabelled_1.2.0   viridisLite_0.4.3  farver_2.1.2      </span></span>
+<span><span class="co">#&gt;  [5] S7_0.2.2           fastmap_1.2.0      bayestestR_0.18.1  digest_0.6.39     </span></span>
+<span><span class="co">#&gt;  [9] timechange_0.4.0   lifecycle_1.0.5    magrittr_2.0.5     compiler_4.6.0    </span></span>
+<span><span class="co">#&gt; [13] rlang_1.2.0        sass_0.4.10        tools_4.6.0        yaml_2.3.12       </span></span>
+<span><span class="co">#&gt; [17] knitr_1.51         labeling_0.4.3     xml2_1.5.2         RColorBrewer_1.1-3</span></span>
+<span><span class="co">#&gt; [21] withr_3.0.2        desc_1.4.3         grid_4.6.0         datawizard_1.3.1  </span></span>
+<span><span class="co">#&gt; [25] stats4_4.6.0       scales_1.4.0       MASS_7.3-65        insight_1.5.1     </span></span>
+<span><span class="co">#&gt; [29] cli_3.6.6          rmarkdown_2.31     ragg_1.5.2         reformulas_0.4.4  </span></span>
+<span><span class="co">#&gt; [33] generics_0.1.4     otel_0.2.0         rstudioapi_0.19.0  performance_0.17.0</span></span>
+<span><span class="co">#&gt; [37] tzdb_0.5.0         parameters_0.29.1  minqa_1.2.8        cachem_1.1.0      </span></span>
+<span><span class="co">#&gt; [41] splines_4.6.0      effectsize_1.0.2   vctrs_0.7.3        boot_1.3-32       </span></span>
+<span><span class="co">#&gt; [45] jsonlite_2.0.0     hms_1.1.4          systemfonts_1.3.2  jquerylib_0.1.4   </span></span>
+<span><span class="co">#&gt; [49] glue_1.8.1         nloptr_2.2.1       pkgdown_2.2.0      stringi_1.8.7     </span></span>
+<span><span class="co">#&gt; [53] gtable_0.3.6       pillar_1.11.1      htmltools_0.5.9    R6_2.6.1          </span></span>
+<span><span class="co">#&gt; [57] textshaping_1.0.5  Rdpack_2.6.6       evaluate_1.0.5     lattice_0.22-9    </span></span>
+<span><span class="co">#&gt; [61] backports_1.5.1    rbibutils_2.4.1    broom_1.0.13       bslib_0.11.0      </span></span>
+<span><span class="co">#&gt; [65] Rcpp_1.1.1-1.1     svglite_2.2.2      gridExtra_2.3      nlme_3.1-169      </span></span>
+<span><span class="co">#&gt; [69] xfun_0.58          fs_2.1.0           sjmisc_2.8.11      pkgconfig_2.0.3</span></span></code></pre></div>
 </div>
   </div>
 
@@ -4896,7 +4894,7 @@ dropping, implying a gradual move towards equality.</p></li>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>
