@@ -5,14 +5,17 @@
 
 The goal of `learningtower` is to provide a user-friendly R package to
 provide easy access to a subset of variables from PISA data collected
-from the [OECD](https://www.oecd.org/pisa/data/). Version 1.1.0 of this
-package provides the data for the years 2000 - 2022. The survey data is
-published every three years. This is an excellent real world dataset for
-data exploring, data visualising and statistical computations.
+from the
+[OECD](https://www.oecd.org/en/about/programmes/pisa/pisa-data.html).
+Version 1.1.0 of this package provides the data for the years 2000 -
+2022. The survey data is published every three years. This is an
+excellent real world dataset for data exploring, data visualising and
+statistical computations.
 
 ## What is the PISA dataset?
 
 <p align="center">
+
 <img width="300" height="300" src="man/figures/pisa_image.png">
 </p>
 
@@ -50,8 +53,8 @@ devtools::install_github("kevinwang09/learningtower")
 
 The `learningtower` gives access to a subset of variables from PISA data
 originally collected and are available from
-[OECD](https://www.oecd.org/pisa/data/), collected on a three year
-basis.
+[OECD](https://www.oecd.org/en/about/programmes/pisa/pisa-data.html),
+collected on a three year basis.
 
 The `learningtower` package contains mainly three datasets:
 
@@ -124,6 +127,7 @@ Note that because of changing data specification over the survery years,
 not all variables were measured consistently across the years.
 
 <p align="center">
+
 <img width="1200" height="500" src="man/figures/README_student_data_missing_values_summary.png">
 </p>
 
@@ -146,6 +150,7 @@ See `?school` for more information on the different variables present in
 the the school dataset.
 
 <p align="center">
+
 <img width="1200" height="500" src="man/figures/README_school_data_missing_values_summary.png">
 </p>
 
@@ -173,7 +178,9 @@ head(countrycode)
 ```
 
 <details>
+
 <summary>
+
 Notes on countries
 </summary>
 
@@ -194,6 +201,7 @@ of these 15 year old students for a few selected countries over the
 available years.
 
 <p align="center">
+
 <img width="600" height="400" src="man/figures/readme.png">
 </p>
 
@@ -242,6 +250,7 @@ citation("learningtower")
   three](https://www.smh.com.au/education/in-china-nicholas-studied-maths-20-hours-a-week-in-australia-it-s-three-20191203-p53ggv.html).
 
 <p align="center">
+
 <img width="720" height="360" src="man/figures/conversation_holden.png">
 </p>
 
@@ -251,7 +260,7 @@ citation("learningtower")
   ‘worrying’](https://www.stuff.co.nz/national/education/117890945/new-zealand-topend-in-oecds-latest-pisa-report-but-drop-in-achievements-worrying),
   [Not even mediocre? Indonesian students score low in math, reading,
   science: PISA
-  report](https://www.thejakartapost.com/news/2019/12/04/not-even-mediocre-indonesian-students-score-low-in-math-reading-science-pisa-report.html).
+  report](https://www.thejakartapost.com/news/2019/12/04/not-even-mediocre-indonesian-students-score-low-in-math-reading-science-pisa-report).
 
 - The data from this survey and all of the surveys conducted since the
   first collection in 2000, is publicly available. We decided to have

@@ -34,7 +34,7 @@ This vignette documents how to access the data, and shows a few typical methods 
 
 ## Usage of the subset of the `student` data
 
-- In `learningtower`, the main data is the student data. This data contains information regarding student test scores and some selected variables regarding their schooling and socio-economic status. The original and complete data may be obtained from [OECD](https://www.oecd.org/pisa/data/).
+- In `learningtower`, the main data is the student data. This data contains information regarding student test scores and some selected variables regarding their schooling and socio-economic status. The original and complete data may be obtained from [OECD](https://www.oecd.org/en/about/programmes/pisa/pisa-data.html).
 
 - However, the size of the full `student` is too big to fit inside the package. Hence, in our package, we provide a random subset of the student data, stored as `student_subset_20xx` data objects (where `xx` denotes the specific year of the study). These subset data can be used to understanding the data structure before using the full dataset which is available for download.
 

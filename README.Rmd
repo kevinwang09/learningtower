@@ -19,7 +19,7 @@ library(learningtower)
 
 [![R-CMD-check](https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kevinwang09/learningtower/actions/workflows/R-CMD-check.yaml)
 
-The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](https://www.oecd.org/pisa/data/). Version `r utils::packageVersion("learningtower")` of this package provides the data for the years `r learningtower:::data_range()`. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualising and statistical computations.
+The goal of `learningtower` is to provide a user-friendly R package to provide easy access to a subset of variables from PISA data collected from the [OECD](https://www.oecd.org/en/about/programmes/pisa/pisa-data.html). Version `r utils::packageVersion("learningtower")` of this package provides the data for the years `r learningtower:::data_range()`. The survey data is published every three years. This is an excellent real world dataset for data exploring, data visualising and statistical computations.
 
 ## What is the PISA dataset?
 
@@ -53,7 +53,7 @@ devtools::install_github("kevinwang09/learningtower")
 
 ## Data Description
 
-The `learningtower` gives access to a subset of variables from PISA data originally collected and are available from [OECD](https://www.oecd.org/pisa/data/), collected on a three year basis.
+The `learningtower` gives access to a subset of variables from PISA data originally collected and are available from [OECD](https://www.oecd.org/en/about/programmes/pisa/pisa-data.html), collected on a three year basis.
 
 The `learningtower` package contains mainly three datasets:
 
@@ -220,7 +220,7 @@ citation("learningtower")
   <img width="720" height="360" src="man/figures/conversation_holden.png">
 </p>
 
-+ Australia's neighbours, New Zealand and Indonesia, are also worrying: [New Zealand top-end in OECD's latest PISA report but drop in achievements 'worrying'](https://www.stuff.co.nz/national/education/117890945/new-zealand-topend-in-oecds-latest-pisa-report-but-drop-in-achievements-worrying), [Not even mediocre? Indonesian students score low in math, reading, science: PISA report](https://www.thejakartapost.com/news/2019/12/04/not-even-mediocre-indonesian-students-score-low-in-math-reading-science-pisa-report.html).
++ Australia's neighbours, New Zealand and Indonesia, are also worrying: [New Zealand top-end in OECD's latest PISA report but drop in achievements 'worrying'](https://www.stuff.co.nz/national/education/117890945/new-zealand-topend-in-oecds-latest-pisa-report-but-drop-in-achievements-worrying), [Not even mediocre? Indonesian students score low in math, reading, science: PISA report](https://www.thejakartapost.com/news/2019/12/04/not-even-mediocre-indonesian-students-score-low-in-math-reading-science-pisa-report).
 
 + The data from this survey and all of the surveys conducted since the first collection in 2000, is publicly available. We decided to have made a more convenient subset of the data available in a new R package, called `learningtower`
 
