@@ -44,6 +44,9 @@ load_student <- function(year = "2000"){
   for(this_year in year){
     message("Downloading year ", this_year, "...\n")
     this_data = download_single_student(year = this_year)
+    if (is.null(this_data)) {
+      return(NULL)
+    }
     result = dplyr::bind_rows(result, this_data)
   }
   return(result)
@@ -52,6 +55,20 @@ load_student <- function(year = "2000"){
 download_single_student <- function(year){
   url_git = base::paste0("https://github.com/kevinwang09/learningtower/raw/master/student_full_data/student_", year, ".rds")
   tmp <- tempfile()
-  utils::download.file(url = url_git, destfile = tmp)
-  return(base::readRDS(file = tmp))
+  
+  res <- tryCatch({
+    utils::download.file(url = url_git, destfile = tmp, quiet = TRUE, mode = "wb")
+    TRUE
+  }, error = function(e) {
+    FALSE
+  }, warning = function(w) {
+    FALSE
+  })
+  
+  if (res) {
+    return(base::readRDS(file = tmp))
+  } else {
+    message("Failed to download data for year ", year, ". The internet resource might be unavailable or changed.")
+    return(NULL)
+  }
 }
