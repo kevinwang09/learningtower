@@ -53,6 +53,15 @@ load_student <- function(year = "2000"){
 }
 
 download_single_student <- function(year){
+  local_path <- file.path("student_full_data", paste0("student_", year, ".rds"))
+  pkg_path <- system.file("student_full_data", paste0("student_", year, ".rds"), package = "learningtower")
+
+  if (file.exists(local_path)) {
+    return(base::readRDS(file = local_path))
+  } else if (nzchar(pkg_path) && file.exists(pkg_path)) {
+    return(base::readRDS(file = pkg_path))
+  }
+
   url_git = base::paste0("https://github.com/kevinwang09/learningtower/raw/master/student_full_data/student_", year, ".rds")
   tmp <- tempfile()
   
