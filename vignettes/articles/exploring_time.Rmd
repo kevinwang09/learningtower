@@ -8,12 +8,13 @@ output:
     fig_width: 14
     number_sections: true
 vignette: >
-  %\VignetteIndexEntry{Temporal trends}
+  %\VignetteIndexEntry{Exploring temporal trends}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
   
 ```{r setup, include = FALSE}
+  options(rmarkdown.html_vignette.check_title = FALSE)
   knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",

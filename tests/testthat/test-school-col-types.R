@@ -1,12 +1,13 @@
 expected_school_columns <- c(
-  "year", "country", "school_id", "fund_gov", "fund_fees", "fund_donation",
-  "enrol_boys", "enrol_girls", "stratio", "public_private", "staff_shortage",
-  "sch_wgt", "school_size"
+  "year", "country", "school_id", "public_private", "fund_gov", "fund_fees",
+  "fund_donation", "enrol_boys", "enrol_girls", "staff_shortage", "stratio",
+  "school_size", "sch_wgt"
 )
 
 expected_school_types <- c(
-  "integer", "character", "character", "numeric", "numeric", "numeric", "numeric",
-  "numeric", "numeric", "factor", "numeric", "numeric", "numeric"
+  "integer", "character", "character", "factor", "numeric", "numeric",
+  "numeric", "numeric", "numeric", "numeric", "numeric",
+  "numeric", "numeric"
 )
 
 test_that("school dataset has correct structure", {
