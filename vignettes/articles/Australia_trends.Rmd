@@ -46,6 +46,10 @@ library(ggrepel)
 library(kableExtra)
 
 student <- load_student("all")
+if (is.null(student)) {
+  message("Internet resource is not available. Skipping the rest of the vignette.")
+  knitr::knit_exit()
+}
 data(school)
 data(countrycode)
 
