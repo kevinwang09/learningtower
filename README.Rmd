@@ -124,7 +124,7 @@ student_data_2012_2018 <- load_student(c(2012, 2018))
 student_data_all <- load_student("all")
 ```
 
-Note that because of changing data specification over the survery years, not all variables were measured consistently across the years.
+Note that because of changing data specification over the survey years, not all variables were measured consistently across all cycles (2000–2022). The summary figure below illustrates the missingness patterns and variable presence across survey years for the student dataset:
 
 <p align="center">
   <img width="1200" height="500" src="man/figures/README_student_data_missing_values_summary.png">
@@ -141,7 +141,7 @@ The `school` dataset comprises school weight and other information such as the f
 data(school)
 ```
 
-See `?school` for more information on the different variables present in the the school dataset.
+See `?school` for more information on the different variables present in the school dataset. The summary figure below illustrates the missingness patterns and variable presence across survey years for the school dataset:
 
 <p align="center">
   <img width="1200" height="500" src="man/figures/README_school_data_missing_values_summary.png">

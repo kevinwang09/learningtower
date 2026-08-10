@@ -23,9 +23,10 @@
 #'     \item \code{science}: Simulated score in science. Numeric.
 #'     \item \code{stu_wgt}: The final survey weight score for the student score. Numeric.
 #'     \item \code{desk}: Possession of desk to study at. Only "yes" and "no" are recorded. Factor.
+#'     Note that in 2022, all entries are missing.
 #'     \item \code{room}: Possession of a room of your own. Only "yes" and "no" are recorded. Factor.
 #'     \item \code{dishwasher}: Possession of a dishwasher. Only "yes" and "no" are recorded. Factor.
-#'     Note that in 2015 and 2018, all entries are missing.
+#'     Note that in 2015 and 2022, all entries are missing.
 #'     \item \code{television}: Number of televisions.
 #'     "0", "1", "2" are code for no, one and two TVs in the house. "3+" codes for three or more TVs. Factor.
 #'     Note that in 2003, all entries are missing.
@@ -39,7 +40,7 @@
 #'     Note that encoding is different in the years 2000 and 2003 compared to all other years. Factor.
 #'     Evaluate \code{table(student$book, student$year)} for a demo.
 #'     \item \code{wealth}: Index of family wealth. Numeric.
-#'     Note that in 2003, all entries are missing.
+#'     Note that in 2003 and 2022, all entries are missing.
 #'     \item \code{escs}: Index of economic, social and cultural status. Numeric.
 #'     }
 #' @docType data

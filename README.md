@@ -123,8 +123,11 @@ student_data_2012_2018 <- load_student(c(2012, 2018))
 student_data_all <- load_student("all")
 ```
 
-Note that because of changing data specification over the survery years,
-not all variables were measured consistently across the years.
+Note that because of changing data specification over the survey years,
+not all variables were measured consistently across all cycles
+(2000–2022). The summary figure below illustrates the missingness
+patterns and variable presence across survey years for the student
+dataset:
 
 <p align="center">
 
@@ -147,7 +150,9 @@ data(school)
 ```
 
 See `?school` for more information on the different variables present in
-the the school dataset.
+the school dataset. The summary figure below illustrates the missingness
+patterns and variable presence across survey years for the school
+dataset:
 
 <p align="center">
 

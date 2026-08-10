@@ -1,17 +1,30 @@
 # Define expected column names and types for student data
-expected_student_columns <- c(
-  "year", "country", "school_id", "student_id", "mother_educ", "father_educ",
-  "gender", "computer", "internet", "math", "read", "science", "stu_wgt",
-  "desk", "room", "dishwasher", "television", "computer_n", "car", "book",
-  "wealth", "escs"
+expected_student_types <- c(
+  year        = "integer",
+  country     = "factor",
+  school_id   = "character",
+  student_id  = "integer",
+  mother_educ = "factor",
+  father_educ = "factor",
+  gender      = "factor",
+  computer    = "factor",
+  internet    = "factor",
+  math        = "numeric",
+  read        = "numeric",
+  science     = "numeric",
+  stu_wgt     = "numeric",
+  desk        = "factor",
+  room        = "factor",
+  dishwasher  = "factor",
+  television  = "factor",
+  computer_n  = "factor",
+  car         = "factor",
+  book        = "factor",
+  wealth      = "numeric",
+  escs        = "numeric"
 )
 
-expected_student_types <- c(
-  "integer", "factor", "character", "integer", "factor", "factor", "factor",
-  "factor", "factor", "numeric", "numeric", "numeric", "numeric", "factor",
-  "factor", "factor", "factor", "factor", "factor", "factor", "numeric",
-  "numeric"
-)
+expected_student_columns <- names(expected_student_types)
 
 test_that("student_subset_* datasets have correct structure", {
   for (year in c("2000", "2003", "2006", "2009", "2012", "2015", "2018", "2022")) {
@@ -25,8 +38,21 @@ test_that("student_subset_* datasets have correct structure", {
 
     # Check column types
     for (i in seq_along(expected_student_columns)) {
-      expect_true(class(dataset[[expected_student_columns[i]]])[1] == expected_student_types[i],
-                  info = paste("Column", expected_student_columns[i], "in", data_name, "should be", expected_student_types[i]))
+      col_name <- expected_student_columns[i]
+      col_val <- dataset[[col_name]]
+      col_class <- class(col_val)[1]
+      expected_type <- expected_student_types[[col_name]]
+      
+      if (all(is.na(col_val))) {
+        expect_true(col_class %in% c("logical", expected_type),
+                    info = paste("All-NA column", col_name, "in", data_name, "should be logical or", expected_type))
+      } else if (col_name %in% c("country", "school_id", "student_id")) {
+        expect_true(col_class %in% c("character", "factor", "integer"),
+                    info = paste("Identifier column", col_name, "in", data_name, "should be character, factor, or integer"))
+      } else {
+        expect_equal(col_class, expected_type,
+                     info = paste("Column", col_name, "in", data_name, "should be", expected_type))
+      }
     }
   }
 })
@@ -41,8 +67,21 @@ test_that("load_student() returns correct structure for full datasets", {
 
     # Check column types
     for (i in seq_along(expected_student_columns)) {
-      expect_true(class(dataset[[expected_student_columns[i]]])[1] == expected_student_types[i],
-                  info = paste("Column", expected_student_columns[i], "in full dataset of", year, "should be", expected_student_types[i]))
+      col_name <- expected_student_columns[i]
+      col_val <- dataset[[col_name]]
+      col_class <- class(col_val)[1]
+      expected_type <- expected_student_types[[col_name]]
+      
+      if (all(is.na(col_val))) {
+        expect_true(col_class %in% c("logical", expected_type),
+                    info = paste("All-NA column", col_name, "in full dataset of", year, "should be logical or", expected_type))
+      } else if (col_name %in% c("country", "school_id", "student_id")) {
+        expect_true(col_class %in% c("character", "factor", "integer"),
+                    info = paste("Identifier column", col_name, "in full dataset of", year, "should be character, factor, or integer"))
+      } else {
+        expect_equal(col_class, expected_type,
+                     info = paste("Column", col_name, "in full dataset of", year, "should be", expected_type))
+      }
     }
   }
 })

@@ -13,7 +13,7 @@
 #'@importFrom tibble tibble
 #'
 #'@return A dataset of PISA scores of students that took the test in the selected year as per user
-#'from the years 2000-2018
+#'from the years 2000-2022
 #'
 #'@usage load_student(year = "2000")
 #'
