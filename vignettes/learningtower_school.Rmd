@@ -2,7 +2,7 @@
 title: "Using the Student and School Data" 
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{learningtower_school}
+  %\VignetteIndexEntry{Using the Student and School Data}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -10,6 +10,7 @@ editor_options:
 ---
 
 ```{r setup, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
 knitr::opts_chunk$set(
 echo = TRUE,
 collapse = TRUE,
