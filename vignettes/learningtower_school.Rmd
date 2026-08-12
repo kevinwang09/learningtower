@@ -1,8 +1,8 @@
 ---
-title: "Using the Student and School Data" 
+title: "Using the Student and School Data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{learningtower_school}
+  %\VignetteIndexEntry{Using the Student and School Data}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

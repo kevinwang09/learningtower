@@ -2,7 +2,7 @@
 title: "Using the Student and Country Data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{learningtower_student}
+  %\VignetteIndexEntry{Using the Student and Country Data}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
