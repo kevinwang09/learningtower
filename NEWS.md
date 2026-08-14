@@ -1,3 +1,10 @@
+# learningtower 2.0.0
+
+* Added PISA 2022 dataset support and expanded school datasets.
+* Added missing value summary visualizations in `man/figures/`.
+* Implemented verified MD5 data transfer pipeline for package dataset management.
+* Schema alignment across student and school datasets.
+
 # learningtower 1.1.1
 
 * Gracefully handle internet resource unavailability during `load_student()` by skipping downloads instead of throwing errors to comply with CRAN checks.
