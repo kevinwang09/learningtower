@@ -93,7 +93,7 @@ Missing data is a common issue that data professionals must deal with on a daily
 ```{r, fig.height = 15, fig.width = 15}
 #checking the missing values in the factor variables of the data
 aus_fct_plotdata = aus_data |> 
-  select(year, where(is.factor)) |> 
+  dplyr::select(year, country, where(is.factor)) |> 
   dplyr::select(-country) |> 
   pivot_longer(cols = -year) |> 
   group_by(year, name, value) |> 
