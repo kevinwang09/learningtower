@@ -45,7 +45,8 @@ load_student <- function(year = "2000"){
     message("Downloading year ", this_year, "...\n")
     this_data = download_single_student(year = this_year)
     if (is.null(this_data)) {
-      return(NULL)
+      message("Could not retrieve all requested student data. Returning NULL.")
+      return(invisible(NULL))
     }
     result = dplyr::bind_rows(result, this_data)
   }
@@ -62,22 +63,34 @@ download_single_student <- function(year){
     return(base::readRDS(file = parent_path))
   }
 
+  # Fast offline check if curl package is installed
+  if (requireNamespace("curl", quietly = TRUE) && !curl::has_internet()) {
+    message("No internet connection detected. Unable to download student data for year ", year, ".")
+    return(invisible(NULL))
+  }
+
   url_git = base::paste0("https://github.com/kevinwang09/learningtower/raw/master/student_full_data/student_", year, ".rds")
-  tmp <- tempfile()
+  tmp <- tempfile(fileext = ".rds")
+  on.exit(unlink(tmp), add = TRUE)
   
-  res <- tryCatch({
-    utils::download.file(url = url_git, destfile = tmp, quiet = TRUE, mode = "wb")
-    TRUE
+  data <- tryCatch({
+    old_opt <- options(timeout = 15)
+    on.exit(options(old_opt), add = TRUE)
+
+    status <- utils::download.file(url = url_git, destfile = tmp, quiet = TRUE, mode = "wb")
+    if (status != 0) return(NULL)
+
+    base::readRDS(file = tmp)
   }, error = function(e) {
-    FALSE
+    NULL
   }, warning = function(w) {
-    FALSE
+    NULL
   })
   
-  if (res) {
-    return(base::readRDS(file = tmp))
-  } else {
-    message("Failed to download data for year ", year, ". The internet resource might be unavailable or changed.")
-    return(NULL)
+  if (is.null(data)) {
+    message("Failed to download or parse data for year ", year, ". The internet resource might be unavailable, changed, or unreachable.")
+    return(invisible(NULL))
   }
+
+  return(data)
 }

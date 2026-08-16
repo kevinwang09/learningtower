@@ -44,7 +44,8 @@ Suggests:
     forcats,
     scales,
     digest,
-    jsonlite
+    jsonlite,
+    curl
 Config/testthat/edition: 3
 LazyData: true
 LazyDataCompression: xz
