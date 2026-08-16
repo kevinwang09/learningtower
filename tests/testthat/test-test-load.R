@@ -1,4 +1,6 @@
 test_that("load student year can be done using both an integer and a character value", {
+  skip_on_cran()
+  skip_if_offline()
   d1 <- load_student(2000)
   d2 <- load_student("2000")
   if (is.null(d1) || is.null(d2)) skip("Data could not be downloaded")
@@ -7,6 +9,8 @@ test_that("load student year can be done using both an integer and a character v
 
 
 test_that("load multiple years, test is on if the data be be properly binded", {
+  skip_on_cran()
+  skip_if_offline()
   d <- load_student(c("2000", "2003"))
   if (is.null(d)) skip("Data could not be downloaded")
   expect_true(is.data.frame(d))
@@ -17,6 +21,8 @@ test_that("load non-existing years", {
 })
 
 test_that("test for load_student class functions",{
+  skip_on_cran()
+  skip_if_offline()
   d <- load_student(year = 2000)
   if (is.null(d)) skip("Data could not be downloaded")
   expect_s3_class(object = d,
