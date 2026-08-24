@@ -1,7 +1,7 @@
 test_that("Merging student and school data works correctly", {
-  # Load datasets
-  student_data <- load_student(2000)
-  if (is.null(student_data)) skip("Data could not be downloaded")
+  # Load datasets from package data
+  data("student_subset_2000", package = "learningtower")
+  student_data <- student_subset_2000
   data("school", package = "learningtower")
 
   # Perform merge
@@ -21,9 +21,9 @@ test_that("Merging student and school data works correctly", {
 
 
 test_that("Merging student and countrycode data works correctly", {
-  # Load datasets
-  student_data <- load_student(2000)
-  if (is.null(student_data)) skip("Data could not be downloaded")
+  # Load datasets from package data
+  data("student_subset_2000", package = "learningtower")
+  student_data <- student_subset_2000
   data("countrycode", package = "learningtower")
 
   # Perform merge
@@ -42,9 +42,9 @@ test_that("Merging student and countrycode data works correctly", {
 })
 
 test_that("Sequential merging of student, school, and countrycode works", {
-  # Load datasets
-  student_data <- load_student(2000)
-  if (is.null(student_data)) skip("Data could not be downloaded")
+  # Load datasets from package data
+  data("student_subset_2000", package = "learningtower")
+  student_data <- student_subset_2000
   data("school", package = "learningtower")
   data("countrycode", package = "learningtower")
 

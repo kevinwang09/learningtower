@@ -1,5 +1,7 @@
 # learningtower 2.0.0
 
+* Hardened `load_student()` with robust `tryCatch` error and timeout handling for remote RDS downloads and parsing to comply with CRAN internet resource policies.
+* Added `skip_on_cran()` and `skip_if_offline()` to remote data unit tests.
 * Added PISA 2022 dataset support and expanded school datasets.
 * Added missing value summary visualizations in `man/figures/`.
 * Implemented verified MD5 data transfer pipeline for package dataset management.
